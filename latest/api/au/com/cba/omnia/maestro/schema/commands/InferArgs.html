@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Arguments for <code>Infer</code> command. .</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/498ea055cd48868cab3e923afe6431b21acded06//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/commands/Infer.scala" target="_blank">Infer.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Arguments for <code>Infer</code> command. .</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1a453a27b567ae33b35211c581689e9b5326ef3e//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/commands/Infer.scala" target="_blank">Infer.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="com.quantifind.sumac.FieldArgs">FieldArgs</span>, <span class="extype" name="com.quantifind.sumac.Args">Args</span>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.quantifind.sumac.ExternalConfig">ExternalConfig</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -211,26 +211,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.schema.commands.InferArgs#columns" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columns:String"></a>
-      <a id="columns:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">var</span>
-      </span>
-      <span class="symbol">
-        <span class="name">columns</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">File containing names and storage types of columns.</p><div class="fullcomment"><div class="comment cmt"><p>File containing names and storage types of columns.
- Each line is treated as a description of a single column,
- where the first  word is the column name,
- and   the second word is the hive storage type.</p><p> Example:
-   paty_i   string
-   acct_i   string
-   balance  float
-</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.schema.commands.InferArgs#database" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="database:String"></a>
       <a id="database:String"></a>
@@ -432,6 +412,26 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldArgs</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.commands.InferArgs#names" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="names:Option[String]"></a>
+      <a id="names:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">names</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">File containing names and storage types of columns.</p><div class="fullcomment"><div class="comment cmt"><p>File containing names and storage types of columns.
+ Each line is treated as a description of a single column,
+ where the first  word is the column name,
+ and   the second word is the hive storage type.</p><p> Example:
+   paty_i   string
+   acct_i   string
+   balance  float
+</p></div></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -614,7 +614,7 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Name of the table.</p>
-    </li><li name="au.com.cba.omnia.maestro.schema.commands.InferArgs#taste" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.schema.commands.InferArgs#taste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="taste:String"></a>
       <a id="taste:String"></a>
       <h4 class="signature">
@@ -626,11 +626,7 @@
         <span class="name">taste</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Taste file, containing histogram of what type of data is in the columns.</p><div class="fullcomment"><div class="comment cmt"><p>Taste file, containing histogram of what type of data is in the columns.</p><p> Example:
- Any:1000, AlphaNum:900,  Real:10;
- Any:1000, AlphaNum:1000;
- Any:1000, Real:800, Nat:120;
-</p></div></div>
+      <p class="shortcomment cmt">Taste file, containing histogram of what type of data is in the columns.</p>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>

@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/498ea055cd48868cab3e923afe6431b21acded06//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/jobs/Check.scala" target="_blank">Check.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1a453a27b567ae33b35211c581689e9b5326ef3e//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/jobs/Check.scala" target="_blank">Check.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -79,7 +79,23 @@
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="au.com.cba.omnia.maestro.schema.jobs.Check.ColumnDef" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ColumnDef=(String,Option[au.com.cba.omnia.maestro.schema.Format])"></a>
+      <a id="ColumnDef:(String,Option[Format])"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ColumnDef</span><span class="result"> = (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A column name along with its format.</p>
+    </li></ol>
+            </div>
 
         
 
@@ -164,15 +180,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#checkField" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="checkField(spec:au.com.cba.omnia.maestro.schema.ColumnSpec,s:String):Option[(au.com.cba.omnia.maestro.schema.ColumnSpec,String)]"></a>
-      <a id="checkField(ColumnSpec,String):Option[(ColumnSpec,String)]"></a>
+      <a id="checkField(columnDef:(String,Option[au.com.cba.omnia.maestro.schema.Format]),s:String):Option[((String,Option[au.com.cba.omnia.maestro.schema.Format]),String)]"></a>
+      <a id="checkField((String,Option[Format]),String):Option[((String,Option[Format]),String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">checkField</span><span class="params">(<span name="spec">spec: <a href="../ColumnSpec.html" class="extype" name="au.com.cba.omnia.maestro.schema.ColumnSpec">ColumnSpec</a></span>, <span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<a href="../ColumnSpec.html" class="extype" name="au.com.cba.omnia.maestro.schema.ColumnSpec">ColumnSpec</a>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">checkField</span><span class="params">(<span name="columnDef">columnDef: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])</span>, <span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[((<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>]), <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Check if a field value matches its associated column spec,
@@ -222,6 +238,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#fieldMatchesColumnDef" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fieldMatchesColumnDef(columnDef:(String,Option[au.com.cba.omnia.maestro.schema.Format]),s:String):Boolean"></a>
+      <a id="fieldMatchesColumnDef((String,Option[Format]),String):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fieldMatchesColumnDef</span><span class="params">(<span name="columnDef">columnDef: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])</span>, <span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Check if a field value matches its associated ColumnDef.</p>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -319,6 +348,35 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#rowMatchesColumnDefs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rowMatchesColumnDefs(s:String,sep:Char,columnDefs:List[(String,Option[au.com.cba.omnia.maestro.schema.Format])]):Boolean"></a>
+      <a id="rowMatchesColumnDefs(String,Char,List[(String,Option[Format])]):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rowMatchesColumnDefs</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="sep">sep: <span class="extype" name="scala.Char">Char</span></span>, <span name="columnDefs">columnDefs: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])]</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Check if a row matches its associated list of ColumnDefs.</p><div class="fullcomment"><div class="comment cmt"><p>Check if a row matches its associated list of ColumnDefs.</p><p> If the number of fields does not match the number of columns then we
+ get the result for the shorter of the two.</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#slurpErrorFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="slurpErrorFields(s:String,sep:Char,columnDefs:List[(String,Option[au.com.cba.omnia.maestro.schema.Format])]):List[((String,Option[au.com.cba.omnia.maestro.schema.Format]),String)]"></a>
+      <a id="slurpErrorFields(String,Char,List[(String,Option[Format])]):List[((String,Option[Format]),String)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">slurpErrorFields</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="sep">sep: <span class="extype" name="scala.Char">Char</span></span>, <span name="columnDefs">columnDefs: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])]</span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[((<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>]), <span class="extype" name="scala.Predef.String">String</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Check if a row matches the associated table spec.</p><div class="fullcomment"><div class="comment cmt"><p>Check if a row matches the associated table spec.
+ Returns the column specs and field values that don't match.</p><p> If the number of fields does not match the number of columns then we
+ get the result for the shorter of the two.</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -345,20 +403,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#validRow" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="validRow(spec:au.com.cba.omnia.maestro.schema.TableSpec,separator:Char,s:String):List[(au.com.cba.omnia.maestro.schema.ColumnSpec,String)]"></a>
-      <a id="validRow(TableSpec,Char,String):List[(ColumnSpec,String)]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">validRow</span><span class="params">(<span name="spec">spec: <a href="../TableSpec.html" class="extype" name="au.com.cba.omnia.maestro.schema.TableSpec">TableSpec</a></span>, <span name="separator">separator: <span class="extype" name="scala.Char">Char</span></span>, <span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<a href="../ColumnSpec.html" class="extype" name="au.com.cba.omnia.maestro.schema.ColumnSpec">ColumnSpec</a>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Check if a row matches the associated table spec.</p><div class="fullcomment"><div class="comment cmt"><p>Check if a row matches the associated table spec.
- Returns the column specs and field values that don't match.</p></div></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

@@ -41,7 +41,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Histogram of how many values in a column match each Classifier
 </p></div><dl class="paramcmts block"><dt class="param">counts</dt><dd class="cmt"><p>How many values match each classifier.
-</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/498ea055cd48868cab3e923afe6431b21acded06//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/Schema.scala" target="_blank">Schema.scala</a></dd></dl><div class="toggleContainer block">
+</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1a453a27b567ae33b35211c581689e9b5326ef3e//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/schema/Histogram.scala" target="_blank">Histogram.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -338,15 +338,15 @@
       </h4>
       <p class="shortcomment cmt">Yield the number of classifiers in the histogram.</p>
     </li><li name="au.com.cba.omnia.maestro.schema.Histogram#sorted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sorted:Seq[(au.com.cba.omnia.maestro.schema.Classifier,Int)]"></a>
-      <a id="sorted:Seq[(Classifier,Int)]"></a>
+      <a id="sorted:List[(au.com.cba.omnia.maestro.schema.Classifier,Int)]"></a>
+      <a id="sorted:List[(Classifier,Int)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sorted</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[(<a href="Classifier.html" class="extype" name="au.com.cba.omnia.maestro.schema.Classifier">Classifier</a>, <span class="extype" name="scala.Int">Int</span>)]</span>
+        <span class="name">sorted</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<a href="Classifier.html" class="extype" name="au.com.cba.omnia.maestro.schema.Classifier">Classifier</a>, <span class="extype" name="scala.Int">Int</span>)]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Extract the histogram with the classifiers in the standard sorted

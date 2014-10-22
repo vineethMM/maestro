@@ -39,7 +39,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Job to check a table against an existing schema.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/498ea055cd48868cab3e923afe6431b21acded06//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/jobs/Check.scala" target="_blank">Check.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Job to check a table against an existing schema.
+ Rows that do not match the schema get written to the given errors file.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1a453a27b567ae33b35211c581689e9b5326ef3e//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/jobs/Check.scala" target="_blank">Check.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="com.twitter.scalding.Job">Job</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -289,6 +290,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#columnDefs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="columnDefs:List[(String,Option[au.com.cba.omnia.maestro.schema.Format])]"></a>
+      <a id="columnDefs:List[(String,Option[Format])]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">columnDefs</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<a href="../Format.html" class="extype" name="au.com.cba.omnia.maestro.schema.Format">Format</a>])]</span>
+      </span>
+      </h4>
+      
     </li><li name="com.twitter.scalding.Job#config" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="config:Map[AnyRef,AnyRef]"></a>
       <a id="config:Map[AnyRef,AnyRef]"></a>
@@ -831,6 +845,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#pipeErrors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pipeErrors:com.twitter.scalding.typed.TypedPipe[String]"></a>
+      <a id="pipeErrors:TypedPipe[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pipeErrors</span><span class="result">: <span class="extype" name="com.twitter.scalding.typed.TypedPipe">TypedPipe</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#pipeInput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="pipeInput:com.twitter.scalding.TypedPipe[String]"></a>
       <a id="pipeInput:TypedPipe[String]"></a>
@@ -844,16 +871,29 @@
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#pipeOutput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="pipeOutput:com.twitter.scalding.TypedDelimited[String]"></a>
-      <a id="pipeOutput:TypedDelimited[String]"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#pipeOutDiag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pipeOutDiag:com.twitter.scalding.TypedDelimited[String]"></a>
+      <a id="pipeOutDiag:TypedDelimited[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">pipeOutput</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedDelimited">TypedDelimited</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">pipeOutDiag</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedDelimited">TypedDelimited</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#pipeOutErrors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pipeOutErrors:com.twitter.scalding.TypedDelimited[String]"></a>
+      <a id="pipeOutErrors:TypedDelimited[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pipeOutErrors</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedDelimited">TypedDelimited</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
       
@@ -909,19 +949,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#schema" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="schema:au.com.cba.omnia.maestro.schema.TableSpec"></a>
-      <a id="schema:TableSpec"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">schema</span><span class="result">: <a href="../TableSpec.html" class="extype" name="au.com.cba.omnia.maestro.schema.TableSpec">TableSpec</a></span>
-      </span>
-      </h4>
-      
     </li><li name="com.twitter.scalding.Job#skipStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="skipStrategy:Option[cascading.flow.FlowSkipStrategy]"></a>
       <a id="skipStrategy:Option[FlowSkipStrategy]"></a>
@@ -974,19 +1001,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.schema.jobs.Check#strSchema" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="strSchema:String"></a>
-      <a id="strSchema:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">strSchema</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li name="com.twitter.scalding.FieldConversions#stringToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stringToFields(x:String):cascading.tuple.Fields"></a>
       <a id="stringToFields(String):Fields"></a>

@@ -58,56 +58,56 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.schema.taste.FieldTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="FieldTasteextendsProductwithSerializable"></a>
-      <a id="FieldTaste:FieldTaste"></a>
+              <ol><li name="au.com.cba.omnia.maestro.schema.taste.Field" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FieldextendsProductwithSerializable"></a>
+      <a id="Field:Field"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="FieldTaste.html"><span class="name">FieldTaste</span></a><span class="params">(<span name="clasCounts">clasCounts: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="histField">histField: <a href="SampleMap.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.SampleMap">SampleMap</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Field.html"><span class="name">Field</span></a><span class="params">(<span name="clasCounts">clasCounts: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="histField">histField: <a href="Sample.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.Sample">Sample</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Classifier counts for a single field in a row.</p>
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.RowTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RowTasteextendsProductwithSerializable"></a>
-      <a id="RowTaste:RowTaste"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Row" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RowextendsProductwithSerializable"></a>
+      <a id="Row:Row"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RowTaste.html"><span class="name">RowTaste</span></a><span class="params">(<span name="fieldTastes">fieldTastes: <span class="extype" name="scala.Array">Array</span>[<a href="FieldTaste.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.FieldTaste">FieldTaste</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Row.html"><span class="name">Row</span></a><span class="params">(<span name="fieldTastes">fieldTastes: <span class="extype" name="scala.Array">Array</span>[<a href="Field.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.Field">Field</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Classifier counts for a row sort, with some fixed number of fields.</p>
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.SampleMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SampleMapextendsProductwithSerializable"></a>
-      <a id="SampleMap:SampleMap"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Sample" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SampleextendsProductwithSerializable"></a>
+      <a id="Sample:Sample"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="SampleMap.html"><span class="name">SampleMap</span></a><span class="params">(<span name="maxSize">maxSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="spilled">spilled: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="histogram">histogram: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Sample.html"><span class="name">Sample</span></a><span class="params">(<span name="maxSize">maxSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="spilled">spilled: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="histogram">histogram: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">A SampleMap is used to build a historgram of the number of times we've seen
 each string in a set of strings.</p>
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.TableTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TableTasteextendsProductwithSerializable"></a>
-      <a id="TableTaste:TableTaste"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Table" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TableextendsProductwithSerializable"></a>
+      <a id="Table:Table"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="TableTaste.html"><span class="name">TableTaste</span></a><span class="params">(<span name="maxHistSize">maxHistSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="rowTastes">rowTastes: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Int">Int</span>, <a href="RowTaste.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.RowTaste">RowTaste</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Table.html"><span class="name">Table</span></a><span class="params">(<span name="maxHistSize">maxHistSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="rowTastes">rowTastes: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Int">Int</span>, <a href="Row.html" class="extype" name="au.com.cba.omnia.maestro.schema.taste.Row">Row</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Accumulated taste information for an entire table.</p>
@@ -118,55 +118,81 @@ each string in a set of strings.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.schema.taste.FieldTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="FieldTaste"></a>
-      <a id="FieldTaste:FieldTaste"></a>
+              <ol><li name="au.com.cba.omnia.maestro.schema.taste.Field" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Field"></a>
+      <a id="Field:Field"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="FieldTaste$.html"><span class="name">FieldTaste</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Field$.html"><span class="name">Field</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.RowTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RowTaste"></a>
-      <a id="RowTaste:RowTaste"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Load" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Load"></a>
+      <a id="Load:Load"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="RowTaste$.html"><span class="name">RowTaste</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Load$.html"><span class="name">Load</span></a>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.SampleMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SampleMap"></a>
-      <a id="SampleMap:SampleMap"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Parser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Parser"></a>
+      <a id="Parser:Parser"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="SampleMap$.html"><span class="name">SampleMap</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Parser$.html"><span class="name">Parser</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Parser for taste files.</p>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Row" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Row"></a>
+      <a id="Row:Row"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Row$.html"><span class="name">Row</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.schema.taste.TableTaste" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TableTaste"></a>
-      <a id="TableTaste:TableTaste"></a>
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Sample" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Sample"></a>
+      <a id="Sample:Sample"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="TableTaste$.html"><span class="name">TableTaste</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Sample$.html"><span class="name">Sample</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.schema.taste.Table" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Table"></a>
+      <a id="Table:Table"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Table$.html"><span class="name">Table</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Functions concerning TableTastes.</p>

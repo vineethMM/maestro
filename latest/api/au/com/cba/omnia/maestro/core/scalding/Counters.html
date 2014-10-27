@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Copied - au.com.cba.omnia.maestro.core.upload.Copied</title>
-          <meta name="description" content="Copied - au.com.cba.omnia.maestro.core.upload.Copied" />
-          <meta name="keywords" content="Copied au.com.cba.omnia.maestro.core.upload.Copied" />
+          <title>Counters - au.com.cba.omnia.maestro.core.scalding.Counters</title>
+          <meta name="description" content="Counters - au.com.cba.omnia.maestro.core.scalding.Counters" />
+          <meta name="keywords" content="Counters au.com.cba.omnia.maestro.core.scalding.Counters" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.upload.Copied';
+            var hash = 'au.com.cba.omnia.maestro.core.scalding.Counters';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../../../../../../lib/class_big.png" />
-        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.upload">upload</a></p>
-        <h1>Copied</h1>
+        <a href="Counters$.html" title="Go to companion"><img src="../../../../../../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding">scalding</a></p>
+        <h1><a href="Counters$.html" title="Go to companion">Counters</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,11 +35,35 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Copied</span><span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="dest">dest: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Counters</span><span class="params">(<span name="stats">stats: <span class="extype" name="cascading.stats.CascadingStats">CascadingStats</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>File copied to HDFS</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/2b0c1346e88695dbd86cf614a88a1164bc4e7ac2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Push.scala" target="_blank">Push.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Convienient access to stats for a scalding <code>CascadeJob</code></p><p>Counters should be created and used in the <code>CascadeJob.postProcessCascade</code>
+method. Example usage:</p><pre><span class="kw">import</span> com.twitter.scalding.CascadeJob
+<span class="kw">import</span> cascading.cascade.Cascade
+
+<span class="kw">class</span> MyCascadeJob(args: Args) <span class="kw">extends</span> CascadeJob(args) {
+  <span class="kw">val</span> jobs = <span class="std">Seq</span>(myJob1, myJob2) <span class="cmt">// my jobs defined elsewhere</span>
+  <span class="kw">override</span> <span class="kw">def</span> postProcessCascade(cascade: Cascade) {
+    <span class="kw">val</span> job1Counters  = Counters.job(cascade, myJob1)
+    <span class="kw">val</span> job2Counters  = Counters.job(cascade, myJob2)
+    <span class="kw">val</span> totalCounters = Counters.cascade(cascade)
+
+    println(s<span class="lit">"Job 1 read ${job1Counters.tuplesRead} rows"</span>)
+    println(s<span class="lit">"Job 2 wrote ${job2Counters.tuplesWritten} rows"</span>)
+    println(s<span class="lit">"Job 2 status: ${job2Counters.staus}"</span>)
+    println
+
+    println(<span class="lit">"Overall cascade stats:"</span>)
+    totalCounters.counters.foreach { <span class="kw">case</span> Counter(name, group, counter, value) <span class="kw">=&gt;</span> {
+      println(s<span class="lit">"$group $counter = $value"</span>)
+    }}
+    println
+  }
+}</pre><p>The statistics underlying the counters class are mutable, so you should
+not look at any results until after the job has finished processing.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/2b0c1346e88695dbd86cf614a88a1164bc4e7ac2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/Counters.scala" target="_blank">Counters.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -59,7 +83,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.upload.Copied"><span>Copied</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.scalding.Counters"><span>Counters</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -79,16 +103,16 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.upload.Copied#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(source:java.io.File,dest:org.apache.hadoop.fs.Path):au.com.cba.omnia.maestro.core.upload.Copied"></a>
-      <a id="&lt;init&gt;:Copied"></a>
+              <ol><li name="au.com.cba.omnia.maestro.core.scalding.Counters#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(stats:cascading.stats.CascadingStats):au.com.cba.omnia.maestro.core.scalding.Counters"></a>
+      <a id="&lt;init&gt;:Counters"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Copied</span><span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="dest">dest: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span>
+        <span class="name">Counters</span><span class="params">(<span name="stats">stats: <span class="extype" name="cascading.stats.CascadingStats">CascadingStats</span></span>)</span>
       </span>
       </h4>
       
@@ -198,19 +222,32 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.upload.Copied#dest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dest:org.apache.hadoop.fs.Path"></a>
-      <a id="dest:Path"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#counterValue" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="counterValue(group:String,counter:String):Long"></a>
+      <a id="counterValue(String,String):Long"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">dest</span><span class="result">: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>
+        <span class="name">counterValue</span><span class="params">(<span name="group">group: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="counter">counter: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The value of a single counter</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#counters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="counters:Iterable[au.com.cba.omnia.maestro.core.scalding.Counter]"></a>
+      <a id="counters:Iterable[Counter]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">counters</span><span class="result">: <span class="extype" name="scala.Iterable">Iterable</span>[<a href="Counter.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.Counter">Counter</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A list of all counters</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -308,19 +345,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.upload.Copied#source" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="source:java.io.File"></a>
-      <a id="source:File"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#stats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stats:cascading.stats.CascadingStats"></a>
+      <a id="stats:CascadingStats"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">source</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">stats</span><span class="result">: <span class="extype" name="cascading.stats.CascadingStats">CascadingStats</span></span>
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#status" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="status:cascading.stats.CascadingStats.Status"></a>
+      <a id="status:Status"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">status</span><span class="result">: <span class="extype" name="cascading.stats.CascadingStats.Status">Status</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The status of the job</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -334,6 +384,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#tuplesRead" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tuplesRead:Long"></a>
+      <a id="tuplesRead:Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tuplesRead</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The number of tuples read,</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters#tuplesWritten" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tuplesWritten:Long"></a>
+      <a id="tuplesWritten:Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tuplesWritten</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The number of tuples written.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

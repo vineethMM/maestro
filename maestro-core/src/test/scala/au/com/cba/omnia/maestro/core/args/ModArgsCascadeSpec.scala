@@ -25,7 +25,6 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, ThermometerSource}
 import au.com.cba.omnia.thermometer.fact.PathFactoids
 
-import au.com.cba.omnia.maestro.core.args.ModArgs
 import au.com.cba.omnia.maestro.core.scalding.UniqueJob
 
 import com.cba.omnia.edge.source.compressible.CompressibleTypedPsv

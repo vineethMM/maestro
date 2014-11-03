@@ -22,8 +22,6 @@ import org.apache.hadoop.conf.Configuration
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, ThermometerSource}
 
-import au.com.cba.omnia.maestro.core.scalding.NamedJob
-
 object CountersSpec extends ThermometerSpec { def is = s2"""
 CountersSpec
 ============

@@ -30,6 +30,7 @@ package object api {
   type UniqueJob       = au.com.cba.omnia.maestro.core.scalding.UniqueJob
   type NamedJob        = au.com.cba.omnia.maestro.core.scalding.NamedJob
   type Counters        = au.com.cba.omnia.maestro.core.scalding.Counters
+  type LoadInfo        = au.com.cba.omnia.maestro.core.task.LoadInfo
 
   val Partition     = au.com.cba.omnia.maestro.core.partition.Partition
   val HivePartition = au.com.cba.omnia.maestro.core.partition.HivePartition

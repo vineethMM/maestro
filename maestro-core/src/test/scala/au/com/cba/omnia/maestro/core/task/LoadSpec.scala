@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 package au.com.cba.omnia.maestro.core
-
 package task
 
 import com.twitter.scalding.{Args, Job, TypedPipe, TypedTsv}

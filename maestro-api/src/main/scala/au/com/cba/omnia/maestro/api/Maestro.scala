@@ -59,7 +59,11 @@ object Maestro
     with Query
     with Upload
     with Sqoop
-    with Config {
+    with Config
+    with Miscellaneous
+
+
+trait Miscellaneous {
   /** Use the current time yyyy-MM-dd as the load time for the data */
   def now(format: String = "yyyy-MM-dd") = {
     val f = new java.text.SimpleDateFormat(format)

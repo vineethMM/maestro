@@ -1,0 +1,134 @@
+//   Copyright 2014 Commonwealth Bank of Australia
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+
+package au.com.cba.omnia.maestro.core
+package task
+
+import java.io.File
+
+import scala.concurrent.Future
+import scala.util.matching.Regex
+
+import org.apache.hadoop.conf.Configuration
+
+import org.apache.log4j.Logger
+
+import scalaz.\&/.{This, That, Both}
+
+import com.twitter.scalding.Execution
+
+import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
+
+import au.com.cba.omnia.maestro.core.upload._
+
+/**
+  * Push source files to HDFS using [[upload]] and archive them.
+  *
+  * See the example at `au.com.cba.omnia.maestro.example.CustomerUploadExample`.
+  *
+  * In order to run map-reduce jobs, we first need to get our data onto HDFS.
+  * [[upload]] copies data files from the local machine onto HDFS and archives
+  * the files.
+  *
+  * For a given `domain` and `tableName`, [[upload]] copies data files from
+  * the standard local location: `\$localIngestDir/dataFeed/\$domain`, to the
+  * standard HDFS location: `\$hdfsRoot/source/\$domain/\$tableName`.
+  *
+  * Only use [[customUpload]] if we are required to use non-standard locations.
+  */
+trait UploadExecution {
+
+  /**
+    * Pushes source files onto HDFS and archives them locally.
+    *
+    * `upload` expects data files intended for HDFS to be placed in
+    * the local folder `\$localIngestDir/dataFeed/\$source/\$domain`. Different
+    * source systems will use different values for `source` and `domain`.
+    * `upload` processes all data files that match a given file pattern.
+    * The file pattern format is explained below.
+    *
+    * Each data file will be copied onto HDFS as the following file:
+    * `\$hdfsRoot/source/\$source/\$domain/\$tableName/<year>/<month>/<day>/<originalFileName>`.
+    *
+    * Data files are also compressed and archived on the local machine and on HDFS.
+    * Each data file is archived as:
+    *  - `\$localArchiveDir/\$source/\$domain/\$tableName/<year>/<month>/<day>/<originalFileName>.bz2`
+    *  - `\$hdfsRoot/archive/\$source/\$domain/\$tableName/<year>/<month>/<day>/<originalFileName>.bz2`
+    *
+    * (These destination paths may change slightly depending on the fields in the file pattern.)
+    *
+    * Some files placed on the local machine are control files. These files
+    * are not intended for HDFS and are ignored by `upload`. `upload` will log
+    * a message whenever it ignores a control file.
+    *
+    * When an error occurs, `upload` stops copying files immediately. Once the
+    * cause of the error has been addressed, `upload` can be run again to copy
+    * any remaining files to HDFS. `upload` will refuse to copy a file if that
+    * file or it's control flags are already present in HDFS. If you
+    * need to overwrite a file that already exists in HDFS, you will need to
+    * delete the file and it's control flags before `upload` will replace it.
+    *
+    * The file pattern is a string containing the following elements:
+    *  - Literals:
+    *    - Any character other than `{`, `}`, `*`, `?`, or `\` represents itself.
+    *    - `\{`, `\}`, `\*`, `\?`, or `\\` represents `{`, `}`, `*`, `?`, and `\`, respectively.
+    *    - The string `{table}` represents the table name.
+    *  - Wildcards:
+    *    - The character `*` represents an arbitrary number of arbitrary characters.
+    *    - The character `?` represents one arbitrary character.
+    *  - Date times:
+    *    - The string `{<timestamp-pattern>}` represents a JodaTime timestamp pattern.
+    *    - `upload` only supports certain date time fields:
+    *      - year (y),
+    *      - month of year (M),
+    *      - day of month (d),
+    *      - hour of day (H),
+    *      - minute of hour (m), and
+    *      - second of minute (s).
+    *
+    * Some example file patterns:
+    *  - `{table}{yyyyMMdd}.DAT`
+    *  - `{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}`
+    *  - `??_{table}-{ddMMyy}*`
+    *
+    * @param source: Source system
+    * @param domain: Database or project within source
+    * @param tableName: Table name or file name in database or project
+    * @param filePattern: File name pattern
+    * @param localIngestDir: Root directory of incoming data files
+    * @param localArchiveDir: Root directory of the local archive
+    * @param hdfsRoot: Root directory of HDFS
+    * @param conf: Hadoop configuration
+    * @return Any error occuring when uploading files
+    */
+  def upload(
+    source: String, domain: String, tableName: String, filePattern: String,
+    localIngestDir: String, localArchiveDir: String, hdfsRoot: String,
+    conf: Configuration, controlPattern: Regex = ControlPattern.default
+  ): Execution[Unit] = {
+    val f: Future[Unit] = UploadHelper.upload(
+      source, domain, tableName, filePattern, localIngestDir,
+      localArchiveDir, hdfsRoot, conf, controlPattern
+    ) match {
+      case Ok(_)             => Future.successful(())
+      case Error(Both(e, t)) => Future.failed(new Exception(s"Failed to upload $source: e", t))
+      case Error(This(e))    => Future.failed(new Exception(s"Failed to upload $source: e"))
+      case Error(That(t))    => Future.failed(new Exception(s"Failed to upload $source", t))
+    }
+  
+    Execution.fromFuture(_ => f)
+  }
+}
+
+private object UploadHelper extends Upload

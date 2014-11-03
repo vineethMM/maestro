@@ -25,7 +25,7 @@ import org.apache.log4j.Logger
 
 import scalaz._, Scalaz._, scalaz.\&/.{This, That, Both}
 
-import com.cba.omnia.edge.hdfs.{Error, Hdfs, Ok, Result}
+import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
 
 import au.com.cba.omnia.maestro.core.upload._
 

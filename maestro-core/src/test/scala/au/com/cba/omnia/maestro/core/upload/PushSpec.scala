@@ -22,7 +22,7 @@ import java.io.File
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.conf.Configuration
 
-import com.cba.omnia.edge.hdfs.{Error, Hdfs, Ok, Result}
+import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
 
 class PushSpec extends Specification { def is = s2"""
 

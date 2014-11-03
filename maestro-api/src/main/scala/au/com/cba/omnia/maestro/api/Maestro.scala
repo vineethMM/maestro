@@ -22,8 +22,8 @@ import com.twitter.scrooge.ThriftStruct
 
 import org.apache.hadoop.conf.Configuration
 
-import com.cba.omnia.edge.hdfs.Hdfs
-import com.cba.omnia.edge.hdfs.HdfsString._
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
+import au.com.cba.omnia.permafrost.hdfs.HdfsString._
 
 import au.com.cba.omnia.maestro.macros.MacroSupport
 

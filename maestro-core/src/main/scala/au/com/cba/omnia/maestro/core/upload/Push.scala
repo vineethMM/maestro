@@ -23,7 +23,7 @@ import org.apache.hadoop.fs.Path
 
 import com.google.common.io.Files
 
-import com.cba.omnia.edge.hdfs.{Hdfs, Result}
+import au.com.cba.omnia.permafrost.hdfs.{Hdfs, Result}
 
 import au.com.cba.omnia.omnitool.file.ops.Temp
 

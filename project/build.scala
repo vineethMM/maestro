@@ -30,8 +30,8 @@ import au.com.cba.omnia.humbug.HumbugSBT._
 object build extends Build {
   type Sett = Def.Setting[_]
 
-  val thermometerVersion = "0.4.0-20140925013601-d800eeb"
-  val ebenezerVersion    = "0.10.0-20141002083428-d673392"
+  val thermometerVersion = "0.5.1-20141106132035-80b63c1"
+  val ebenezerVersion    = "0.11.0-20141103051330-cbcd753"
   val omnitoolVersion    = "1.3.0-20141009013528-4a9aa95"
 
   lazy val standardSettings: Seq[Sett] =
@@ -82,11 +82,12 @@ object build extends Build {
       ) ++ depend.scalaz() ++ depend.scalding() ++ depend.hadoop()
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
-        ++ depend.omnia("edge",          "2.2.0-20141001082205-537c965")
+        ++ depend.omnia("edge",          "3.1.0-20141102235054-95794f6")
+        ++ depend.omnia("permafrost",    "0.1.0-20141102230603-b90058b")
         ++ depend.omnia("humbug-core",   "0.3.0-20140918054014-3066286")
         ++ depend.omnia("omnitool-time", omnitoolVersion)
         ++ depend.omnia("omnitool-file", omnitoolVersion)
-        ++ depend.omnia("parlour", "1.4.1-20141105223456-db7d1a8")
+        ++ depend.omnia("parlour",       "1.5.0-20141106011009-45f83b2")
         ++ Seq(
           "commons-validator"  % "commons-validator" % "1.4.0",
           "org.apache.hadoop"  % "hadoop-tools"      % depend.versions.hadoop % "provided",

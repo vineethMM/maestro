@@ -28,6 +28,7 @@ import cascading.tuple.Tuple
 import cascading.tap.hadoop.io.MultiInputSplit.CASCADING_SOURCE_PATH
 
 import com.twitter.scalding._, TDsl._, Dsl._
+import com.twitter.scalding.typed.TypedPipeFactory
 
 import com.twitter.scrooge.ThriftStruct
 
@@ -65,13 +66,17 @@ trait Load {
     */
   def load[A <: ThriftStruct : Decode : Tag : Manifest]
     (delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
-      validator: Validator[A], filter: RowFilter, none: String)
-    (implicit flowDef: FlowDef, mode: Mode): TypedPipe[A] =
+      validator: Validator[A], filter: RowFilter, none: String): TypedPipe[A] = {
+    val pipe: TypedPipe[RawRow] = TypedPipeFactory { (flowDef, mode) =>
+      TypedPipe.fromSingleField[RawRow](
+        MultipleTextLineFiles(sources: _*)
+          .read(flowDef, mode)
+          .eachTo(('offset, 'line), 'result)(_ => new ExtractTime(timeSource))
+      )(flowDef, mode)
+    }
+
     Load.loadProcess(
-      MultipleTextLineFiles(sources: _*)
-        .read
-        .each(('offset, 'line), 'result)(_ => new ExtractTime(timeSource))
-        .toTypedPipe[RawRow]('result),
+      pipe,
       Splitter.delimited(delimiter),
       errors,
       clean,
@@ -79,7 +84,7 @@ trait Load {
       filter,
       none
     )
-
+  }
   /**
     * Same as `load` but also appends a unique key to each line. The last field of `A`
     * needs to be set aside to receive the key as type string.
@@ -94,8 +99,7 @@ trait Load {
     */
   def loadWithKey[A <: ThriftStruct : Decode : Tag : Manifest]
     (delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
-      validator: Validator[A], filter: RowFilter, none: String)
-    (implicit flowDef: FlowDef, mode: Mode): TypedPipe[A] = {
+      validator: Validator[A], filter: RowFilter, none: String): TypedPipe[A] = {
     val rnd    = new SecureRandom()
     val seed   = rnd.generateSeed(4)
     val md     = MessageDigest.getInstance("SHA-1")
@@ -104,11 +108,16 @@ trait Load {
         .map(k => k -> md.digest(seed ++ k.getBytes("UTF-8")).drop(12).map("%02x".format(_)).mkString)
         .toMap
 
+    val pipe: TypedPipe[RawRow] = TypedPipeFactory { (flowDef, mode) =>
+      TypedPipe.fromSingleField[RawRow](
+        MultipleTextLineFiles(sources: _*)
+          .read(flowDef, mode)
+          .eachTo(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, hashes))
+      )(flowDef, mode)
+    }
+
     Load.loadProcess(
-      MultipleTextLineFiles(sources: _*)
-        .read
-        .each(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, hashes))
-        .toTypedPipe[RawRow]('result),
+      pipe,
       Splitter.delimited(delimiter),
       errors,
       clean,
@@ -121,8 +130,7 @@ trait Load {
   /** Same as `load` but uses a list of column lengths to split the string rather than a delimeter. */
   def loadFixedLength[A <: ThriftStruct : Decode : Tag : Manifest]
     (lengths: List[Int], sources: List[String], errors: String, timeSource: TimeSource,
-      clean: Clean, validator: Validator[A], filter: RowFilter, none: String)
-    (implicit flowDef: FlowDef, mode: Mode): TypedPipe[A] =
+      clean: Clean, validator: Validator[A], filter: RowFilter, none: String): TypedPipe[A] =
     Load.loadProcess(
       sources
         .map(p => TextLine(p).map(l => (p, l)))
@@ -148,8 +156,7 @@ object Load {
   /** Implementation of `loadFoo` methods in `Load` trait */
   def loadProcess[A <: ThriftStruct : Decode : Tag : Manifest]
     (in: TypedPipe[RawRow], splitter: Splitter, errors: String, clean: Clean,
-       validator: Validator[A], filter: RowFilter, none: String)
-    (implicit flowDef: FlowDef, mode: Mode): TypedPipe[A] = {
+       validator: Validator[A], filter: RowFilter, none: String) : TypedPipe[A] = {
     val pipe =
       in
         .map(row => splitter.run(row.line) ++ row.extraFields)

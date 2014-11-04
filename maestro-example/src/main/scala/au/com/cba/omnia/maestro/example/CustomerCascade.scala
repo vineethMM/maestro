@@ -42,9 +42,9 @@ class CustomerCascade(args: Args) extends MaestroCascade[Customer](args) {
     Clean.removeNonPrintables
   )
   val dateTable =
-    HiveTable(domain, "by_date", Partition.byDate(Fields.EffectiveDate) )
+    HiveTable(domain, "by_date", Partition.byDate(Fields.EffectiveDate), args.optional("by_date"))
   val catTable  =
-    HiveTable(domain, "by_cat", Partition.byField(Fields.Cat))
+    HiveTable(domain, "by_cat", Partition.byField(Fields.Cat), args.optional("by_cat"))
   val conf = configuration(args)
 
   upload(source, domain, tablename, "{table}_{yyyyMMdd}.txt", localRoot, archiveRoot, hdfsRoot, conf) match {

@@ -48,20 +48,19 @@ object Errors extends FieldConversions {
    *       the trap. This should neatly write out the error because of our
    *       previous hack to strip off the left constructor.
    */
-  def handle[A](p: TypedPipe[String \/ A], errors: Source)(implicit flow: FlowDef, mode: Mode): TypedPipe[A] =
-    p.toPipe('value)
-      .addTrap(errors)
-      .toTypedPipe[String \/ A]('value)
+  def handle[A](p: TypedPipe[String \/ A], errors: Source with TypedSink[Any]): TypedPipe[A] =
+    p
       .flatMap({
         case     -\/(error) => List(error)
         case v @ \/-(value) => List(v)
       })
       .fork
+      .addTrap(errors)
       .map({
         case \/-(value) => value.asInstanceOf[A]
         case v          => sys.error("trap: The real error was: " + v.toString)
       })
 
-  def safely[A](path: String)(p: TypedPipe[String \/ A])(implicit flow: FlowDef, mode: Mode): TypedPipe[A] =
-    handle(p, TextLine(path))
+  def safely[A](path: String)(p: TypedPipe[String \/ A]): TypedPipe[A] =
+    handle(p, TypedPsv(path))
 }

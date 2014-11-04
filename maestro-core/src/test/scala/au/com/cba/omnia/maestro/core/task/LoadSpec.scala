@@ -16,13 +16,11 @@ package au.com.cba.omnia.maestro.core
 
 package task
 
-import com.twitter.scalding.{ Args, Job, Source, TextLine, TypedPipe, TypedTsv }
+import com.twitter.scalding.{Args, Job, TypedPipe, TypedTsv}
 
 import org.apache.hadoop.fs.Path
 
 import org.specs2.execute.{Failure, FailureException, Result}
-
-import scalaz.Validation
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, ThermometerSource}
 import au.com.cba.omnia.thermometer.context.Context
@@ -30,13 +28,13 @@ import au.com.cba.omnia.thermometer.tools.Jobs
 
 import au.com.cba.omnia.maestro.core.clean.Clean
 import au.com.cba.omnia.maestro.core.codec.{Decode, Tag}
-import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.filter.RowFilter
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.validate.Validator
+
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
-object LoadSpec extends ThermometerSpec { def is = s2"""
+object LoadSpec extends ThermometerSpec with LoadTestUtil { def is = s2"""
 
 Load properties
 ===============
@@ -49,9 +47,6 @@ loadProcess applies fixed length splitter correctly    $loadProcessSplitsFixed
   def loadProcessSplitsDelim = {
     val input      = List("col1|col02", "colA|col_B", "colI|colII")
     val splitter   = Splitter.delimited("|")
-    val clean      = Clean((_, row) => row)
-    val validator  = Validator[StringPair](Validation.success)
-    val filter     = RowFilter.keep
     val test       = (pair:StringPair) => pair.first.length == 4 &&
     pair.second.length == 5
 
@@ -61,9 +56,6 @@ loadProcess applies fixed length splitter correctly    $loadProcessSplitsFixed
   def loadProcessSplitsFixed = {
     val input      = List("col1col02", "colAcol_B", "colIcolII")
     val splitter   = Splitter.fixed(List(4,5))
-    val clean      = Clean((_, row) => row)
-    val validator  = Validator[StringPair](Validation.success)
-    val filter     = RowFilter.keep
     val test       = (pair:StringPair) => pair.first.length == 4 &&
                                           pair.second.length == 5
 
@@ -103,24 +95,7 @@ class LoadProcessStringPairTestJob
   (args: Args, input: List[String], splitter: Splitter, clean: Clean,
     validator: Validator[StringPair], filter: RowFilter, outFile: String,
     errFile: String, test: StringPair => Boolean
-  ) extends Job(args) {
-
-  implicit val StringPairDecode: Decode[StringPair] = for {
-    first  <- Decode.of[String]
-    second <- Decode.of[String]
-  } yield StringPair(first, second)
-
-  implicit val StringPairTag: Tag[StringPair] = {
-    val fields =
-      Field("FIRST", (p:StringPair) => p.first) +:
-      Field("SECOND",(p:StringPair) => p.second) +:
-      Stream.continually[Field[StringPair,String]](
-        Field("UNKNOWN", _ => throw new Exception("invalid field"))
-      )
-
-    Tag(_ zip fields)
-  }
-
+  )(implicit decode: Decode[StringPair], tag: Tag[StringPair]) extends Job(args) {
   val in = ThermometerSource(input).map(l => RawRow(l, Nil))
 
   Load.loadProcess[StringPair](in, splitter, errFile, clean, validator, filter, "\0")

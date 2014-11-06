@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/2c5ea3209fd08f0a53db5c45a4fab594b9b0d5fb//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerCascade.scala" target="_blank">CustomerCascade.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/f403b21c4212cb580efab22e00b5013e4170b1d3//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerCascade.scala" target="_blank">CustomerCascade.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="../api/MaestroCascade.html" class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade">MaestroCascade</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <span class="extype" name="com.twitter.scalding.CascadeJob">CascadeJob</span>, <span class="extype" name="com.twitter.scalding.Job">Job</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -339,7 +339,7 @@
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">lazy val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
         <span class="name">classIdentifier</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
@@ -683,19 +683,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
-    </li><li name="com.twitter.scalding.Job#fromInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="fromInputStream(s:java.io.InputStream):Array[Byte]"></a>
-      <a id="fromInputStream(InputStream):Array[Byte]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">fromInputStream</span><span class="params">(<span name="s">s: <span class="extype" name="java.io.InputStream">InputStream</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -917,19 +904,6 @@
       </span>
       </h4>
       
-    </li><li name="com.twitter.scalding.Job#md5Hex" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="md5Hex(bytes:Array[Byte]):String"></a>
-      <a id="md5Hex(Array[Byte]):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">md5Hex</span><span class="params">(<span name="bytes">bytes: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="com.twitter.scalding.Job#mode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="mode:com.twitter.scalding.Mode"></a>
       <a id="mode:Mode"></a>
@@ -1115,6 +1089,19 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Don't run any cascading jobs if the job list is empty.</p><div class="fullcomment"><div class="comment cmt"><p>Don't run any cascading jobs if the job list is empty.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../api/MaestroCascade.html" class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade">MaestroCascade</a> → CascadeJob → Job</dd></dl></div>
+    </li><li name="com.twitter.scalding.Job#scaldingConfig" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="scaldingConfig:com.twitter.scalding.Config"></a>
+      <a id="scaldingConfig:Config"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">scaldingConfig</span><span class="result">: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="com.twitter.scalding.Job#skipStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="skipStrategy:Option[cascading.flow.FlowSkipStrategy]"></a>
       <a id="skipStrategy:Option[FlowSkipStrategy]"></a>
@@ -1151,6 +1138,19 @@
       </span>
       <span class="symbol">
         <span class="name">sourceToRichPipe</span><span class="params">(<span name="src">src: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.RichPipe">RichPipe</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
+    </li><li name="com.twitter.scalding.Job#stepListeners" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stepListeners:List[cascading.flow.FlowStepListener]"></a>
+      <a id="stepListeners:List[FlowStepListener]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stepListeners</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="cascading.flow.FlowStepListener">FlowStepListener</span>]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
@@ -1245,19 +1245,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
-    </li><li name="com.twitter.scalding.Job#toHexString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toHexString(bytes:Array[Byte]):String"></a>
-      <a id="toHexString(Array[Byte]):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toHexString</span><span class="params">(<span name="bytes">bytes: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="com.twitter.scalding.Job#toPipe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toPipe[T](iter:Iterable[T])(implicitset:com.twitter.scalding.TupleSetter[T],implicitconv:com.twitter.scalding.TupleConverter[T]):cascading.pipe.Pipe"></a>
       <a id="toPipe[T](Iterable[T])(TupleSetter[T],TupleConverter[T]):Pipe"></a>
@@ -1297,19 +1284,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
-    </li><li name="com.twitter.scalding.Job#uniqueId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="uniqueId:com.twitter.scalding.UniqueID"></a>
-      <a id="uniqueId:UniqueID"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit final </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">uniqueId</span><span class="result">: <span class="extype" name="com.twitter.scalding.UniqueID">UniqueID</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#unitToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="unitToFields(u:Unit):cascading.tuple.Fields"></a>
       <a id="unitToFields(Unit):Fields"></a>

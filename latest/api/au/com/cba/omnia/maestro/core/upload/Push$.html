@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Functions to push files to HDFS</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/2c5ea3209fd08f0a53db5c45a4fab594b9b0d5fb//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Push.scala" target="_blank">Push.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Functions to push files to HDFS</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/f403b21c4212cb580efab22e00b5013e4170b1d3//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Push.scala" target="_blank">Push.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -151,7 +151,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#archiveFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="archiveFile(raw:java.io.File,archDestDir:java.io.File,archHdfsDestDir:org.apache.hadoop.fs.Path,archName:String):com.cba.omnia.edge.hdfs.Hdfs[Unit]"></a>
+      <a id="archiveFile(raw:java.io.File,archDestDir:java.io.File,archHdfsDestDir:org.apache.hadoop.fs.Path,archName:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[Unit]"></a>
       <a id="archiveFile(File,File,Path,String):Hdfs[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -159,7 +159,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">archiveFile</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="archDestDir">archDestDir: <span class="extype" name="java.io.File">File</span></span>, <span name="archHdfsDestDir">archHdfsDestDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>, <span name="archName">archName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">archiveFile</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="archDestDir">archDestDir: <span class="extype" name="java.io.File">File</span></span>, <span name="archHdfsDestDir">archHdfsDestDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>, <span name="archName">archName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Compress and archive file both locally and in hdfs</p>
@@ -196,7 +196,7 @@
               
         </dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#copyToHdfs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="copyToHdfs(file:java.io.File,destDir:org.apache.hadoop.fs.Path):com.cba.omnia.edge.hdfs.Hdfs[Unit]"></a>
+      <a id="copyToHdfs(file:java.io.File,destDir:org.apache.hadoop.fs.Path):au.com.cba.omnia.permafrost.hdfs.Hdfs[Unit]"></a>
       <a id="copyToHdfs(File,Path):Hdfs[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -204,7 +204,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyToHdfs</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="destDir">destDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span><span class="result">: <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">copyToHdfs</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="destDir">destDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Copy file to hdfs</p>
@@ -280,7 +280,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#hdfsWithTempFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="hdfsWithTempFile[A](raw:java.io.File,fileName:String,action:java.io.File=&gt;com.cba.omnia.edge.hdfs.Hdfs[A]):com.cba.omnia.edge.hdfs.Hdfs[A]"></a>
+      <a id="hdfsWithTempFile[A](raw:java.io.File,fileName:String,action:java.io.File=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[A]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
       <a id="hdfsWithTempFile[A](File,String,(File)⇒Hdfs[A]):Hdfs[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -288,7 +288,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hdfsWithTempFile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="fileName">fileName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="action">action: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Push.hdfsWithTempFile.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Push.hdfsWithTempFile.A">A</span>]</span>
+        <span class="name">hdfsWithTempFile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="fileName">fileName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="action">action: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Push.hdfsWithTempFile.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Push.hdfsWithTempFile.A">A</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Convert a Hdfs operation that depends on a temporary file into a normal Hdfs operation</p>
@@ -306,7 +306,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#moveToDir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="moveToDir(file:java.io.File,destDir:java.io.File):com.cba.omnia.edge.hdfs.Hdfs[Unit]"></a>
+      <a id="moveToDir(file:java.io.File,destDir:java.io.File):au.com.cba.omnia.permafrost.hdfs.Hdfs[Unit]"></a>
       <a id="moveToDir(File,File):Hdfs[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -314,7 +314,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">moveToDir</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="destDir">destDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">moveToDir</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="destDir">destDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Move file to another directory.</p><div class="fullcomment"><div class="comment cmt"><p>Move file to another directory. Convienient to run in a Hdfs operation.</p></div></div>
@@ -358,7 +358,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#push" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="push(src:au.com.cba.omnia.maestro.core.upload.Data,hdfsLandingDir:String,archiveDir:String,hdfsArchiveDir:String):com.cba.omnia.edge.hdfs.Hdfs[au.com.cba.omnia.maestro.core.upload.Copied]"></a>
+      <a id="push(src:au.com.cba.omnia.maestro.core.upload.Data,hdfsLandingDir:String,archiveDir:String,hdfsArchiveDir:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[au.com.cba.omnia.maestro.core.upload.Copied]"></a>
       <a id="push(Data,String,String,String):Hdfs[Copied]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -366,7 +366,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">push</span><span class="params">(<span name="src">src: <a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a></span>, <span name="hdfsLandingDir">hdfsLandingDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archiveDir">archiveDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchiveDir">hdfsArchiveDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.cba.omnia.edge.hdfs.Hdfs">Hdfs</span>[<a href="Copied.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Copied">Copied</a>]</span>
+        <span class="name">push</span><span class="params">(<span name="src">src: <a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a></span>, <span name="hdfsLandingDir">hdfsLandingDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archiveDir">archiveDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchiveDir">hdfsArchiveDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<a href="Copied.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Copied">Copied</a>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Copy the file to HDFS and archive it.</p><div class="fullcomment"><div class="comment cmt"><p>Copy the file to HDFS and archive it.</p><p>If nothing goes wrong, this methods will:</p><ul><li>copy the file to Hdfs</li><li>create an &quot;ingestion complete&quot; flag on Hdfs</li><li>archive the file</li></ul><p>This method will fail if a duplicate of the file or it's

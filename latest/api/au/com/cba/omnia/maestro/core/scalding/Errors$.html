@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/2c5ea3209fd08f0a53db5c45a4fab594b9b0d5fb//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/Errors.scala" target="_blank">Errors.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/f403b21c4212cb580efab22e00b5013e4170b1d3//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/Errors.scala" target="_blank">Errors.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -397,15 +397,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors#handle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="handle[A](p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]],errors:com.twitter.scalding.Source)(implicitflow:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="handle[A](TypedPipe[\/[String,A]],Source)(FlowDef,Mode):TypedPipe[A]"></a>
+      <a id="handle[A](p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]],errors:com.twitter.scalding.Sourcewithcom.twitter.scalding.typed.TypedSink[Any]):com.twitter.scalding.TypedPipe[A]"></a>
+      <a id="handle[A](TypedPipe[\/[String,A]],SourcewithTypedSink[Any]):TypedPipe[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">handle</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]]</span>, <span name="errors">errors: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flow">flow: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]</span>
+        <span class="name">handle</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]]</span>, <span name="errors">errors: <span class="extype" name="com.twitter.scalding.Source">Source</span> with <span class="extype" name="com.twitter.scalding.typed.TypedSink">TypedSink</span>[<span class="extype" name="scala.Any">Any</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]</span>
       </span>
       </h4>
       
@@ -569,15 +569,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>LowPriorityFieldConversions</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors#safely" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="safely[A](path:String)(p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]])(implicitflow:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="safely[A](String)(TypedPipe[\/[String,A]])(FlowDef,Mode):TypedPipe[A]"></a>
+      <a id="safely[A](path:String)(p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]]):com.twitter.scalding.TypedPipe[A]"></a>
+      <a id="safely[A](String)(TypedPipe[\/[String,A]]):TypedPipe[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">safely</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flow">flow: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]</span>
+        <span class="name">safely</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]</span>
       </span>
       </h4>
       

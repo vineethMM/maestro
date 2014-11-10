@@ -95,7 +95,8 @@ object build extends Build {
           "org.scalikejdbc"   %% "scalikejdbc"       % "2.1.2"                % "test",
           "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test",
           "org.apache.commons" % "commons-compress"  % "1.8.1"
-        )
+        ),
+      parallelExecution in Test := false
     )
   )
 

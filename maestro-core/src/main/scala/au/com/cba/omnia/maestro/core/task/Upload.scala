@@ -108,13 +108,13 @@ trait Upload {
     * @param hdfsRoot: Root directory of HDFS
     * @param conf: Hadoop configuration
     * @param controlPattern: The regex which identifies control files. Optional.
-    * @return Any error occuring when uploading files
+    * @return The list of copied hdfs files if successful, or any error occuring when uploading files
     */
   def upload(
     source: String, domain: String, tableName: String, filePattern: String,
     localIngestDir: String, localArchiveDir: String, hdfsRoot: String,
     conf: Configuration, controlPattern: Regex = ControlPattern.default
-  ): Result[Unit] = {
+  ): Result[List[String]] = {
     val logger = Logger.getLogger("Upload")
 
     logger.info("Start of upload")
@@ -131,12 +131,13 @@ trait Upload {
     val hdfsArchiveDir = List(hdfsRoot,        "archive",  source, domain, tableName) mkString File.separator
     val hdfsLandingDir = List(hdfsRoot,        "source",   source, domain, tableName) mkString File.separator
 
-    val result: Result[Unit] =
-      Upload.uploadImpl(tableName, filePattern, locSourceDir, archiveDir, hdfsArchiveDir, hdfsLandingDir, controlPattern).safe.run(conf)
+    val result = Upload.uploadImpl(
+      tableName, filePattern, locSourceDir, archiveDir, hdfsArchiveDir, hdfsLandingDir, controlPattern
+    ).safe.run(conf)
 
     val args = s"$source/$domain/$tableName"
     result match {
-      case Ok(())                => logger.info(s"Upload ended for $args")
+      case Ok(_)                 => logger.info(s"Upload ended for $args")
       case Error(This(msg))      => logger.error(s"Upload failed for $args: $msg")
       case Error(That(exn))      => logger.error(s"Upload failed for $args", exn)
       case Error(Both(msg, exn)) => logger.error(s"Upload failed for $args: $msg", exn)
@@ -166,13 +167,13 @@ trait Upload {
     * @param hdfsLandingPath: HDFS landing directory
     * @param conf: Hadoop configuration
     * @param controlPattern: The regex which identifies control files. Optional.
-    * @return Any error occuring when uploading files
+    * @return The list of copied hdfs files if successful, or any error occuring when uploading files
     */
   def customUpload(
     tableName: String, filePattern: String, localIngestPath: String,
     localArchivePath: String, hdfsArchivePath: String, hdfsLandingPath: String,
     conf: Configuration, controlPattern: Regex = ControlPattern.default
-  ): Result[Unit] = {
+  ): Result[List[String]] = {
     val logger = Logger.getLogger("Upload")
 
     logger.info("Start of custom upload")
@@ -189,7 +190,7 @@ trait Upload {
         controlPattern).safe.run(conf)
 
     result match {
-      case Ok(())                => logger.info(s"Custom upload ended from $localIngestPath")
+      case Ok(_)                 => logger.info(s"Custom upload ended from $localIngestPath")
       case Error(This(msg))      => logger.error(s"Custom upload failed from $localIngestPath: $msg")
       case Error(That(exn))      => logger.error(s"Custom upload failed from $localIngestPath", exn)
       case Error(Both(msg, exn)) => logger.error(s"Custom upload failed from $localIngestPath: $msg", exn)
@@ -214,16 +215,17 @@ object Upload {
     tableName: String, filePattern: String, localIngestPath: String,
     localArchivePath: String, hdfsArchivePath: String, hdfsLandingPath: String,
     controlPattern: Regex
-  ): Hdfs[Unit] =
-    for {
-      inputFiles <- Hdfs.result(Input.findFiles(new File(localIngestPath), tableName, filePattern, controlPattern))
-
-      _ <- inputFiles traverse_ {
-        case Control(file)   => Hdfs.value(logger.info(s"skipping control file ${file.getName}"))
-        case src @ Data(_,_) => for {
-          copied <- Push.push(src, hdfsLandingPath, localArchivePath, hdfsArchivePath)
-          _      =  logger.info(s"copied ${copied.source.getName} to ${copied.dest}")
-        } yield ()
-      }
-    } yield ()
+  ): Hdfs[List[String]] = for {
+    temp          <- Hdfs.result(Input.findFiles(new File(localIngestPath), tableName, filePattern, controlPattern))
+    (ctrls, datas) = temp
+    _              = ctrls foreach  (ctrl =>
+      logger.info(s"skipping control file ${ctrl.file.getName}")
+    )
+    hdfsFiles     <- datas traverse (data =>
+      Push.push(data, hdfsLandingPath, localArchivePath, hdfsArchivePath).map(record => {
+        logger.info(s"copied ${record.source.getName} to ${record.dest}")
+        record.dest.toString
+      })
+    )
+  } yield hdfsFiles
 }

@@ -28,6 +28,7 @@ import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.core.hive.HiveTable
 import au.com.cba.omnia.maestro.core.scalding.StatKeys
 
+/** Executions for view tasks */
 trait ViewExecution {
   /**
     * Partitions a pipe using the given partition scheme and writes out the data.

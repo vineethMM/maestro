@@ -40,28 +40,23 @@ object Input {
     *
     * See the description of the file pattern at [[au.cba.com.omnia.meastro.core.task.Upload]]
     */
-  def findFiles(sourceDir: File, tableName: String, pattern: String, controlPattern: Regex): Result[List[Input]] =
-    Option(sourceDir.listFiles) match {
-      case None        =>
-        Result.fail(s"$sourceDir is not an existing directory")
-      case Some(files) => for {
-        inputMatcher <- fromDisjunction(InputParsers.forPattern(tableName, pattern))
-        fileMatches  <- files.toList traverse (file =>
-          fromDisjunction(inputMatcher(file.getName)) map ((m:MatchResult) => (file, m))
-        )
-      } yield for {
-        (file, matchRes) <- fileMatches
-        dirs             <- matchRes match {
-          case Match(dirs) => List(dirs)
-          case NoMatch     => List.empty[List[String]]
-        }
-        dirFile = new File(dirs mkString File.separator)
-        input   = if (isControl(file, controlPattern)) Control(file) else Data(file, dirFile)
-      } yield input
-    }
+  def findFiles(
+    sourceDir: File, tableName: String, pattern: String, controlPattern: Regex
+  ): Result[(List[Control], List[Data])] = for {
+    matcher     <- fromDisjunction(InputParsers.forPattern(tableName, pattern))
+    files       <- fromNullable(sourceDir.listFiles, s"$sourceDir is not an existing directory").map(_.toList)
+    results     <- files traverse (file => fromDisjunction(matcher(file.getName)))
+    matches      = (files zip results) collect { case (file, Match(dirs)) => (file, dirs) }
+    (ctrl, data) = matches partition { case (file, _) => isControl(file, controlPattern) }
+    controls     = ctrl map { case (file, _)    => Control(file) }
+    dataFiles    = data map { case (file, dirs) => Data(file, new File(dirs mkString File.separator)) }
+  } yield (controls, dataFiles)
+
+  /** Convert a nullable reference into a Result */
+  def fromNullable[A](x: A, msg: String): Result[A] = if (x == null) Result.fail(msg) else Result.ok(x)
 
   /** Convert a disjunction into a Result */
-  def fromDisjunction[A](x: String \/ A) = x.fold(Result.fail(_), Result.ok(_))
+  def fromDisjunction[A](x: String \/ A): Result[A] = x.fold(Result.fail(_), Result.ok(_))
 
   /** check if file matches any of the control file patterns */
   def isControl(file: File, controlPattern: Regex) =

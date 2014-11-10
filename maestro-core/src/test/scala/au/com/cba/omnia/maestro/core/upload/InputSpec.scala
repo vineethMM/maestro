@@ -65,7 +65,7 @@ control files
     f2.createNewFile
 
     val fileList = Input.findFiles(dirs.testDir, "local", "{table}{yyyyddMM}.txt", ControlPattern.default)
-    fileList mustEqual Ok(List(data1))
+    fileList mustEqual Ok((List(), List(data1)))
   })
 
   def rejectLateLiteral = isolatedTest((dirs: IsolatedDirs) => {
@@ -76,7 +76,7 @@ control files
     f2.createNewFile
 
     val fileList = Input.findFiles(dirs.testDir, "local", "{table}*{yyyyddMM}.txt", ControlPattern.default)
-    fileList mustEqual Ok(List(data2))
+    fileList mustEqual Ok((List(), List(data2)))
   })
 
   def rejectMissingSourceDir = isolatedTest((dirs: IsolatedDirs) => {
@@ -95,8 +95,6 @@ control files
     f2.createNewFile
 
     val fileList = Input.findFiles(dirs.testDir, "local", "{table}{yyyyMMdd}*", ControlPattern.default)
-    fileList must beLike {
-      case Ok(list) => list must contain(exactly(expected: _*))
-    }
+    fileList must_== Ok((List(ctrl1), List(data2)))
   })
 }

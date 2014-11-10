@@ -22,13 +22,13 @@ import au.com.cba.omnia.ebenezer.scrooge.hive.HiveExecution
 
 import au.com.cba.omnia.maestro.core.hive.HiveTable
 
-/** A trait for API to run hive queries using the execution monad.*/
+/**
+  * A trait for API to run hive queries using the execution monad.
+  *
+  * TODO go over these methods so that they make sense for Execution.
+  */
 trait QueryExecution {
-  /** 
-    * Runs the specified hive query.
-    * 
-    * The input and output tables are used to determine dependencies for scheduling.
-    */
+  /** Runs the specified hive query. */
   def hiveQuery(
     name: String,
     query: String*
@@ -37,8 +37,8 @@ trait QueryExecution {
 
   /**
     * Runs the specified hive query.
-    * 
-    * The input and output tables are used to determine dependencies for scheduling.
+    *
+    * The output table is created before running the query.
     */
   def hiveQuery(
     name: String,
@@ -47,11 +47,7 @@ trait QueryExecution {
   ) : Execution[Unit] =
     HiveExecution.query(name, output.sink(), query: _*)
 
-  /**
-    * Runs the specified hive query.
-    * 
-    * The input and output tables are used to determine dependencies for scheduling.
-    */
+  /** Runs the specified hive query. */
   def hiveQuery(
     name: String,
     hiveSettings: Map[ConfVars, String], query: String*
@@ -60,8 +56,8 @@ trait QueryExecution {
 
   /**
     * Runs the specified hive query.
-    * 
-    * The input and output tables are used to determine dependencies for scheduling.
+    *
+    * The output table is created before running the query.
     */
   def hiveQuery(
     name: String,

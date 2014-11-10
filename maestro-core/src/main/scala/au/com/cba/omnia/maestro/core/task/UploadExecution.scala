@@ -32,6 +32,11 @@ import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
 
 import au.com.cba.omnia.maestro.core.upload._
 
+/** Information about an upload */
+case class UploadInfo(files: List[String]) {
+  def continue = !files.isEmpty
+}
+
 /**
   * Push source files to HDFS using [[upload]] and archive them.
   *
@@ -109,26 +114,66 @@ trait UploadExecution {
     * @param localIngestDir: Root directory of incoming data files
     * @param localArchiveDir: Root directory of the local archive
     * @param hdfsRoot: Root directory of HDFS
-    * @param conf: Hadoop configuration
-    * @return Any error occuring when uploading files
+    * @param controlPattern: The regex which identifies control files. Optional.
+    * @return The list of copied hdfs files if successful, or any error occuring when uploading files
     */
   def upload(
     source: String, domain: String, tableName: String, filePattern: String,
     localIngestDir: String, localArchiveDir: String, hdfsRoot: String,
-    conf: Configuration, controlPattern: Regex = ControlPattern.default
-  ): Execution[Unit] = {
-    val f: Future[Unit] = UploadHelper.upload(
-      source, domain, tableName, filePattern, localIngestDir,
-      localArchiveDir, hdfsRoot, conf, controlPattern
-    ) match {
-      case Ok(_)             => Future.successful(())
-      case Error(Both(e, t)) => Future.failed(new Exception(s"Failed to upload $source: e", t))
-      case Error(This(e))    => Future.failed(new Exception(s"Failed to upload $source: e"))
-      case Error(That(t))    => Future.failed(new Exception(s"Failed to upload $source", t))
-    }
-  
-    Execution.fromFuture(_ => f)
-  }
+    controlPattern: Regex = ControlPattern.default
+  ): Execution[UploadInfo] =
+    UploadHelper.execution(s"upload for $source", {
+      val conf = new Configuration // TODO replace with execution's conf once scalding provides access
+      UploadHelper.upload(
+        source, domain, tableName, filePattern, localIngestDir,
+        localArchiveDir, hdfsRoot, conf, controlPattern
+      )
+    })
+
+  /**
+    * Pushes source files onto HDFS and archives them locally, using non-standard file locations.
+    *
+    * As per [[upload]], except the user has more control where to find data
+    * files, where to copy them, and where to archive them.
+    *
+    * Data files are found in the local folder `\$locSourceDir`. They are copied
+    * to `\$hdfsLandingDir/<year>/<month>/<originalFileName>`,
+    * and archived at `\$archiveDir/<year>/<month>/<originalFileName>.gz`. (These
+    * directories may change slightly depending on the timestamp format.)
+    *
+    * In all other respects `customUpload` behaves the same as [[upload]].
+    *
+    * @param tableName: Table name or file name in database or project
+    * @param filePattern: File name pattern
+    * @param localIngestPath: Local ingest directory
+    * @param localArchivePath: Local archive directory
+    * @param hdfsArchivePath: HDFS archive directory
+    * @param hdfsLandingPath: HDFS landing directory
+    * @param controlPattern: The regex which identifies control files. Optional.
+    * @return The list of copied hdfs files if successful, or any error occuring when uploading files
+    */
+  def customUpload(
+    tableName: String, filePattern: String, localIngestPath: String,
+    localArchivePath: String, hdfsArchivePath: String, hdfsLandingPath: String,
+    controlPattern: Regex = ControlPattern.default
+  ): Execution[UploadInfo] =
+    UploadHelper.execution(s"upload from $localIngestPath", {
+      val conf = new Configuration // TODO replace with execution's conf once scalding provides access
+      UploadHelper.customUpload(
+        tableName, filePattern, localIngestPath, localArchivePath,
+        hdfsArchivePath, hdfsLandingPath, conf, controlPattern
+      )
+    })
 }
 
-private object UploadHelper extends Upload
+private object UploadHelper extends Upload {
+  def execution(desc: String, action: => Result[List[String]]): Execution[UploadInfo] =
+    Execution.fromFuture(ec => Future {
+      action match {
+        case Ok(copied)        => UploadInfo(copied)
+        case Error(Both(e, t)) => throw new Exception(s"Failed to $desc: $e", t)
+        case Error(This(e))    => throw new Exception(s"Failed to $desc: $e")
+        case Error(That(t))    => throw new Exception(s"Failed to $desc", t)
+      }
+    }(ec))
+}

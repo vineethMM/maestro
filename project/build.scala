@@ -89,11 +89,13 @@ object build extends Build {
         ++ depend.omnia("parlour",       "1.5.0-20141110224249-7f2b947")
         ++ Seq(
           "commons-validator"  % "commons-validator" % "1.4.0",
+          "org.apache.commons" % "commons-compress"  % "1.8.1",
           "org.apache.hadoop"  % "hadoop-tools"      % depend.versions.hadoop % "provided",
           "au.com.cba.omnia"  %% "thermometer-hive"  % thermometerVersion     % "test",
           "org.scalikejdbc"   %% "scalikejdbc"       % "2.1.2"                % "test",
           "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test",
-          "org.apache.commons" % "commons-compress"  % "1.8.1"
+          "com.twitter"        % "parquet-hive"      % "1.2.5-cdh4.6.0"       % "test",
+          "com.twitter"        % "parquet-cascading" % "1.2.5-cdh4.6.0-p337"  % "provided"
         ),
       parallelExecution in Test := false
     )

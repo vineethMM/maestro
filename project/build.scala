@@ -37,7 +37,6 @@ object build extends Build {
   lazy val standardSettings: Seq[Sett] =
     Defaults.defaultSettings ++
     uniformDependencySettings ++
-    Seq(resolvers += "commbank-releases-private" at "https://commbank.artifactoryonline.com/commbank/libs-releases-local") ++
     uniform.docSettings("https://github.com/CommBank/maestro")
 
   lazy val all = Project(

@@ -16,13 +16,17 @@ package au.com.cba.omnia.maestro.core.task
 
 import java.io.File
 
-import org.apache.log4j.Logger
+import com.cloudera.sqoop.SqoopOptions
 
-import cascading.flow.FlowDef
+import org.apache.commons.lang.StringUtils
+
+import org.apache.log4j.Logger
 
 import org.apache.hadoop.io.compress.BZip2Codec
 
 import com.twitter.scalding.{Args, Job, Mode, TextLine, TypedPipe}
+
+import cascading.flow.FlowDef
 
 import com.cba.omnia.edge.source.compressible.CompressibleTypedTsv
 
@@ -144,17 +148,34 @@ trait Sqoop {
   /**
    * Runs a sqoop export from HDFS to a database table.
    *
+   * If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
+   * Otherwise the rows will be appended.
+   *
    * @param options: Custom export options
+   * @param deleteFromTable: Delete all the rows before export
    * @return Job for this export
    */
   def customSqoopExport[T <: ParlourExportOptions[T]](
-    options: ParlourExportOptions[T]
+    options: ParlourExportOptions[T], deleteFromTable: Boolean = false
   )(args: Args)(implicit flowDef: FlowDef, mode: Mode): Job = {
-    new ExportSqoopJob(options.toSqoopOptions)(args)
+    val sqoopOptions = options.toSqoopOptions
+    if (deleteFromTable) trySetDeleteQuery(sqoopOptions)
+
+    new ExportSqoopJob(sqoopOptions)(args)
+  }
+
+  private def trySetDeleteQuery(options: SqoopOptions): Unit = {
+    if (!StringUtils.isEmpty(options.getSqlQuery)) {
+      throw new RuntimeException("SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table")
+    }
+    options.setSqlQuery(s"DELETE FROM ${options.getTableName}")
   }
 
   /**
    * Runs a sqoop export from HDFS to a database table.
+   *
+   * If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
+   * Otherwise the rows will be appended.
    *
    * @param exportDir: Directory containing data to be exported
    * @param tableName: Table name in the database
@@ -164,6 +185,7 @@ trait Sqoop {
    * @param inputFieldsTerminatedBy: Field separator in input data
    * @param inputNullString: The string to be interpreted as null for string and non string columns
    * @param options: Extra export options
+   * @param deleteFromTable: Delete all the rows before export
    * @return Job for this export
    */
   def sqoopExport[T <: ParlourExportOptions[T]](
@@ -174,13 +196,14 @@ trait Sqoop {
     password: String,
     inputFieldsTerminatedBy: Char,
     inputNullString: String,
-    options: T = ParlourExportDsl()
+    options: T = ParlourExportDsl(),
+    deleteFromTable: Boolean = false
   )(args: Args)(implicit flowDef: FlowDef, mode: Mode): Job = {
     val withConnection = options.connectionString(connectionString).username(username).password(password)
     val withEntity = withConnection.exportDir(exportDir)
       .tableName(tableName)
       .inputFieldsTerminatedBy(inputFieldsTerminatedBy)
       .inputNull(inputNullString)
-    customSqoopExport(withEntity)(args)
+    customSqoopExport(withEntity, deleteFromTable)(args)
   }
 }

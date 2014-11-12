@@ -107,6 +107,7 @@ trait Upload {
     * @param localArchiveDir: Root directory of the local archive
     * @param hdfsRoot: Root directory of HDFS
     * @param conf: Hadoop configuration
+    * @param controlPattern: The regex which identifies control files. Optional.
     * @return Any error occuring when uploading files
     */
   def upload(
@@ -164,6 +165,7 @@ trait Upload {
     * @param hdfsArchivePath: HDFS archive directory
     * @param hdfsLandingPath: HDFS landing directory
     * @param conf: Hadoop configuration
+    * @param controlPattern: The regex which identifies control files. Optional.
     * @return Any error occuring when uploading files
     */
   def customUpload(

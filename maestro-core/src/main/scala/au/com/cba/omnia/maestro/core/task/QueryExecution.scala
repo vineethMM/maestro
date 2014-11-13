@@ -66,4 +66,3 @@ trait QueryExecution {
   ) : Execution[Unit] =
     HiveExecution.query(name, output.sink(), hiveSettings, query: _*)
 }
-

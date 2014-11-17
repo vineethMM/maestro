@@ -123,7 +123,7 @@ trait UploadExecution {
     controlPattern: Regex = ControlPattern.default
   ): Execution[UploadInfo] =
     UploadHelper.execution(s"upload for $source", {
-      val conf = new Configuration // TODO replace with execution's conf once scalding provides access
+      val conf = new Configuration
       UploadHelper.upload(
         source, domain, tableName, filePattern, localIngestDir,
         localArchiveDir, hdfsRoot, conf, controlPattern
@@ -158,7 +158,7 @@ trait UploadExecution {
     controlPattern: Regex = ControlPattern.default
   ): Execution[UploadInfo] =
     UploadHelper.execution(s"upload from $localIngestPath", {
-      val conf = new Configuration // TODO replace with execution's conf once scalding provides access
+      val conf = new Configuration
       UploadHelper.customUpload(
         tableName, filePattern, localIngestPath, localArchivePath,
         hdfsArchivePath, hdfsLandingPath, conf, controlPattern

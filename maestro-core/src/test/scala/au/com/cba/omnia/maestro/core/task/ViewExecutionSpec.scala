@@ -114,6 +114,5 @@ View execution properties
     StringPair("B", "2")
   )
 
-  // TODO move this PathFactoid to thermometer
   def matchesFile = PathFactoid((context, path) => !context.glob(path).isEmpty)
 }

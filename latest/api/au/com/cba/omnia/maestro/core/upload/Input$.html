@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for <code>Input</code>s</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/f158cfd099d82d5734fe485635c4e8ad64793c65//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Input.scala" target="_blank">Input.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for <code>Input</code>s</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/86b7edb8662b793a6ea56c4e5c77317b040e635b//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Input.scala" target="_blank">Input.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -228,32 +228,45 @@
               
         </dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Input#findFiles" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="findFiles(sourceDir:java.io.File,tableName:String,pattern:String,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.permafrost.hdfs.Result[List[au.com.cba.omnia.maestro.core.upload.Input]]"></a>
-      <a id="findFiles(File,String,String,Regex):Result[List[Input]]"></a>
+      <a id="findFiles(sourceDir:java.io.File,tableName:String,pattern:String,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.permafrost.hdfs.Result[(List[au.com.cba.omnia.maestro.core.upload.Control],List[au.com.cba.omnia.maestro.core.upload.Data])]"></a>
+      <a id="findFiles(File,String,String,Regex):Result[(List[Control],List[Data])]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">findFiles</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Result">Result</span>[<span class="extype" name="scala.List">List</span>[<a href="Input.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Input">Input</a>]]</span>
+        <span class="name">findFiles</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Result">Result</span>[(<span class="extype" name="scala.List">List</span>[<a href="Control.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Control">Control</a>], <span class="extype" name="scala.List">List</span>[<a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a>])]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Find files from a directory matching a given file pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Find files from a directory matching a given file pattern.</p><p>See the description of the file pattern at <span class="extype" name="au.cba.com.omnia.meastro.core.task.Upload">au.cba.com.omnia.meastro.core.task.Upload</span>
 </p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Input#fromDisjunction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="fromDisjunction[A](x:scalaz.\/[String,A]):au.com.cba.omnia.permafrost.hdfs.Result[_&lt;:A]"></a>
-      <a id="fromDisjunction[A](\/[String,A]):Result[_&lt;:A]"></a>
+      <a id="fromDisjunction[A](x:scalaz.\/[String,A]):au.com.cba.omnia.permafrost.hdfs.Result[A]"></a>
+      <a id="fromDisjunction[A](\/[String,A]):Result[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fromDisjunction</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="x">x: <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromDisjunction.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Result">Result</span>[_ &lt;: <span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromDisjunction.A">A</span>]</span>
+        <span class="name">fromDisjunction</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="x">x: <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromDisjunction.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Result">Result</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromDisjunction.A">A</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Convert a disjunction into a Result</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.Input#fromNullable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromNullable[A](x:A,msg:String):au.com.cba.omnia.permafrost.hdfs.Result[A]"></a>
+      <a id="fromNullable[A](A,String):Result[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromNullable</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="x">x: <span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromNullable.A">A</span></span>, <span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Result">Result</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.upload.Input.fromNullable.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Convert a nullable reference into a Result</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>

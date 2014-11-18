@@ -110,6 +110,58 @@
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LoadExecutionextendsAnyRef"></a>
+      <a id="LoadExecution:LoadExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadExecution.html"><span class="name">LoadExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Executions for load tasks</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadFailureextendsLoadInfowithProductwithSerializable"></a>
+      <a id="LoadFailure:LoadFailure"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadFailure.html"><span class="name">LoadFailure</span></a><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The number of rows which failed to load exceeded our error threshold</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LoadInfoextendsAnyRef"></a>
+      <a id="LoadInfo:LoadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadInfo.html"><span class="name">LoadInfo</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Information about a Load</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadSuccessextendsLoadInfowithProductwithSerializable"></a>
+      <a id="LoadSuccess:LoadSuccess"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadSuccess.html"><span class="name">LoadSuccess</span></a><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The number of rows which failed to load was within acceptable limits</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.Predetermined" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PredeterminedextendsTimeSourcewithProductwithSerializable"></a>
       <a id="Predetermined:Predetermined"></a>
@@ -136,6 +188,19 @@
       </span>
       </h4>
       <p class="comment cmt">A trait for API to run hive queries.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.QueryExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="QueryExecutionextendsAnyRef"></a>
+      <a id="QueryExecution:QueryExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryExecution.html"><span class="name">QueryExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A trait for API to run hive queries using the execution monad.</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.RawRow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RawRowextendsProductwithSerializable"></a>
       <a id="RawRow:RawRow"></a>
@@ -187,7 +252,33 @@
         <a href="Upload.html"><span class="name">Upload</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Push source files to HDFS using <a href="Upload.html#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.permafrost.hdfs.Result[Unit]" class="extmbr" name="au.com.cba.omnia.maestro.core.task.Upload#upload">upload</a> and archive them.</p>
+      <p class="comment cmt">Push source files to HDFS using <a href="Upload.html#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.permafrost.hdfs.Result[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.core.task.Upload#upload">upload</a> and archive them.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="UploadExecutionextendsAnyRef"></a>
+      <a id="UploadExecution:UploadExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadExecution.html"><span class="name">UploadExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Push source files to HDFS using <a href="UploadExecution.html#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.core.task.UploadExecution#upload">upload</a> and archive them.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadInfoextendsProductwithSerializable"></a>
+      <a id="UploadInfo:UploadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadInfo.html"><span class="name">UploadInfo</span></a><span class="params">(<span name="files">files: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Information about an upload</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.View" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ViewextendsAnyRef"></a>
       <a id="View:View"></a>
@@ -201,6 +292,19 @@
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.task.ViewExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ViewExecutionextendsAnyRef"></a>
+      <a id="ViewExecution:ViewExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ViewExecution.html"><span class="name">ViewExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Executions for view tasks</p>
     </li></ol>
             </div>
 
@@ -208,7 +312,20 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.task.Load" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.task.EmptyLoad" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmptyLoad"></a>
+      <a id="EmptyLoad:EmptyLoad"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EmptyLoad$.html"><span class="name">EmptyLoad</span></a><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The Load had no new data to process</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.Load" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Load"></a>
       <a id="Load:Load"></a>
       <h4 class="signature">
@@ -221,6 +338,19 @@
       </span>
       </h4>
       <p class="comment cmt">Contains implementation for <code>loadFoo</code> methods in <code>Load</code> trait.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadInfo"></a>
+      <a id="LoadInfo:LoadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadInfo$.html"><span class="name">LoadInfo</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory methods for <code>LoadInfo</code></p>
     </li><li name="au.com.cba.omnia.maestro.core.task.Upload" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Upload"></a>
       <a id="Upload:Upload"></a>

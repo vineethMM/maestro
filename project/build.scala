@@ -31,7 +31,7 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "0.5.2-20141114023512-17afb81"
-  val ebenezerVersion    = "0.11.0-20141114053152-9812d76"
+  val ebenezerVersion    = "0.11.1-20141117235330-fe04130"
   val omnitoolVersion    = "1.3.0-20141009013528-4a9aa95"
 
   lazy val standardSettings: Seq[Sett] =

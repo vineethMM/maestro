@@ -47,9 +47,8 @@ object CustomerExecution extends MaestroExecution[Customer] {
       )
 
       if loadInfo.continue
-      count1 <- viewHive(dateTable)(pipe)
-      _      <- viewHive(catTable)(pipe)
-      _      <- hiveQuery(
+      (count1, _) <- viewHive(dateTable)(pipe).zip(viewHive(catTable)(pipe))
+      _           <- hiveQuery(
         "test", catTable,
         Map(HIVEMERGEMAPFILES -> "true"),
         s"INSERT OVERWRITE TABLE ${catTable.name} PARTITION (partition_cat) SELECT id, name, acct, cat, sub_cat, -10, effective_date, cat AS partition_cat FROM ${dateTable.name}",

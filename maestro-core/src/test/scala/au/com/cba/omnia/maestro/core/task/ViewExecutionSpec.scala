@@ -94,7 +94,7 @@ View execution properties
       hiveWarehouse </> "zippedhive.db" </> "by_second" </> "partition_second=1" </> "part-*.parquet" ==> matchesFile,
       hiveWarehouse </> "zippedhive.db" </> "by_second" </> "partition_second=2" </> "part-*.parquet" ==> matchesFile
     )
-  }.pendingUntilFixed
+  }
 
 
   def tableByFirst(database: String) =

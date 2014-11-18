@@ -44,7 +44,7 @@ object FieldsMacro {
     }).map({
       case (method, field, value) =>
         val n = newTermName(field)
-        q"""def ${n} = $value"""
+        q"""val ${n} = $value"""
     })
     val refs = entries.map({
       case (method, field) =>

@@ -14,8 +14,6 @@
 
 package au.com.cba.omnia.maestro.api.exec
 
-import com.twitter.scalding.Execution
-
 import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.maestro.core.task._
@@ -27,6 +25,7 @@ trait MaestroExecutionBase
   with LoadExecution
   with ViewExecution
   with QueryExecution
+  with SqoopExecution
   with Config
   with Miscellaneous {
 

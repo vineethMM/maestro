@@ -16,20 +16,24 @@ package au.com.cba.omnia.maestro.core.task
 
 import java.io.File
 
-import au.com.cba.omnia.maestro.core.scalding.StatKeys
-import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourImportOptions}
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 import cascading.flow.FlowDef
-import com.cba.omnia.edge.source.compressible.CompressibleTypedTsv
+
 import com.twitter.scalding._
+
 import org.apache.hadoop.conf.Configuration
+
 import org.apache.hadoop.io.compress.{BZip2Codec, CompressionCodec}
+
 import org.apache.log4j.Logger
 
-import scala.reflect._
+import au.com.cba.omnia.maestro.core.scalding.StatKeys
+
+import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourExportOptions, ParlourImportOptions}
+import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourExportDsl, ParlourImportDsl}
+
+import com.cba.omnia.edge.source.compressible.CompressibleTypedTsv
 
 trait SqoopExecution {
-
   /** Return an [[Execution]] that will run a custom sqoop import using parlour import options
     *
     * '''Use this method ONLY if non-standard settings are required'''
@@ -117,6 +121,58 @@ trait SqoopExecution {
       count        <- Archiver.archive[BZip2Codec](importPath, archivePath)
     } yield((importPath, count))
   }
+
+  /**
+   * Runs a sqoop export from HDFS to a database table.
+   *
+   * If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
+   * Otherwise the rows will be appended.
+   *
+   * @param options: Custom export options
+   * @param deleteFromTable: Delete all the rows before export
+   */
+  def customSqoopExport[T <: ParlourExportOptions[T]](
+    options: ParlourExportOptions[T], deleteFromTable: Boolean = false
+  ): Execution[Unit] = {
+    val sqoopOptions = options.toSqoopOptions
+    if (deleteFromTable) sqoopOptions.setSqlQuery(s"DELETE FROM ${options.getTableName}")
+    ParlourExecution.sqoopExport(sqoopOptions)
+  }
+
+  /**
+   * Runs a sqoop export from HDFS to a database table.
+   *
+   * If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
+   * Otherwise the rows will be appended.
+   *
+   * @param exportDir: Directory containing data to be exported
+   * @param tableName: Table name in the database
+   * @param connectionString: Jdbc url for connecting to the database
+   * @param username: Username for connecting to the database
+   * @param password: Password for connecting to the database
+   * @param inputFieldsTerminatedBy: Field separator in input data
+   * @param inputNullString: The string to be interpreted as null for string and non string columns
+   * @param options: Extra export options
+   * @param deleteFromTable: Delete all the rows before export
+   */
+  def sqoopExport[T <: ParlourExportOptions[T]](
+    exportDir: String,
+    tableName: String,
+    connectionString: String,
+    username: String,
+    password: String,
+    inputFieldsTerminatedBy: Char,
+    inputNullString: String,
+    options: T = ParlourExportDsl(),
+    deleteFromTable: Boolean = false
+  ): Execution[Unit] = {
+    val withConnection = options.connectionString(connectionString).username(username).password(password)
+    val withEntity = withConnection.exportDir(exportDir)
+      .tableName(tableName)
+      .inputFieldsTerminatedBy(inputFieldsTerminatedBy)
+      .inputNull(inputNullString)
+    customSqoopExport(withEntity, deleteFromTable)
+  }
 }
 
 private object SqoopHelper extends Sqoop
@@ -139,5 +195,6 @@ object Archiver {
         TypedPipe.from(TextLine(src)).write(CompressibleTypedTsv[String](dest))
         ExecutionContext.newContext(configWithCompress).run
       }
-    } yield (ExecutionCounters.fromJobStats(jobStat).get(StatKeys.tuplesWritten).get)
+      counter = ExecutionCounters.fromJobStats(jobStat)
+    } yield (counter.get(StatKeys.tuplesWritten).get)
 }

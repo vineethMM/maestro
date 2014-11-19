@@ -15,9 +15,11 @@
 package au.com.cba.omnia.maestro.core
 package data
 
-import com.twitter.scrooge.ThriftStruct
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
+
+import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
+
 object FieldSpec extends test.Spec { def is = s2"""
 
 Field equality
@@ -25,32 +27,47 @@ Field equality
 
 Fields with
   different names should NOT be equal and should have different hashCode  $fieldNameNotEqual
-  equal names and column type should be equal and have equal hashCode     $fieldNameAndTypeEqual
-
-
+  same names but different column type should NOT be equal                $fieldDiffColumnTypes
+  same names but different return type should NOT be equal                $fieldDiffReturnTypes
+  same names and column type should be equal and have equal hashCode      $fieldNameAndTypeEqual
 """
   val genDifferentString = for {
-    x <- Gen.alphaStr
-    y <- Gen.alphaStr
-    if (x != y)
-  } yield (x ,y)
+    string1 <- Gen.alphaStr
+    string2 <- Gen.alphaStr
+    if (string1 != string2)
+  } yield (string1 ,string2)
 
   def fieldNameNotEqual = forAll(genDifferentString) {
-    case (name, name2) => {
-      val fun = (x: ThriftStruct) => ""
-      val res = Field(name, fun)
-      val res2 = Field(name2, fun)
-      ("no equal" |: res != res2 && res.hashCode != res2.hashCode )
+    case (name1, name2) => {
+      val fun = (p:StringPair) => p.first
+      val field1 = Field(name1, fun)
+      val field2 = Field(name2, fun)
+      ("no equal" |: field1 != field2 && field1.hashCode != field2.hashCode)
     }
   }
 
-  def fieldNameAndTypeEqual = forAll { (name: String, f: String => Int, f2: String => Double) => {
-    val res = Field(name, f)
-    val res2 = Field(name, f2)
-    ("equal" |: res == res2 && res.hashCode == res2.hashCode )
-
+  def fieldNameAndTypeEqual = forAll { (name: String, f: StringPair => String) => {
+      val field1 = Field(name, f)
+      val filed2 = Field(name, f)
+      ("equal" |: field1 == filed2 && field1.hashCode == filed2.hashCode)
+    }
   }
 
+  def fieldDiffColumnTypes = {
+    val name = "id"
+    val field1 = Field(name, (x: StringPair)  => 1)
+    val field2 = Field(name, (x: Int)         => 1)
+
+    field1 shouldNotEqual field2
+    field1.hashCode shouldNotEqual field2
   }
- 
+
+  def fieldDiffReturnTypes = {
+    val name = "id"
+    val field1 = Field(name, (x: String) => "")
+    val field2 = Field(name, (x: String) => 1)
+
+    field1 shouldNotEqual field2
+    field1.hashCode shouldNotEqual field2
+  }
 }

@@ -20,8 +20,8 @@ package data
   * instance of `A`.
   */
 case class Field[A : Manifest, B : Manifest](name: String, get: A => B) {
-  val typeA = manifest[A]
-  val typeB = manifest[B]
+  val structType = manifest[A]
+  val columnType = manifest[B]
 
   /**
    * Fields are consider equal if name and type of column are equal
@@ -29,9 +29,17 @@ case class Field[A : Manifest, B : Manifest](name: String, get: A => B) {
    * Do not try to use it with custom created fields.
    */
   override def equals(other: Any): Boolean = other match {
-    case f: Field[_, _] => typeA == f.typeA && typeB == f.typeB && name == f.name
+    case f: Field[_, _] => equalityTest(f)
     case _              => false
   }
 
-  override def hashCode: Int = (name.hashCode * 41 + typeA.hashCode) * 41 + typeB.hashCode
+  private def equalityTest(f: Field[_, _]): Boolean = {
+    val equalFields = structType == f.structType && name == f.name
+    if (equalFields && columnType != f.columnType) {
+      throw new RuntimeException("Can't have two columns with the same name from the same Thrift structure with different column type")
+    }
+    equalFields
+  }
+
+  override def hashCode: Int = name.hashCode * 41 + structType.hashCode
 }

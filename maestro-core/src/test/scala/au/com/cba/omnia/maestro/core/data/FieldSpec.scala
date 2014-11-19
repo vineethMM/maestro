@@ -18,6 +18,8 @@ package data
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 
+import com.twitter.scrooge.ThriftStruct
+
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 object FieldSpec extends test.Spec { def is = s2"""
@@ -27,9 +29,9 @@ Field equality
 
 Fields with
   different names should NOT be equal and should have different hashCode  $fieldNameNotEqual
-  same names but different column type should NOT be equal                $fieldDiffColumnTypes
-  same names but different return type should NOT be equal                $fieldDiffReturnTypes
-  same names and column type should be equal and have equal hashCode      $fieldNameAndTypeEqual
+  same names but different Thrift struct type should NOT be equal         $fieldDiffStructTypes
+  same names but different return type should throw an Exception          $fieldDiffReturnTypes
+  same names and Thrift struct should be equal and have equal hashCode    $fieldNameAndTypeEqual
 """
   val genDifferentString = for {
     string1 <- Gen.alphaStr
@@ -53,7 +55,7 @@ Fields with
     }
   }
 
-  def fieldDiffColumnTypes = {
+  def fieldDiffStructTypes = {
     val name = "id"
     val field1 = Field(name, (x: StringPair)  => 1)
     val field2 = Field(name, (x: Int)         => 1)
@@ -64,10 +66,12 @@ Fields with
 
   def fieldDiffReturnTypes = {
     val name = "id"
-    val field1 = Field(name, (x: String) => "")
-    val field2 = Field(name, (x: String) => 1)
+    val field1 = Field(name, (x: ThriftStruct) => "")
+    val field2 = Field(name, (x: ThriftStruct) => 1)
 
-    field1 shouldNotEqual field2
-    field1.hashCode shouldNotEqual field2
+    def notValidEqualityCheck = { field1 == field2 }
+
+    notValidEqualityCheck must throwA(new RuntimeException("Can't have two columns with the same name from the same Thrift structure with different column type"))
+
   }
 }

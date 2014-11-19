@@ -17,15 +17,16 @@ package au.com.cba.omnia.maestro.core.task
 import java.io.{File, InputStream}
 import java.util.UUID
 
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
-import au.com.cba.omnia.thermometer.fact.PathFactoids._
-import au.com.cba.omnia.thermometer.core.Thermometer._
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 
 import org.specs2.specification.BeforeExample
 
 import scalaz.effect.IO
 
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
+
+import au.com.cba.omnia.thermometer.fact.PathFactoids._
+import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.tools.Streams
 import au.com.cba.omnia.thermometer.core.{ThermometerRecordReader, ThermometerSpec}
@@ -66,8 +67,6 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
       records(bzippedRecordReader, CustomerImport.data))
     count === 3
   }
-
-
 
   override def before: Any = CustomerImport.tableSetup(connectionString, username, password, importTableName)
 }

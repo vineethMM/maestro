@@ -2,7 +2,6 @@ package au.com.cba.omnia.maestro.core.task
 
 import scalikejdbc._
 
-
 object CustomerImport {
 
   Class.forName("org.hsqldb.jdbcDriver")

@@ -118,6 +118,9 @@ trait SqoopExecution {
       archivePath   = List(hdfsRoot, "archive", source, domain, dstTableName, timePath) mkString File.separator
       finalOptions  = options.targetDir(importPath)
       _            <- customSqoopImport(finalOptions)
+      //Sqoop doesn't report the number of rows written, so we have to rely on the numbers of rows
+      //we have archived from the sqoop imported data. While it is not impossible, it is highly unlikely
+      //that the counts will be different
       count        <- Archiver.archive[BZip2Codec](importPath, archivePath)
     } yield((importPath, count))
   }
@@ -190,10 +193,11 @@ object Archiver {
               "mapred.output.compression.codec" -> implicitly[ClassManifest[C]].erasure.getName
             )
           )
-        implicit val flowDef = new FlowDef
-        implicit val localMode = Mode(Args("--hdfs"), new Configuration)
-        TypedPipe.from(TextLine(src)).write(CompressibleTypedTsv[String](dest))
-        ExecutionContext.newContext(configWithCompress).run
+        val flowDef = new FlowDef
+        //TODO : Get the mode from scalding once it is made available
+        val mode = Mode(Args("--hdfs"), new Configuration)
+        TypedPipe.from(TextLine(src)).write(CompressibleTypedTsv[String](dest))(flowDef, mode)
+        ExecutionContext.newContext(configWithCompress)(flowDef, mode).run
       }
       counter = ExecutionCounters.fromJobStats(jobStat)
     } yield (counter.get(StatKeys.tuplesWritten).get)

@@ -35,11 +35,9 @@ object ArchiverSpec extends ThermometerSpec { def is = s2"""
 Archiver properties
 ===================
 
-archives the source to the destination with the provided compression setting $archive
-after archiving from source to destination return the written row count      $archiveAndReturnCount
+archives the source to the destination with the provided compression and return the row count $archiveAndReturnCount
 
 """
-
   val resourceUrl         = getClass.getResource("/sqoop")
   val textData            = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/customer.txt").getLines().toSeq
   val bzippedRecordReader =
@@ -52,16 +50,10 @@ after archiving from source to destination return the written row count      $ar
       finally in.close
     })
 
-  def archive = {
-    withEnvironment(path(resourceUrl.toString)) {
-      executesOk(Archiver.archive[BZip2Codec](s"$dir/user/sales/books/customers", s"$dir/user/sales/books/compressed"))
-      facts(s"$dir/user/sales/books/compressed" </> "part-00000.bz2" ==> records(bzippedRecordReader, CustomerImport.data))
-    }
-  }
-
   def archiveAndReturnCount = {
     withEnvironment(path(resourceUrl.toString)) {
       executesSuccessfully(Archiver.archive[BZip2Codec](s"$dir/user/sales/books/customers", s"$dir/user/sales/books/compressed")) === 3
+      facts(s"$dir/user/sales/books/compressed" </> "part-00000.bz2" ==> records(bzippedRecordReader, CustomerImport.data))
     }
   }
 

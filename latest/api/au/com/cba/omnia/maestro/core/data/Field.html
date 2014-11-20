@@ -35,13 +35,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Field</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="get">get: (<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Field</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="get">get: (<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence$1">evidence$1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>]</span>, <span name="evidence$2">evidence$2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a field of <code>A</code> with type <code>B</code>. It has the name of the field and a getter given an
 instance of <code>A</code>.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/de95d562b3b8fc8f180c42d62691424d72b9dfa6//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/data/Field.scala" target="_blank">Field.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/5af91abbed4d71a07c5b842979036da2b82d2200//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/data/Field.scala" target="_blank">Field.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -82,7 +82,7 @@ instance of <code>A</code>.
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.maestro.core.data.Field#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(name:String,get:A=&gt;B):au.com.cba.omnia.maestro.core.data.Field[A,B]"></a>
+      <a id="&lt;init&gt;(name:String,get:A=&gt;B)(implicitevidence$1:Manifest[A],implicitevidence$2:Manifest[B]):au.com.cba.omnia.maestro.core.data.Field[A,B]"></a>
       <a id="&lt;init&gt;:Field[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -90,7 +90,7 @@ instance of <code>A</code>.
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Field</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="get">get: (<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span></span>)</span>
+        <span class="name">Field</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="get">get: (<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span>]</span>)</span>
       </span>
       </h4>
       
@@ -200,6 +200,19 @@ instance of <code>A</code>.
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.data.Field#columnType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="columnType:Class[_&lt;:Manifest[B]]"></a>
+      <a id="columnType:Class[_&lt;:Manifest[B]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">columnType</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_ &lt;: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.B">B</span>]]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -213,6 +226,25 @@ instance of <code>A</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.data.Field#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(other:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Fields are consider equal if name and type of Thrift struct are equal and column type are equal
+Notice that this function will be working correctly only with Fields generated by FieldsMacro.</p><div class="fullcomment"><div class="comment cmt"><p>Fields are consider equal if name and type of Thrift struct are equal and column type are equal
+Notice that this function will be working correctly only with Fields generated by FieldsMacro.
+Do not try to use it with custom created fields.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a> → Equals → AnyRef → Any</dd><dt>Exceptions thrown</dt><dd><span class="cmt">RuntimeException<p>when encounters 2 fields with same name from the same Thrift struct with different column type,
+                         the intention is to indicate serious error in logic of your program.
+</p></span></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -258,6 +290,19 @@ instance of <code>A</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.data.Field#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -323,6 +368,19 @@ instance of <code>A</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.data.Field#structType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="structType:Class[_&lt;:Manifest[A]]"></a>
+      <a id="structType:Class[_&lt;:Manifest[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">structType</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_ &lt;: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.data.Field.A">A</span>]]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

@@ -28,7 +28,7 @@ Field equality
 ===========
 
 Fields with
-  different names should NOT be equal and should have different hashCode  $fieldNameNotEqual
+  different names should NOT be equal                                     $fieldNameNotEqual
   same names but different Thrift struct type should NOT be equal         $fieldDiffStructTypes
   same names but different return type should throw an Exception          $fieldDiffReturnTypes
   same names and Thrift struct should be equal and have equal hashCode    $fieldNameAndTypeEqual
@@ -41,31 +41,34 @@ Fields with
 
   def fieldNameNotEqual = forAll(genDifferentString) {
     case (name1, name2) => {
-      val fun = (p:StringPair) => p.first
+      val fun    = (p:StringPair) => p.first
       val field1 = Field(name1, fun)
       val field2 = Field(name2, fun)
-      ("no equal" |: field1 != field2 && field1.hashCode != field2.hashCode)
+
+      field1 must_!= field2
     }
   }
 
   def fieldNameAndTypeEqual = forAll { (name: String, f: StringPair => String) => {
       val field1 = Field(name, f)
       val filed2 = Field(name, f)
-      ("equal" |: field1 == filed2 && field1.hashCode == filed2.hashCode)
+
+      field1          must_== filed2
+      field1.hashCode must_== filed2.hashCode
     }
   }
 
   def fieldDiffStructTypes = {
-    val name = "id"
+    val name   = "id"
     val field1 = Field(name, (x: StringPair)  => 1)
     val field2 = Field(name, (x: Int)         => 1)
 
-    field1 shouldNotEqual field2
-    field1.hashCode shouldNotEqual field2
+    field1          must_!= field2
+    field1.hashCode must_!= field2.hashCode
   }
 
   def fieldDiffReturnTypes = {
-    val name = "id"
+    val name   = "id"
     val field1 = Field(name, (x: ThriftStruct) => "")
     val field2 = Field(name, (x: ThriftStruct) => 1)
 

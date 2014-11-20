@@ -18,77 +18,51 @@ import java.util.UUID
 
 import scala.io.Source
 
-import com.twitter.scalding.{Args, CascadeJob}
-
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
-class SqoopExportSpec extends ThermometerSpec { def is = s2"""
-  Sqoop Export Cascade test
-  =========================
+object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
+  Sqoop Export Execution test
+  ===========================
 
-  Export data from HDFS to DB appending to existing rows $endToEndExportWithAppendTest
+  Exporting data from HDFS to DB appending to existing rows $endToEndExportWithAppend
   Export data from HDFS to DB deleting all existing rows $endToEndExportWithDeleteTest
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
   val username         = "sa"
   val password         = ""
-  val userHome         = System.getProperty("user.home")
+  val mapRedHome       = s"${System.getProperty("user.home")}/.ivy2/cache"
+  val sqoop            = new SqoopExecution {}
+  val exportDir        = s"$dir/user/sales/books/customers/export"
   val resourceUrl      = getClass.getResource("/sqoop")
   val newCustomers     = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/export/new-customers.txt").getLines().toList
   val oldCustomers     = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/old-customers.txt").getLines().toList
 
-  val argsMap = Map(
-    "exportDir"        -> s"$dir/user/sales/books/customers/export",
-    "mapRedHome"       -> s"$userHome/.ivy2/cache",
-    "connectionString" -> connectionString,
-    "username"         -> username,
-    "password"         -> password
-  )
-
-  def endToEndExportWithAppendTest = {
-    val table = s"table_${UUID.randomUUID.toString.replace('-', '_')}"
+  def endToEndExportWithAppend = {
+    val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
     CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
 
     withEnvironment(path(resourceUrl.toString)) {
-      withArgs(argsMap ++ Map("exportTableName"  -> table, "deleteFromTable" -> "false"))(new SqoopExportCascade(_)).run
+      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome)
+      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions)
+      executesOk(execution)
       CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers ++ oldCustomers)
     }
   }
 
   def endToEndExportWithDeleteTest = {
-    val table = s"table_${UUID.randomUUID.toString.replace('-', '_')}"
+    val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
     CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
 
     withEnvironment(path(resourceUrl.toString)) {
-      withArgs(argsMap ++ Map("exportTableName"  -> table, "deleteFromTable" -> "true"))(new SqoopExportCascade(_)).run
+      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome)
+      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions, true)
+      executesOk(execution)
       CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
     }
   }
 }
-
-class SqoopExportCascade(args: Args) extends CascadeJob(args) with Sqoop {
-  val exportDir        = args("exportDir")
-  val exportTableName  = args("exportTableName")
-  val mappers          = 1
-  val connectionString = args("connectionString")
-  val username         = args("username")
-  val password         = args("password")
-  val mapRedHome       = args("mapRedHome")
-  val deleteFromTable  = args("deleteFromTable").toBoolean
-
-  /**
-   * hadoopMapRedHome is set for Sqoop to find the hadoop jars. This hack would be necessary ONLY in a
-   * test case.
-   */
-  val exportOptions = ParlourExportDsl().hadoopMapRedHome(mapRedHome)
-
-  override val jobs = Seq(sqoopExport(exportDir, exportTableName, connectionString, username, password, '|', "", exportOptions, deleteFromTable)(args))
-}
-
-
-
 

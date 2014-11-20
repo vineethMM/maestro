@@ -39,7 +39,7 @@ archives the source to the destination with the provided compression and return 
 
 """
   val resourceUrl         = getClass.getResource("/sqoop")
-  val textData            = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/customer.txt").getLines().toSeq
+  val data                = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/export/new-customers.txt").getLines().toList
   val bzippedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
       val ctx = new Context(conf)
@@ -52,8 +52,8 @@ archives the source to the destination with the provided compression and return 
 
   def archiveAndReturnCount = {
     withEnvironment(path(resourceUrl.toString)) {
-      executesSuccessfully(Archiver.archive[BZip2Codec](s"$dir/user/sales/books/customers", s"$dir/user/sales/books/compressed")) === 3
-      facts(s"$dir/user/sales/books/compressed" </> "part-00000.bz2" ==> records(bzippedRecordReader, CustomerImport.data))
+      executesSuccessfully(Archiver.archive[BZip2Codec](s"$dir/user/sales/books/customers/export", s"$dir/user/sales/books/customers/compressed")) === 3
+      facts(s"$dir/user/sales/books/customers/compressed" </> "part-00000.bz2" ==> records(bzippedRecordReader, data))
     }
   }
 

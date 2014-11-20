@@ -138,7 +138,7 @@ trait SqoopExecution {
     options: ParlourExportOptions[T], deleteFromTable: Boolean = false
   ): Execution[Unit] = {
     val sqoopOptions = options.toSqoopOptions
-    if (deleteFromTable) sqoopOptions.setSqlQuery(s"DELETE FROM ${options.getTableName}")
+    if (deleteFromTable) sqoopOptions.setSqlQuery(s"DELETE FROM ${sqoopOptions.getTableName}")
     ParlourExecution.sqoopExport(sqoopOptions)
   }
 

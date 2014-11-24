@@ -145,8 +145,12 @@ object build extends Build {
     ++ uniformThriftSettings
     ++ Seq[Sett](
          libraryDependencies ++= depend.hadoop() ++ Seq(
-           "com.twitter" % "parquet-hive"      % parquetVersion % "test",
-           "com.twitter" % "parquet-cascading" % parquetVersion % "provided"
+           "com.twitter"      % "parquet-hive"      % parquetVersion % "test",
+           "com.twitter"      % "parquet-cascading" % parquetVersion % "provided",
+           "com.twitter"      % "parquet-hive"      % "1.2.5-cdh4.6.0"      % "test",
+           "com.twitter"      % "parquet-cascading" % "1.2.5-cdh4.6.0-p337" % "provided",
+           "org.scalikejdbc" %% "scalikejdbc"       % "2.1.2"               % "test",
+           "org.hsqldb"       % "hsqldb"            % "1.8.0.10"            % "test"
          )
        , parallelExecution in Test := false
     )

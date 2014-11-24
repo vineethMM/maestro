@@ -37,8 +37,8 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
   =================================
 
   imports data from DB to HDFS successfully $endToEndImportWithSuccess
-  handles exceptions while importing data $endToEndImportWithException
-  handles exceptions while table not set $endToEndImportWithoutTable
+  handles exceptions while importing data   $endToEndImportWithException
+  handles exceptions while table not set    $endToEndImportWithoutTable
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"

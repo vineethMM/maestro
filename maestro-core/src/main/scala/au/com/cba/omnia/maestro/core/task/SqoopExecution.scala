@@ -17,13 +17,14 @@ package au.com.cba.omnia.maestro.core.task
 import java.io.File
 
 import cascading.flow.FlowDef
+
 import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
+
 import org.apache.commons.lang.StringUtils
 
 import org.apache.hadoop.conf.Configuration
-
 import org.apache.hadoop.io.compress.{BZip2Codec, CompressionCodec}
 
 import org.apache.log4j.Logger

@@ -14,11 +14,12 @@
 
 package au.com.cba.omnia.maestro.example
 
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 import com.twitter.scalding._
 
 import au.com.cba.omnia.maestro.api.exec.MaestroExecution
 import au.com.cba.omnia.maestro.example.thrift.Customer
+
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 object CustomerSqoopExportExecution extends MaestroExecution[Customer] {
   def execute(

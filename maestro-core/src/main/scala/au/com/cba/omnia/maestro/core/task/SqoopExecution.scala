@@ -17,8 +17,10 @@ package au.com.cba.omnia.maestro.core.task
 import java.io.File
 
 import cascading.flow.FlowDef
+import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
+import org.apache.commons.lang.StringUtils
 
 import org.apache.hadoop.conf.Configuration
 
@@ -138,8 +140,20 @@ trait SqoopExecution {
     options: ParlourExportOptions[T], deleteFromTable: Boolean = false
   ): Execution[Unit] = {
     val sqoopOptions = options.toSqoopOptions
-    if (deleteFromTable) sqoopOptions.setSqlQuery(s"DELETE FROM ${sqoopOptions.getTableName}")
-    ParlourExecution.sqoopExport(sqoopOptions)
+
+    for {
+      _ <- Execution.from {
+        if (deleteFromTable) trySetDeleteQuery(sqoopOptions)
+      }
+      _ <- ParlourExecution.sqoopExport(sqoopOptions)
+    } yield()
+  }
+
+  private def trySetDeleteQuery(options: SqoopOptions): Unit = {
+    if (StringUtils.isNotEmpty(options.getSqlQuery)) {
+      throw new RuntimeException("SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table")
+    }
+    options.setSqlQuery(s"DELETE FROM ${options.getTableName}")
   }
 
   /**

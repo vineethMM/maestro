@@ -16,6 +16,7 @@ package au.com.cba.omnia.maestro.core.task
 
 import java.util.UUID
 
+import scala.util.Failure
 import scala.io.Source
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
@@ -24,11 +25,12 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
 object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
-  Sqoop Export Execution test
-  ===========================
+  Sqoop Export Execution properties
+  =================================
 
-  Exporting data from HDFS to DB appending to existing rows $endToEndExportWithAppend
-  Export data from HDFS to DB deleting all existing rows $endToEndExportWithDeleteTest
+  Exporting data from HDFS to DB appending to existing rows  $endToEndExportWithAppend
+  Export data from HDFS to DB deleting all existing rows     $endToEndExportWithDeleteTest
+  Fails if sqlQuery set and need to delete all existing rows $endToEndExportWithQuery
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
@@ -62,6 +64,17 @@ object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
       val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions, true)
       executesOk(execution)
       CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
+    }
+  }
+
+  def endToEndExportWithQuery = {
+    val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
+    CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
+
+    withEnvironment(path(resourceUrl.toString)) {
+      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome).sqlQuery(s"select * from $table")
+      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions, true)
+      execute(execution) must beLike { case Failure(_) => ok }
     }
   }
 }

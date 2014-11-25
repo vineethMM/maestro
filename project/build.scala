@@ -31,8 +31,9 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "0.5.2-20141114023512-17afb81"
-  val ebenezerVersion    = "0.11.1-20141117235330-fe04130"
+  val ebenezerVersion    = "0.11.1-20141125004825-c6530cf"
   val omnitoolVersion    = "1.3.0-20141009013528-4a9aa95"
+  val parquetVersion     = "1.2.5-cdh4.6.0-p485"
 
   lazy val standardSettings: Seq[Sett] =
     Defaults.defaultSettings ++
@@ -94,8 +95,8 @@ object build extends Build {
           "au.com.cba.omnia"  %% "thermometer-hive"  % thermometerVersion     % "test",
           "org.scalikejdbc"   %% "scalikejdbc"       % "2.1.2"                % "test",
           "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test",
-          "com.twitter"        % "parquet-hive"      % "1.2.5-cdh4.6.0"       % "test",
-          "com.twitter"        % "parquet-cascading" % "1.2.5-cdh4.6.0-p337"  % "provided"
+          "com.twitter"        % "parquet-hive"      % parquetVersion         % "test",
+          "com.twitter"        % "parquet-cascading" % parquetVersion         % "provided"
         ),
       parallelExecution in Test := false
     )
@@ -144,8 +145,8 @@ object build extends Build {
     ++ uniformThriftSettings
     ++ Seq[Sett](
          libraryDependencies ++= depend.hadoop() ++ Seq(
-           "com.twitter" % "parquet-hive"      % "1.2.5-cdh4.6.0"      % "test",
-           "com.twitter" % "parquet-cascading" % "1.2.5-cdh4.6.0-p337" % "provided"
+           "com.twitter" % "parquet-hive"      % parquetVersion % "test",
+           "com.twitter" % "parquet-cascading" % parquetVersion % "provided"
          )
        , parallelExecution in Test := false
     )

@@ -22,11 +22,7 @@ import au.com.cba.omnia.ebenezer.scrooge.hive.HiveExecution
 
 import au.com.cba.omnia.maestro.core.hive.HiveTable
 
-/**
-  * A trait for API to run hive queries using the execution monad.
-  *
-  * TODO go over these methods so that they make sense for Execution.
-  */
+/** A trait for API to run hive queries using the execution monad. */
 trait QueryExecution {
   /** Runs the specified hive query. */
   def hiveQuery(

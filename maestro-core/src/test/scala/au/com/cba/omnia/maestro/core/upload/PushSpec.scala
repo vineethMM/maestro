@@ -54,11 +54,11 @@ push behaviour
     local.createNewFile must_== true
 
     val archiveCheck = Push.archiveFile(local, dirs.archiveDir,
-      dirs.hdfsArchiveDirP, "local.txt.bz2")
+      dirs.hdfsArchiveDirP, "local.txt.gz")
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
-    val destFile = new File(dirs.archiveDir, "local.txt.bz2")
+    val destFile = new File(dirs.archiveDir, "local.txt.gz")
     destFile.isFile must beTrue
   })
 
@@ -67,11 +67,11 @@ push behaviour
     local.createNewFile must_== true
 
     val archiveCheck = Push.archiveFile(local, dirs.archiveDir,
-      dirs.hdfsArchiveDirP, "local.txt.bz2")
+      dirs.hdfsArchiveDirP, "local.txt.gz")
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
-    val destFile = new File(dirs.hdfsArchiveDir, "local.txt.bz2")
+    val destFile = new File(dirs.hdfsArchiveDir, "local.txt.gz")
     destFile.isFile must beTrue
   })
 
@@ -81,11 +81,11 @@ push behaviour
     val destDir = new File(dirs.archiveDir, "subDir")
 
     val archiveCheck = Push.archiveFile(local, destDir, dirs.hdfsArchiveDirP,
-      "local.txt.bz2")
+      "local.txt.gz")
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
-    val destFile = new File(destDir, "local.txt.bz2")
+    val destFile = new File(destDir, "local.txt.gz")
     destFile.isFile must beTrue
   })
 
@@ -151,7 +151,7 @@ push behaviour
   def pushFailsOnArchiveFile = isolatedTest((dirs: IsolatedDirs) => {
     val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("."))
     val dest = new Path(dirs.hdfsDirS + File.separator + "local20140506.txt")
-    val arch = new Path(dirs.hdfsArchiveDirS + File.separator + "local20140506.txt.bz2")
+    val arch = new Path(dirs.hdfsArchiveDirS + File.separator + "local20140506.txt.gz")
     val conf = new Configuration
     src.file.createNewFile must_== true
     Hdfs.create(arch).run(conf) must beLike { case Ok(_) => ok }

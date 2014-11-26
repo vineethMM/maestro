@@ -45,7 +45,7 @@ Upload Cascade
       val srcDirs = "account" </> "transaction"
       val dstDirs = "account" </> "transaction" </> "transaction" </> "2014" </> "08" </> "21"
       val file = "transaction_20140821.dat"
-      val zippedFile = s"$file.bz2"
+      val zippedFile = s"$file.gz"
       cascade.withFacts(
         root </> "local"   </> "dataFeed" </> srcDirs </> file       ==> PathFactoids.missing,
         root </> "archive" </>                dstDirs </> zippedFile ==> PathFactoids.exists,

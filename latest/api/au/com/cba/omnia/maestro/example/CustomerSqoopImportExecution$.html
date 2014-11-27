@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>CustomerExecution - au.com.cba.omnia.maestro.example.CustomerExecution</title>
-          <meta name="description" content="CustomerExecution - au.com.cba.omnia.maestro.example.CustomerExecution" />
-          <meta name="keywords" content="CustomerExecution au.com.cba.omnia.maestro.example.CustomerExecution" />
+          <title>CustomerSqoopImportExecution - au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution</title>
+          <meta name="description" content="CustomerSqoopImportExecution - au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution" />
+          <meta name="keywords" content="CustomerSqoopImportExecution au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.example.CustomerExecution$';
+            var hash = 'au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,7 +26,7 @@
       <div id="definition">
         <img src="../../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.example">example</a></p>
-        <h1>CustomerExecution</h1>
+        <h1>CustomerSqoopImportExecution</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,11 +35,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">CustomerExecution</span><span class="result"> extends <a href="../api/exec/MaestroExecution.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution">MaestroExecution</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
+        <span class="name">CustomerSqoopImportExecution</span><span class="result"> extends <a href="../api/exec/MaestroExecution.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution">MaestroExecution</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/efb183bc913d8826f9f4fb04b9ee601add6adcab//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerExecution.scala" target="_blank">CustomerExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Please be aware that the Execution API is being actively developed/modified and
+hence not officially supported or ready for production use yet.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/efb183bc913d8826f9f4fb04b9ee601add6adcab//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerSqoopImportExecution.scala" target="_blank">CustomerSqoopImportExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="../api/exec/MaestroExecution.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution">MaestroExecution</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <a href="../api/exec/MaestroExecutionBase.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase">MaestroExecutionBase</a>, <a href="../core/misc/Miscellaneous.html" class="extype" name="au.com.cba.omnia.maestro.core.misc.Miscellaneous">Miscellaneous</a>, <a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a>, <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a>, <a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a>, <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a>, <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a>, <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -59,7 +61,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.example.CustomerExecution"><span>CustomerExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution"><span>MaestroExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.macros.MacroSupport"><span>MacroSupport</span></li><li class="in" name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase"><span>MaestroExecutionBase</span></li><li class="in" name="au.com.cba.omnia.maestro.core.misc.Miscellaneous"><span>Miscellaneous</span></li><li class="in" name="au.com.cba.omnia.maestro.core.args.Config"><span>Config</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.SqoopExecution"><span>SqoopExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.QueryExecution"><span>QueryExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.ViewExecution"><span>ViewExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.LoadExecution"><span>LoadExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.UploadExecution"><span>UploadExecution</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution"><span>CustomerSqoopImportExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution"><span>MaestroExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.macros.MacroSupport"><span>MacroSupport</span></li><li class="in" name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase"><span>MaestroExecutionBase</span></li><li class="in" name="au.com.cba.omnia.maestro.core.misc.Miscellaneous"><span>Miscellaneous</span></li><li class="in" name="au.com.cba.omnia.maestro.core.args.Config"><span>Config</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.SqoopExecution"><span>SqoopExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.QueryExecution"><span>QueryExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.ViewExecution"><span>ViewExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.LoadExecution"><span>LoadExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.UploadExecution"><span>UploadExecution</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -683,7 +685,7 @@ Otherwise the rows will be appended.
         <span class="name">customSqoopImport</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[_]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">com.twitter.scalding.Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Return an <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution.Execution">Execution</a> that will run a custom sqoop import using parlour import options</p><div class="fullcomment"><div class="comment cmt"><p>Return an <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution.Execution">Execution</a> that will run a custom sqoop import using parlour import options</p><p><b>Use this method ONLY if non-standard settings are required</b>
+      <p class="shortcomment cmt">Return an <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution.Execution">Execution</a> that will run a custom sqoop import using parlour import options</p><div class="fullcomment"><div class="comment cmt"><p>Return an <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution.Execution">Execution</a> that will run a custom sqoop import using parlour import options</p><p><b>Use this method ONLY if non-standard settings are required</b>
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#customUpload" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="customUpload(tableName:String,filePattern:String,localIngestPath:String,localArchivePath:String,hdfsArchivePath:String,hdfsLandingPath:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]"></a>
@@ -697,11 +699,11 @@ Otherwise the rows will be appended.
         <span class="name">customUpload</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">com.twitter.scalding.Execution</span>[<a href="../core/task/UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadInfo">core.task.UploadInfo</a>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><p>As per <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution#upload">upload</a>, except the user has more control where to find data
+      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><p>As per <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution#upload">upload</a>, except the user has more control where to find data
 files, where to copy them, and where to archive them.</p><p>Data files are found in the local folder <code>$locSourceDir</code>. They are copied
 to <code>$hdfsLandingDir/&lt;year&gt;/&lt;month&gt;/&lt;originalFileName&gt;</code>,
 and archived at <code>$archiveDir/&lt;year&gt;/&lt;month&gt;/&lt;originalFileName&gt;.gz</code>. (These
-directories may change slightly depending on the timestamp format.)</p><p>In all other respects <code>customUpload</code> behaves the same as <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution#upload">upload</a>.
+directories may change slightly depending on the timestamp format.)</p><p>In all other respects <code>customUpload</code> behaves the same as <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,controlPattern:scala.util.matching.Regex):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution#upload">upload</a>.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The list of copied hdfs files if successful, or any error occuring when uploading files
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -730,16 +732,16 @@ directories may change slightly depending on the timestamp format.)</p><p>In all
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.example.CustomerExecution#execute" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="execute(hdfsRoot:String,localRoot:String,archiveRoot:String):au.com.cba.omnia.maestro.example.CustomerExecution.Execution[(au.com.cba.omnia.maestro.example.CustomerExecution.LoadInfo,Long)]"></a>
-      <a id="execute(String,String,String):Execution[(LoadInfo,Long)]"></a>
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution#execute" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="execute(hdfsRoot:String,connectionString:String,username:String,password:String,options:au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl):au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution.Execution[au.com.cba.omnia.maestro.example.CustomerImportStatus]"></a>
+      <a id="execute(String,String,String,String,ParlourImportDsl):Execution[CustomerImportStatus]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">execute</span><span class="params">(<span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localRoot">localRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archiveRoot">archiveRoot: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution.Execution">Execution</a>[(<a href="#LoadInfo=au.com.cba.omnia.maestro.core.task.LoadInfo" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerExecution.LoadInfo">LoadInfo</a>, <span class="extype" name="scala.Long">Long</span>)]</span>
+        <span class="name">execute</span><span class="params">(<span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</span></span>)</span><span class="result">: <a href="#Execution[A]=com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.example.CustomerSqoopImportExecution.Execution">Execution</a>[<a href="CustomerImportStatus.html" class="extype" name="au.com.cba.omnia.maestro.example.CustomerImportStatus">CustomerImportStatus</a>]</span>
       </span>
       </h4>
       

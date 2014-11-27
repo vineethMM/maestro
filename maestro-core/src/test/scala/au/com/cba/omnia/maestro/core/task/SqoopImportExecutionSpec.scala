@@ -33,8 +33,8 @@ import au.com.cba.omnia.thermometer.tools.Streams
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerRecordReader, ThermometerSpec}, Thermometer._
 
 object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def is = s2"""
-  Sqoop Import Execution properties
-  =================================
+  Sqoop Import Execution test
+  ===========================
 
   imports data from DB to HDFS successfully $endToEndImportWithSuccess
   handles exceptions while importing data   $endToEndImportWithException

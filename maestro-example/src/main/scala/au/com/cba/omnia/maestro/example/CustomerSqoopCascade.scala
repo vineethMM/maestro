@@ -45,6 +45,10 @@ class CustomerSqoopCascade(args: Args) extends MaestroCascade[Customer](args) {
   val customerView     = s"${hdfsRoot}/view/warehouse/${domain}/${importTableName}"
   val timePath         = DateTime.now(DateTimeZone.UTC).toString(List("yyyy","MM", "dd") mkString File.separator)
 
+  /**
+   * In order for sqoop to work with Teradata, you will need to include the teradata drivers and cloudera connector
+   * as a dependency or in the maestro-example/lib folder when building the assembly.
+   */
   val initialImportOptions = createSqoopImportOptions(connectionString, username, password, importTableName, '|', "null", Some("1=1"), TeradataParlourImportDsl())
   val finalImportOptions = initialImportOptions.numberOfMappers(mappers).inputMethod(SplitByAmp).splitBy("id").verbose()
 

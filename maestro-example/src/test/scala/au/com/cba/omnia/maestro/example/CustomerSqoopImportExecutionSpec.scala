@@ -56,7 +56,7 @@ CustomerSqoopImportExecution test
     )
 
     withEnvironment(path(getClass.getResource("/sqoop-customer/import").toString)) {
-      executesSuccessfully(execution) === 6
+      executesSuccessfully(execution) === CustomerImportStatus(6, 6, 6)
 
       facts(
         hiveWarehouse </> "customer.db" </> "by_cat"  ==>

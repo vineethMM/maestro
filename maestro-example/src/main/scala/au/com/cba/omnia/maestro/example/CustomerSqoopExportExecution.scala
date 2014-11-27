@@ -21,6 +21,9 @@ import au.com.cba.omnia.maestro.example.thrift.Customer
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
+/** Please be aware that the Execution API is being actively developed/modified and
+  * hence not officially supported or ready for production use yet.
+  */
 object CustomerSqoopExportExecution extends MaestroExecution[Customer] {
   def execute(
     hdfsRoot: String,

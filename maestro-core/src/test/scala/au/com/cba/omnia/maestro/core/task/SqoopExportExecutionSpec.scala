@@ -25,8 +25,8 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
 object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
-  Sqoop Export Execution properties
-  =================================
+  Sqoop Export Execution test
+  ===========================
 
   Exporting data from HDFS to DB appending to existing rows  $endToEndExportWithAppend
   Export data from HDFS to DB deleting all existing rows     $endToEndExportWithDeleteTest

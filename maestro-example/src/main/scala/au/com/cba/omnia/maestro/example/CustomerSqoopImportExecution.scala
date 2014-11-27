@@ -23,6 +23,9 @@ import au.com.cba.omnia.maestro.example.thrift.Customer
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 
+/** Please be aware that the Execution API is being actively developed/modified and
+  * hence not officially supported or ready for production use yet.
+  */
 object CustomerSqoopImportExecution extends MaestroExecution[Customer] {
   def execute(
     hdfsRoot: String, 
@@ -30,7 +33,7 @@ object CustomerSqoopImportExecution extends MaestroExecution[Customer] {
     username: String, 
     password: String,
     options: ParlourImportDsl
-  ): Execution[Long] = {
+  ): Execution[CustomerImportStatus] = {
     val source     = "sales"
     val domain     = "books"
     val table      = "customer_import"
@@ -45,12 +48,15 @@ object CustomerSqoopImportExecution extends MaestroExecution[Customer] {
       password, table, '|', "", None, options).splitBy("id")
 
     for {
-      (importPath, _)  <- sqoopImport(hdfsRoot, source, domain, timePath, importOptions)
-      (pipe, loadInfo) <- load[Customer]("|", List(importPath), errors, now(), cleaners, validators, filter, "null")
+      (path, sqoopCount) <- sqoopImport(hdfsRoot, source, domain, timePath, importOptions)
+      (pipe, loadInfo)   <- load[Customer]("|", List(path), errors, now(), cleaners, validators, filter, "null")
       if loadInfo.continue
-      hiveCount        <- viewHive(catTable)(pipe)
-    } yield (hiveCount)
+      loadCount = loadInfo.asInstanceOf[LoadSuccess].written
+      hiveCount          <- viewHive(catTable)(pipe)
+    } yield (CustomerImportStatus(sqoopCount, loadCount, hiveCount))
   }
 }
+
+case class CustomerImportStatus(sqoopCount: Long, loadCount: Long, hiveCount: Long)
 
 

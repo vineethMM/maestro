@@ -21,7 +21,7 @@ import scala.util.Failure
 
 import scalaz.effect.IO
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 
 import org.specs2.specification.BeforeExample
 
@@ -51,11 +51,11 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
   val domain           = "books"
   val timePath         = (List("2014", "10", "10") mkString File.separator)
 
-  val bzippedRecordReader =
+  val compressedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
       val ctx = new Context(conf)
-      val in = new BZip2CompressorInputStream(
-        ctx.withFileSystem[InputStream](_.open(path))("bzippedRecordReader")
+      val in = new GzipCompressorInputStream(
+        ctx.withFileSystem[InputStream](_.open(path))("compressedRecordReader")
       )
       try Streams.read(in).lines.toList
       finally in.close
@@ -67,8 +67,8 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
     val execution = sqoop.sqoopImport(s"$dir/user/hdfs", source, domain, timePath, importOptions)
     val (path, count) = executesSuccessfully(execution)
     facts(
-      s"$dir/user/hdfs/archive/sales/books" </> importTableName </> "2014/10/10" </> "part-00000.bz2" ==>
-        records(bzippedRecordReader, CustomerImport.data),
+      s"$dir/user/hdfs/archive/sales/books" </> importTableName </> "2014/10/10" </> "part-00000.gz" ==>
+        records(compressedRecordReader, CustomerImport.data),
       s"$dir/user/hdfs/source/sales/books" </> importTableName </> "2014/10/10" </> "part-m-00000"   ==>
         lines(CustomerImport.data)
     )

@@ -19,7 +19,7 @@ import java.util.UUID
 import com.twitter.scalding.{Args, CascadeJob, Job}
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.io.compress.BZip2Codec
+import org.apache.hadoop.io.compress.GzipCodec
 
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, ThermometerSource}
@@ -43,9 +43,9 @@ ModArgs in Cascade
     )
     cascade.withFacts(
       dir </> "output" </> "uncompressed" </> "part-00000"     ==> PathFactoids.exists,
-      dir </> "output" </> "uncompressed" </> "part-00000.bz2" ==> PathFactoids.missing,
+      dir </> "output" </> "uncompressed" </> "part-00000.gz"  ==> PathFactoids.missing,
       dir </> "output" </> "compressed"   </> "part-00000"     ==> PathFactoids.missing,
-      dir </> "output" </> "compressed"   </> "part-00000.bz2" ==> PathFactoids.exists
+      dir </> "output" </> "compressed"   </> "part-00000.gz"  ==> PathFactoids.exists
     )
   }
 }
@@ -57,7 +57,7 @@ class IndividualCompressionCascadeJob(args: Args) extends CascadeJob(args) {
       .modify(args)),
     new CopyJob(ModArgs
       .set("dst", args("dst-root") + "/compressed")
-      .compressOutput[BZip2Codec]
+      .compressOutput[GzipCodec]
       .modify(args))
   )
 }

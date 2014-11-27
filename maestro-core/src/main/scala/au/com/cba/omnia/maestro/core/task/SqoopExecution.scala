@@ -25,7 +25,8 @@ import com.twitter.scalding._
 import org.apache.commons.lang.StringUtils
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.io.compress.{BZip2Codec, CompressionCodec}
+
+import org.apache.hadoop.io.compress.{GzipCodec, CompressionCodec}
 
 import org.apache.log4j.Logger
 
@@ -124,7 +125,7 @@ trait SqoopExecution {
       //Sqoop doesn't report the number of rows written, so we have to rely on the numbers of rows
       //we have archived from the sqoop imported data. While it is not impossible, it is highly unlikely
       //that the counts will be different
-      count        <- Archiver.archive[BZip2Codec](importPath, archivePath)
+      count        <- Archiver.archive[GzipCodec](importPath, archivePath)
     } yield((importPath, count))
   }
 

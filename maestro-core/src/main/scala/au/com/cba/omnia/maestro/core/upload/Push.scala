@@ -17,6 +17,8 @@ package upload
 
 import java.io.File
 
+import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream
+
 import org.apache.hadoop.fs.Path
 
 import com.google.common.io.Files
@@ -101,5 +103,7 @@ object Push {
 
   /** Convert a Hdfs operation that depends on a temporary file into a normal Hdfs operation */
   def hdfsWithTempFile[A](raw: File, fileName: String, action: File => Hdfs[A]): Hdfs[A] =
-    Hdfs(c => Temp.withTempCompressed(raw, fileName, compressed => action(compressed).run(c)))
+    Hdfs(c => Temp.withTempModified(
+      raw, fileName, new GzipCompressorOutputStream(_), action(_).run(c)
+    ))
 }

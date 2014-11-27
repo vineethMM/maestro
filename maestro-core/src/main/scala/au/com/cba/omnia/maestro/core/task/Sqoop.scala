@@ -22,7 +22,7 @@ import org.apache.commons.lang.StringUtils
 
 import org.apache.log4j.Logger
 
-import org.apache.hadoop.io.compress.BZip2Codec
+import org.apache.hadoop.io.compress.GzipCodec
 
 import com.twitter.scalding.{Args, Job, Mode, TextLine, TypedPipe}
 
@@ -52,7 +52,7 @@ trait Sqoop {
    * @param archivePath: Path pointing to the archive location
    */
   protected class ArchiveDirectoryJob(importPath: String, archivePath: String)(args: Args)
-      extends Job(ModArgs.compressOutput[BZip2Codec].modify(args)) {
+      extends Job(ModArgs.compressOutput[GzipCodec].modify(args)) {
 
     TypedPipe.from(TextLine(importPath)).write(CompressibleTypedTsv[String](archivePath))
 

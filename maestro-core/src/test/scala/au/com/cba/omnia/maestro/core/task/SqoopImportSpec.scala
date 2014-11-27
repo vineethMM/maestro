@@ -16,7 +16,7 @@ package au.com.cba.omnia.maestro.core.task
 
 import java.io.{File, InputStream}
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 
 import scalaz.effect.IO
 
@@ -67,17 +67,17 @@ class SqoopImportSpec extends ThermometerSpec with BeforeExample { def is = s2""
       root </> dstDir     </> "_SUCCESS"       ==> exists,
       root </> dstDir     </> "part-m-00000"   ==> lines(CustomerImport.data),
       root </> archiveDir </> "_SUCCESS"       ==> exists,
-      root </> archiveDir </> "part-00000.bz2" ==> records(bzippedRecordReader, CustomerImport.data)
+      root </> archiveDir </> "part-00000.gz" ==> records(compressedRecordReader, CustomerImport.data)
     )
   }
 
   override def before: Any = CustomerImport.tableSetup(connectionString, username, password)
 
-  val bzippedRecordReader =
+  val compressedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
       val ctx = new Context(conf)
-      val in = new BZip2CompressorInputStream(
-        ctx.withFileSystem[InputStream](_.open(path))("bzippedRecordReader")
+      val in = new GzipCompressorInputStream(
+        ctx.withFileSystem[InputStream](_.open(path))("compressedRecordReader")
       )
       try Streams.read(in).lines.toList
       finally in.close

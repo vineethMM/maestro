@@ -20,9 +20,9 @@ import scala.io.Source
 
 import scalaz.effect.IO
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 
-import org.apache.hadoop.io.compress.BZip2Codec
+import org.apache.hadoop.io.compress.GzipCodec
 
 import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.core.Thermometer._
@@ -40,11 +40,11 @@ archives the source to the destination with the provided compression and return 
 """
   val resourceUrl         = getClass.getResource("/sqoop")
   val data                = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/export/new-customers.txt").getLines().toList
-  val bzippedRecordReader =
+  val compressedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
       val ctx = new Context(conf)
-      val in = new BZip2CompressorInputStream(
-        ctx.withFileSystem[InputStream](_.open(path))("bzippedRecordReader")
+      val in = new GzipCompressorInputStream(
+        ctx.withFileSystem[InputStream](_.open(path))("compressedRecordReader")
       )
       try Streams.read(in).lines.toList
       finally in.close
@@ -52,9 +52,11 @@ archives the source to the destination with the provided compression and return 
 
   def archiveAndReturnCount = {
     withEnvironment(path(resourceUrl.toString)) {
-      executesSuccessfully(Archiver.archive[BZip2Codec](s"$dir/user/sales/books/customers/export", s"$dir/user/sales/books/customers/compressed")) === 3
-      facts(s"$dir/user/sales/books/customers/compressed" </> "part-00000.bz2" ==> records(bzippedRecordReader, data))
+      executesSuccessfully(Archiver.archive[GzipCodec](s"$dir/user/sales/books/customers/export", s"$dir/user/sales/books/customers/compressed")) === 3
+      facts(s"$dir/user/sales/books/customers/compressed" </> "part-00000.gz" ==> records(compressedRecordReader, data))
     }
   }
+
+
 
 }

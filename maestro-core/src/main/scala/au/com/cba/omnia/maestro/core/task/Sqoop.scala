@@ -18,8 +18,6 @@ import java.io.File
 
 import com.cloudera.sqoop.SqoopOptions
 
-import org.apache.commons.lang.StringUtils
-
 import org.apache.log4j.Logger
 
 import org.apache.hadoop.io.compress.GzipCodec
@@ -107,7 +105,7 @@ trait Sqoop {
     logger.info(s"connectionString = ${sqoopOptions.getConnectString}")
     logger.info(s"tableName        = ${sqoopOptions.getTableName}")
     logger.info(s"targetDir        = ${sqoopOptions.getTargetDir}")
-    new ImportSqoopJob(sqoopOptions)(args)
+    new ImportSqoopJob(options)(args)
   }
 
   /**
@@ -158,17 +156,8 @@ trait Sqoop {
   def customSqoopExport[T <: ParlourExportOptions[T]](
     options: ParlourExportOptions[T], deleteFromTable: Boolean = false
   )(args: Args)(implicit flowDef: FlowDef, mode: Mode): Job = {
-    val sqoopOptions = options.toSqoopOptions
-    if (deleteFromTable) trySetDeleteQuery(sqoopOptions)
-
-    new ExportSqoopJob(sqoopOptions)(args)
-  }
-
-  private def trySetDeleteQuery(options: SqoopOptions): Unit = {
-    if (!StringUtils.isEmpty(options.getSqlQuery)) {
-      throw new RuntimeException("SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table")
-    }
-    options.setSqlQuery(s"DELETE FROM ${options.getTableName}")
+    val withDelete = if (deleteFromTable) SqoopDelete.trySetDeleteQuery(options) else options
+    new ExportSqoopJob(withDelete)(args)
   }
 
   /**

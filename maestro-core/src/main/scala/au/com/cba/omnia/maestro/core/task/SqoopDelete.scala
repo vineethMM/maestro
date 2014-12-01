@@ -19,15 +19,20 @@ import org.apache.commons.lang.StringUtils
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 import au.com.cba.omnia.parlour.ParlourExportOptions
 
-/** Handles setup of delete from table before Sqoop export */
-private[task] object SqoopDelete {
+/**
+  * Handles setup of delete from table before Sqoop export
+  *
+  * WARNING: This object is not considered part of the maestro API and may be
+  * changed without warning.
+  */
+object SqoopDelete {
   /** Sets DELETE sql query. Throws RuntimeException if sql query already set or table name is not set */
-  def trySetDeleteQuery[T <: ParlourExportOptions[T]](options: ParlourExportOptions[T]): ParlourExportDsl = {
+  def trySetDeleteQuery[T <: ParlourExportOptions[T]](options: T): T = {
     if (options.getSqlQuery.fold(false)(StringUtils.isNotEmpty(_))) {
       throw new RuntimeException("SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table")
     }
 
-    val tableName = options.getTableName.getOrElse(new RuntimeException("Cannot create DELETE query before SqoopExport - table name is not set"))
-    ParlourExportDsl(options.updates) sqlQuery(s"DELETE FROM $tableName")
+    val tableName: String = options.getTableName.getOrElse(throw new RuntimeException("Cannot create DELETE query before SqoopExport - table name is not set"))
+    options.sqlQuery(s"DELETE FROM $tableName")
   }
 }

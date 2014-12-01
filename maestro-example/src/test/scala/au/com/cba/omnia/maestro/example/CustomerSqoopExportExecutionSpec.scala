@@ -22,6 +22,8 @@ import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 
+import au.com.cba.omnia.maestro.api.exec.SqoopExecutionTest
+
 object CustomerSqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
 
 CustomerSqoopExportExecutionSpec test
@@ -39,17 +41,16 @@ CustomerSqoopExportExecutionSpec test
 
   def pipeline = {
     CustomerExport.tableSetup(connectionString, username, password)
+    SqoopExecutionTest.setupEnv()
 
-    val execution = CustomerSqoopExportExecution.execute(
-      s"$dir/user",
-      connectionString,
-      username,
-      password,
-      ParlourExportDsl().hadoopMapRedHome(mapRedHome)
+    val args = Map(
+      "hdfs-root" -> List(s"$dir/user"),
+      "jdbc"      -> List(connectionString),
+      "db-user"   -> List(username)
     )
 
     withEnvironment(path(resourceUrl.toString)) {
-      executesOk(execution)
+      executesOk(CustomerSqoopExportExecution.execute, args)
       CustomerExport.tableData(connectionString, username, password) must containTheSameElementsAs(expectedData)
     }
   }
@@ -89,5 +90,3 @@ CustomerSqoopExportExecutionSpec test
     }
   }
 }
-
-

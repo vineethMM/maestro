@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.task
+package au.com.cba.omnia.maestro.core.exec
 
 import java.util.UUID
 
@@ -24,7 +24,12 @@ import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
-object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
+import au.com.cba.omnia.maestro.core.exec.ParlourInstances._
+import au.com.cba.omnia.maestro.core.task.CustomerExport
+
+object SqoopExportExecutionSpec
+  extends ThermometerSpec
+  with SqoopExecution { def is = s2"""
   Sqoop Export Execution test
   ===========================
 
@@ -37,20 +42,24 @@ object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
   val username         = "sa"
   val password         = ""
   val mapRedHome       = s"${System.getProperty("user.home")}/.ivy2/cache"
-  val sqoop            = new SqoopExecution {}
   val exportDir        = s"$dir/user/sales/books/customers/export"
   val resourceUrl      = getClass.getResource("/sqoop")
   val newCustomers     = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/export/new-customers.txt").getLines().toList
   val oldCustomers     = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/old-customers.txt").getLines().toList
+
+  def options(table: String) = SqoopExportConfig.options[ParlourExportDsl](
+    connectionString, username, password, table
+  )
+
+  SqoopExecutionTest.setupEnv()
 
   def endToEndExportWithAppend = {
     val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
     CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
 
     withEnvironment(path(resourceUrl.toString)) {
-      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome)
-      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions)
-      executesOk(execution)
+      val config = SqoopExportConfig(options(table))
+      executesOk(sqoopExport(config, exportDir))
       CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers ++ oldCustomers)
     }
   }
@@ -60,9 +69,8 @@ object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
     CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
 
     withEnvironment(path(resourceUrl.toString)) {
-      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome)
-      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions, true)
-      executesOk(execution)
+      val config = SqoopExportConfig(options(table), deleteFromTable = true)
+      executesOk(sqoopExport(config, exportDir))
       CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
     }
   }
@@ -72,10 +80,12 @@ object SqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
     CustomerExport.tableSetup(connectionString, username, password, table, Option(oldCustomers))
 
     withEnvironment(path(resourceUrl.toString)) {
-      val exportOptions = new ParlourExportDsl().hadoopMapRedHome(mapRedHome).sqlQuery(s"select * from $table")
-      val execution = sqoop.sqoopExport(exportDir, table, connectionString, username, password, '|', "", exportOptions, true)
-      execute(execution) must beLike { case Failure(_) => ok }
+      val config = SqoopExportConfig(
+        options(table).sqlQuery(s"select * from $table"), deleteFromTable = true
+      )
+      execute(sqoopExport(config, exportDir)) must throwA[RuntimeException](
+        message = "SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table"
+      )
     }
   }
 }
-

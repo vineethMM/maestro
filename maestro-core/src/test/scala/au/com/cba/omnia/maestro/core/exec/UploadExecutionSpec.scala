@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.task
+package au.com.cba.omnia.maestro.core.exec
 
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
@@ -31,39 +31,43 @@ Upload execution properties
 """
 
   def normal = withEnvironment(path(getClass.getResource("/upload-execution-normal").toString)) {
-    val root      = dir </> "user"
-    val destDir   = "hdfs-root" </> "source" </> "normal" </> "mydomain" </> "mytable"
-    val expected1 = destDir </> "2014" </> "11" </> "11" </> "mytable_20141111.dat"
-    val expected2 = destDir </> "2014" </> "11" </> "12" </> "mytable_20141112.dat"
-
-    val exec = UploadExec.upload(
-      "normal", "mydomain", "mytable", "{table}_{yyyyMMdd}.dat",
-      s"$root/local-ingest", s"$root/local-archive", "hdfs-root"
+    val root      = s"$dir/user"
+    val dirStruct = "normal/mydomain/mytable"
+    val destDir   = "hdfs-root/source/$dirStruct"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/dataFeed/normal/mydomain", destDir,
+      s"$root/local-archive/$dirStruct", "hdfs-root/archive/$dirStruct", "mytable"
     )
-    executesSuccessfully(exec).files must containTheSameElementsAs(List(expected1.toString, expected2.toString))
+
+    executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
+      s"$destDir/2014/11/11/mytable_20141111.dat",
+      s"$destDir/2014/11/12/mytable_20141112.dat"
+    ))
   }
 
   def custom = withEnvironment(path(getClass.getResource("/upload-execution-custom").toString)) {
-    val root      = dir </> "user"
-    val destDir   = "hdfs-root" </> "custom-landing"
-    val expected1 = destDir </> "2014" </> "11" </> "11" </> "mytable_20141111.dat"
-    val expected2 = destDir </> "2014" </> "11" </> "12" </> "mytable_20141112.dat"
-
-    val exec = UploadExec.customUpload(
-      "mytable", "{table}_{yyyyMMdd}.dat", s"$root/local-ingest/custom",
-      s"$root/local-archive/custom", "hdfs-root/custom-archive", "hdfs-root/custom-landing"
+    val root      = s"$dir/user"
+    val destDir   = "hdfs-root/custom-landing"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/custom", "hdfs-root/custom-landing", s"$root/local-archive/custom",
+      "hdfs-root/custom-archive", "mytable", "{table}_{yyyyMMdd}.dat"
     )
-    executesSuccessfully(exec).files must containTheSameElementsAs(List(expected1.toString, expected2.toString))
+
+    executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
+      s"$destDir/2014/11/11/mytable_20141111.dat",
+      s"$destDir/2014/11/12/mytable_20141112.dat"
+    ))
   }
 
   def continue = withEnvironment(path(getClass.getResource("/upload-execution-continue").toString)) {
-    val root = dir </> "user"
-
+    val root      = s"$dir/user"
+    val dirStruct = "normal/mydomain/mytable"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/dataFeed/normal/mydomain", "hdfs-root/source/$dirStruct",
+      s"$root/local-archive/$dirStruct", "hdfs-root/archive/$dirStruct", "mytable"
+    )
     val exec = for {
-      res <- UploadExec.upload(
-        "normal", "mydomain", "mytable", "{table}_{yyyyMMdd}.dat",
-        s"$root/local-ingest", s"$root/local-archive", "hdfs-root"
-      )
+      res <- UploadExec.upload(conf)
       if res.continue
     } yield ()
 

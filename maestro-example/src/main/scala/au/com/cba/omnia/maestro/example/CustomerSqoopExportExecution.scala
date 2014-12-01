@@ -14,38 +14,38 @@
 
 package au.com.cba.omnia.maestro.example
 
-import com.twitter.scalding._
+import com.twitter.scalding.{TextLine, TypedPipe, TypedPsv}
 
-import au.com.cba.omnia.maestro.api.exec.MaestroExecution
+import au.com.cba.omnia.maestro.api.exec._
+import au.com.cba.omnia.maestro.api.exec.Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
-/** Please be aware that the Execution API is being actively developed/modified and
-  * hence not officially supported or ready for production use yet.
-  */
-object CustomerSqoopExportExecution extends MaestroExecution[Customer] {
-  def execute(
-    hdfsRoot: String,
-    connectionString: String, 
-    username: String, 
-    password: String,
-    options: ParlourExportDsl
-  ) : Execution[Unit] = {
-    val rawDataDir    = s"$hdfsRoot/customers"
-    val exportDir     = s"$hdfsRoot/processed-customers"
-    val tableName     = "customer_export"
-    val nullString    = ""
-  
+/** Configuration for `CustomerSqoopExportExecution` */
+case class CustomerExportConfig(config: Config) extends MacroSupport[Customer] {
+  val maestro = MaestroConfig(
+    conf         = config,
+    source       = "customer",
+    domain       = "customer",
+    tablename    = "customer"
+  )
+  val rawDataDir = s"${maestro.hdfsRoot}/customers"
+  val exportDir  = s"${maestro.hdfsRoot}/processed-customers"
+  val export     = maestro.sqoopExport[ParlourExportDsl](
+    dbTablename  = "customer_export"
+  )
+}
+
+/** Customer execution, exporting data to a database via Sqoop */
+object CustomerSqoopExportExecution extends MacroSupport[Customer] {
+  def execute: Execution[Unit] = {
     for {
-      _ <- {
-        TypedPipe.from(TextLine(rawDataDir))
-          .map(Splitter.delimited("|").run(_).init.mkString("|"))
-          .writeExecution(TypedPsv(exportDir))
-      }
-      _ <- sqoopExport(exportDir, tableName, connectionString, username, password, '|', nullString, options)
+      conf <- Execution.getConfig.map(CustomerExportConfig(_))
+      _    <- TypedPipe.from(TextLine(conf.rawDataDir))
+                       .map(Splitter.delimited("|").run(_).init.mkString("|"))
+                       .writeExecution(TypedPsv(conf.exportDir))
+      _    <- sqoopExport(conf.export, conf.exportDir)
     } yield ()
   }
 }
-
-

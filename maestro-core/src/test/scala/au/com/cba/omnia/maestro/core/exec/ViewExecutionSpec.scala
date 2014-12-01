@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.task
+package au.com.cba.omnia.maestro.core.exec
 
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource, ThermometerSpec}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid
@@ -47,7 +47,7 @@ View execution properties
 """
 
   def normal = {
-    val exec = ViewExec.view(byFirst, s"$dir/normal")(source)
+    val exec = ViewExec.view(ViewConfig(byFirst, s"$dir/normal"), source)
     executesSuccessfully(exec) must_== 4
     facts(
       dir </> "normal" </> "A" </> "part-*.parquet" ==> matchesFile,
@@ -56,8 +56,8 @@ View execution properties
   }
 
   def zipped = {
-    val exec = ViewExec.view(byFirst, s"$dir/zipped/by_first")(source)
-      .zip(ViewExec.view(bySecond, s"$dir/zipped/by_second")(source))
+    val exec = ViewExec.view(ViewConfig(byFirst, s"$dir/zipped/by_first"), source)
+      .zip(ViewExec.view(ViewConfig(bySecond, s"$dir/zipped/by_second"), source))
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
       dir </> "zipped" </> "by_first"  </> "A" </> "part-*.parquet" ==> matchesFile,
@@ -68,7 +68,7 @@ View execution properties
   }
 
   def normalHive = {
-    val exec = ViewExec.viewHive(tableByFirst("normalHive"))(source)
+    val exec = ViewExec.viewHive(tableByFirst("normalHive"), source)
     executesSuccessfully(exec) must_== 4
     facts(
       hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
@@ -78,8 +78,8 @@ View execution properties
 
   def flatMappedHive = {
     val exec = for {
-      count1 <- ViewExec.viewHive(tableByFirst("flatMappedHive"))(source)
-      count2 <- ViewExec.viewHive(tableBySecond("flatMappedHive"))(source)
+      count1 <- ViewExec.viewHive(tableByFirst("flatMappedHive"), source)
+      count2 <- ViewExec.viewHive(tableBySecond("flatMappedHive"), source)
     } yield (count1, count2)
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
@@ -91,8 +91,8 @@ View execution properties
   }
 
   def zippedHive = {
-    val exec = ViewExec.viewHive(tableByFirst("zippedHive"))(source)
-      .zip(ViewExec.viewHive(tableBySecond("zippedHive"))(source))
+    val exec = ViewExec.viewHive(tableByFirst("zippedHive"), source)
+      .zip(ViewExec.viewHive(tableBySecond("zippedHive"), source))
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
       hiveWarehouse </> "zippedhive.db" </> "by_first"  </> "partition_first=A"  </> "part-*.parquet" ==> matchesFile,
@@ -103,7 +103,7 @@ View execution properties
   }
 
   def normalHiveUnpartitioned = {
-    val exec = ViewExec.viewHive(tableUnpartitioned("unpart"))(source)
+    val exec = ViewExec.viewHive(tableUnpartitioned("unpart"), source)
     executesSuccessfully(exec) must_== 4
     facts(
       hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
@@ -112,8 +112,8 @@ View execution properties
 
   def flatMappedHiveUnpartitioned = {
     val exec = for {
-      count1 <- ViewExec.viewHive(tableUnpartitioned("flatMappedHiveUnpart1"))(source)
-      count2 <- ViewExec.viewHive(tableUnpartitioned("flatMappedHiveUnpart2"))(source)
+      count1 <- ViewExec.viewHive(tableUnpartitioned("flatMappedHiveUnpart1"), source)
+      count2 <- ViewExec.viewHive(tableUnpartitioned("flatMappedHiveUnpart2"), source)
     } yield (count1, count2)
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
@@ -131,8 +131,8 @@ View execution properties
     )
     val zipSource = ThermometerSource(zipData)
 
-    val exec = ViewExec.viewHive(tableUnpartitioned("zippedHiveUnpart"))(source)
-      .zip(ViewExec.viewHive(tableUnpartitioned("zippedHiveUnpart2"))(zipSource))
+    val exec = ViewExec.viewHive(tableUnpartitioned("zippedHiveUnpart"), source)
+      .zip(ViewExec.viewHive(tableUnpartitioned("zippedHiveUnpart2"), zipSource))
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
       hiveWarehouse </> "zippedhiveunpart.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile,
@@ -159,6 +159,6 @@ View execution properties
     StringPair("B", "1"),
     StringPair("B", "2")
   )
-  
+
   def matchesFile = PathFactoid((context, path) => !context.glob(path).isEmpty)
 }

@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.task
+package au.com.cba.omnia.maestro.core.exec
 
 import java.io.{File, InputStream}
 import java.util.UUID
@@ -32,7 +32,14 @@ import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.tools.Streams
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerRecordReader, ThermometerSpec}, Thermometer._
 
-object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def is = s2"""
+import au.com.cba.omnia.maestro.core.exec.ParlourInstances._
+import au.com.cba.omnia.maestro.core.task.CustomerImport
+
+
+object SqoopImportExecutionSpec
+  extends ThermometerSpec
+  with BeforeExample
+  with SqoopExecution { def is = s2"""
   Sqoop Import Execution test
   ===========================
 
@@ -44,12 +51,19 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
   val username         = "sa"
   val password         = ""
+  val hdfsRoot         = s"$dir/user/hdfs"
   val mapRedHome       = s"${System.getProperty("user.home")}/.ivy2/cache"
   val importTableName  = s"customer_import_${UUID.randomUUID.toString.replace('-', '_')}"
-  val sqoop            = new SqoopExecution {}
-  val source           = "sales"
-  val domain           = "books"
-  val timePath         = (List("2014", "10", "10") mkString File.separator)
+  val dirStructure     = s"sales/books/$importTableName"
+  val hdfsLandingPath  = s"$hdfsRoot/source/$dirStructure"
+  val hdfsArchivePath  = s"$hdfsRoot/archive/$dirStructure"
+  val timePath         = List("2014", "10", "10") mkString File.separator
+
+  val options = SqoopImportConfig.options[ParlourImportDsl](
+    connectionString, username, password, importTableName
+  ).splitBy("id")
+
+  SqoopExecutionTest.setupEnv()
 
   val compressedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
@@ -62,33 +76,28 @@ object SqoopImportExecutionSpec extends ThermometerSpec with BeforeExample { def
     })
 
   def endToEndImportWithSuccess = {
-    val importOptions: ParlourImportDsl = sqoop.createSqoopImportOptions(connectionString, username,
-        password, importTableName, '|', "", Some("1=1")).splitBy("id").hadoopMapRedHome(mapRedHome)
-    val execution = sqoop.sqoopImport(s"$dir/user/hdfs", source, domain, timePath, importOptions)
-    val (path, count) = executesSuccessfully(execution)
+    val config = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
+    val (path, count) = executesSuccessfully(sqoopImport(config))
     facts(
-      s"$dir/user/hdfs/archive/sales/books" </> importTableName </> "2014/10/10" </> "part-00000.gz" ==>
-        records(compressedRecordReader, CustomerImport.data),
-      s"$dir/user/hdfs/source/sales/books" </> importTableName </> "2014/10/10" </> "part-m-00000"   ==>
-        lines(CustomerImport.data)
+      s"$hdfsLandingPath/$timePath" </> "part-m-00000" ==> lines(CustomerImport.data),
+      s"$hdfsArchivePath/$timePath" </> "part-00000.gz" ==> records(compressedRecordReader, CustomerImport.data)
     )
-    count === 3
+    count must_== 3
   }
 
   def endToEndImportWithException = {
-    val importOptions: ParlourImportDsl = sqoop.createSqoopImportOptions(connectionString, username,
-      password, importTableName, '|', "", Some("very_bad_col=1")).splitBy("id").hadoopMapRedHome(mapRedHome)
-    val execution = sqoop.sqoopImport(s"$dir/user/hdfs", source, domain, timePath, importOptions)
-    execute(execution) must beLike { case Failure(_) => ok }
+    val config = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
+    execute(sqoopImport(config, "very_bad_col=1")) must beLike { case Failure(_) => ok }
   }
 
   def endToEndImportWithoutTable = {
-    val importOptions: ParlourImportDsl = sqoop.createSqoopImportOptions(connectionString, username,
-      password, null, '|', "", None).splitBy("id").hadoopMapRedHome(mapRedHome)
-    val execution = sqoop.sqoopImport(s"$dir/user/hdfs", source, domain, timePath, importOptions)
-    execute(execution) must beLike { case Failure(_) => ok }
+    val config = SqoopImportConfig(
+      hdfsLandingPath, hdfsArchivePath, timePath, options.tableName(null)
+    )
+    execute(sqoopImport(config)) must beLike { case Failure(_) => ok }
   }
 
-  override def before: Any = CustomerImport.tableSetup(connectionString, username, password, importTableName)
+  override def before: Any = CustomerImport.tableSetup(
+    connectionString, username, password, importTableName
+  )
 }
-

@@ -103,7 +103,7 @@ import au.com.cba.omnia.etl.customer.thrift._
 class CustomerCuscade(args: Args) extends CascadeJob(args) with MaestroSupport[Customer] {
   val maestro = Maestro(args)
 
-  val delimiter = "|$|"
+  val delimiter     = "|$|"
   val env           = args("env")
   val domain        = "CUSTOMER"
   val input         = s"${env}/source/${domain}"
@@ -199,7 +199,7 @@ add it to your project's resources directory so that it is included in your jar.
 
 ### Example
 
-```
+```scala
 import scalaz.{Tag => _, _}, Scalaz._
 
 import com.twitter.scalding._, TDsl._

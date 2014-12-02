@@ -52,9 +52,17 @@ object RowFilter {
   def byRowLeader(include: String): RowFilter =
     RowFilter(row => if (row.headOption.exists(_ == include)) Some(row.tail) else None)
 
+
   /** Drops the last field. */
   def init: RowFilter = RowFilter(l => 
     if (l.isEmpty) None
     else           Option(l.init)
   )
+
+  /**
+    * Drops the field for a particular index
+    *
+    * Index value starts from 0
+    */
+  def dropI(i: Int): RowFilter = RowFilter(row => Some(row.take(i) ++ row.drop(i+1)))
 }

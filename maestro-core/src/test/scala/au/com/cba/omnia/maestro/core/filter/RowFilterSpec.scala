@@ -27,6 +27,11 @@ RowFilter
   can only keep elements with the right first value $byRowLeader
   can drop the last element                         $init
   can combine filters                               $and
+  can drop the first element                        $dropIFirst
+  can drop the last element                         $dropILast
+  can drop the element for index in between         $dropIIndex
+  can drop the only element                         $dropISingle
+  can drop the if no element                        $dropIEmpty
 """
 
   def keep = prop { (l: List[String]) =>
@@ -53,5 +58,49 @@ RowFilter
 
     if (t1 && t2) filter.run(row) must_== Option(l)
     else          filter.run(row) must beNone
+  }
+
+  val inputList:List[String] = List("D","T","H")
+
+  def dropIFirst = {
+    val expectedList:List[String] = List("T","H")
+    val index  = 0
+    val filter = RowFilter.dropI(index)
+    filter.run(inputList) must_== Option(expectedList)
+
+  }
+
+  def dropILast = {
+    val expectedList:List[String] = List("D","T")
+    val index  = 2
+    val filter = RowFilter.dropI(index)
+    filter.run(inputList) must_== Option(expectedList)
+
+  }
+
+  def dropIIndex = {
+    val expectedList:List[String] = List("D","H")
+    val index  = 1
+    val filter = RowFilter.dropI(index)
+    filter.run(inputList) must_== Option(expectedList)
+
+  }
+
+  def dropISingle ={
+    val inputList:List[String] = List("D")
+    val expectedList:List[String] = List()
+    val index  = 0
+    val filter = RowFilter.dropI(index)
+    filter.run(inputList) must_== Option(expectedList)
+
+  }
+
+  def dropIEmpty = {
+    val inputList:List[String] = List()
+    val expectedList:List[String] = List()
+    val index  = 1
+    val filter = RowFilter.dropI(index)
+    filter.run(inputList) must_== Option(expectedList)
+
   }
 }

@@ -155,4 +155,3 @@ object TransformMacro {
     c.Expr[Transform[A, B]](result)
   }
 }
-

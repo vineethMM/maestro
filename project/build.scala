@@ -113,6 +113,7 @@ object build extends Build {
            "org.scala-lang"   % "scala-compiler" % sv
          , "org.scala-lang"   % "scala-reflect"  % sv
          , "org.scalamacros" %% "quasiquotes"    % "2.0.0"
+         , "com.twitter"      % "util-eval_2.10" % "6.22.1" % Test
          ) ++ depend.testing())
        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
     )

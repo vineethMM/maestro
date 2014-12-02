@@ -17,7 +17,7 @@ package au.com.cba.omnia.maestro.macros
 import com.twitter.scrooge._
 
 import au.com.cba.omnia.maestro.core.codec._
-import au.com.cba.omnia.maestro.core.transform.Transform
+import au.com.cba.omnia.maestro.core.transform.{Transform, Join}
 
 object Macros {
   def mkDecode[A <: ThriftStruct]: Decode[A] =
@@ -38,12 +38,12 @@ object Macros {
 
   /**
     * Macro to automatically derive Transformations from one thrift struct to another.
-    * 
+    *
     * It can take a variable number of rules that determine how to calculate the value for the
     * specified target field. Target fields that don't have specified rules are copied from a source
     * field with the same name. If there are no source fields with the same name, and no explicit
     * transformation exists to populate the target field, then the compilation will fail.
-    * 
+    *
     * Example:
     * {{{
     * val transform = Macros.mkTransform[Types, SubTwo](
@@ -56,6 +56,24 @@ object Macros {
   def mkTransform[A <: ThriftStruct, B <: ThriftStruct](
     transformations: (Symbol, A => _)*
   ): Transform[A, B] = macro TransformMacro.impl[A, B]
+
+  /**
+    * Macro to automatically derive transformations from a tuple of thrift structs
+    * to one resulting output thrift struct.
+    *
+    * The macro will generate a `Join` value which matches input fields to
+    * output fields if they have the same name and conforming types. If multiple
+    * input fields match, they must have the same values at runtime or the `Join`
+    * value will throw an exception.
+    *
+    * Compilation will succeed when:
+    * - The input type is a product (e.g. tuple) of thrift structures.
+    * - Every field in the output thrift struct has matching fields (fields with
+    *   the same name) amongst the input thrift structs.
+    * - Every matching input field's type conforms to the type of it's output field.
+    */
+  def mkJoin[A <: Product, B <: ThriftStruct]: Join[A, B] =
+    macro JoinMacro.impl[A, B]
 }
 
 /** Provides implicit Decode, Tag, etc. views for a ThriftStruct. */

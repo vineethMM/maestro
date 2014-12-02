@@ -14,4 +14,22 @@
 
 package au.com.cba.omnia.maestro.core.transform
 
+/**
+  * By convention, a function between thrift structures.
+  *
+  * [[au.com.cba.omnia.maestro.macros.Macros.mkTransform]] will automatically
+  * generate [[Transform]]s when `A` and `B` are thrift structs, by matching
+  * their fields, or failing compilation if that is not possible.
+  */
 case class Transform[A, B](run: A => B)
+
+/**
+  * By convention, a function that joins a tuple of thrift structures to produce
+  * a new thrift structure.
+  *
+  * [[au.com.cba.omnia.maestro.macros.Macros.mkJoin]] will automatically
+  * generate [[Join]]s when `A` is a product of thrift structs and `B` is a
+  * thrift struct, by matching fields between the output and input structs, or
+  * failing compilation if that is not possible.
+  */
+case class Join[A, B](run: A => B)

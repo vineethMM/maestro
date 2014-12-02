@@ -14,8 +14,6 @@
 
 package au.com.cba.omnia.maestro.macros
 
-import au.com.cba.omnia.maestro.core.transform.Transform
-
 import au.com.cba.omnia.maestro.test.Spec
 import au.com.cba.omnia.maestro.test.Arbitraries._
 import au.com.cba.omnia.maestro.test.thrift.humbug.{Types => HTypes, Large, SubOne, SubTwo, SubThree}

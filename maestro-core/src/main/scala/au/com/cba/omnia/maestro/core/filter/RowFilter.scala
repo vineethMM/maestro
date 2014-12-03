@@ -14,8 +14,10 @@
 
 package au.com.cba.omnia.maestro.core.filter
 
-/** Filter for individual rows of data.
+/**
+  * Filter for individual rows of data.
   * 
+  * Use this to remove rows that should not be processed for example header or trailer records.
   * Runs across a list of string and returns `Some` subset of the list if the filter is satisfied.
   * Otherwise returns `None`.
   */
@@ -42,7 +44,8 @@ object RowFilter {
   def keep: RowFilter =
     RowFilter(Some.apply)
 
-  /** Only keeps rows where the first field matches `include`.
+  /**
+    * Only keeps rows where the first field matches `include`.
     * 
     * It also removes the first field after filtering.
     */

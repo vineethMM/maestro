@@ -25,6 +25,12 @@ import org.joda.time.format.{DateTimeFormatter, DateTimeFormat}
 
 import au.com.cba.omnia.maestro.core.data._
 
+/**
+  * Validator to check that the record conforms to expectations.
+  * 
+  * Use this to error out records that don't meet expectations for example
+  * checking that records all have a positive balance, etc.
+  */
 case class Validator[A](run: A => ValidationNel[String, A])
 
 object Validator {

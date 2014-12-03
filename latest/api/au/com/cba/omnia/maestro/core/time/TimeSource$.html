@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>TimeSource - au.com.cba.omnia.maestro.core.task.TimeSource</title>
-          <meta name="description" content="TimeSource - au.com.cba.omnia.maestro.core.task.TimeSource" />
-          <meta name="keywords" content="TimeSource au.com.cba.omnia.maestro.core.task.TimeSource" />
+          <title>TimeSource - au.com.cba.omnia.maestro.core.time.TimeSource</title>
+          <meta name="description" content="TimeSource - au.com.cba.omnia.maestro.core.time.TimeSource" />
+          <meta name="keywords" content="TimeSource au.com.cba.omnia.maestro.core.time.TimeSource" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.task.TimeSource';
+            var hash = 'au.com.cba.omnia.maestro.core.time.TimeSource$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,29 +22,26 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <img src="../../../../../../../lib/trait_big.png" />
-        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.task">task</a></p>
-        <h1>TimeSource</h1>
+        <a href="TimeSource.html" title="Go to companion"><img src="../../../../../../../lib/object_to_trait_big.png" /></a>
+        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.time">time</a></p>
+        <h1><a href="TimeSource.html" title="Go to companion">TimeSource</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
+        <span class="modifier"></span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">TimeSource</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">TimeSource</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e14da9140616e92ba71cf60530d77a87d4d5093//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/Load.scala" target="_blank">Load.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory functions for time sources</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0aded02cbe7deb098390de1a5447ecff3990f6ce//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/time/TimeSource.scala" target="_blank">TimeSource.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="FromPath.html" class="extype" name="au.com.cba.omnia.maestro.core.task.FromPath">FromPath</a>, <a href="Predetermined.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Predetermined">Predetermined</a></div>
         </div></div>
         
 
@@ -62,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.task.TimeSource"><span>TimeSource</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.time.TimeSource"><span>TimeSource</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -230,6 +227,100 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromDirStructure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromDirStructure:au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromDirStructure:TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromDirStructure</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A time source which takes the year, month, and day from our standard directory structure</p>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromDirStructureHour" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromDirStructureHour:au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromDirStructureHour:TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromDirStructureHour</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A time source which takes the year, month, day, and hour from our standard directory structure</p>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromDirStructureSecond" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromDirStructureSecond:au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromDirStructureSecond:TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromDirStructureSecond</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A time source which takes the year, month, day, hour, minute, and second from our standard directory structure</p>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromPath(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromPath(Regex):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromPath</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Derive the load time from the file path using the provided regex.</p><div class="fullcomment"><div class="comment cmt"><p>Derive the load time from the file path using the provided regex.</p><p>The regex needs to extract the year, month and day into separate capture groups.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromPath(extract:String=&gt;String):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromPath((String)⇒String):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromPath</span><span class="params">(<span name="extract">extract: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Derive the load time from the file path</p>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromPathHour" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromPathHour(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromPathHour(Regex):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromPathHour</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Derive the load time from the file path using the provided regex.</p><div class="fullcomment"><div class="comment cmt"><p>Derive the load time from the file path using the provided regex.</p><p>The regex needs to extract the year, month, day, and hour into separate capture groups.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#fromPathSecond" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromPathSecond(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="fromPathSecond(Regex):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromPathSecond</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Derive the load time from the file path using the provided regex.</p><div class="fullcomment"><div class="comment cmt"><p>Derive the load time from the file path using the provided regex.</p><p>The regex needs to extract the year, month, day, hour, minute, and second into separate capture groups.
+</p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -243,19 +334,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.TimeSource#getTime" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="getTime(path:String):String"></a>
-      <a id="getTime(String):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">getTime</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -321,6 +399,47 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#now" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="now(format:String):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="now(String):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">now</span><span class="params">(<span name="format">format: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;yyyy-MM-dd&quot;</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Use the current time as the time source</p>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#predetermined" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="predetermined(time:org.joda.time.DateTime,format:String):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="predetermined(DateTime,String):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">predetermined</span><span class="params">(<span name="time">time: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="format">format: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;yyyy-MM-dd&quot;</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Use a predetermined date as the time source</p><div class="fullcomment"><div class="comment cmt"><p>Use a predetermined date as the time source</p><p>Converts the time to UTC, which maintains backwards compatibility, but is
+different to our other time sources.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.time.TimeSource#predetermined" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="predetermined(time:String):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="predetermined(String):TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">predetermined</span><span class="params">(<span name="time">time: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Use a predetermined date time string as the time source</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

@@ -46,7 +46,7 @@ tokens using the Lexer:</p><pre><span class="kw">import</span> Parser._
 <span class="kw">val</span> table: NoSuccess \/ Schema = Parser(input)</pre><p>When parsing the table fails, the message stored in the result may contain
 useful information regarding the location of the error, which can be reported
 to the user.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e14da9140616e92ba71cf60530d77a87d4d5093//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/schema/Parser.scala" target="_blank">Parser.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0aded02cbe7deb098390de1a5447ecff3990f6ce//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/schema/Parser.scala" target="_blank">Parser.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.util.parsing.combinator.Parsers">Parsers</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -154,7 +154,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers.OnceParser" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="OnceParser[+T]extendsParsers.this.Parser[T]"></a>
+      <a id="OnceParser[+T&lt;:&lt;?&gt;]extendsParsers.this.Parser[T]"></a>
       <a id="OnceParser[+T]:OnceParser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -167,7 +167,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers.ParseResult" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="ParseResult[+T]extendsAnyRef"></a>
+      <a id="ParseResult[+T&lt;:&lt;?&gt;]extendsAnyRef"></a>
       <a id="ParseResult[+T]:ParseResult[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -330,7 +330,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#OnceParser" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="OnceParser[T](f:Parsers.this.Input=&gt;Parsers.this.ParseResult[T]):Parsers.this.Parser[T]withParsers.this.OnceParser[T]"></a>
+      <a id="OnceParser[T&lt;:&lt;?&gt;](f:&lt;?&gt;):Parsers.this.Parser[T]withParsers.this.OnceParser[T]"></a>
       <a id="OnceParser[T]((Input)⇒ParseResult[T]):Parser[T]withOnceParser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -421,7 +421,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#acceptMatch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="acceptMatch[U](expected:String,f:PartialFunction[Parsers.this.Elem,U]):Parsers.this.Parser[U]"></a>
+      <a id="acceptMatch[U&lt;:&lt;?&gt;](expected:&lt;?&gt;,f:&lt;?&gt;):Parsers.this.Parser[U]"></a>
       <a id="acceptMatch[U](String,PartialFunction[Elem,U]):Parser[U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -486,7 +486,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainl1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainl1[T,U](first:=&gt;Parsers.this.Parser[T],p:=&gt;Parsers.this.Parser[U],q:=&gt;Parsers.this.Parser[(T,U)=&gt;T]):Parsers.this.Parser[T]"></a>
+      <a id="chainl1[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;](first:&lt;?&gt;,p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[T]"></a>
       <a id="chainl1[T,U](⇒Parser[T],⇒Parser[U],⇒Parser[(T,U)⇒T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -499,7 +499,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainl1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainl1[T](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[(T,T)=&gt;T]):Parsers.this.Parser[T]"></a>
+      <a id="chainl1[T&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[T]"></a>
       <a id="chainl1[T](⇒Parser[T],⇒Parser[(T,T)⇒T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -512,7 +512,7 @@ to the user.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainr1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainr1[T,U](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[(T,U)=&gt;U],combine:(T,U)=&gt;U,first:U):Parsers.this.Parser[U]"></a>
+      <a id="chainr1[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;,combine:&lt;?&gt;,first:&lt;?&gt;):Parsers.this.Parser[U]"></a>
       <a id="chainr1[T,U](⇒Parser[T],⇒Parser[(T,U)⇒U],(T,U)⇒U,U):Parser[U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -544,7 +544,7 @@ to the user.
               
         </dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#commit" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="commit[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[T]"></a>
+      <a id="commit[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[T]"></a>
       <a id="commit[T](⇒Parser[T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -740,7 +740,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#log" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="log[T](p:=&gt;Parsers.this.Parser[T])(name:String):Parsers.this.Parser[T]"></a>
+      <a id="log[T&lt;:&lt;?&gt;](p:&lt;?&gt;)(name:&lt;?&gt;):Parsers.this.Parser[T]"></a>
       <a id="log[T](⇒Parser[T])(String):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -753,7 +753,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#mkList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mkList[T]:Parsers.this.~[T,List[T]]=&gt;List[T]"></a>
+      <a id="mkList[T&lt;:&lt;?&gt;]:Parsers.this.~[T,List[T]]=&gt;List[T]"></a>
       <a id="mkList[T]:(~[T,List[T]])⇒List[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -779,7 +779,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#not" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="not[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[Unit]"></a>
+      <a id="not[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[Unit]"></a>
       <a id="not[T](⇒Parser[T]):Parser[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -818,7 +818,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#opt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="opt[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[Option[T]]"></a>
+      <a id="opt[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[Option[T]]"></a>
       <a id="opt[T](⇒Parser[T]):Parser[Option[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1328,7 +1328,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#rep1sep" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="rep1sep[T](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[Any]):Parsers.this.Parser[List[T]]"></a>
+      <a id="rep1sep[T&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[List[T]]"></a>
       <a id="rep1sep[T](⇒Parser[T],⇒Parser[Any]):Parser[List[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1341,7 +1341,7 @@ its provided parameter as a string.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#repN" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="repN[T](num:Int,p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[List[T]]"></a>
+      <a id="repN[T&lt;:&lt;?&gt;](num:&lt;?&gt;,p:&lt;?&gt;):Parsers.this.Parser[List[T]]"></a>
       <a id="repN[T](Int,⇒Parser[T]):Parser[List[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1499,7 +1499,7 @@ its provided parameter as a string.
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> lastNoSuccess was not thread-safe and will be removed in 2.11.0</p></dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#lastNoSuccess_=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="lastNoSuccess_=(x:Parsers.this.NoSuccess):Unit"></a>
+      <a id="lastNoSuccess_=(x:&lt;?&gt;):Unit"></a>
       <a id="lastNoSuccess_=(NoSuccess):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">

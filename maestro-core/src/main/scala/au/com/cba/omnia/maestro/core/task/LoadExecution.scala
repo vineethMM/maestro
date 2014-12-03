@@ -78,7 +78,8 @@ trait LoadExecution {
     delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
     validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](errorThreshold,
+    LoadHelper.execution[A](
+      errorThreshold,
       LoadHelper.load[A](delimiter, sources, errors, timeSource, clean, validator, filter, none)
     )
 
@@ -98,7 +99,8 @@ trait LoadExecution {
       delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
       validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](errorThreshold,
+    LoadHelper.execution[A](
+      errorThreshold,
       LoadHelper.loadWithKey[A](delimiter, sources, errors, timeSource, clean, validator, filter, none)
     )
 
@@ -107,7 +109,8 @@ trait LoadExecution {
     lengths: List[Int], sources: List[String], errors: String, timeSource: TimeSource,
       clean: Clean, validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](errorThreshold,
+    LoadHelper.execution[A](
+      errorThreshold,
       LoadHelper.loadFixedLength[A](lengths, sources, errors, timeSource, clean, validator, filter, none)
     )
 }

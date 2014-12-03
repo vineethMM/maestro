@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e31c0a10ccd465341664c4594ec5618fb9019362//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerCascade.scala" target="_blank">CustomerCascade.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e14da9140616e92ba71cf60530d77a87d4d5093//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerCascade.scala" target="_blank">CustomerCascade.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="../api/MaestroCascade.html" class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade">MaestroCascade</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <span class="extype" name="com.twitter.scalding.CascadeJob">CascadeJob</span>, <span class="extype" name="com.twitter.scalding.Job">Job</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -321,15 +321,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.example.CustomerCascade#catTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="catTable:au.com.cba.omnia.maestro.core.hive.HiveTable[au.com.cba.omnia.maestro.example.thrift.Customer,String]"></a>
-      <a id="catTable:HiveTable[Customer,String]"></a>
+      <a id="catTable:au.com.cba.omnia.maestro.core.hive.HiveTable[au.com.cba.omnia.maestro.example.thrift.Customer,(String,au.com.cba.omnia.maestro.example.thrift.Customer)]"></a>
+      <a id="catTable:HiveTable[Customer,(String,Customer)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">catTable</span><span class="result">: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>, <span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">catTable</span><span class="result">: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>, (<span class="extype" name="scala.Predef.String">String</span>, <a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>)]</span>
       </span>
       </h4>
       
@@ -444,15 +444,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Job</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.example.CustomerCascade#dateTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dateTable:au.com.cba.omnia.maestro.core.hive.HiveTable[au.com.cba.omnia.maestro.example.thrift.Customer,(String,String,String)]"></a>
-      <a id="dateTable:HiveTable[Customer,(String,String,String)]"></a>
+      <a id="dateTable:au.com.cba.omnia.maestro.core.hive.HiveTable[au.com.cba.omnia.maestro.example.thrift.Customer,((String,String,String),au.com.cba.omnia.maestro.example.thrift.Customer)]"></a>
+      <a id="dateTable:HiveTable[Customer,((String,String,String),Customer)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">dateTable</span><span class="result">: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">dateTable</span><span class="result">: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>, ((<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>), <a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>)]</span>
       </span>
       </h4>
       

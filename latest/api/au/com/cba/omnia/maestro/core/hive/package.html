@@ -58,19 +58,45 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.hive.HiveTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="HiveTable[A&lt;:com.twitter.scrooge.ThriftStruct,B]extendsProductwithSerializable"></a>
-      <a id="HiveTable[A&lt;:ThriftStruct,B]:HiveTable[A,B]"></a>
+              <ol><li name="au.com.cba.omnia.maestro.core.hive.HiveTable" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="HiveTable[T&lt;:com.twitter.scrooge.ThriftStruct,ST]extendsAnyRef"></a>
+      <a id="HiveTable[T&lt;:ThriftStruct,ST]:HiveTable[T,ST]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="HiveTable.html"><span class="name">HiveTable</span></a><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="ST">ST</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base type for partitioned and unpartitioned Hive tables.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PartitionedHiveTable[A&lt;:com.twitter.scrooge.ThriftStruct,B]extendsHiveTable[A,(B,A)]withProductwithSerializable"></a>
+      <a id="PartitionedHiveTable[A&lt;:ThriftStruct,B]:PartitionedHiveTable[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="HiveTable.html"><span class="name">HiveTable</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="database">database: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.B">B</span>]</span>, <span name="externalPath">externalPath: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence$1">evidence$1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.A">A</span>]</span>, <span name="evidence$2">evidence$2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.B">B</span>]</span>, <span name="evidence$3">evidence$3: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.B">B</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="PartitionedHiveTable.html"><span class="name">PartitionedHiveTable</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="database">database: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="externalPath">externalPath: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence$1">evidence$1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>, <span name="evidence$2">evidence$2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="evidence$3">evidence$3: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>)</span><span class="result"> extends <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>)] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Information need to address/describe a specific partitioned hive table.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnpartitionedHiveTable[A&lt;:com.twitter.scrooge.ThriftStruct]extendsHiveTable[A,A]withProductwithSerializable"></a>
+      <a id="UnpartitionedHiveTable[A&lt;:ThriftStruct]:UnpartitionedHiveTable[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="UnpartitionedHiveTable.html"><span class="name">UnpartitionedHiveTable</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="database">database: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="externalPath">externalPath: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence$4">evidence$4: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>]</span>)</span><span class="result"> extends <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Information need to address/describe a specific unpartitioned hive table.</p>
     </li></ol>
             </div>
 
@@ -87,10 +113,10 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="HiveTable$.html"><span class="name">HiveTable</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="HiveTable$.html"><span class="name">HiveTable</span></a>
       </span>
       </h4>
-      <p class="comment cmt">Alternative contructors for HiveTable.</p>
+      <p class="comment cmt">Contructors for HiveTable.</p>
     </li></ol>
             </div>
 

@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>ModArgs - au.com.cba.omnia.maestro.core.args.ModArgs</title>
-          <meta name="description" content="ModArgs - au.com.cba.omnia.maestro.core.args.ModArgs" />
-          <meta name="keywords" content="ModArgs au.com.cba.omnia.maestro.core.args.ModArgs" />
+          <title>PartitionedHiveTable - au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable</title>
+          <meta name="description" content="PartitionedHiveTable - au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable" />
+          <meta name="keywords" content="PartitionedHiveTable au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.args.ModArgs';
+            var hash = 'au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="ModArgs$.html" title="Go to companion"><img src="../../../../../../../lib/class_to_object_big.png" /></a>
-        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.args">args</a></p>
-        <h1><a href="ModArgs$.html" title="Go to companion">ModArgs</a></h1>
+        <img src="../../../../../../../lib/class_big.png" />
+        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.hive">hive</a></p>
+        <h1>PartitionedHiveTable</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,18 +35,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">ModArgs</span><span class="params">(<span name="mutateConf">mutateConf: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>, <span name="scaldingPairs">scaldingPairs: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">PartitionedHiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="database">database: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="externalPath">externalPath: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence$1">evidence$1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>, <span name="evidence$2">evidence$2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="evidence$3">evidence$3: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>)</span><span class="result"> extends <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>)] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a set of changes to Scalding arguments.</p><p>These changes can be applied to Scalding arguments safely:
-producing a new modified set of arguments without mutating the original
-arguments.</p><p>We may have to do a deep copy of the Scalding arguments in order to safely
-modify them, so it is best to apply one combined ModArgs value to Scalding
-arguments, rather than applying many primitive ModArgs values.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e14da9140616e92ba71cf60530d77a87d4d5093//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/args/ModArgs.scala" target="_blank">ModArgs.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Information need to address/describe a specific partitioned hive table.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e14da9140616e92ba71cf60530d77a87d4d5093//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>)], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -64,7 +59,7 @@ arguments, rather than applying many primitive ModArgs values.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.args.ModArgs"><span>ModArgs</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable"><span>PartitionedHiveTable</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.maestro.core.hive.HiveTable"><span>HiveTable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -84,16 +79,16 @@ arguments, rather than applying many primitive ModArgs values.
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.args.ModArgs#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(mutateConf:Option[org.apache.hadoop.conf.Configuration=&gt;Unit],scaldingPairs:Map[String,Iterable[String]]):au.com.cba.omnia.maestro.core.args.ModArgs"></a>
-      <a id="&lt;init&gt;:ModArgs"></a>
+              <ol><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(database:String,table:String,partition:au.com.cba.omnia.maestro.core.partition.Partition[A,B],externalPath:Option[String])(implicitevidence$1:Manifest[A],implicitevidence$2:Manifest[B],implicitevidence$3:com.twitter.scalding.TupleSetter[B]):au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable[A,B]"></a>
+      <a id="&lt;init&gt;:PartitionedHiveTable[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ModArgs</span><span class="params">(<span name="mutateConf">mutateConf: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>, <span name="scaldingPairs">scaldingPairs: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>)</span>
+        <span class="name">PartitionedHiveTable</span><span class="params">(<span name="database">database: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="externalPath">externalPath: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>, <span name="arg2">arg2: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>)</span>
       </span>
       </h4>
       
@@ -203,19 +198,19 @@ arguments, rather than applying many primitive ModArgs values.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#compressOutput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="compressOutput[C&lt;:org.apache.hadoop.io.compress.CompressionCodec](implicitevidence$1:reflect.ClassManifest[C]):au.com.cba.omnia.maestro.core.args.ModArgs"></a>
-      <a id="compressOutput[C&lt;:CompressionCodec](ClassManifest[C]):ModArgs"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#database" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="database:String"></a>
+      <a id="database:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">compressOutput</span><span class="tparams">[<span name="C">C &lt;: <span class="extype" name="org.apache.hadoop.io.compress.CompressionCodec">CompressionCodec</span></span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassManifest">ClassManifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.args.ModArgs.compressOutput.C">C</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.maestro.core.args.ModArgs">ModArgs</a></span>
+        <span class="name">database</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Compress mapreduce output using specified codec</p>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -229,6 +224,19 @@ arguments, rather than applying many primitive ModArgs values.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#externalPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="externalPath:Option[String]"></a>
+      <a id="externalPath:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">externalPath</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -274,32 +282,19 @@ arguments, rather than applying many primitive ModArgs values.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#modify" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="modify(args:com.twitter.scalding.Args):com.twitter.scalding.Args"></a>
-      <a id="modify(Args):Args"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">modify</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Take scalding arguments and safely return a modified copy</p>
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#mutateConf" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="mutateConf:Option[org.apache.hadoop.conf.Configuration=&gt;Unit]"></a>
-      <a id="mutateConf:Option[(Configuration)⇒Unit]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#name" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="name:String"></a>
+      <a id="name:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">mutateConf</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">name</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Fully qualified SQL reference to table.</p><div class="fullcomment"><div class="comment cmt"><p>Fully qualified SQL reference to table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -339,45 +334,71 @@ arguments, rather than applying many primitive ModArgs values.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#scaldingPairs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="scaldingPairs:Map[String,Iterable[String]]"></a>
-      <a id="scaldingPairs:Map[String,Iterable[String]]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#partition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="partition:au.com.cba.omnia.maestro.core.partition.Partition[A,B]"></a>
+      <a id="partition:Partition[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">scaldingPairs</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+        <span class="name">partition</span><span class="result">: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>]</span>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#set" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="set(key:String,value:String):au.com.cba.omnia.maestro.core.args.ModArgs"></a>
-      <a id="set(String,String):ModArgs"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#partitionMetadata" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="partitionMetadata:List[(String,String)]"></a>
+      <a id="partitionMetadata:List[(String,String)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">partitionMetadata</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">List of partition column names and type (string by default).</p>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#path" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="path:org.apache.hadoop.fs.Path"></a>
+      <a id="path:Path"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">path</span><span class="result">: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Path of the table.</p><div class="fullcomment"><div class="comment cmt"><p>Path of the table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#sink" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sink(append:Boolean):au.com.cba.omnia.ebenezer.scrooge.hive.PartitionHiveParquetScroogeSink[B,A]"></a>
+      <a id="sink(Boolean):PartitionHiveParquetScroogeSink[B,A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">set</span><span class="params">(<span name="key">key: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.maestro.core.args.ModArgs">ModArgs</a></span>
+        <span class="name">sink</span><span class="params">(<span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.PartitionHiveParquetScroogeSink">PartitionHiveParquetScroogeSink</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Set a key-value pair in the Scalding configuration</p>
-    </li><li name="au.com.cba.omnia.maestro.core.args.ModArgs#setHadoop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="setHadoop(key:String,value:String):au.com.cba.omnia.maestro.core.args.ModArgs"></a>
-      <a id="setHadoop(String,String):ModArgs"></a>
+      <p class="shortcomment cmt">Creates a scalding sink to write to the hive table.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a scalding sink to write to the hive table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#source" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="source():au.com.cba.omnia.ebenezer.scrooge.hive.PartitionHiveParquetScroogeSource[A]"></a>
+      <a id="source():PartitionHiveParquetScroogeSource[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setHadoop</span><span class="params">(<span name="key">key: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.maestro.core.args.ModArgs">ModArgs</a></span>
+        <span class="name">source</span><span class="params">()</span><span class="result">: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.PartitionHiveParquetScroogeSource">PartitionHiveParquetScroogeSource</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Set a key-value pair in the underlying Hadoop configuration</p>
+      <p class="shortcomment cmt">Creates a scalding source to read from the hive table.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a scalding source to read from the hive table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -391,6 +412,19 @@ arguments, rather than applying many primitive ModArgs values.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#table" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="table:String"></a>
+      <a id="table:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">table</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -448,6 +482,32 @@ arguments, rather than applying many primitive ModArgs values.
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#write" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="write(pipe:com.twitter.scalding.TypedPipe[A],append:Boolean)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.TypedPipe[(B,A)]"></a>
+      <a id="write(TypedPipe[A],Boolean)(FlowDef,Mode):TypedPipe[(B,A)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">write</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[(<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable#writeExecution" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[A],append:Boolean):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="writeExecution(TypedPipe[A],Boolean):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">writeExecution</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates <span class="extype" name="Execution">Execution</span> that writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Creates <span class="extype" name="Execution">Execution</span> that writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable">PartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -465,6 +525,8 @@ arguments, rather than applying many primitive ModArgs values.
               <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.hive.HiveTable">
+              <h3>Inherited from <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.PartitionedHiveTable.A">A</span>)]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

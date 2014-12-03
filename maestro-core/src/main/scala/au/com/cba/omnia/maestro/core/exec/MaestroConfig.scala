@@ -121,6 +121,42 @@ case class MaestroConfig(
   }
 
   /**
+    * Produce a sqoop import config for this job using standard paths and database options.
+    * 
+    * Use it when you want to use SQL Select query to fetch data. If you do not provide `splitBy`,
+    * then `numberOfMappers` is set to 1.
+    *
+    * The standard database options are:
+    *  - connectionString and username come from command line arguments
+    *  - password comes from an environment variable
+    *  - dbTablename is `\$tablename`
+    *
+    * The default paths are as follows:
+    *  - hdfsLandingPath  = `\$hdfsRoot/source/\$dirStructure`
+    *  - hdfsArchivePath  = `\$hdfsRoot/archive/\$dirStructure`
+    *  - timePath         = `<year>/<month>/<day>`
+    */
+  def sqoopImportWithQuery[T <: ParlourImportOptions[T] : Monoid](
+    query: String,
+    splitBy: Option[String],
+    hdfsLandingPath: String        = hdfsLandingPath,
+    hdfsArchivePath: String        = hdfsArchivePath,
+    timePath: String               = loadTime.toString("yyyy/MM/dd"),
+    connectionString: String       = connString,
+    username: String               = username,
+    password: String               = password,
+    outputFieldsTerminatedBy: Char = '|',
+    nullString: String             = "",
+    initialOptions: Option[T]      = None
+  ): SqoopImportConfig[T] = {
+    val options = SqoopEx.createSqoopImportOptionsWithQuery[T](
+      connectionString, username, password, query, splitBy, outputFieldsTerminatedBy,
+      nullString, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+    )
+    SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
+  }
+
+  /**
     * Produces a sqoop export config for this job using standard database options.
     *
     * The standard database options are:

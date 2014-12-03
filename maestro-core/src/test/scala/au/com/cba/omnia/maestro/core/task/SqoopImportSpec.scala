@@ -22,8 +22,6 @@ import scalaz.effect.IO
 
 import com.twitter.scalding.{Args, CascadeJob}
 
-import org.specs2.specification.BeforeExample
-
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 
 import au.com.cba.omnia.thermometer.context.Context
@@ -32,11 +30,12 @@ import au.com.cba.omnia.thermometer.core.{ThermometerRecordReader, ThermometerSp
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.tools.Streams
 
-class SqoopImportSpec extends ThermometerSpec with BeforeExample { def is = s2"""
+class SqoopImportSpec extends ThermometerSpec { def is = s2"""
   Sqoop Import Cascade test
   =========================
 
-  Import/Upload data from DB to HDFS $endToEndImportTest
+  Import/Upload data from DB to HDFS            $endToEndImportTest
+  Import with query/Upload data from DB to HDFS $endToEndImportWithQueryTest
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
@@ -44,34 +43,47 @@ class SqoopImportSpec extends ThermometerSpec with BeforeExample { def is = s2""
   val password = ""
   val userHome = System.getProperty("user.home")
 
-  def endToEndImportTest = {
+  def endToEndImportTest = endToEndImport(
+    new SqoopImportCascade(_),
+    "customer_import",
+    CustomerImport.data
+  )
+
+
+  val filteredData = CustomerImport.dataSplitted.filter(_(5).toInt > 220).map(_.mkString("|"))
+  def endToEndImportWithQueryTest = endToEndImport(
+    new SqoopImportWithQueryCascade(_),
+    "customer_import_with_query",
+    filteredData
+  )
+
+  def endToEndImport(cascadeFactory: Args => CascadeJob, tableName: String, expectedRows: List[String]) = {
+    CustomerImport.tableSetup(connectionString, username, password, tableName)
     val cascade = withArgs(
       Map(
         "hdfs-root"        -> s"$dir/user/hdfs",
         "source"           -> "sales",
         "domain"           -> "books",
-        "importTableName"  -> "customer_import",
+        "importTableName"  -> tableName,
         "timePath"         -> (List("2014", "10", "10") mkString File.separator),
         "mapRedHome"       -> s"$userHome/.ivy2/cache",
         "connectionString" -> connectionString,
         "username"         -> username,
         "password"         -> password
       )
-    )(new SqoopImportCascade(_))
+    )(cascadeFactory(_))
 
     val root = dir </> "user" </> "hdfs"
-    val tail = "sales" </> "books" </> "customer_import" </> "2014" </> "10" </> "10"
+    val tail = "sales" </> "books" </> tableName </> "2014" </> "10" </> "10"
     val dstDir = "source" </> tail
     val archiveDir = "archive" </> tail
     cascade.withFacts(
       root </> dstDir     </> "_SUCCESS"       ==> exists,
-      root </> dstDir     </> "part-m-00000"   ==> lines(CustomerImport.data),
+      root </> dstDir     </> "part-m-00000"   ==> lines(expectedRows),
       root </> archiveDir </> "_SUCCESS"       ==> exists,
-      root </> archiveDir </> "part-00000.gz" ==> records(compressedRecordReader, CustomerImport.data)
+      root </> archiveDir </> "part-00000.gz"  ==> records(compressedRecordReader, expectedRows)
     )
   }
-
-  override def before: Any = CustomerImport.tableSetup(connectionString, username, password)
 
   val compressedRecordReader =
     ThermometerRecordReader[String]((conf, path) => IO {
@@ -84,12 +96,27 @@ class SqoopImportSpec extends ThermometerSpec with BeforeExample { def is = s2""
     })
 }
 
-class SqoopImportCascade(args: Args) extends CascadeJob(args) with Sqoop {
+class SqoopImportCascade(args: Args) extends BaseSqoopImportCascade(args) {
+  def importOptions: ParlourImportDsl = createSqoopImportOptions(connectionString, username,
+    password, importTableName, '|', "", Some("1=1")
+  ).splitBy("id")
+
+  override def jobs = sqoopImport(hdfsRoot, source, domain, timePath, withMRHome(importOptions))(args)._1
+}
+
+class SqoopImportWithQueryCascade(args: Args) extends BaseSqoopImportCascade(args) {
+  val importOptions: ParlourImportDsl = createSqoopImportOptionsWithQuery(connectionString, username,
+    password, s"SELECT * FROM $importTableName WHERE balance > 220 AND $$CONDITIONS", Some("id"), '|', ""
+  )
+
+  override val jobs = sqoopImportWithQuery(hdfsRoot, source, domain, timePath, importTableName, withMRHome(importOptions))(args)._1
+}
+
+abstract class BaseSqoopImportCascade(args: Args) extends CascadeJob(args) with Sqoop {
   val hdfsRoot         = args("hdfs-root")
   val source           = args("source")
   val domain           = args("domain")
   val importTableName  = args("importTableName")
-  val mappers          = 1
   val database         = domain
   val connectionString = args("connectionString")
   val username         = args("username")
@@ -98,13 +125,10 @@ class SqoopImportCascade(args: Args) extends CascadeJob(args) with Sqoop {
   val mapRedHome       = args("mapRedHome")
 
   /**
-   * hadoopMapRedHome is set for Sqoop to find the hadoop jars. This hack would be necessary ONLY in a
-   * test case.
-   */
-  val importOptions: ParlourImportDsl = createSqoopImportOptions(connectionString, username,
-    password, importTableName, '|', "", Some("1=1")).splitBy("id").hadoopMapRedHome(mapRedHome)
-
-  override val jobs = sqoopImport(hdfsRoot, source, domain, timePath, importOptions)(args)._1
+    * hadoopMapRedHome is set for Sqoop to find the hadoop jars. This hack would be necessary ONLY in a
+    * test case.
+    */
+  def withMRHome(options: ParlourImportDsl) = options.hadoopMapRedHome(mapRedHome)
 }
 
 

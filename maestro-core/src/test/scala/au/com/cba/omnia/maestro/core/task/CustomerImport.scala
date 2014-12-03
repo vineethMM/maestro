@@ -5,7 +5,8 @@ import scalikejdbc.{SQL, AutoSession, ConnectionPool}
 object CustomerImport {
   Class.forName("org.hsqldb.jdbcDriver")
 
-  val data = List("1|Fred|001|D|M|259", "2|Betty|005|D|M|205", "3|Bart|002|F|M|225")
+  val data         = List("1|Fred|001|D|M|259", "2|Betty|005|D|M|205", "3|Bart|002|F|M|225")
+  val dataSplitted = data.map(line => line.split('|'))
 
   def tableSetup(connectionString: String, username: String, password: String, table: String = "customer_import"): Unit = {
     ConnectionPool.singleton(connectionString, username, password)
@@ -22,7 +23,7 @@ object CustomerImport {
       )
     """).execute.apply()
 
-    data.map(line => line.split('|')).foreach(
+    dataSplitted.foreach(
       row => SQL(s"""insert into ${table}(id, name, accr, cat, sub_cat, balance)
         values ('${row(0)}', '${row(1)}', '${row(2)}', '${row(3)}', '${row(4)}', '${row(5)}')""").update().apply())
   }

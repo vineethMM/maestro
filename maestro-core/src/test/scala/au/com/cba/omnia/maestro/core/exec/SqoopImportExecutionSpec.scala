@@ -27,6 +27,7 @@ import org.specs2.specification.BeforeExample
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 
+import au.com.cba.omnia.thermometer.fact.Fact
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.tools.Streams
@@ -43,9 +44,10 @@ object SqoopImportExecutionSpec
   Sqoop Import Execution test
   ===========================
 
-  imports data from DB to HDFS successfully $endToEndImportWithSuccess
-  handles exceptions while importing data   $endToEndImportWithException
-  handles exceptions while table not set    $endToEndImportWithoutTable
+  imports data from DB to HDFS successfully    $endToEndImportWithSuccess
+  imports data from DB to HDFS using SQL query $endToEndImportWithSqlQuery
+  handles exceptions while importing data      $endToEndImportWithException
+  handles exceptions while table not set       $endToEndImportWithoutTable
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
@@ -79,8 +81,25 @@ object SqoopImportExecutionSpec
     val config = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
     val (path, count) = executesSuccessfully(sqoopImport(config))
     facts(
+      ImportPathFact(path),
       s"$hdfsLandingPath/$timePath" </> "part-m-00000" ==> lines(CustomerImport.data),
       s"$hdfsArchivePath/$timePath" </> "part-00000.gz" ==> records(compressedRecordReader, CustomerImport.data)
+    )
+    count must_== 3
+  }
+
+  def endToEndImportWithSqlQuery = {
+    val optionsWithQuery = SqoopImportConfig.optionsWithQuery[ParlourImportDsl](connectionString, username, password,
+      s"SELECT * FROM $importTableName WHERE $$CONDITIONS", Some("id"))
+
+    val config = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, optionsWithQuery)
+    val (path, count) = executesSuccessfully(sqoopImport(config))
+    facts(
+      ImportPathFact(path),
+      s"$dir/user/hdfs/archive/sales/books" </> importTableName </> "2014/10/10" </> "part-00000.gz" ==>
+        records(compressedRecordReader, CustomerImport.data),
+      s"$dir/user/hdfs/source/sales/books" </> importTableName </> "2014/10/10" </> "part-m-00000"   ==>
+        lines(CustomerImport.data)
     )
     count must_== 3
   }
@@ -100,4 +119,8 @@ object SqoopImportExecutionSpec
   override def before: Any = CustomerImport.tableSetup(
     connectionString, username, password, importTableName
   )
+
+  object ImportPathFact {
+    def apply(actualPath: String) = Fact(_ => actualPath must beEqualTo(s"$hdfsLandingPath/$timePath"))
+  }
 }

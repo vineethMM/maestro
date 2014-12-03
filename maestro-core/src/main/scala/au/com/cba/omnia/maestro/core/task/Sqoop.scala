@@ -90,6 +90,39 @@ trait Sqoop {
   }
 
   /**
+   * Convenience method to populate a parlour import option instance.
+   * Use it when you want to use SQL Select query to fetch data. 
+   *
+   * @param connectionString: database connection string
+   * @param username: database username
+   * @param password: database password
+   * @param query: SQL Select query
+   * @param outputFieldsTerminatedBy: output field terminating character
+   * @param nullString: The string to be written for a null value in columns
+   * @param splitBy: splitting column; if None, then `numberOfMappers` is set to 1 
+   * @param options: parlour option to populate
+   * @return : Populated parlour option
+   */
+  def createSqoopImportOptionsWithQuery[T <: ParlourImportOptions[T]](
+    connectionString: String,
+    username: String,
+    password: String,
+    query: String,
+    splitBy: Option[String],
+    outputFieldsTerminatedBy: Char,
+    nullString: String,
+    options: T = ParlourImportDsl()
+  ): T = {
+    val withConnection = options.connectionString(connectionString).username(username).password(password)
+    val withSplitBy = splitBy.fold(withConnection.numberOfMappers(1))(withConnection.splitBy(_))
+    withSplitBy
+      .sqlQuery(query)
+      .fieldsTerminatedBy(outputFieldsTerminatedBy)
+      .nullString(nullString)
+      .nullNonString(nullString)
+  }
+
+  /**
    * Run a custom sqoop import using parlour import options
    *
    * '''Use this method ONLY if non-standard settings are required'''
@@ -133,7 +166,7 @@ trait Sqoop {
     tableName: Option[String] = None
   )(args: Args)(implicit flowDef: FlowDef, mode: Mode): (Seq[Job], String) = {
     val dstTableName = tableName.getOrElse(
-      options.getTableName.getOrElse(throw new RuntimeException("Table name must be set in ParlourImportOptions"))
+      options.getTableName.getOrElse(throw new RuntimeException("Table name must be set either in ParlourImportOptions or provided as parameter"))
     )
 
     val importPath = List(hdfsRoot, "source", source, domain, dstTableName, timePath) mkString File.separator
@@ -142,6 +175,35 @@ trait Sqoop {
     (Seq(customSqoopImport(finalOptions)(args),
       new ArchiveDirectoryJob(importPath, archivePath)(args)), importPath)
   }
+
+  /**
+   * Runs a sqoop import from a database table to HDFS.
+   * Data is fetched using SQL query provided in `options`.
+   * 
+   * WARNING: `options.tableName` should not be set. Otherwise Sqoop will not use SQL query.
+   * 
+   * Data will be copied to a path that is generated. For a given `domain`,`tableName` and `timePath`, a path
+   * `\$hdfsRoot/source/\$source/\$domain/\$tableName/\$timePath` is generated.
+   *
+   * Use [[Sqoop.createSqoopImportOptionsWithQuery]] to populate the [[ParlourImportOptions]] parameter.
+   *
+   * @param hdfsRoot: Root directory of HDFS
+   * @param source: Source system
+   * @param domain: Database within source
+   * @param timePath: custom timepath to import data into
+   * @param tableName: Table name used in the import path
+   * @param options: Sqoop import options
+   * @return Tuple of Seq of jobs for this import and import directory.
+   */
+  def sqoopImportWithQuery[T <: ParlourImportOptions[T]](
+    hdfsRoot: String,
+    source: String,
+    domain: String,
+    timePath: String,
+    tableName: String,
+    options: T
+  )(args: Args)(implicit flowDef: FlowDef, mode: Mode): (Seq[Job], String) = 
+    sqoopImport(hdfsRoot, source, domain, timePath, options, Some(tableName))(args)
 
   /**
    * Runs a sqoop export from HDFS to a database table.

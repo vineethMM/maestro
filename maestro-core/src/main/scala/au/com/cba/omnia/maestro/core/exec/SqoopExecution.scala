@@ -54,7 +54,7 @@ case class SqoopImportConfig[T <: ParlourImportOptions[T]](
 /** Factory functions for [[SqoopImportConfig]] */
 object SqoopImportConfig {
   /**
-    * Convenience method to populate a parlour import option instance
+    * Convenience method to populate a parlour import option instance.
     *
     * @param connectionString: Database connection string
     * @param username:         Database username
@@ -81,6 +81,36 @@ object SqoopImportConfig {
   ): T = SqoopEx.createSqoopImportOptions[T](
     connectionString, username, password, dbTablename, outputFieldsTerminatedBy,
     nullString, whereCondition, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+  )
+
+  /**
+   * Convenience method to populate a parlour import option instance.
+   * Use it when you want to use SQL Select query to fetch data.
+   * If you do not provide `splitBy`, then `numberOfMappers` is set to 1.
+   *
+   * @param connectionString: database connection string
+   * @param username: database username
+   * @param password: database password
+   * @param query: SQL Select query
+   * @param outputFieldsTerminatedBy: output field terminating character
+   * @param nullString: The string to be written for a null value in columns
+   * @param splitBy: splitting column; if None, then `numberOfMappers` is set to 1 
+   * @param options: parlour option to populate
+   * 
+   * @return : Populated parlour option
+   */
+  def optionsWithQuery[T <: ParlourImportOptions[T] : Monoid](
+    connectionString: String,
+    username: String,
+    password: String,
+    query: String,
+    splitBy: Option[String],
+    outputFieldsTerminatedBy: Char = '|',
+    nullString: String             = "",
+    initialOptions: Option[T]      = None
+  ): T = SqoopEx.createSqoopImportOptionsWithQuery[T](
+    connectionString, username, password, query, splitBy, outputFieldsTerminatedBy,
+    nullString, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
   )
 }
 

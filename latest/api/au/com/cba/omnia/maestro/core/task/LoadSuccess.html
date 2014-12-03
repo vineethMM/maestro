@@ -35,11 +35,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">LoadSuccess</span><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">LoadSuccess</span><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="actual">actual: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The number of rows which failed to load was within acceptable limits</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0aded02cbe7deb098390de1a5447ecff3990f6ce//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The number of rows which failed to load was within acceptable limits.
+</p></div><dl class="paramcmts block"><dt class="param">actual</dt><dd class="cmt"><p>the number of rows that remained after filtering
+</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/5e760e2edd3dfd185800f64a70e34cb1ef1d9f87//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -79,8 +81,8 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.task.LoadSuccess#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(read:Long,written:Long,failed:Long):au.com.cba.omnia.maestro.core.task.LoadSuccess"></a>
+              <ol><li name="au.com.cba.omnia.maestro.core.task.LoadSuccess#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(read:Long,actual:Long,written:Long,failed:Long):au.com.cba.omnia.maestro.core.task.LoadSuccess"></a>
       <a id="&lt;init&gt;:LoadSuccess"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -88,10 +90,11 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">LoadSuccess</span><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span>
+        <span class="name">LoadSuccess</span><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="actual">actual: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">actual</dt><dd class="cmt"><p>the number of rows that remained after filtering
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -166,6 +169,20 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadSuccess#actual" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="actual:Long"></a>
+      <a id="actual:Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">actual</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">the number of rows that remained after filtering
+</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>

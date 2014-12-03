@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Load - au.com.cba.omnia.maestro.core.task.Load</title>
-          <meta name="description" content="Load - au.com.cba.omnia.maestro.core.task.Load" />
-          <meta name="keywords" content="Load au.com.cba.omnia.maestro.core.task.Load" />
+          <title>LoadExecution - au.com.cba.omnia.maestro.core.task.LoadExecution</title>
+          <meta name="description" content="LoadExecution - au.com.cba.omnia.maestro.core.task.LoadExecution" />
+          <meta name="keywords" content="LoadExecution au.com.cba.omnia.maestro.core.task.LoadExecution" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.task.Load$';
+            var hash = 'au.com.cba.omnia.maestro.core.task.LoadExecution$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="Load.html" title="Go to companion"><img src="../../../../../../../lib/object_to_trait_big.png" /></a>
+        <a href="LoadExecution.html" title="Go to companion"><img src="../../../../../../../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.task">task</a></p>
-        <h1><a href="Load.html" title="Go to companion">Load</a></h1>
+        <h1><a href="LoadExecution.html" title="Go to companion">LoadExecution</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,14 +35,11 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Load</span>
+        <span class="name">LoadExecution</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Contains implementation for <code>loadFoo</code> methods in <code>Load</code> trait.</p><p>WARNING: The methods on this object are not considered part of the public
-maestro API, and may change without warning. Use the methods in the Load
-trait instead, unless you know what you are doing.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0aded02cbe7deb098390de1a5447ecff3990f6ce//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/Load.scala" target="_blank">Load.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/5e760e2edd3dfd185800f64a70e34cb1ef1d9f87//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -62,7 +59,7 @@ trait instead, unless you know what you are doing.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.task.Load"><span>Load</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.task.LoadExecution"><span>LoadExecution</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -211,6 +208,19 @@ trait instead, unless you know what you are doing.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadExecution#execution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="execution[A](errorThreshold:Double,pipe:Option[com.twitter.scalding.Stat]=&gt;com.twitter.scalding.TypedPipe[A]):com.twitter.scalding.Execution[(com.twitter.scalding.TypedPipe[A],au.com.cba.omnia.maestro.core.task.LoadInfo)]"></a>
+      <a id="execution[A](Double,(Option[Stat])⇒TypedPipe[A]):Execution[(TypedPipe[A],LoadInfo)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">execution</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="errorThreshold">errorThreshold: <span class="extype" name="scala.Double">Double</span></span>, <span name="pipe">pipe: (<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="com.twitter.scalding.Stat">Stat</span>]) ⇒ <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.execution.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[(<span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.execution.A">A</span>], <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a>)]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -269,19 +279,6 @@ trait instead, unless you know what you are doing.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Load#loadProcess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="loadProcess[A&lt;:com.twitter.scrooge.ThriftStruct](in:com.twitter.scalding.TypedPipe[au.com.cba.omnia.maestro.core.task.RawRow],splitter:au.com.cba.omnia.maestro.core.split.Splitter,errors:String,clean:au.com.cba.omnia.maestro.core.clean.Clean,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],filter:au.com.cba.omnia.maestro.core.filter.RowFilter,none:String)(implicitevidence$10:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$11:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$12:Manifest[A]):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="loadProcess[A&lt;:ThriftStruct](TypedPipe[RawRow],Splitter,String,Clean,Validator[A],RowFilter,String)(Decode[A],Tag[A],Manifest[A]):TypedPipe[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">loadProcess</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="in">in: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<a href="RawRow.html" class="extype" name="au.com.cba.omnia.maestro.core.task.RawRow">RawRow</a>]</span>, <span name="splitter">splitter: <a href="../split/Splitter.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">Splitter</a></span>, <span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clean">clean: <a href="../clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">Clean</a></span>, <span name="validator">validator: <a href="../validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadProcess.A">A</span>]</span>, <span name="filter">filter: <a href="../filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">RowFilter</a></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadProcess.A">A</span>]</span>, <span name="arg1">arg1: <a href="../codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadProcess.A">A</span>]</span>, <span name="arg2">arg2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadProcess.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadProcess.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Implementation of <code>loadFoo</code> methods in <code>Load</code> trait</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>

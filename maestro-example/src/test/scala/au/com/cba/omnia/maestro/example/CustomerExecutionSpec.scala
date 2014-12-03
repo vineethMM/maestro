@@ -43,7 +43,7 @@ Customer Execution
 
     withEnvironment(path(getClass.getResource("/customer").toString)) {
       executesSuccessfully(CustomerExecution.execute(s"$dir/user", s"$dir/user", s"$dir/user/archive")) must_== ((
-        LoadSuccess(8, 8, 0),
+        LoadSuccess(8, 8, 8, 0),
         8
       ))
 

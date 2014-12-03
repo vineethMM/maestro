@@ -37,6 +37,7 @@ Load execution properties
   returns the right load info for no data                        $noData
   returns the right load info for an acceptable number of errors $someErrors
   returns the right load info for too many errors                $manyErrors
+  calculates the right number of rows after filtering            $filtered
 
 """
 
@@ -44,7 +45,7 @@ Load execution properties
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
       executesSuccessfully(LoadExec.load[StringPair](
         "|", List("normal"), "errors", now, clean, validator, RowFilter.keep, "null"
-      ))._2 must_== LoadSuccess(4, 4, 0)
+      ))._2 must_== LoadSuccess(4, 4, 4, 0)
     }
   }
 
@@ -52,7 +53,7 @@ Load execution properties
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
       executesSuccessfully(LoadExec.loadFixedLength[StringPair](
         List(4), List("fixed"), "errors", now, clean, validator, RowFilter.keep, "null"
-      ))._2 must_== LoadSuccess(4, 4, 0)
+      ))._2 must_== LoadSuccess(4, 4, 4, 0)
     }
   }
 
@@ -68,7 +69,7 @@ Load execution properties
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
       executesSuccessfully(LoadExec.load[StringPair](
         "|", List("some-errors"), "errors", now, clean, validator, RowFilter.keep, "null", 0.25
-      ))._2 must_== LoadSuccess(5, 4, 1)
+      ))._2 must_== LoadSuccess(5, 5, 4, 1)
     }
   }
 
@@ -76,7 +77,15 @@ Load execution properties
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
       executesSuccessfully(LoadExec.load[StringPair](
         "|", List("many-errors"), "errors", now, clean, validator, RowFilter.keep, "null", 0.25
-      ))._2 must_== LoadFailure(5, 3, 2)
+      ))._2 must_== LoadFailure(5, 5, 3, 2)
+    }
+  }
+
+  def filtered = {
+    withEnvironment(path(getClass.getResource("/load-execution").toString)) {
+      executesSuccessfully(LoadExec.load[StringPair](
+        "|", List("filtered"), "errors", now, clean, validator, RowFilter.byRowLeader("D"), "null", 0.25
+      ))._2 must_== LoadSuccess(5, 3, 3, 0)
     }
   }
 }

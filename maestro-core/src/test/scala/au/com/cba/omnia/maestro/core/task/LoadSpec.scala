@@ -97,7 +97,7 @@ class LoadProcessStringPairTestJob
   )(implicit decode: Decode[StringPair], tag: Tag[StringPair]) extends Job(args) {
   val in = ThermometerSource(input).map(l => RawRow(l, Nil))
 
-  Load.loadProcess[StringPair](in, splitter, errFile, clean, validator, filter, "\0")
+  LoadHelper.loadProcess[StringPair](in, splitter, errFile, clean, validator, filter, "\0", None)
     .map(pair =>
       if (!test(pair)) throw new FailureException(Failure(s"bad result: $pair"))
       else (pair.first, pair.second))

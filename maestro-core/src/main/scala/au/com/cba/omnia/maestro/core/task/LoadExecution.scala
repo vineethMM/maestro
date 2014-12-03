@@ -15,7 +15,7 @@
 package au.com.cba.omnia.maestro.core
 package task
 
-import com.twitter.scalding.{Execution, ExecutionCounters, TypedPipe}
+import com.twitter.scalding.{Execution, ExecutionCounters, TypedPipe, Stat}
 
 import com.twitter.scrooge.ThriftStruct
 
@@ -29,34 +29,47 @@ import au.com.cba.omnia.maestro.core.validate.Validator
 /** Information about a Load */
 sealed trait LoadInfo {
   def continue: Boolean = this match {
-    case EmptyLoad            => false
-    case LoadFailure(_, _, _) => false
-    case LoadSuccess(_, _, _) => true
+    case EmptyLoad               => false
+    case LoadFailure(_, _, _, _) => false
+    case LoadSuccess(_, _, _, _) => true
   }
 }
 
 /** The Load had no new data to process */
 case object EmptyLoad extends LoadInfo
 
-/** The number of rows which failed to load exceeded our error threshold */
-case class LoadFailure(read: Long, written: Long, failed: Long) extends LoadInfo
+/**
+  * The number of rows which failed to load exceeded our error threshold.
+  * 
+  * @param actual the number of rows that remained after filtering.
+  */
+case class LoadFailure(read: Long, actual: Long, written: Long, failed: Long) extends LoadInfo
 
-/** The number of rows which failed to load was within acceptable limits */
-case class LoadSuccess(read: Long, written: Long, failed: Long) extends LoadInfo
+/**
+  * The number of rows which failed to load was within acceptable limits.
+  * 
+  * @param actual the number of rows that remained after filtering
+  */
+case class LoadSuccess(read: Long, actual: Long, written: Long, failed: Long) extends LoadInfo
 
 /** Factory methods for `LoadInfo` */
 object LoadInfo {
   def fromCounters(counters: ExecutionCounters, errorThreshold: Double): LoadInfo = {
     // If there is no data, nothing will be read in and this counter won't be set
-    val read    = counters.get(StatKeys.tuplesRead).getOrElse(0l)
+    val read     = counters.get(StatKeys.tuplesRead).getOrElse(0l)
+    // If no values are filtered this counter will be 0
+    val filtered = counters.get(StatKeys.tuplesFiltered).getOrElse(0l)
     // If all values fail nothing will be written out and this counter won't be set
-    val written = counters.get(StatKeys.tuplesWritten).getOrElse(0l)
-    // If all values pass nothing will be written out and this counter won't be set
-    val failed  = counters.get(StatKeys.tuplesTrapped).getOrElse(read - written)
+    val written  = counters.get(StatKeys.tuplesWritten).getOrElse(0l)
 
-    if (read == 0) EmptyLoad
-    else if (failed / read.toDouble >= errorThreshold) LoadFailure(read, written, failed)
-    else LoadSuccess(read, written, failed)
+    // The number of rows that remain after filtering
+    val actual   = read - filtered
+    // If all values pass nothing will be written out and this counter won't be set
+    val failed   = counters.get(StatKeys.tuplesTrapped).getOrElse(actual - written)
+
+    if (actual == 0) EmptyLoad
+    else if (failed / actual.toDouble >= errorThreshold) LoadFailure(read, actual, written, failed)
+    else LoadSuccess(read, actual, written, failed)
   }
 }
 
@@ -78,7 +91,7 @@ trait LoadExecution {
     delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
     validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](
+    LoadExecution.execution[A](
       errorThreshold,
       LoadHelper.load[A](delimiter, sources, errors, timeSource, clean, validator, filter, none)
     )
@@ -99,7 +112,7 @@ trait LoadExecution {
       delimiter: String, sources: List[String], errors: String, timeSource: TimeSource, clean: Clean,
       validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](
+    LoadExecution.execution[A](
       errorThreshold,
       LoadHelper.loadWithKey[A](delimiter, sources, errors, timeSource, clean, validator, filter, none)
     )
@@ -109,17 +122,20 @@ trait LoadExecution {
     lengths: List[Int], sources: List[String], errors: String, timeSource: TimeSource,
       clean: Clean, validator: Validator[A], filter: RowFilter, none: String, errorThreshold: Double = 0.05
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadHelper.execution[A](
+    LoadExecution.execution[A](
       errorThreshold,
       LoadHelper.loadFixedLength[A](lengths, sources, errors, timeSource, clean, validator, filter, none)
     )
 }
 
-private object LoadHelper extends Load {
-  def execution[A](errorThreshold: Double, pipe: TypedPipe[A]): Execution[(TypedPipe[A], LoadInfo)] = {
-    pipe
-      .forceToDiskExecution
-      .getAndResetCounters
-      .map { case (pipe, counters) => (pipe, LoadInfo.fromCounters(counters, errorThreshold)) }
-  }
+
+object LoadExecution {
+  def execution[A](errorThreshold: Double, pipe: Option[Stat] => TypedPipe[A]): Execution[(TypedPipe[A], LoadInfo)] =
+    Execution.withId { id => 
+      val stat = Stat(StatKeys.tuplesFiltered)(id)
+      pipe(Some(stat))
+        .forceToDiskExecution
+        .getAndResetCounters
+        .map { case (pipe, counters) => (pipe, LoadInfo.fromCounters(counters, errorThreshold)) }
+    }
 }

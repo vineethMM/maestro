@@ -28,4 +28,7 @@ object StatKeys {
 
   /** Key for number of tuples trapped. */
   val tuplesTrapped = StatKey(StepCounters.Tuples_Trapped.toString, "cascading.flow.StepCounters")
+
+  /** Key for number of tuples filtered out by using a filter. */
+  val tuplesFiltered = StatKey("tuples_filtered", "maestro")
 }

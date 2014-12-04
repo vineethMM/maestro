@@ -63,6 +63,5 @@ trait ViewExecution {
     table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = false
   ): Execution[Long] =
     table.writeExecution(pipe, append)
-      .getAndResetCounters
-      .map { case (_, counters) => counters.get(StatKeys.tuplesWritten).get }
+      .map(_.get(StatKeys.tuplesWritten).get)
 }

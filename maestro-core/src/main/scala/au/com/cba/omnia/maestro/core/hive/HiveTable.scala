@@ -14,20 +14,22 @@
 
 package au.com.cba.omnia.maestro.core.hive
 
-import cascading.flow.FlowDef
-
 import org.apache.hadoop.fs.Path
 
 import org.apache.hadoop.hive.conf.HiveConf
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars.METASTOREWAREHOUSE
 
-import com.twitter.scalding.{TupleSetter, TypedSink, TypedPipe, Source, Execution, Mode, Mappable}
+import cascading.flow.FlowDef
+
+import com.twitter.scalding._
 
 import com.twitter.scrooge.ThriftStruct
 
-import au.com.cba.omnia.maestro.core.partition.Partition
-
 import au.com.cba.omnia.ebenezer.scrooge.hive._
+
+import au.com.cba.omnia.maestro.core.partition.Partition
+import au.com.cba.omnia.maestro.core.scalding.ConfHelper
+import au.com.cba.omnia.maestro.core.scalding.RichExecution._
 
 /** 
   * Base type for partitioned and unpartitioned Hive tables. 
@@ -52,7 +54,7 @@ sealed trait HiveTable[T <: ThriftStruct, ST] {
   /** Creates a scalding sink to write to the hive table.*/
   def sink(append: Boolean = true): TypedSink[ST] with Source
   /** Creates [[Execution]] that writes to `this.sink` using given [[TypedPipe]].*/
-  def writeExecution(pipe: TypedPipe[T], append: Boolean = true): Execution[Unit]
+  def writeExecution(pipe: TypedPipe[T], append: Boolean = true): Execution[ExecutionCounters]
   /** Writes to `this.sink` using given [[TypedPipe]].*/ 
   def write(pipe: TypedPipe[T], append: Boolean = true)
     (implicit flowDef: FlowDef, mode: Mode): TypedPipe[ST]
@@ -66,14 +68,26 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
   /** List of partition column names and type (string by default). */ 
   val partitionMetadata: List[(String, String)] = partition.fieldNames.map(n => (n, "string"))
 
-  override def source(): PartitionHiveParquetScroogeSource[A] =
+  override def source: PartitionHiveParquetScroogeSource[A] =
     PartitionHiveParquetScroogeSource[A](database, table, partitionMetadata)
 
   override def sink(append: Boolean = true) =
     PartitionHiveParquetScroogeSink[B, A](database, table, partitionMetadata, externalPath, append)
 
-  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[Unit] =
-    pipe.map(v => partition.extract(v) -> v).writeExecution(sink(append))
+  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
+    def modifyConfig(config: Config) =
+      if (append) ConfHelper.createUniqueFilenames(config)
+      else        config
+
+    val execution = 
+      pipe
+        .map(v => partition.extract(v) -> v)
+        .writeExecution(sink(append))
+        .getAndResetCounters
+        .map(_._2)
+
+    execution.withSubConfig(modifyConfig)
+  }
 
   override def write(pipe: TypedPipe[A], append: Boolean = true)
     (implicit flowDef: FlowDef, mode: Mode): TypedPipe[(B, A)] =
@@ -85,14 +99,20 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
   database: String, table: String, externalPath: Option[String] = None
 ) extends HiveTable[A, A] {
 
-  override def source() =
+  override def source =
     new HiveParquetScroogeSource[A](database, table, None)
 
   override def sink(append: Boolean = true) =
     new HiveParquetScroogeSource[A](database, table, None)
 
-  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[Unit] =
-    pipe.writeExecution(sink(append))
+  /** Writes the contents of the pipe to this HiveTable. NB: APPEND IS CURRENTLY NOT SUPPORTED. */
+  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
+    if (append) System.err.println("APPEND IS CURRENTLY NOT SUPPORTED")
+    pipe
+      .writeExecution(sink(append))
+      .getAndResetCounters
+      .map(_._2)
+  }
 
   override def write(pipe: TypedPipe[A], append: Boolean = true)
     (implicit flowDef: FlowDef, mode: Mode): TypedPipe[A] =

@@ -190,6 +190,7 @@ object Archiver {
   def archive[C <: CompressionCodec : ClassManifest](src: String, dest: String): Execution[Long] =
     for {
       config  <- Execution.getConfig
+      mode    <- Execution.getMode
       jobStat <- Execution.fromFuture { ec =>
         val configWithCompress =
           Config(config.toMap ++
@@ -200,8 +201,6 @@ object Archiver {
             )
           )
         val flowDef = new FlowDef
-        //TODO : Get the mode from scalding once it is made available
-        val mode = Mode(Args("--hdfs"), new Configuration)
         TypedPipe.from(TextLine(src)).write(CompressibleTypedTsv[String](dest))(flowDef, mode)
         ExecutionContext.newContext(configWithCompress)(flowDef, mode).run
       }

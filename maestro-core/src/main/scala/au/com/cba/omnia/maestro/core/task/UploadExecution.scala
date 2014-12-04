@@ -20,8 +20,6 @@ import java.io.File
 import scala.concurrent.Future
 import scala.util.matching.Regex
 
-import org.apache.hadoop.conf.Configuration
-
 import org.apache.log4j.Logger
 
 import scalaz.\&/.{This, That, Both}
@@ -31,6 +29,7 @@ import com.twitter.scalding.Execution
 import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
 
 import au.com.cba.omnia.maestro.core.upload._
+import au.com.cba.omnia.maestro.core.scalding.ConfHelper
 
 /** Information about an upload */
 case class UploadInfo(files: List[String]) {
@@ -121,14 +120,14 @@ trait UploadExecution {
     source: String, domain: String, tableName: String, filePattern: String,
     localIngestDir: String, localArchiveDir: String, hdfsRoot: String,
     controlPattern: Regex = ControlPattern.default
-  ): Execution[UploadInfo] =
+  ): Execution[UploadInfo] = Execution.getConfig.flatMap { conf =>
     UploadHelper.execution(s"upload for $source", {
-      val conf = new Configuration
       UploadHelper.upload(
         source, domain, tableName, filePattern, localIngestDir,
-        localArchiveDir, hdfsRoot, conf, controlPattern
+        localArchiveDir, hdfsRoot, ConfHelper.getHadoopConf(conf), controlPattern
       )
     })
+  }
 
   /**
     * Pushes source files onto HDFS and archives them locally, using non-standard file locations.
@@ -156,14 +155,14 @@ trait UploadExecution {
     tableName: String, filePattern: String, localIngestPath: String,
     localArchivePath: String, hdfsArchivePath: String, hdfsLandingPath: String,
     controlPattern: Regex = ControlPattern.default
-  ): Execution[UploadInfo] =
+  ): Execution[UploadInfo] = Execution.getConfig.flatMap { conf =>
     UploadHelper.execution(s"upload from $localIngestPath", {
-      val conf = new Configuration
       UploadHelper.customUpload(
         tableName, filePattern, localIngestPath, localArchivePath,
-        hdfsArchivePath, hdfsLandingPath, conf, controlPattern
+        hdfsArchivePath, hdfsLandingPath, ConfHelper.getHadoopConf(conf), controlPattern
       )
     })
+  }
 }
 
 private object UploadHelper extends Upload {

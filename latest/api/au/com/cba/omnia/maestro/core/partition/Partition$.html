@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Various partitioning schemes.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1e05c906cef60a59daa87d03b2c1cab34dea427c//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/partition/Partition.scala" target="_blank">Partition.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Various partitioning schemes.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7f1b7a7d7b68b78ab26f26d5a5cd7d242920e747//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/partition/Partition.scala" target="_blank">Partition.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -163,21 +163,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.partition.Partition#byDate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="byDate[A](date:au.com.cba.omnia.maestro.core.data.Field[A,String]):au.com.cba.omnia.maestro.core.partition.Partition[A,(String,String,String)]"></a>
-      <a id="byDate[A](Field[A,String]):Partition[A,(String,String,String)]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.partition.Partition#byDate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="byDate[A](date:au.com.cba.omnia.maestro.core.data.Field[A,String],dateFormat:String):au.com.cba.omnia.maestro.core.partition.Partition[A,(String,String,String)]"></a>
+      <a id="byDate[A](Field[A,String],String):Partition[A,(String,String,String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">byDate</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="date">date: <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byDate.A">A</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byDate.A">A</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">byDate</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="date">date: <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byDate.A">A</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="dateFormat">dateFormat: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;y-M-d&quot;</span></span>)</span><span class="result">: <a href="Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byDate.A">A</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Partitions by year, month, day.</p><div class="fullcomment"><div class="comment cmt"><p>Partitions by year, month, day. Expects to the specified field to have data in the
-format <code>yyyy-mm-dd</code>.
-</p></div></div>
+      <p class="shortcomment cmt">Partition by year, month, day for a given dateFormat.</p>
     </li><li name="au.com.cba.omnia.maestro.core.partition.Partition#byField" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="byField[A,B](a:au.com.cba.omnia.maestro.core.data.Field[A,B]):au.com.cba.omnia.maestro.core.partition.Partition[A,B]"></a>
       <a id="byField[A,B](Field[A,B]):Partition[A,B]"></a>
@@ -217,21 +215,19 @@ format <code>yyyy-mm-dd</code>.
       </span>
       </h4>
       <p class="shortcomment cmt">Partitions by the three specified fields.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.partition.Partition#byHour" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="byHour[A](date:au.com.cba.omnia.maestro.core.data.Field[A,String]):au.com.cba.omnia.maestro.core.partition.Partition[A,(String,String,String,String)]"></a>
-      <a id="byHour[A](Field[A,String]):Partition[A,(String,String,String,String)]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.partition.Partition#byHour" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="byHour[A](date:au.com.cba.omnia.maestro.core.data.Field[A,String],dateFormat:String):au.com.cba.omnia.maestro.core.partition.Partition[A,(String,String,String,String)]"></a>
+      <a id="byHour[A](Field[A,String],String):Partition[A,(String,String,String,String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">byHour</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="date">date: <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byHour.A">A</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byHour.A">A</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">byHour</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="date">date: <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byHour.A">A</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="dateFormat">dateFormat: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;y-M-d-H&quot;</span></span>)</span><span class="result">: <a href="Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.byHour.A">A</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Partitions by year, month, day, hour.</p><div class="fullcomment"><div class="comment cmt"><p>Partitions by year, month, day, hour. Expects to the specified field to have data in the
-format <code>yyyy-mm-dd-hh</code>.
-</p></div></div>
+      <p class="shortcomment cmt">Partition by year, month, day, hour for a given dateFormat.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>

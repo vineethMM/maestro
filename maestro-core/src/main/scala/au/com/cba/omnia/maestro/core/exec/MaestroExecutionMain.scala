@@ -37,10 +37,17 @@ case object JobNeverReady extends JobStatus { val exitCode = 2 }
 /**
   * The job failed
   *
-  * The exit code should be negative.
+  * The exit code has to be negative.
   */
-case class JobFailure(override val exitCode: Int) extends JobStatus
+case class JobFailure(override val exitCode: Int) extends JobStatus {
+  require(exitCode < 0, s"The exit code for a job failure must be < 0. Got $exitCode")
+}
 
+/** Companion object for JobFailure to create a default JobFailure. */
+object JobFailure {
+  /** Creates a default job failure with exit code -1. */
+  def apply(): JobFailure = new JobFailure(-1)
+}
 
 /**
   * Create an object which extends this class and run the class as a normal java program.

@@ -20,10 +20,14 @@ package object exec {
   type MacroSupport[A <: ThriftStruct] = au.com.cba.omnia.maestro.macros.MacroSupport[A]
 
   type JobStatus       = au.com.cba.omnia.maestro.core.exec.JobStatus
+  type JobFinished     = au.com.cba.omnia.maestro.core.exec.JobFinished.type
+  type JobNotReady     = au.com.cba.omnia.maestro.core.exec.JobNotReady.type
+  type JobNeverReady   = au.com.cba.omnia.maestro.core.exec.JobNeverReady.type
   type JobFailure      = au.com.cba.omnia.maestro.core.exec.JobFailure
   val  JobFinished     = au.com.cba.omnia.maestro.core.exec.JobFinished
   val  JobNotReady     = au.com.cba.omnia.maestro.core.exec.JobNotReady
   val  JobNeverReady   = au.com.cba.omnia.maestro.core.exec.JobNeverReady
+  val  JobFailure      = au.com.cba.omnia.maestro.core.exec.JobFailure
 
   type HiveTable[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.core.hive.HiveTable[A, B]
   type Partition[A, B] = au.com.cba.omnia.maestro.core.partition.Partition[A, B]

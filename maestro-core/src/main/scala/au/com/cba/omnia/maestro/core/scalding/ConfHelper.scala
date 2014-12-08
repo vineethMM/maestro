@@ -19,10 +19,21 @@ import org.apache.hadoop.mapred.JobConf
 
 import com.twitter.scalding.Config
 
+/** Collection of utility methods around get/setting Config. */
 object ConfHelper {
+  /** Get the Hadoop JobConfig from Config. */
   def getHadoopConf(config: Config): JobConf = {
     val conf = new JobConf(true)
     config.toMap.foreach{ case (k, v) => conf.set(k, v) }
     conf
   }
+
+  /**
+    * Get cascading to create unique output filenames by inserting a timestamp as part of the output
+    * filename.
+    *
+    * This is used to get cascading to append to files to existing partitions.
+    */
+  def createUniqueFilenames(config: Config): Config =
+    config + ("cascading.tapcollector.partname" -> s"%s%spart-${System.currentTimeMillis}-%05d-%05d")
 }

@@ -81,9 +81,10 @@ object LoadInfo {
     // If all values pass nothing will be written out and this counter won't be set
     val failed   = counters.get(StatKeys.tuplesTrapped).getOrElse(actual - written)
 
-    if (actual == 0) EmptyLoad
+    if (actual == 0)                                     EmptyLoad
+    else if (failed == 0)                                LoadSuccess(read, actual, written, failed)
     else if (failed / actual.toDouble >= errorThreshold) LoadFailure(read, actual, written, failed)
-    else LoadSuccess(read, actual, written, failed)
+    else                                                 LoadSuccess(read, actual, written, failed)
   }
 }
 

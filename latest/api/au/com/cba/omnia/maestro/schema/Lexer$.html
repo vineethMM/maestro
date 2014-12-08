@@ -54,7 +54,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
  3. For other token types, create parsers, create an entry in
     tokensToString and add them to the final sum parser pTokens.
  4. Add tests within TableLexerSpec.
-</li></ol></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e74f4b3827c65dc62d450b53847f00a09162c7d5//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/schema/Lexer.scala" target="_blank">Lexer.scala</a></dd></dl><div class="toggleContainer block">
+</li></ol></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/eeb36fee6b80c7165e9e59c10f35588decd47a12//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/schema/Lexer.scala" target="_blank">Lexer.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.util.parsing.combinator.RegexParsers">RegexParsers</span>, <span class="extype" name="scala.util.parsing.combinator.Parsers">Parsers</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -240,7 +240,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers.OnceParser" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="OnceParser[+T&lt;:&lt;?&gt;]extendsParsers.this.Parser[T]"></a>
+      <a id="OnceParser[+T]extendsParsers.this.Parser[T]"></a>
       <a id="OnceParser[+T]:OnceParser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -253,7 +253,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers.ParseResult" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="ParseResult[+T&lt;:&lt;?&gt;]extendsAnyRef"></a>
+      <a id="ParseResult[+T]extendsAnyRef"></a>
       <a id="ParseResult[+T]:ParseResult[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -689,7 +689,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#OnceParser" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="OnceParser[T&lt;:&lt;?&gt;](f:&lt;?&gt;):Parsers.this.Parser[T]withParsers.this.OnceParser[T]"></a>
+      <a id="OnceParser[T](f:Parsers.this.Input=&gt;Parsers.this.ParseResult[T]):Parsers.this.Parser[T]withParsers.this.OnceParser[T]"></a>
       <a id="OnceParser[T]((Input)⇒ParseResult[T]):Parser[T]withOnceParser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -767,7 +767,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#acceptMatch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="acceptMatch[U&lt;:&lt;?&gt;](expected:&lt;?&gt;,f:&lt;?&gt;):Parsers.this.Parser[U]"></a>
+      <a id="acceptMatch[U](expected:String,f:PartialFunction[Parsers.this.Elem,U]):Parsers.this.Parser[U]"></a>
       <a id="acceptMatch[U](String,PartialFunction[Elem,U]):Parser[U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -819,7 +819,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainl1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainl1[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;](first:&lt;?&gt;,p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[T]"></a>
+      <a id="chainl1[T,U](first:=&gt;Parsers.this.Parser[T],p:=&gt;Parsers.this.Parser[U],q:=&gt;Parsers.this.Parser[(T,U)=&gt;T]):Parsers.this.Parser[T]"></a>
       <a id="chainl1[T,U](⇒Parser[T],⇒Parser[U],⇒Parser[(T,U)⇒T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -832,7 +832,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainl1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainl1[T&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[T]"></a>
+      <a id="chainl1[T](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[(T,T)=&gt;T]):Parsers.this.Parser[T]"></a>
       <a id="chainl1[T](⇒Parser[T],⇒Parser[(T,T)⇒T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -845,7 +845,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#chainr1" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chainr1[T&lt;:&lt;?&gt;,U&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;,combine:&lt;?&gt;,first:&lt;?&gt;):Parsers.this.Parser[U]"></a>
+      <a id="chainr1[T,U](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[(T,U)=&gt;U],combine:(T,U)=&gt;U,first:U):Parsers.this.Parser[U]"></a>
       <a id="chainr1[T,U](⇒Parser[T],⇒Parser[(T,U)⇒U],(T,U)⇒U,U):Parser[U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -877,7 +877,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
               
         </dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#commit" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="commit[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[T]"></a>
+      <a id="commit[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[T]"></a>
       <a id="commit[T](⇒Parser[T]):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1078,7 +1078,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>RegexParsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#log" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="log[T&lt;:&lt;?&gt;](p:&lt;?&gt;)(name:&lt;?&gt;):Parsers.this.Parser[T]"></a>
+      <a id="log[T](p:=&gt;Parsers.this.Parser[T])(name:String):Parsers.this.Parser[T]"></a>
       <a id="log[T](⇒Parser[T])(String):Parser[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1091,7 +1091,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#mkList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mkList[T&lt;:&lt;?&gt;]:Parsers.this.~[T,List[T]]=&gt;List[T]"></a>
+      <a id="mkList[T]:Parsers.this.~[T,List[T]]=&gt;List[T]"></a>
       <a id="mkList[T]:(~[T,List[T]])⇒List[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1117,7 +1117,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#not" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="not[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[Unit]"></a>
+      <a id="not[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[Unit]"></a>
       <a id="not[T](⇒Parser[T]):Parser[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1156,7 +1156,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#opt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="opt[T&lt;:&lt;?&gt;](p:&lt;?&gt;):Parsers.this.Parser[Option[T]]"></a>
+      <a id="opt[T](p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[Option[T]]"></a>
       <a id="opt[T](⇒Parser[T]):Parser[Option[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1445,7 +1445,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#rep1sep" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="rep1sep[T&lt;:&lt;?&gt;](p:&lt;?&gt;,q:&lt;?&gt;):Parsers.this.Parser[List[T]]"></a>
+      <a id="rep1sep[T](p:=&gt;Parsers.this.Parser[T],q:=&gt;Parsers.this.Parser[Any]):Parsers.this.Parser[List[T]]"></a>
       <a id="rep1sep[T](⇒Parser[T],⇒Parser[Any]):Parser[List[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1458,7 +1458,7 @@ It can be called as follows:</p><pre><span class="kw">import</span> TableLexer._
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Parsers</dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#repN" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="repN[T&lt;:&lt;?&gt;](num:&lt;?&gt;,p:&lt;?&gt;):Parsers.this.Parser[List[T]]"></a>
+      <a id="repN[T](num:Int,p:=&gt;Parsers.this.Parser[T]):Parsers.this.Parser[List[T]]"></a>
       <a id="repN[T](Int,⇒Parser[T]):Parser[List[T]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1670,7 +1670,7 @@ This is essentially the reverse of the lexing process.</p></div><dl class="param
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> lastNoSuccess was not thread-safe and will be removed in 2.11.0</p></dd></dl></div>
     </li><li name="scala.util.parsing.combinator.Parsers#lastNoSuccess_=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="lastNoSuccess_=(x:&lt;?&gt;):Unit"></a>
+      <a id="lastNoSuccess_=(x:Parsers.this.NoSuccess):Unit"></a>
       <a id="lastNoSuccess_=(NoSuccess):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">

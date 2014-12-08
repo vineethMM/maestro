@@ -39,13 +39,36 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"></div>
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/exec/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
 
       <div id="mbrsel">
         <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        
-        
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="au.com.cba.omnia.maestro.api.exec"><span>exec</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
             <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
@@ -58,29 +81,458 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.api.exec.MaestroExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="MaestroExecution[A&lt;:com.twitter.scrooge.ThriftStruct]extendsMaestroExecutionBasewithMacroSupport[A]"></a>
-      <a id="MaestroExecution[A&lt;:ThriftStruct]:MaestroExecution[A]"></a>
+              <ol><li name="au.com.cba.omnia.maestro.api.exec.Clean" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Clean=au.com.cba.omnia.maestro.core.clean.Clean"></a>
+      <a id="Clean:Clean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <a href="MaestroExecution.html"><span class="name">MaestroExecution</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <a href="MaestroExecutionBase.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase">MaestroExecutionBase</a> with <a href="../../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecution.A">A</span>]</span>
+        <span class="name">Clean</span><span class="result"> = <a href="../../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">core.clean.Clean</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Extend this trait to get access to all maestro execution tasks, and supporting types.</p>
-    </li><li name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="MaestroExecutionBaseextendsUploadExecutionwithLoadExecutionwithViewExecutionwithQueryExecutionwithSqoopExecutionwithConfig"></a>
-      <a id="MaestroExecutionBase:MaestroExecutionBase"></a>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Config" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Config=com.twitter.scalding.Config"></a>
+      <a id="Config:Config"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Config</span><span class="result"> = <span class="extype" name="com.twitter.scalding.Config">com.twitter.scalding.Config</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Decode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Decode[A]=au.com.cba.omnia.maestro.core.codec.Decode[A]"></a>
+      <a id="Decode[A]:Decode[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Decode</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="../../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Decode.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Execution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Execution[A]=com.twitter.scalding.Execution[A]"></a>
+      <a id="Execution[A]:Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Execution</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="com.twitter.scalding.Execution">com.twitter.scalding.Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Execution.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Field" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Field[A,B]=au.com.cba.omnia.maestro.core.data.Field[A,B]"></a>
+      <a id="Field[A,B]:Field[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Field</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> = <a href="../../core/data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">core.data.Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Field.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.api.exec.Field.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.GuardFilter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GuardFilter=au.com.cba.omnia.maestro.core.hdfs.GuardFilter"></a>
+      <a id="GuardFilter:GuardFilter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">GuardFilter</span><span class="result"> = <a href="../../core/hdfs/GuardFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.GuardFilter">core.hdfs.GuardFilter</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.HiveTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HiveTable[A&lt;:com.twitter.scrooge.ThriftStruct,B]=au.com.cba.omnia.maestro.core.hive.HiveTable[A,B]"></a>
+      <a id="HiveTable[A&lt;:ThriftStruct,B]:HiveTable[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">HiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="result"> = <a href="../../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.HiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.api.exec.HiveTable.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.JobFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobFailure=au.com.cba.omnia.maestro.core.exec.JobFailure"></a>
+      <a id="JobFailure:JobFailure"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JobFailure</span><span class="result"> = <a href="../../core/exec/JobFailure.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.JobFailure">core.exec.JobFailure</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.JobStatus" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobStatus=au.com.cba.omnia.maestro.core.exec.JobStatus"></a>
+      <a id="JobStatus:JobStatus"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JobStatus</span><span class="result"> = <a href="../../core/exec/JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.JobStatus">core.exec.JobStatus</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.LoadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadConfig[A]=au.com.cba.omnia.maestro.core.exec.LoadConfig[A]"></a>
+      <a id="LoadConfig[A]:LoadConfig[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadConfig</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="../../core/exec/LoadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadConfig">core.exec.LoadConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.LoadConfig.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.LoadFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadFailure=au.com.cba.omnia.maestro.core.exec.LoadFailure"></a>
+      <a id="LoadFailure:LoadFailure"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadFailure</span><span class="result"> = <a href="../../core/exec/LoadFailure.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadFailure">core.exec.LoadFailure</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.LoadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadInfo=au.com.cba.omnia.maestro.core.exec.LoadInfo"></a>
+      <a id="LoadInfo:LoadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadInfo</span><span class="result"> = <a href="../../core/exec/LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadInfo">core.exec.LoadInfo</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.LoadSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadSuccess=au.com.cba.omnia.maestro.core.exec.LoadSuccess"></a>
+      <a id="LoadSuccess:LoadSuccess"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadSuccess</span><span class="result"> = <a href="../../core/exec/LoadSuccess.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadSuccess">core.exec.LoadSuccess</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.MacroSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MacroSupport[A&lt;:com.twitter.scrooge.ThriftStruct]=au.com.cba.omnia.maestro.macros.MacroSupport[A]"></a>
+      <a id="MacroSupport[A&lt;:ThriftStruct]:MacroSupport[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MacroSupport</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> = <a href="../../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">macros.MacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.MacroSupport.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.MaestroConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MaestroConfig=au.com.cba.omnia.maestro.core.exec.MaestroConfig"></a>
+      <a id="MaestroConfig:MaestroConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MaestroConfig</span><span class="result"> = <a href="../../core/exec/MaestroConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig">core.exec.MaestroConfig</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.MaestroJob" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="MaestroJob[A&lt;:com.twitter.scrooge.ThriftStruct]extendsMaestroExecutionMainwithau.com.cba.omnia.maestro.api.exec.MacroSupport[A]"></a>
+      <a id="MaestroJob[A&lt;:ThriftStruct]:MaestroJob[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="MaestroExecutionBase.html"><span class="name">MaestroExecutionBase</span></a><span class="result"> extends <a href="../../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a> with <a href="../../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a> with <a href="../../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a> with <a href="../../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a> with <a href="../../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a> with <a href="../../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a></span>
+        <a href="MaestroJob.html"><span class="name">MaestroJob</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <a href="../../core/exec/MaestroExecutionMain.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroExecutionMain">MaestroExecutionMain</a> with <a href="#MacroSupport[A&lt;:com.twitter.scrooge.ThriftStruct]=au.com.cba.omnia.maestro.macros.MacroSupport[A]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.MacroSupport">MacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroJob.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Create an object extending this trait to create Maestro Job using the execution api.</p>
+    </li><li name="au.com.cba.omnia.maestro.api.exec.ParlourExportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourExportDsl=au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl"></a>
+      <a id="ParlourExportDsl:ParlourExportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourExportDsl</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl">parlour.SqoopSyntax.ParlourExportDsl</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.ParlourExportOptions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourExportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourExportOptions[_]]=au.com.cba.omnia.parlour.ParlourExportOptions[T]"></a>
+      <a id="ParlourExportOptions[+T&lt;:ParlourExportOptions[_]]:ParlourExportOptions[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourExportOptions</span><span class="tparams">[<span name="T">+T &lt;: <a href="#ParlourExportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourExportOptions[_]]=au.com.cba.omnia.parlour.ParlourExportOptions[T]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.ParlourExportOptions">ParlourExportOptions</a>[_]</span>]</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">parlour.ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.ParlourExportOptions.T">T</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.ParlourImportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourImportDsl=au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl"></a>
+      <a id="ParlourImportDsl:ParlourImportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourImportDsl</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">parlour.SqoopSyntax.ParlourImportDsl</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.ParlourImportOptions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourImportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourImportOptions[_]]=au.com.cba.omnia.parlour.ParlourImportOptions[T]"></a>
+      <a id="ParlourImportOptions[+T&lt;:ParlourImportOptions[_]]:ParlourImportOptions[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourImportOptions</span><span class="tparams">[<span name="T">+T &lt;: <a href="#ParlourImportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourImportOptions[_]]=au.com.cba.omnia.parlour.ParlourImportOptions[T]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.ParlourImportOptions">ParlourImportOptions</a>[_]</span>]</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">parlour.ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.ParlourImportOptions.T">T</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Partition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Partition[A,B]=au.com.cba.omnia.maestro.core.partition.Partition[A,B]"></a>
+      <a id="Partition[A,B]:Partition[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Partition</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> = <a href="../../core/partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">core.partition.Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Partition.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.api.exec.Partition.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfig=au.com.cba.omnia.maestro.core.exec.QueryConfig"></a>
+      <a id="QueryConfig:QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">QueryConfig</span><span class="result"> = <a href="../../core/exec/QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">core.exec.QueryConfig</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.RowFilter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RowFilter=au.com.cba.omnia.maestro.core.filter.RowFilter"></a>
+      <a id="RowFilter:RowFilter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RowFilter</span><span class="result"> = <a href="../../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">core.filter.RowFilter</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Splitter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Splitter=au.com.cba.omnia.maestro.core.split.Splitter"></a>
+      <a id="Splitter:Splitter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Splitter</span><span class="result"> = <a href="../../core/split/Splitter.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">core.split.Splitter</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.SqoopExportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExportConfig[T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourExportOptions[T]]=au.com.cba.omnia.maestro.core.exec.SqoopExportConfig[T]"></a>
+      <a id="SqoopExportConfig[T&lt;:ParlourExportOptions[T]]:SqoopExportConfig[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SqoopExportConfig</span><span class="tparams">[<span name="T">T &lt;: <a href="#ParlourExportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourExportOptions[_]]=au.com.cba.omnia.parlour.ParlourExportOptions[T]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.ParlourExportOptions">ParlourExportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.SqoopExportConfig.T">T</span>]</span>]</span><span class="result"> = <a href="../../core/exec/SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopExportConfig">core.exec.SqoopExportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.SqoopExportConfig.T">T</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.SqoopImportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopImportConfig[T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourImportOptions[T]]=au.com.cba.omnia.maestro.core.exec.SqoopImportConfig[T]"></a>
+      <a id="SqoopImportConfig[T&lt;:ParlourImportOptions[T]]:SqoopImportConfig[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SqoopImportConfig</span><span class="tparams">[<span name="T">T &lt;: <a href="#ParlourImportOptions[+T&lt;:au.com.cba.omnia.maestro.api.exec.package.ParlourImportOptions[_]]=au.com.cba.omnia.parlour.ParlourImportOptions[T]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.ParlourImportOptions">ParlourImportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.SqoopImportConfig.T">T</span>]</span>]</span><span class="result"> = <a href="../../core/exec/SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopImportConfig">core.exec.SqoopImportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.SqoopImportConfig.T">T</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Tag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Tag[A]=au.com.cba.omnia.maestro.core.codec.Tag[A]"></a>
+      <a id="Tag[A]:Tag[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Tag</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="../../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Tag.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.TeradataParlourExportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TeradataParlourExportDsl=au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl"></a>
+      <a id="TeradataParlourExportDsl:TeradataParlourExportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TeradataParlourExportDsl</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">parlour.SqoopSyntax.TeradataParlourExportDsl</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.TeradataParlourImportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TeradataParlourImportDsl=au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl"></a>
+      <a id="TeradataParlourImportDsl:TeradataParlourImportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TeradataParlourImportDsl</span><span class="result"> = <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">parlour.SqoopSyntax.TeradataParlourImportDsl</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.TimeSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeSource=au.com.cba.omnia.maestro.core.time.TimeSource"></a>
+      <a id="TimeSource:TimeSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimeSource</span><span class="result"> = <a href="../../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Transform" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Transform[A,B]=au.com.cba.omnia.maestro.core.transform.Transform[A,B]"></a>
+      <a id="Transform[A,B]:Transform[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Transform</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> = <a href="../../core/transform/Transform.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform">core.transform.Transform</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Transform.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.api.exec.Transform.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.UploadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadConfig=au.com.cba.omnia.maestro.core.exec.UploadConfig"></a>
+      <a id="UploadConfig:UploadConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UploadConfig</span><span class="result"> = <a href="../../core/exec/UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.UploadConfig">core.exec.UploadConfig</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.UploadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadInfo=au.com.cba.omnia.maestro.core.exec.UploadInfo"></a>
+      <a id="UploadInfo:UploadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UploadInfo</span><span class="result"> = <a href="../../core/exec/UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.UploadInfo">core.exec.UploadInfo</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Validator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Validator[A]=au.com.cba.omnia.maestro.core.validate.Validator[A]"></a>
+      <a id="Validator[A]:Validator[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Validator</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="../../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">core.validate.Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.Validator.A">A</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.ViewConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ViewConfig[A&lt;:com.twitter.scrooge.ThriftStruct,B]=au.com.cba.omnia.maestro.core.exec.ViewConfig[A,B]"></a>
+      <a id="ViewConfig[A&lt;:ThriftStruct,B]:ViewConfig[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ViewConfig</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="result"> = <a href="../../core/exec/ViewConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.ViewConfig">core.exec.ViewConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.exec.ViewConfig.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.api.exec.ViewConfig.B">B</span>]</span>
       </span>
       </h4>
       
@@ -91,19 +543,487 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.api.exec.MaestroExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="MaestroExecution"></a>
-      <a id="MaestroExecution:MaestroExecution"></a>
+              <ol><li name="au.com.cba.omnia.maestro.api.exec.package#Check" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Check:au.com.cba.omnia.maestro.core.validate.Check.type"></a>
+      <a id="Check:core.validate.Check.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Check</span><span class="result">: <a href="../../core/validate/Check$.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Check">core.validate.Check</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Clean" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Clean:au.com.cba.omnia.maestro.core.clean.Clean.type"></a>
+      <a id="Clean:core.clean.Clean.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Clean</span><span class="result">: <a href="../../core/clean/Clean$.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">core.clean.Clean</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#EmptyLoad" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmptyLoad:au.com.cba.omnia.maestro.core.exec.EmptyLoad.type"></a>
+      <a id="EmptyLoad:core.exec.EmptyLoad.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">EmptyLoad</span><span class="result">: <a href="../../core/exec/EmptyLoad$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.EmptyLoad">core.exec.EmptyLoad</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Execution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Execution:com.twitter.scalding.Execution.type"></a>
+      <a id="Execution:com.twitter.scalding.Execution.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Execution</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">com.twitter.scalding.Execution</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Guard" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Guard:au.com.cba.omnia.maestro.core.hdfs.Guard.type"></a>
+      <a id="Guard:core.hdfs.Guard.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Guard</span><span class="result">: <a href="../../core/hdfs/Guard$.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.Guard">core.hdfs.Guard</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#HivePartition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HivePartition:au.com.cba.omnia.maestro.core.partition.HivePartition.type"></a>
+      <a id="HivePartition:core.partition.HivePartition.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">HivePartition</span><span class="result">: <a href="../../core/partition/HivePartition$.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.HivePartition">core.partition.HivePartition</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#HiveTable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HiveTable:au.com.cba.omnia.maestro.core.hive.HiveTable.type"></a>
+      <a id="HiveTable:core.hive.HiveTable.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">HiveTable</span><span class="result">: <a href="../../core/hive/HiveTable$.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#JobFinished" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobFinished:au.com.cba.omnia.maestro.core.exec.JobFinished.type"></a>
+      <a id="JobFinished:core.exec.JobFinished.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JobFinished</span><span class="result">: <a href="../../core/exec/JobFinished$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.JobFinished">core.exec.JobFinished</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#JobNeverReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobNeverReady:au.com.cba.omnia.maestro.core.exec.JobNeverReady.type"></a>
+      <a id="JobNeverReady:core.exec.JobNeverReady.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JobNeverReady</span><span class="result">: <a href="../../core/exec/JobNeverReady$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.JobNeverReady">core.exec.JobNeverReady</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#JobNotReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobNotReady:au.com.cba.omnia.maestro.core.exec.JobNotReady.type"></a>
+      <a id="JobNotReady:core.exec.JobNotReady.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JobNotReady</span><span class="result">: <a href="../../core/exec/JobNotReady$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.JobNotReady">core.exec.JobNotReady</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#LoadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadConfig:au.com.cba.omnia.maestro.core.exec.LoadConfig.type"></a>
+      <a id="LoadConfig:core.exec.LoadConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadConfig</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadConfig">core.exec.LoadConfig</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#LoadFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadFailure:au.com.cba.omnia.maestro.core.exec.LoadFailure.type"></a>
+      <a id="LoadFailure:core.exec.LoadFailure.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadFailure</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadFailure">core.exec.LoadFailure</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#LoadSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadSuccess:au.com.cba.omnia.maestro.core.exec.LoadSuccess.type"></a>
+      <a id="LoadSuccess:core.exec.LoadSuccess.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LoadSuccess</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadSuccess">core.exec.LoadSuccess</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Macros" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Macros:au.com.cba.omnia.maestro.macros.Macros.type"></a>
+      <a id="Macros:macros.Macros.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Macros</span><span class="result">: <a href="../../macros/Macros$.html" class="extype" name="au.com.cba.omnia.maestro.macros.Macros">macros.Macros</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.Maestro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Maestro"></a>
+      <a id="Maestro:Maestro"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="MaestroExecution$.html"><span class="name">MaestroExecution</span></a><span class="result"> extends <a href="MaestroExecutionBase.html" class="extype" name="au.com.cba.omnia.maestro.api.exec.MaestroExecutionBase">MaestroExecutionBase</a></span>
+        <a href="Maestro$.html"><span class="name">Maestro</span></a><span class="result"> extends <a href="../../core/exec/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.UploadExecution">UploadExecution</a> with <a href="../../core/exec/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.LoadExecution">LoadExecution</a> with <a href="../../core/exec/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.ViewExecution">ViewExecution</a> with <a href="../../core/exec/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryExecution">QueryExecution</a> with <a href="../../core/exec/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopExecution">SqoopExecution</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Use this object to get access to all maestro execution tasks, and supporting types.</p>
+      <p class="comment cmt">Provides task methods, and any implicits required to use them.</p>
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#MaestroConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MaestroConfig:au.com.cba.omnia.maestro.core.exec.MaestroConfig.type"></a>
+      <a id="MaestroConfig:core.exec.MaestroConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MaestroConfig</span><span class="result">: <a href="../../core/exec/MaestroConfig$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig">core.exec.MaestroConfig</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#ParlourExportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourExportDsl:au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl.type"></a>
+      <a id="ParlourExportDsl:parlour.SqoopSyntax.ParlourExportDsl.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourExportDsl</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl">parlour.SqoopSyntax.ParlourExportDsl</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#ParlourImportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourImportDsl:au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl.type"></a>
+      <a id="ParlourImportDsl:parlour.SqoopSyntax.ParlourImportDsl.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourImportDsl</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">parlour.SqoopSyntax.ParlourImportDsl</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#ParlourInstances" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ParlourInstances:au.com.cba.omnia.maestro.core.exec.ParlourInstances.type"></a>
+      <a id="ParlourInstances:core.exec.ParlourInstances.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ParlourInstances</span><span class="result">: <a href="../../core/exec/ParlourInstances$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.ParlourInstances">core.exec.ParlourInstances</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Partition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Partition:au.com.cba.omnia.maestro.core.partition.Partition.type"></a>
+      <a id="Partition:core.partition.Partition.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Partition</span><span class="result">: <a href="../../core/partition/Partition$.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">core.partition.Partition</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfig:au.com.cba.omnia.maestro.core.exec.QueryConfig.type"></a>
+      <a id="QueryConfig:core.exec.QueryConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">QueryConfig</span><span class="result">: <a href="../../core/exec/QueryConfig$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">core.exec.QueryConfig</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#RowFilter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RowFilter:au.com.cba.omnia.maestro.core.filter.RowFilter.type"></a>
+      <a id="RowFilter:core.filter.RowFilter.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RowFilter</span><span class="result">: <a href="../../core/filter/RowFilter$.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">core.filter.RowFilter</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Splitter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Splitter:au.com.cba.omnia.maestro.core.split.Splitter.type"></a>
+      <a id="Splitter:core.split.Splitter.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Splitter</span><span class="result">: <a href="../../core/split/Splitter$.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">core.split.Splitter</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#SqoopExecutionTest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExecutionTest:au.com.cba.omnia.maestro.core.exec.SqoopExecutionTest.type"></a>
+      <a id="SqoopExecutionTest:core.exec.SqoopExecutionTest.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SqoopExecutionTest</span><span class="result">: <a href="../../core/exec/SqoopExecutionTest$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopExecutionTest">core.exec.SqoopExecutionTest</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#SqoopExportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExportConfig:au.com.cba.omnia.maestro.core.exec.SqoopExportConfig.type"></a>
+      <a id="SqoopExportConfig:core.exec.SqoopExportConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SqoopExportConfig</span><span class="result">: <a href="../../core/exec/SqoopExportConfig$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopExportConfig">core.exec.SqoopExportConfig</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#SqoopImportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopImportConfig:au.com.cba.omnia.maestro.core.exec.SqoopImportConfig.type"></a>
+      <a id="SqoopImportConfig:core.exec.SqoopImportConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SqoopImportConfig</span><span class="result">: <a href="../../core/exec/SqoopImportConfig$.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopImportConfig">core.exec.SqoopImportConfig</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#TeradataParlourExportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TeradataParlourExportDsl:au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl.type"></a>
+      <a id="TeradataParlourExportDsl:parlour.SqoopSyntax.TeradataParlourExportDsl.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TeradataParlourExportDsl</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">parlour.SqoopSyntax.TeradataParlourExportDsl</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#TeradataParlourImportDsl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TeradataParlourImportDsl:au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl.type"></a>
+      <a id="TeradataParlourImportDsl:parlour.SqoopSyntax.TeradataParlourImportDsl.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TeradataParlourImportDsl</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">parlour.SqoopSyntax.TeradataParlourImportDsl</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#TimeSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeSource:au.com.cba.omnia.maestro.core.time.TimeSource.type"></a>
+      <a id="TimeSource:core.time.TimeSource.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimeSource</span><span class="result">: <a href="../../core/time/TimeSource$.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#UploadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadConfig:au.com.cba.omnia.maestro.core.exec.UploadConfig.type"></a>
+      <a id="UploadConfig:core.exec.UploadConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UploadConfig</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.UploadConfig">core.exec.UploadConfig</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#UploadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadInfo:au.com.cba.omnia.maestro.core.exec.UploadInfo.type"></a>
+      <a id="UploadInfo:core.exec.UploadInfo.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UploadInfo</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.UploadInfo">core.exec.UploadInfo</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#Validator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Validator:au.com.cba.omnia.maestro.core.validate.Validator.type"></a>
+      <a id="Validator:core.validate.Validator.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Validator</span><span class="result">: <a href="../../core/validate/Validator$.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">core.validate.Validator</a>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#ViewConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ViewConfig:au.com.cba.omnia.maestro.core.exec.ViewConfig.type"></a>
+      <a id="ViewConfig:core.exec.ViewConfig.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ViewConfig</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.exec.ViewConfig">core.exec.ViewConfig</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#parlourExportDslMonoid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="parlourExportDslMonoid:scalaz.Monoid[au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl]"></a>
+      <a id="parlourExportDslMonoid:Monoid[parlour.SqoopSyntax.ParlourExportDsl]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parlourExportDslMonoid</span><span class="result">: <span class="extype" name="scalaz.Monoid">Monoid</span>[<span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl">parlour.SqoopSyntax.ParlourExportDsl</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#parlourImportDslMonoid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="parlourImportDslMonoid:scalaz.Monoid[au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl]"></a>
+      <a id="parlourImportDslMonoid:Monoid[parlour.SqoopSyntax.ParlourImportDsl]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parlourImportDslMonoid</span><span class="result">: <span class="extype" name="scalaz.Monoid">Monoid</span>[<span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">parlour.SqoopSyntax.ParlourImportDsl</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#teradataParlourExportDslMonoid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="teradataParlourExportDslMonoid:scalaz.Monoid[au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl]"></a>
+      <a id="teradataParlourExportDslMonoid:Monoid[parlour.SqoopSyntax.TeradataParlourExportDsl]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">teradataParlourExportDslMonoid</span><span class="result">: <span class="extype" name="scalaz.Monoid">Monoid</span>[<span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">parlour.SqoopSyntax.TeradataParlourExportDsl</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.api.exec.package#teradataParlourImportDslMonoid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="teradataParlourImportDslMonoid:scalaz.Monoid[au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl]"></a>
+      <a id="teradataParlourImportDslMonoid:Monoid[parlour.SqoopSyntax.TeradataParlourImportDsl]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">teradataParlourImportDslMonoid</span><span class="result">: <span class="extype" name="scalaz.Monoid">Monoid</span>[<span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">parlour.SqoopSyntax.TeradataParlourImportDsl</span>]</span>
+      </span>
+      </h4>
+      
     </li></ol>
             </div>
 
@@ -113,7 +1033,11 @@
         </div>
 
         <div id="inheritedMembers">
-        
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
         
         </div>
 

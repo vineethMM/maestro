@@ -2,17 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>LoadExecution - au.com.cba.omnia.maestro.core.task.LoadExecution</title>
-          <meta name="description" content="LoadExecution - au.com.cba.omnia.maestro.core.task.LoadExecution" />
-          <meta name="keywords" content="LoadExecution au.com.cba.omnia.maestro.core.task.LoadExecution" />
+          <title>CustomerExportConfig - au.com.cba.omnia.maestro.example.CustomerExportConfig</title>
+          <meta name="description" content="CustomerExportConfig - au.com.cba.omnia.maestro.example.CustomerExportConfig" />
+          <meta name="keywords" content="CustomerExportConfig au.com.cba.omnia.maestro.example.CustomerExportConfig" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
-      <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
       <script type="text/javascript">
          if(top === self) {
-            var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.task.LoadExecution$';
+            var url = '../../../../../../index.html';
+            var hash = 'au.com.cba.omnia.maestro.example.CustomerExportConfig';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,26 +22,26 @@
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <a href="LoadExecution.html" title="Go to companion"><img src="../../../../../../../lib/object_to_trait_big.png" /></a>
-        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.task">task</a></p>
-        <h1><a href="LoadExecution.html" title="Go to companion">LoadExecution</a></h1>
+        <img src="../../../../../../lib/class_big.png" />
+        <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.example">example</a></p>
+        <h1>CustomerExportConfig</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">LoadExecution</span>
+        <span class="name">CustomerExportConfig</span><span class="params">(<span name="config">config: <a href="../api/exec/package.html#Config=com.twitter.scalding.Config" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.Config">Config</a></span>)</span><span class="result"> extends <a href="../api/exec/package.html#MacroSupport[A&lt;:com.twitter.scrooge.ThriftStruct]=au.com.cba.omnia.maestro.macros.MacroSupport[A]" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7f1b7a7d7b68b78ab26f26d5a5cd7d242920e747//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Configuration for <code>CustomerSqoopExportExecution</code></p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerSqoopExportExecution.scala" target="_blank">CustomerSqoopExportExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.task.LoadExecution"><span>LoadExecution</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.example.CustomerExportConfig"><span>CustomerExportConfig</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.maestro.macros.MacroSupport"><span>MacroSupport</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -77,7 +77,23 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(config:au.com.cba.omnia.maestro.api.exec.Config):au.com.cba.omnia.maestro.example.CustomerExportConfig"></a>
+      <a id="&lt;init&gt;:CustomerExportConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CustomerExportConfig</span><span class="params">(<span name="config">config: <a href="../api/exec/package.html#Config=com.twitter.scalding.Config" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.Config">Config</a></span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
 
         
 
@@ -150,6 +166,82 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedDecode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedDecode:au.com.cba.omnia.maestro.core.codec.Decode[A]"></a>
+      <a id="DerivedDecode:Decode[Customer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedDecode</span><span class="result">: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">Decode</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.DecodeMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedEncode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedEncode:au.com.cba.omnia.maestro.core.codec.Encode[A]"></a>
+      <a id="DerivedEncode:Encode[Customer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedEncode</span><span class="result">: <a href="../core/codec/Encode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode">Encode</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.EncodeMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedTag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedTag:au.com.cba.omnia.maestro.core.codec.Tag[A]"></a>
+      <a id="DerivedTag:Tag[Customer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedTag</span><span class="result">: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">Tag</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.TagMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#Fields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Fields:Any"></a>
+      <a id="Fields:Any"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Fields</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.FieldsMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -175,13 +267,26 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#config" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="config:au.com.cba.omnia.maestro.api.exec.Config"></a>
+      <a id="config:Config"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">config</span><span class="result">: <a href="../api/exec/package.html#Config=com.twitter.scalding.Config" class="extmbr" name="au.com.cba.omnia.maestro.api.exec.Config">Config</a></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -195,29 +300,29 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#export" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="export:au.com.cba.omnia.maestro.core.exec.SqoopExportConfig[au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl]"></a>
+      <a id="export:SqoopExportConfig[ParlourExportDsl]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">export</span><span class="result">: <a href="../core/exec/SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopExportConfig">SqoopExportConfig</a>[<span class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl">ParlourExportDsl</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.LoadExecution#execution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="execution[A](errorThreshold:Double,pipe:Option[com.twitter.scalding.Stat]=&gt;com.twitter.scalding.TypedPipe[A]):com.twitter.scalding.Execution[(com.twitter.scalding.TypedPipe[A],au.com.cba.omnia.maestro.core.task.LoadInfo)]"></a>
-      <a id="execution[A](Double,(Option[Stat])⇒TypedPipe[A]):Execution[(TypedPipe[A],LoadInfo)]"></a>
+      
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#exportDir" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="exportDir:String"></a>
+      <a id="exportDir:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">execution</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="errorThreshold">errorThreshold: <span class="extype" name="scala.Double">Double</span></span>, <span name="pipe">pipe: (<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="com.twitter.scalding.Stat">Stat</span>]) ⇒ <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.execution.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[(<span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.execution.A">A</span>], <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a>)]</span>
+        <span class="name">exportDir</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       
@@ -233,7 +338,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -253,19 +358,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -279,6 +371,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#maestro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="maestro:au.com.cba.omnia.maestro.core.exec.MaestroConfig"></a>
+      <a id="maestro:MaestroConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">maestro</span><span class="result">: <a href="../core/exec/MaestroConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig">MaestroConfig</a></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -318,6 +423,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.example.CustomerExportConfig#rawDataDir" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rawDataDir:String"></a>
+      <a id="rawDataDir:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rawDataDir</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -331,19 +449,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -410,7 +515,17 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.macros.MacroSupport">
+              <h3>Inherited from <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
@@ -430,6 +545,6 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../lib/template.js"></script>
     </body>
       </html>

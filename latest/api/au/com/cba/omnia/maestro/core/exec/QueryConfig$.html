@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Archiver - au.com.cba.omnia.maestro.core.task.Archiver</title>
-          <meta name="description" content="Archiver - au.com.cba.omnia.maestro.core.task.Archiver" />
-          <meta name="keywords" content="Archiver au.com.cba.omnia.maestro.core.task.Archiver" />
+          <title>QueryConfig - au.com.cba.omnia.maestro.core.exec.QueryConfig</title>
+          <meta name="description" content="QueryConfig - au.com.cba.omnia.maestro.core.exec.QueryConfig" />
+          <meta name="keywords" content="QueryConfig au.com.cba.omnia.maestro.core.exec.QueryConfig" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.core.task.Archiver$';
+            var hash = 'au.com.cba.omnia.maestro.core.exec.QueryConfig$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../../../../../lib/object_big.png" />
-        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.task">task</a></p>
-        <h1>Archiver</h1>
+        <a href="QueryConfig.html" title="Go to companion"><img src="../../../../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.exec">exec</a></p>
+        <h1><a href="QueryConfig.html" title="Go to companion">QueryConfig</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,13 +35,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Archiver</span>
+        <span class="name">QueryConfig</span><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7f1b7a7d7b68b78ab26f26d5a5cd7d242920e747//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/SqoopExecution.scala" target="_blank">SqoopExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory functions for query configs</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/exec/QueryExecution.scala" target="_blank">QueryExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.task.Archiver"><span>Archiver</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.exec.QueryConfig"><span>QueryConfig</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -150,19 +150,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Archiver#archive" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="archive[C&lt;:org.apache.hadoop.io.compress.CompressionCodec](src:String,dest:String)(implicitevidence$1:ClassManifest[C]):com.twitter.scalding.Execution[Long]"></a>
-      <a id="archive[C&lt;:CompressionCodec](String,String)(ClassManifest[C]):Execution[Long]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="apply(name:String,settings:Map[org.apache.hadoop.hive.conf.HiveConf.ConfVars,String],queries:String*):au.com.cba.omnia.maestro.core.exec.QueryConfig"></a>
+      <a id="apply(String,Map[ConfVars,String],String*):QueryConfig"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">archive</span><span class="tparams">[<span name="C">C &lt;: <span class="extype" name="org.apache.hadoop.io.compress.CompressionCodec">CompressionCodec</span></span>]</span><span class="params">(<span name="src">src: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dest">dest: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.ClassManifest">ClassManifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Archiver.archive.C">C</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Long">Long</span>]</span>
+        <span class="name">apply</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="settings">settings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="queries">queries: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <a href="QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">QueryConfig</a></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">QueryConfig</p>
+    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="apply(name:String,queries:String*):au.com.cba.omnia.maestro.core.exec.QueryConfig"></a>
+      <a id="apply(String,String*):QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="queries">queries: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <a href="QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">QueryConfig</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">QueryConfig with empty hive settings</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -410,7 +423,11 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

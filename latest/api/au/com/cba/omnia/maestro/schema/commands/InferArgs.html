@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Arguments for <code>Infer</code> command. .</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7f1b7a7d7b68b78ab26f26d5a5cd7d242920e747//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/commands/Infer.scala" target="_blank">Infer.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Arguments for <code>Infer</code> command. .</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-schema/src/main/scala/au/com/cba/omnia/maestro/schema/commands/Infer.scala" target="_blank">Infer.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="com.quantifind.sumac.FieldArgs">FieldArgs</span>, <span class="extype" name="com.quantifind.sumac.Args">Args</span>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.quantifind.sumac.ExternalConfig">ExternalConfig</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -167,7 +167,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="com.quantifind.sumac.Args#addValidation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addValidation(f:&lt;?&gt;):Unit"></a>
+      <a id="addValidation(f:=&gt;Unit):Unit"></a>
       <a id="addValidation(⇒Unit):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -322,7 +322,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Args</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#hasSetter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hasSetter(f:&lt;?&gt;):Boolean"></a>
+      <a id="hasSetter(f:java.lang.reflect.Field):Boolean"></a>
       <a id="hasSetter(Field):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -374,7 +374,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#isNestedArgField" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isNestedArgField(f:&lt;?&gt;):Boolean"></a>
+      <a id="isNestedArgField(f:java.lang.reflect.Field):Boolean"></a>
       <a id="isNestedArgField(Field):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -387,7 +387,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldArgs</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#isSumacHelperField" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isSumacHelperField(f:&lt;?&gt;):Boolean"></a>
+      <a id="isSumacHelperField(f:java.lang.reflect.Field):Boolean"></a>
       <a id="isSumacHelperField(Field):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -400,7 +400,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldArgs</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#isValidField" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isValidField(f:&lt;?&gt;):Boolean"></a>
+      <a id="isValidField(f:java.lang.reflect.Field):Boolean"></a>
       <a id="isValidField(Field):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -472,7 +472,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="com.quantifind.sumac.Args#parse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="parse(kvPairs:&lt;?&gt;,validation:&lt;?&gt;):Unit"></a>
+      <a id="parse(kvPairs:scala.collection.Map[String,String],validation:Boolean):Unit"></a>
       <a id="parse(Map[String,String],Boolean):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -485,7 +485,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Args</dd></dl></div>
     </li><li name="com.quantifind.sumac.Args#parse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="parse(args:&lt;?&gt;):Unit"></a>
+      <a id="parse(args:Array[String]):Unit"></a>
       <a id="parse(Array[String]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -524,7 +524,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Args → ExternalConfig</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#registerAnnotationValidation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="registerAnnotationValidation(annotation:&lt;?&gt;)(validationFunction:&lt;?&gt;):Unit"></a>
+      <a id="registerAnnotationValidation(annotation:Class[_&lt;:java.lang.annotation.Annotation])(validationFunction:(Any,Any,java.lang.annotation.Annotation,String)=&gt;Unit):Unit"></a>
       <a id="registerAnnotationValidation(Class[_&lt;:Annotation])((Any,Any,Annotation,String)⇒Unit):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -537,7 +537,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldArgs</dd></dl></div>
     </li><li name="com.quantifind.sumac.FieldArgs#registerAnnotationValidationUpdate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="registerAnnotationValidationUpdate(annotation:&lt;?&gt;)(validationFunction:&lt;?&gt;):Unit"></a>
+      <a id="registerAnnotationValidationUpdate(annotation:Class[_&lt;:java.lang.annotation.Annotation])(validationFunction:(Any,Any,java.lang.annotation.Annotation,String,com.quantifind.sumac.ArgAssignable)=&gt;Unit):Unit"></a>
       <a id="registerAnnotationValidationUpdate(Class[_&lt;:Annotation])((Any,Any,Annotation,String,ArgAssignable)⇒Unit):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -550,7 +550,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldArgs</dd></dl></div>
     </li><li name="com.quantifind.sumac.Args#registerParser" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="registerParser[T&lt;:&lt;?&gt;](parser:&lt;?&gt;):Unit"></a>
+      <a id="registerParser[T](parser:com.quantifind.sumac.Parser[T]):Unit"></a>
       <a id="registerParser[T](Parser[T]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">

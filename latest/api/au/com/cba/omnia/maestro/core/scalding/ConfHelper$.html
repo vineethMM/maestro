@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/ConfHelper.scala" target="_blank">ConfHelper.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Collection of utility methods around get/setting Config.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e74f4b3827c65dc62d450b53847f00a09162c7d5//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/ConfHelper.scala" target="_blank">ConfHelper.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -182,6 +182,22 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ConfHelper#createUniqueFilenames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createUniqueFilenames(config:com.twitter.scalding.Config):com.twitter.scalding.Config"></a>
+      <a id="createUniqueFilenames(Config):Config"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">createUniqueFilenames</span><span class="params">(<span name="config">config: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get cascading to create unique output filenames by inserting a timestamp as part of the output
+filename.</p><div class="fullcomment"><div class="comment cmt"><p>Get cascading to create unique output filenames by inserting a timestamp as part of the output
+filename.</p><p>This is used to get cascading to append to files to existing partitions.
+</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -252,7 +268,7 @@
         <span class="name">getHadoopConf</span><span class="params">(<span name="config">config: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>)</span><span class="result">: <span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Get the Hadoop JobConfig from Config.</p>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>

@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Information need to address/describe a specific unpartitioned hive table.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Information need to address/describe a specific unpartitioned hive table.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e74f4b3827c65dc62d450b53847f00a09162c7d5//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -361,15 +361,15 @@
       </h4>
       <p class="shortcomment cmt">Creates a scalding sink to write to the hive table.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a scalding sink to write to the hive table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable">UnpartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable#source" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="source():au.com.cba.omnia.ebenezer.scrooge.hive.HiveParquetScroogeSource[A]"></a>
-      <a id="source():HiveParquetScroogeSource[A]"></a>
+      <a id="source:au.com.cba.omnia.ebenezer.scrooge.hive.HiveParquetScroogeSource[A]"></a>
+      <a id="source:HiveParquetScroogeSource[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">source</span><span class="params">()</span><span class="result">: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.HiveParquetScroogeSource">HiveParquetScroogeSource</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>]</span>
+        <span class="name">source</span><span class="result">: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.HiveParquetScroogeSource">HiveParquetScroogeSource</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a scalding source to read from the hive table.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a scalding source to read from the hive table.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable">UnpartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
@@ -470,18 +470,18 @@
       </h4>
       <p class="shortcomment cmt">Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable">UnpartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable#writeExecution" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[A],append:Boolean):com.twitter.scalding.Execution[Unit]"></a>
-      <a id="writeExecution(TypedPipe[A],Boolean):Execution[Unit]"></a>
+      <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[A],append:Boolean):com.twitter.scalding.Execution[com.twitter.scalding.ExecutionCounters]"></a>
+      <a id="writeExecution(TypedPipe[A],Boolean):Execution[ExecutionCounters]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">writeExecution</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">writeExecution</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable.A">A</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="com.twitter.scalding.ExecutionCounters">ExecutionCounters</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Creates <span class="extype" name="Execution">Execution</span> that writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Creates <span class="extype" name="Execution">Execution</span> that writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable">UnpartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
+      <p class="shortcomment cmt">Writes the contents of the pipe to this HiveTable.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the contents of the pipe to this HiveTable. NB: APPEND IS CURRENTLY NOT SUPPORTED.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable">UnpartitionedHiveTable</a> → <a href="HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a></dd></dl></div>
     </li></ol>
             </div>
 

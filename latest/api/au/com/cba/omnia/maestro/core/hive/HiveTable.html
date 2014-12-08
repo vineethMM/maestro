@@ -42,7 +42,7 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Base type for partitioned and unpartitioned Hive tables.
 ST - Type parameter of <span class="extype" name="TypedSink">TypedSink</span> and <span class="extype" name="TypedPipe">TypedPipe</span>
 returned in <code>sink</code> and <code>write</code> methods respectively.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/477870f50561ef49e37b20a08828a2aa28a859ed//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e74f4b3827c65dc62d450b53847f00a09162c7d5//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -168,15 +168,15 @@ returned in <code>sink</code> and <code>write</code> methods respectively.
       </h4>
       <p class="shortcomment cmt">Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p>
     </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#writeExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[T],append:Boolean):com.twitter.scalding.Execution[Unit]"></a>
-      <a id="writeExecution(TypedPipe[T],Boolean):Execution[Unit]"></a>
+      <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[T],append:Boolean):com.twitter.scalding.Execution[com.twitter.scalding.ExecutionCounters]"></a>
+      <a id="writeExecution(TypedPipe[T],Boolean):Execution[ExecutionCounters]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">writeExecution</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.T">T</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">writeExecution</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.T">T</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="com.twitter.scalding.ExecutionCounters">ExecutionCounters</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates <span class="extype" name="Execution">Execution</span> that writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p>

@@ -60,7 +60,7 @@ trait ViewExecution {
     * @return the number of rows written.
     */
   def viewHive[A <: ThriftStruct : Manifest, ST](
-    table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = false
+    table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
   ): Execution[Long] =
     table.writeExecution(pipe, append)
       .map(_.get(StatKeys.tuplesWritten).get)

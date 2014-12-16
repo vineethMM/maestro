@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/368d17ee22130184cf9aa9f97d184fc93e9ec2c7//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/93e2e2052ba831944ab5befb58358e9c3c6dca8e//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="../core/hdfs/OldGuardFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">OldGuardFunctions</a>, <a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a>, <a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a>, <a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a>, <a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a>, <a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a>, <a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a>, <a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -239,6 +239,22 @@
       </h4>
       <p class="shortcomment cmt">Convenience method to populate a parlour import option instance
 </p><div class="fullcomment"><div class="comment cmt"><p>Convenience method to populate a parlour import option instance
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>: Populated parlour option
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#createSqoopImportOptionsWithQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createSqoopImportOptionsWithQuery[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](connectionString:String,username:String,password:String,query:String,splitBy:Option[String],outputFieldsTerminatedBy:Char,nullString:String,options:T):T"></a>
+      <a id="createSqoopImportOptionsWithQuery[T&lt;:ParlourImportOptions[T]](String,String,String,String,Option[String],Char,String,T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">createSqoopImportOptionsWithQuery</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span>]</span>]</span><span class="params">(<span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outputFieldsTerminatedBy">outputFieldsTerminatedBy: <span class="extype" name="scala.Char">Char</span></span>, <span name="nullString">nullString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ParlourImportDsl()</a></span></span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Convenience method to populate a parlour import option instance.</p><div class="fullcomment"><div class="comment cmt"><p>Convenience method to populate a parlour import option instance.
+Use it when you want to use SQL Select query to fetch data.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>: Populated parlour option
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#customSqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -555,6 +571,23 @@ Otherwise the rows will be appended.
       </h4>
       <p class="shortcomment cmt">Runs a sqoop import from a database table to HDFS.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop import from a database table to HDFS.</p><p>Data will be copied to a path that is generated. For a given <code>domain</code>,<code>tableName</code> and <code>timePath</code>, a path
 <code>$hdfsRoot/source/$source/$domain/$tableName/$timePath</code> is generated.</p><p>Use <span class="extype" name="Sqoop.createSqoopImportOptions">Sqoop.createSqoopImportOptions</span> to populate the <span class="extype" name="ParlourImportOptions">ParlourImportOptions</span> parameter.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of Seq of jobs for this import and import directory.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#sqoopImportWithQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopImportWithQuery[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](hdfsRoot:String,source:String,domain:String,timePath:String,tableName:String,options:T)(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):(Seq[com.twitter.scalding.Job],String)"></a>
+      <a id="sqoopImportWithQuery[T&lt;:ParlourImportOptions[T]](String,String,String,String,String,T)(Args)(FlowDef,Mode):(Seq[Job],String)"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sqoopImportWithQuery</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImportWithQuery.T">T</span>]</span>]</span><span class="params">(<span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImportWithQuery.T">T</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: (<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="com.twitter.scalding.Job">Job</span>], <span class="extype" name="scala.Predef.String">String</span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Runs a sqoop import from a database table to HDFS.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop import from a database table to HDFS.
+Data is fetched using SQL query provided in <code>options</code>.</p><p>WARNING: <code>options.tableName</code> should not be set. Otherwise Sqoop will not use SQL query.</p><p>Data will be copied to a path that is generated. For a given <code>domain</code>,<code>tableName</code> and <code>timePath</code>, a path
+<code>$hdfsRoot/source/$source/$domain/$tableName/$timePath</code> is generated.</p><p>Use <span class="extype" name="Sqoop.createSqoopImportOptionsWithQuery">Sqoop.createSqoopImportOptionsWithQuery</span> to populate the <span class="extype" name="ParlourImportOptions">ParlourImportOptions</span> parameter.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of Seq of jobs for this import and import directory.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

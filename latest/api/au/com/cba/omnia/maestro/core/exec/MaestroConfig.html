@@ -41,7 +41,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Core configuration settings for loads, and factory functions for
 task specific configurations.
-</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig">MaestroConfig</a></dd><dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/368d17ee22130184cf9aa9f97d184fc93e9ec2c7//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/exec/MaestroConfig.scala" target="_blank">MaestroConfig.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig">MaestroConfig</a></dd><dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/93e2e2052ba831944ab5befb58358e9c3c6dca8e//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/exec/MaestroConfig.scala" target="_blank">MaestroConfig.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -350,7 +350,7 @@ task specific configurations.
       </h4>
       
     </li><li name="au.com.cba.omnia.maestro.core.exec.MaestroConfig#hiveTable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveTable[A&lt;:com.twitter.scrooge.ThriftStruct](tablename:String,database:String,path:Option[String])(implicitevidence$6:Manifest[A]):au.com.cba.omnia.maestro.core.hive.HiveTable[A,A]"></a>
+      <a id="hiveTable[A&lt;:com.twitter.scrooge.ThriftStruct](tablename:String,database:String,path:Option[String])(implicitevidence$7:Manifest[A]):au.com.cba.omnia.maestro.core.hive.HiveTable[A,A]"></a>
       <a id="hiveTable[A&lt;:ThriftStruct](String,String,Option[String])(Manifest[A]):HiveTable[A,A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -378,7 +378,7 @@ no database path.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.exec.MaestroConfig#load" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="load[A&lt;:com.twitter.scrooge.ThriftStruct](errors:String,splitter:au.com.cba.omnia.maestro.core.split.Splitter,timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,loadWithKey:Boolean,filter:au.com.cba.omnia.maestro.core.filter.RowFilter,clean:au.com.cba.omnia.maestro.core.clean.Clean,none:String,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],errorThreshold:Double)(implicitevidence$3:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$4:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$5:Manifest[A]):au.com.cba.omnia.maestro.core.exec.LoadConfig[A]"></a>
+      <a id="load[A&lt;:com.twitter.scrooge.ThriftStruct](errors:String,splitter:au.com.cba.omnia.maestro.core.split.Splitter,timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,loadWithKey:Boolean,filter:au.com.cba.omnia.maestro.core.filter.RowFilter,clean:au.com.cba.omnia.maestro.core.clean.Clean,none:String,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],errorThreshold:Double)(implicitevidence$4:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$5:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$6:Manifest[A]):au.com.cba.omnia.maestro.core.exec.LoadConfig[A]"></a>
       <a id="load[A&lt;:ThriftStruct](String,Splitter,TimeSource,Boolean,RowFilter,Clean,String,Validator[A],Double)(Decode[A],Tag[A],Manifest[A]):LoadConfig[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -469,7 +469,7 @@ no database path.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.exec.MaestroConfig#partitionedHiveTable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="partitionedHiveTable[A&lt;:com.twitter.scrooge.ThriftStruct,B](partition:au.com.cba.omnia.maestro.core.partition.Partition[A,B],tablename:String,database:String,path:Option[String])(implicitevidence$7:Manifest[A],implicitevidence$8:Manifest[B],implicitevidence$9:com.twitter.scalding.TupleSetter[B]):au.com.cba.omnia.maestro.core.hive.HiveTable[A,(B,A)]"></a>
+      <a id="partitionedHiveTable[A&lt;:com.twitter.scrooge.ThriftStruct,B](partition:au.com.cba.omnia.maestro.core.partition.Partition[A,B],tablename:String,database:String,path:Option[String])(implicitevidence$8:Manifest[A],implicitevidence$9:Manifest[B],implicitevidence$10:com.twitter.scalding.TupleSetter[B]):au.com.cba.omnia.maestro.core.hive.HiveTable[A,(B,A)]"></a>
       <a id="partitionedHiveTable[A&lt;:ThriftStruct,B](Partition[A,B],String,String,Option[String])(Manifest[A],Manifest[B],TupleSetter[B]):HiveTable[A,(B,A)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -510,7 +510,7 @@ no database path.
       </h4>
       
     </li><li name="au.com.cba.omnia.maestro.core.exec.MaestroConfig#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](deleteFromTable:Boolean,connectionString:String,username:String,password:String,dbTablename:String,inputFieldsTerminatedBy:Char,inputNullString:String,initialOptions:Option[T])(implicitevidence$2:scalaz.Monoid[T]):au.com.cba.omnia.maestro.core.exec.SqoopExportConfig[T]"></a>
+      <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](deleteFromTable:Boolean,connectionString:String,username:String,password:String,dbTablename:String,inputFieldsTerminatedBy:Char,inputNullString:String,initialOptions:Option[T])(implicitevidence$3:scalaz.Monoid[T]):au.com.cba.omnia.maestro.core.exec.SqoopExportConfig[T]"></a>
       <a id="sqoopExport[T&lt;:ParlourExportOptions[T]](Boolean,String,String,String,String,Char,String,Option[T])(Monoid[T]):SqoopExportConfig[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -536,6 +536,21 @@ no database path.
       </span>
       </h4>
       <p class="shortcomment cmt">Produce a sqoop import config for this job using standard paths and database options.</p><div class="fullcomment"><div class="comment cmt"><p>Produce a sqoop import config for this job using standard paths and database options.</p><p>The standard database options are:</p><ul><li>connectionString and username come from command line arguments</li><li>password comes from an environment variable</li><li>dbTablename is <code>$tablename</code></li></ul><p>The default paths are as follows:</p><ul><li>hdfsLandingPath  = <code>$hdfsRoot/source/$dirStructure</code></li><li>hdfsArchivePath  = <code>$hdfsRoot/archive/$dirStructure</code></li><li>timePath         = <code>&lt;year&gt;/&lt;month&gt;/&lt;day&gt;</code>
+</li></ul></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.exec.MaestroConfig#sqoopImportWithQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopImportWithQuery[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](query:String,splitBy:Option[String],hdfsLandingPath:String,hdfsArchivePath:String,timePath:String,connectionString:String,username:String,password:String,outputFieldsTerminatedBy:Char,nullString:String,initialOptions:Option[T])(implicitevidence$2:scalaz.Monoid[T]):au.com.cba.omnia.maestro.core.exec.SqoopImportConfig[T]"></a>
+      <a id="sqoopImportWithQuery[T&lt;:ParlourImportOptions[T]](String,Option[String],String,String,String,String,String,String,Char,String,Option[T])(Monoid[T]):SqoopImportConfig[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sqoopImportWithQuery</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig.sqoopImportWithQuery.T">T</span>]</span>]</span><span class="params">(<span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">hdfsLandingPath</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">hdfsArchivePath</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#loadTime:org.joda.time.DateTime">loadTime.toString(&quot;yyyy/MM/dd&quot;)</a></span></span></span>, <span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#connString:String">connString</a></span></span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">username</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">password</span></span>, <span name="outputFieldsTerminatedBy">outputFieldsTerminatedBy: <span class="extype" name="scala.Char">Char</span> = <span class="symbol">'|'</span></span>, <span name="nullString">nullString: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="initialOptions">initialOptions: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig.sqoopImportWithQuery.T">T</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scalaz.Monoid">Monoid</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig.sqoopImportWithQuery.T">T</span>]</span>)</span><span class="result">: <a href="SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.SqoopImportConfig">SqoopImportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.exec.MaestroConfig.sqoopImportWithQuery.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Produce a sqoop import config for this job using standard paths and database options.</p><div class="fullcomment"><div class="comment cmt"><p>Produce a sqoop import config for this job using standard paths and database options.</p><p>Use it when you want to use SQL Select query to fetch data. If you do not provide <code>splitBy</code>,
+then <code>numberOfMappers</code> is set to 1.</p><p>The standard database options are:</p><ul><li>connectionString and username come from command line arguments</li><li>password comes from an environment variable</li><li>dbTablename is <code>$tablename</code></li></ul><p>The default paths are as follows:</p><ul><li>hdfsLandingPath  = <code>$hdfsRoot/source/$dirStructure</code></li><li>hdfsArchivePath  = <code>$hdfsRoot/archive/$dirStructure</code></li><li>timePath         = <code>&lt;year&gt;/&lt;month&gt;/&lt;day&gt;</code>
 </li></ul></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>

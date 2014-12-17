@@ -14,8 +14,15 @@
 
 package au.com.cba.omnia.maestro.core.scalding
 
+import scala.concurrent.Future
+
+import scalaz.\&/.{This, That, Both}
+
 import com.twitter.scalding.{Config, Execution}
 
+import au.com.cba.omnia.permafrost.hdfs.{Hdfs, Ok, Error}
+
+/** Pimps an Execution instance. */
 case class RichExecution[A](execution: Execution[A]) {
   def withSubConfig(modifyConfig: Config => Config): Execution[A] =
     Execution.getConfigMode.flatMap { case (config, mode) =>
@@ -23,7 +30,30 @@ case class RichExecution[A](execution: Execution[A]) {
     }
 }
 
-object RichExecution {
+/** Pimps the Execution object. */
+case class RichExecutionObject(exec: Execution.type) {
+  /** Changes from  HDFS context to Execution context. */
+  def fromHdfs[T](hdfs: Hdfs[T]): Execution[T] = {
+    Execution.getConfig.flatMap { config =>
+      Execution.fromFuture(_ => hdfs.run(ConfHelper.getHadoopConf(config)) match {
+        case Ok(x)             => Future.successful(x)
+        case Error(This(s))    => Future.failed(new Exception(s))
+        case Error(That(e))    => Future.failed(e)
+        case Error(Both(s, e)) => Future.failed(new Exception(s, e))
+      })
+    }
+  }
+}
+
+object ExecutionOps extends ExecutionOps
+
+trait ExecutionOps {
+  /** Implicit conversion of an Execution instance to RichExecution. */
   implicit def executionToRichExecution[A](execution: Execution[A]): RichExecution[A] =
     RichExecution[A](execution)
+
+  /** Implicit conversion of Execution Object to RichExecutionObject. */
+  implicit def ExecutionToRichExecution(exec: Execution.type): RichExecutionObject =
+    RichExecutionObject(exec)
+
 }

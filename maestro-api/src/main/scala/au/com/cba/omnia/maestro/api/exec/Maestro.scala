@@ -14,11 +14,9 @@
 
 package au.com.cba.omnia.maestro.api.exec
 
-import au.com.cba.omnia.maestro.core.exec.LoadExecution
-import au.com.cba.omnia.maestro.core.exec.SqoopExecution
-import au.com.cba.omnia.maestro.core.exec.UploadExecution
-import au.com.cba.omnia.maestro.core.exec.ViewExecution
-import au.com.cba.omnia.maestro.core.exec.QueryExecution
+import au.com.cba.omnia.maestro.core.exec.{LoadExecution, SqoopExecution, UploadExecution, ViewExecution, QueryExecution}
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps
+
 
 /** Provides task methods, and any implicits required to use them. */
 object Maestro
@@ -27,3 +25,5 @@ object Maestro
   with ViewExecution
   with QueryExecution
   with SqoopExecution
+  with ExecutionOps
+

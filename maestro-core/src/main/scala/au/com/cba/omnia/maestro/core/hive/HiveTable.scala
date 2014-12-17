@@ -29,7 +29,7 @@ import au.com.cba.omnia.ebenezer.scrooge.hive._
 
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.core.scalding.ConfHelper
-import au.com.cba.omnia.maestro.core.scalding.RichExecution._
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
 
 /** 
   * Base type for partitioned and unpartitioned Hive tables. 

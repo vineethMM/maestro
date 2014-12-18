@@ -49,7 +49,7 @@ trait ViewExecution {
       .map(v => config.partition.extract(v) -> v)
       .writeExecution(PartitionParquetScroogeSource[B, A](config.partition.pattern, config.output))
       .getAndResetCounters
-      .map { case (_, counters) => counters.get(StatKeys.tuplesWritten).get }
+      .map { case (_, counters) => counters.get(StatKeys.tuplesWritten).getOrElse(0) }
 
   /**
     * Writes out the data to a hive table.
@@ -63,5 +63,5 @@ trait ViewExecution {
     table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
   ): Execution[Long] =
     table.writeExecution(pipe, append)
-      .map(_.get(StatKeys.tuplesWritten).get)
+      .map(_.get(StatKeys.tuplesWritten).getOrElse(0))
 }

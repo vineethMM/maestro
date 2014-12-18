@@ -17,7 +17,6 @@ package au.com.cba.omnia.maestro.api.exec
 import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.maestro.core.exec.MaestroExecutionMain
-import au.com.cba.omnia.maestro.macros.MacroSupport
 
 /**
   * Create an object extending this trait to create Maestro Job using the execution api.

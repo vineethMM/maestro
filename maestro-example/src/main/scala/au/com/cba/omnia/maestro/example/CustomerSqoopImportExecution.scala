@@ -18,11 +18,13 @@ import java.io.File
 
 import org.joda.time.{DateTime, DateTimeZone}
 
+import com.twitter.scalding.{Config, Execution}
+
+import au.com.cba.omnia.parlour.ParlourImportOptions
+
 import au.com.cba.omnia.maestro.api.exec._
 import au.com.cba.omnia.maestro.api.exec.Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
-
-import au.com.cba.omnia.parlour.ParlourImportOptions
 
 /** Configuration for `CustomerSqoopImportExecution` */
 case class CustomerImportConfig(config: Config) extends MacroSupport[Customer] {

@@ -16,11 +16,13 @@ package au.com.cba.omnia.maestro.example
 
 import com.twitter.scalding.{TextLine, TypedPipe, TypedPsv}
 
+import com.twitter.scalding.{Config, Execution}
+
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
+
 import au.com.cba.omnia.maestro.api.exec._
 import au.com.cba.omnia.maestro.api.exec.Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
-
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 /** Configuration for `CustomerSqoopExportExecution` */
 case class CustomerExportConfig(config: Config) extends MacroSupport[Customer] {

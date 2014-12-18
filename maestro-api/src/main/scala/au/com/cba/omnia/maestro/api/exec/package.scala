@@ -60,10 +60,6 @@ package object exec {
   type GuardFilter     = au.com.cba.omnia.maestro.core.hdfs.GuardFilter
   val  Guard           = au.com.cba.omnia.maestro.core.hdfs.Guard
 
-  type Config          = com.twitter.scalding.Config
-  type Execution[A]    = com.twitter.scalding.Execution[A]
-  val  Execution       = com.twitter.scalding.Execution
-
   type MaestroConfig   = au.com.cba.omnia.maestro.core.exec.MaestroConfig
   val  MaestroConfig   = au.com.cba.omnia.maestro.core.exec.MaestroConfig
 

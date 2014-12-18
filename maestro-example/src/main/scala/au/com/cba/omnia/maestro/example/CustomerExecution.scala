@@ -16,6 +16,8 @@ package au.com.cba.omnia.maestro.example
 
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
 
+import com.twitter.scalding.{Config, Execution}
+
 import au.com.cba.omnia.maestro.api.exec._
 import au.com.cba.omnia.maestro.api.exec.Maestro._
 import au.com.cba.omnia.maestro.example.thrift.{Account, Customer}

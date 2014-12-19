@@ -25,8 +25,7 @@ import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
 /** Configuration for a customer execution example */
-case class CustomerConfig(config: Config) {
-
+case class CustomerJobConfig(config: Config) {
   val maestro   = MaestroConfig(
     conf        = config,
     source      = "customer",
@@ -39,27 +38,19 @@ case class CustomerConfig(config: Config) {
     partition   = Partition.byDate(Fields[Customer].EffectiveDate),
     tablename   = "by_date"
   )
-  val catTable  = maestro.partitionedHiveTable[Customer, String](
-    partition   = Partition.byField(Fields[Customer].Cat),
-    tablename   = "by_cat"
-  )
-  val queries = List(
-    s"""INSERT OVERWRITE TABLE ${catTable.name} PARTITION (partition_cat) SELECT id, name, acct,
-       |cat, sub_cat, -10, effective_date, cat AS partition_cat FROM ${dateTable.name}""".stripMargin,
-    s"SELECT COUNT(*) FROM ${catTable.name}"
-  )
 }
 
-/** Customer execution example */
-object CustomerExecution {
-  /** Create an example customer execution */
-  def execute: Execution[(LoadSuccess, Long)] = for {
-    conf           <- Execution.getConfig.map(CustomerConfig(_))
-    uploadInfo     <- upload(conf.upload)
-    sources        <- uploadInfo.withSources
-    (pipe, ldInfo) <- load[Customer](conf.load, uploadInfo.files)
-    loadSuccess    <- ldInfo.withSuccess
-    (count1, _)    <- viewHive(conf.dateTable, pipe) zip viewHive(conf.catTable, pipe)
-    _              <- Execution.fromHive(Hive.queries(conf.queries), _.setVar(HIVEMERGEMAPFILES, "true"))
-  } yield (loadSuccess, count1)
+/** Customer file load job with an execution for the main program */
+object CustomerJob extends MaestroJob {
+  def job: Execution[JobStatus] = for {
+    conf             <- Execution.getConfig.map(CustomerJobConfig(_))
+    uploadInfo       <- upload(conf.upload)
+    sources          <- uploadInfo.withSources
+    (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+    loadSuccess      <- loadInfo.withSuccess
+    count            <- viewHive(conf.dateTable, pipe)
+    if count == loadSuccess.actual
+  } yield JobFinished
+
+  def attemptsExceeded = Execution.from(JobNeverReady)   // Elided in the README
 }

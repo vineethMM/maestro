@@ -24,7 +24,7 @@ Checks can be defined / used stand alone, or in the context of field validation:
 // check that a string is not empty
 Check.nonempty
 
-// or the more likely scenario, appling that in the context of a specific field
+// or the more likely scenario, applying that in the context of a specific field
 Validator.of(Field.Name, Check.nonempty)
 
 // check that a string is one of a set of values

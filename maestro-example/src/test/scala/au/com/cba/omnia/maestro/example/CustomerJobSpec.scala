@@ -25,13 +25,13 @@ import au.com.cba.omnia.maestro.test.Records
 
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
-object CustomerExecutionSpec
+object CustomerJobSpec
   extends ThermometerSpec
   with Records
   with HiveSupport { def is = s2"""
 
-Customer Execution
-==================
+Customer Job
+============
 
   end to end pipeline        $pipeline
 
@@ -47,14 +47,10 @@ Customer Execution
         "local-root"   -> List(s"$dir/user"),
         "archive-root" -> List(s"$dir/user/archive")
       )
-      executesSuccessfully(CustomerExecution.execute, args) must_== ((
-        LoadSuccess(8, 8, 8, 0),
-        8
-      ))
+      executesSuccessfully(CustomerJob.job, args) must_== JobFinished
 
       facts(
-        hiveWarehouse </> "customer_customer.db" </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date"),
-        hiveWarehouse </> "customer_customer.db" </> "by_cat"  ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-cat")
+        hiveWarehouse </> "customer_customer.db" </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date")
       )
     }
   }

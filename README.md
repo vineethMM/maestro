@@ -10,22 +10,35 @@ maestro
 maestro: a distinguished conductor
 ```
 
-The `maestro` library is responsible for providing convenient APIs for marshalling and
-orchestrating data around for etl type work.
+The `maestro` library provides convenient marshalling and
+orchestration of data for ETL type work by providing a common framework
+for conducting jobs combining a variety of data APIs.
 
-The primary goal of `maestro` is to provide the ability to make it _easy_ to manage
-data sets with out sacrificing safety or robustness. This is achieved by sticking
-with strongly-typed schemas describing the fixed structure of data, and working on
-APIs for manipulating those structures in a sensible way that it can scale to data-sets
-with 100s of columns.
+The primary goal of `maestro` is to make it _easy_ to manage data sets
+with out sacrificing safety or robustness. This is achieved by faithfully
+sticking to strongly-typed schemas describing the fixed structure of
+data, and providing APIs for manipulating those structures in a
+sensible way that scales to data sets with 100s of columns.
 
 [Scaladoc](https://commbank.github.io/maestro/latest/api/index.html)
 
-Documentation
--------------
+__Handy links for related Scaladoc__
 
-* Github Pages: https://commbank.github.io/maestro/index.html
-* Extended documentation: https://github.com/CommBank/maestro/tree/master/doc
+* omnia.maestro.api [package](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.api.package) and Maestro [object](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.api.Maestro$)
+* omnia.parlour.[SqoopSyntax](http://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.SqoopSyntax$)
+*  omnia.permafrost.hdfs.Hdfs [class](https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs) and 
+[object](https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs$)
+* omnia.ebenezer.scrooge.hive.Hive [class](https://commbank.github.io/ebenezer/latest/api/index.html#au.com.cba.omnia.ebenezer.scrooge.hive.Hive) and [object](https://commbank.github.io/ebenezer/latest/api/index.html#au.com.cba.omnia.ebenezer.scrooge.hive.Hive$)
+* omnia.maestro.core.scalding [RichExecution](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution)
+and [RichExecutionObject](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecutionObject)
+* com.twitter.scalding.Execution [trait](http://twitter.github.io/scalding/index.html#com.twitter.scalding.Execution)
+and [object](http://twitter.github.io/scalding/index.html#com.twitter.scalding.Execution$)
+
+
+__Other__
+
+* Github Pages: [https://commbank.github.io/maestro/index.html]()
+* Extended documentation (in progress): [https://github.com/CommBank/maestro/tree/master/doc]()
 
 starting point
 --------------
@@ -48,8 +61,7 @@ provide generic "tasks" like generating analytics views.
 
 ### Defining a thrift schema.
 
-This is not the place for a full thrift tutorial, so I will skip a lot
-of the details, but if you don't understand thrift or would like more
+This is not the place for a full thrift tutorial, if you would like more
 complete documentation then <http://diwakergupta.github.io/thrift-missing-guide/>
 is a really good reference.
 
@@ -76,98 +88,156 @@ This is a simplified example, a real data set may have 100s of
 columns, but it should be enough to demonstrate. The important points
 here are that _order_ is important, the struct should be defined to
 have fields in the same order as input data, and _types_ are
-important, they should accurately descript the data (and will be used
+important, they should accurately describe the data (and will be used
 to infer how the data should be parsed and validated).
 
 
-### Building a pipeline from the built in tools
+### Building a `maestro` job
 
-A pipeline is defined in terms of a `cascade`. This terminology comes
-from the underlying technology used, but it is easier to think of it
-as a set of jobs (with an implied partial-ordering, based on data
-dependencies).
+The core of most ETL jobs can be implemented quickly and safely using
+the features of `maestro`, but it is also designed to easily accommodate custom code, 
+including code using raw APIs like scalding, hive, hdfs and sqoop.
 
-A cascade can be made up of scalding jobs, hive queries (future),
-shell commands, or `maestro` tasks. The hope is that most pipelines
-can be implemented with _just_ `maestro`, and the corner cases can
-be easily handled by hive or raw scalding jobs.
+A `maestro` job is defined via an `Execution` 
+(see [scalding](https://github.com/twitter/scalding) and the `Execution` monad in the Concepts section below), 
+generally involving multiple steps, with each step being an `Execution` itself and potentially 
+depending on the results of previous steps.  This is often neatly expressed as a 
+Scala `for`-`yield` comprehension like in the example below.
 
-A pipeline built only from `maestro` tasks.
+`maestro` includes convenient ways to construct `Execution` steps from
+hive queries, sqoop import/export, hdfs operations, scalding pipes and
+various other convenient ways of specifying operations and combining steps.
+
+An example `maestro` job that loads a customer data file into a hive table
+is in the example 
+[`CustomerJob.scala`](maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerJob.scala).
+An extract follows to give the flavour of executions and the their configuration.
 
 ```scala
-
-import com.twitter.scalding._
-import au.com.cba.omnia.maestro._
-import au.com.cba.omnia.etl.customer.thrift._
-
-class CustomerCuscade(args: Args) extends CascadeJob(args) with MaestroSupport[Customer] {
-  val maestro = Maestro(args)
-
-  val delimiter     = "|$|"
-  val env           = args("env")
-  val domain        = "CUSTOMER"
-  val input         = s"${env}/source/${domain}"
-  val clean         = s"${env}/processing/${domain}"
-  val outbound      = s"${env}/outbound/${domain}"
-  val dateView      = s"${env}/view/warehouse/${domain}/by-date"
-  val catView       = s"${env}/view/warehouse/${domain}/by-category"
-  val features      = s"${env}/view/features/ivory"
-  val errors        = s"${env}/errors/${domain}"
-  val now           = yyyyMMdd.format(new java.util.Date)
-  val byDate        = Partition.byDate(Fields.EFFECITVE_DATE)
-  val byCategory    = Partition.byFields(Field.CUSTOMER_CAT, Fields.CUSTOMER_SUB_CAT)
-  val filters       = Filter.exclude(Fields.EFFECTIVE_DATE)
-  val cleaners      = Clean.all(
-    Clean.trim
-  )
-  val validators    = Validator.all(
-  )
-  val filter        = RowFilter.keep
-
-  def jobs = List(
-    maestro.load[Customer](delimiter, input, clean, errors, now, cleaners, validators, filter),
-    maestro.view(byDate, clean, dateView),
-    maestro.view(byCategory, clean, catView),
-    maestro.ivory(clean, features),
-    maestro.sqoop(clean, output, filters)
-  )
+case class CustomerJobConfig(config: Config)  {
+  val maestro   = MaestroConfig(...)
+  val upload    = maestro.upload(...)
+  val load      = maestro.load[Customer] (...)
+  val dateTable = maestro.partitionedHiveTable[Customer, (String, String, String)] (...)
 }
 
+/** Customer file load job with an execution for the main program */
+object CustomerJob extends MaestroJob {
+  def job: Execution[JobStatus] = for {
+    conf             <- Execution.getConfig.map(CustomerJobConfig(_))
+    uploadInfo       <- upload(conf.upload)
+    sources          <- uploadInfo.withSources
+    (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+    loadSuccess      <- loadInfo.withSuccess
+    count            <- viewHive(conf.dateTable, pipe)
+    if count == loadSuccess.actual
+  } yield JobFinished
+  ...
+}
 ```
 
-Hive
-----
+Concepts
+--------
+
+### Generated support for fields and records
+
+`maestro` will use the metadata available from the thrift definition
+to generate supporting infrastructure customized for _your_ specific
+record type. This will give us the ability to refer to fields in code
+for partitioning, validation, row filtering and transformations in a
+way that can be easily be checked and validated up front (by the
+compiler in most circumstances, and on start-up before things run in
+the worst case).  Such field references can have 
+interesting metadata which potentially allows us to automatically
+parse, print, validate, filter, partition the data in a way that we
+_know_ will work before we run the code (for a valid schema).
+
+### Type Mappings
+
+| Thrift Type                                       | Hive Type                                                                                     | Scala Type    |
+| ------------------------------------------------- |:---------------------------------------------------------------------------------------------:| -------------:|
+| bool: A boolean value (true or false), one byte   | BOOLEAN                                                                                       | bool          |
+| byte: A signed byte                               | TINYINT (1-byte signed integer, from -128 to 127)                                             | byte          |
+| i16: A 16-bit signed integer                      | SMALLINT (2-byte signed integer, from -32,768 to 32,767)                                      | short         |
+| i32: A 32-bit signed integer                      | INT (4-byte signed integer, from -2,147,483,648 to 2,147,483,647)                             | int           |
+| i64: A 64-bit signed integer                      | BIGINT (8-byte signed integer, from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)  | BigInteger    |
+| double: A 64-bit floating point number            | DOUBLE (8-byte double precision floating point number)                                        | double        |
+| string: Encoding agnostic text or binary string   | string 
+
+### Execution monad
+
+The execution monad is a key concept from scalding, see
+the `com.twitter.scalding.Execution` [trait](http://twitter.github.io/scalding/#com.twitter.scalding.Execution) and [object](http://twitter.github.io/scalding/#com.twitter.scalding.Execution$)
+as well as the maestro extensions in [`RichExecution`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution) and [`RichExecutionObject`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecutionObject).
+
+An execution is an object with type `Execution[T]` representing some
+work that can be performed that provides an item
+of type `T` if it succeeds, otherwise it fails.  The work can depend
+on configuration information, and can involve a variety of smaller
+steps, including hadoop jobs via scalding, with counters and caching
+when appropriate.  Many small `Execution`s can be chained together
+into a larger `Execution` using a `for`-`yield`-comprehension like in
+the earlier example.
+
+`for`-`yield`-comprehensions for `Execution[T]` have the same
+structure as for other type constructors like `List[T]` and `Iterable[T]`.
+This is because these type constructors are all monads, which roughly
+means they allow chains to be formed via calls to `flatMap`.  Scala
+`for`-`yield` comprehensions are actually just syntactic sugar for such chains, for
+more details see this
+[FAQ](http://docs.scala-lang.org/tutorials/FAQ/yield.html).
+
+
+### Failures
+
+Jobs should generally fail when unexpected conditions are detected so that appropriate action
+can be taken to fix the situation.  Use `if(`condition`)` in a comprehension to cause
+the whole `Execution` to fail with an error if the condition is false (via the
+`filter` method, see the [FAQ](http://docs.scala-lang.org/tutorials/FAQ/yield.html)).
+Exceptions in custom executions (see below) also lead to failures.
+
+Some useful methods related to failures include
+[`recoverWith`](http://twitter.github.io/scalding/#com.twitter.scalding.Execution),
+[`bracket`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution)
+[`ensuring`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution) and 
+[`onException`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution).
+
+### Custom executions
+
+`Execution.from` allows any Scala code to be included in an `Execution`, however this should be done
+carefully, including considering handling errors and other unusual situations.  If the code
+throws an exception this is caught and converted into a failing `Execution`.
+
+Pure expressions that just
+return a value and never throw exceptions nor perform effects should be included in comprehensions
+using `x = ...` rather than `x <- Execution.from(...)`.
+
+Hive and Hdfs operations should instead be included in `Execution`s via their own monads as outlined below. 
+
+### Hive
 
 Maestro allows you to write directly to Hive tables and to run queries on Hive tables as part of a
 Maestro job.
 
-Create a `HiveTable` to describe/reference a specific hive table. This is required by the other hive
-related methods as identifier. The `source` and `sink` methods on the `HiveTable` provide Scalding
-sources and sinks for typed pipes to read from or write to. `name` provides a fully qualifed name
-that can be used inside hql.
+`viewHive` allows the Maestro job to write out the data from a `TypedPipe` (such as from a load) to a partitioned hive table in parquet. However, it also creates the hive table if it doesn't already exist, or verifies the schema if it does exist.
 
-`viewHive` allows the Maestro job to write out the data to a partitioned hive table in parquet
-similar to `view`. However, it also creates the hive table if it doesn't already exist. Otherwise,
-it just verifies the schema.
+Alternatively `HiveTable` instances allow you to refer to a specific hive table.
+The `source` and `sink` methods on the `HiveTable` provide Scalding
+sources and sinks for typed pipes to read from or write to the table. 
+`name` provides a fully qualifed name that can be used inside hql.
 
-`hiveQuery` enables the running of a hive query as part of the Maestro job. Apart from the query
-string it also expects a list of input hive tables and optionally an output table. This is required
-for Maestro to properly schedule interdependent flows. It is solely use for scheduling and has no
-effect on the query itself. In order to run a hive query the Maestro job needs to extend
-`MaestroCascade`. See the example for more details.
+`Execution.fromHive` executes hive operations as part of a Maestro `Execution`, via the `Hive[T]` monad, providing an appropriate configuration from the `Execution` configuration.  The `Hive[T]` monad is similar to the `Execution[T]` monad but specifically for building hive operations that include steps like creating databases and tables, as well as performing queries (yielding lists of strings), and some additional support for checking conditions and building compound operations.
 
-### Limitations
+**Hive Limitations and issues**
 
-Currently it is not possible for our implementation to read in data from the partition columns.
-Instead it is expected that all the data is solely contained inside the core columns of the table
-itself. It is, therefore, not possible to partition on the same column as a field of the thrift
-struct (instead a duplicate column with a different name is required). Partition columns can only
-be used for hive performance reasons and not to carry information.
+* Currently it is not possible for our implementation to read in data from the partition columns.
+  Instead it is expected that all the data is solely contained inside the core columns of the table
+  itself. It is, therefore, not possible to partition on the same column as a field of the thrift
+  struct (instead a duplicate column with a different name is required). Partition columns can only
+  be used for hive performance reasons and not to carry information.
 
-In order for the job to work the hive-site.xml needs to be on the classpath when the job is
-initiated and on every node.
-
-### Known issues
+* In order for the job to work the hive-site.xml needs to be on the classpath when the job is
+  initiated and on every node.
 
 * Writing out hive files currently only works if the metastore is specified as thrift endpoint
   instead of database.
@@ -197,75 +267,12 @@ You can start with the [example hive-site.xml](doc/hive-site.xml).  To use this 
 install it on your cluster, or
 add it to your project's resources directory so that it is included in your jar.
 
-### Example
 
-```scala
-import scalaz.{Tag => _, _}, Scalaz._
 
-import com.twitter.scalding._, TDsl._
+### Hdfs
 
-import org.apache.hadoop.hive.conf.HiveConf
-
-import au.com.cba.omnia.maestro.api._, Maestro._
-import au.com.cba.omnia.maestro.core.codec._
-import au.com.cba.omnia.maestro.example.thrift._
-
-class CustomerCascade(args: Args) extends MaestroCascade[Customer](args) {
-  val env           = args("env")
-  val domain        = "customer"
-  val inputs        = Guard.expandPaths(s"${env}/source/${domain}/*")
-  val errors        = s"${env}/errors/${domain}"
-  val conf          = new HiveConf
-  val validators    = Validator.all[Customer]()
-  val filter        = RowFilter.keep
-  val cleaners      = Clean.all(
-    Clean.trim,
-    Clean.removeNonPrintables
-  )
-
-  val dateTable =
-    HiveTable(domain, "by_date", Partition.byDate(Fields.EffectiveDate) )
-  val idTable =
-    HiveTable(domain, "by_id", Partition(List("id"), Fields.Id.get, "%s"))
-  val jobs = Seq(
-    new UniqueJob(args) {
-      load[Customer]("|", inputs, errors, Maestro.now(), cleaners, validators, filter) |>
-      (viewHive(dateTable, conf) _ &&&
-        viewHive(idTable, conf)
-      )
-    },
-    hiveQuery(
-      args, "test",
-      s"INSERT OVERWRITE TABLE ${idTable.name} PARTITION (id) SELECT id, name, acct, cat, sub_cat, -10, effective_date FROM ${dateTable.name}",
-      List(dateTable, idTable), None, conf
-    )
-  )
-}
-```
-
-Concepts
---------
-
-### Maestro
-
-`Maestro` uses the metadata available from the thrift definition
-to generate out significant supporting infrastructure customized for
-_your_ specific record type. This gives us the ability to refer to fields
-for partitioning, filtering and validation in a way that can be easily
-be checked and validated up front (by the compiler in most circumstances,
-and on start-up before things run in the worst case) and that those field
-references can have large amounts of interesting metadata which allows
-us to automatically parse, print, validate, filter, partition the data
-in a way that we _know_ will work before we run the code (for a valid
-schema).
-
-### Tasks
-
-Tasks are not a concrete concept, it is just a name used to indicate that a
-function returns a scalding job for integration into a cascade. Tasks differ
-from raw Jobs in that they rely on the metadata generated by `Maestro`
-and can generally only by executed via their scala api and are not intended to
-be standalone jobs that would be run by themselves.
+Maestro provides support for Hdfs operations similar to the support for the `Hive[T]` monad
+described above.
 
 ### Partitioners
 
@@ -275,38 +282,20 @@ partition a data set by.
 The primary api is the list of fields you want to partition on:
 
 ```scala
-Partiton.byFields(Fields.CUSTOMER_CAT, Fields.CUSTOMER_SUB_CAT)
+Partition.byFields(Fields.CUSTOMER_CAT, Fields.CUSTOMER_SUB_CAT)
 ```
 
-The api also has special support for dates of the `yyyy-MM-dd` form:
+The api also has support for date formats, such as:
 
 ```scala
-Partiton.byDate(Fields.EFFECTIVE_DATE)
+Partition.byDate(Fields.EFFECTIVE_DATE, "yyyy-MM-dd")
 ```
 
 This will use that field, but split the partitioning into 3 parts of
 yyyy, MM and dd.
 
-
-### Filters
-
-Filters again are really simple (hopefully). By default filters
-allow everything. A filter can then be refined via either
-blacklists (i.e. exclude these columns) or whitelists (i.e.
-only include these columns).
-
-Examples:
-```scala
- // everything except effective date
-Filter.exclude(Fields.EFFECTIVE_DATE)
-
- // _only_ effective date and customer id
-Filter.include(Fields.EFFECTIVE_DATE, Fields.CUSTOMER_ID)
-```
-
 ### Validators
 
-Validators start to get a bit more advanced, but hopefully not too bad.
 A Validator can be thought of as something that is a function from the record
 type to either an error message or an "ok" tick of approval. In a lot of
 cases this understanding can be simplified to saying it is a combination
@@ -323,23 +312,3 @@ Validator.all(
   Validator.by[Customer](_.customerAcct.length == 4, "Customer accounts should always be a length of 4")
 )
 ```
-
-### Type Mappings
-
-| Thrift Type                                       | Hive Type                                                                                     | Scala Type    |
-| ------------------------------------------------- |:---------------------------------------------------------------------------------------------:| -------------:|
-| bool: A boolean value (true or false), one byte   | BOOLEAN                                                                                       | bool          |
-| byte: A signed byte                               | TINYINT (1-byte signed integer, from -128 to 127)                                             | byte          |
-| i16: A 16-bit signed integer                      | SMALLINT (2-byte signed integer, from -32,768 to 32,767)                                      | short         |
-| i32: A 32-bit signed integer                      | INT (4-byte signed integer, from -2,147,483,648 to 2,147,483,647)                             | int           |
-| i64: A 64-bit signed integer                      | BIGINT (8-byte signed integer, from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)  | BigInteger    |
-| double: A 64-bit floating point number            | DOUBLE (8-byte double precision floating point number)                                        | double        |
-| string: Encoding agnostic text or binary string   | string 
-
-### Advanced tips & tricks
-
-The best tip for advanced pipelines is to look carefully at how
-the maestro tasks are implemented. You have the same set of tools
-available to you and can jump down to the same lower-level of
-abstraction by just implementing a scalding job, and extending the
-`Maestro` class.

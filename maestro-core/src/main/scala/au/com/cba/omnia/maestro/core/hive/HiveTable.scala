@@ -100,10 +100,10 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
 ) extends HiveTable[A, A] {
 
   override def source =
-    new HiveParquetScroogeSource[A](database, table, None)
+    new HiveParquetScroogeSource[A](database, table, externalPath)
 
   override def sink(append: Boolean = true) =
-    new HiveParquetScroogeSource[A](database, table, None)
+    new HiveParquetScroogeSource[A](database, table, externalPath)
 
   /** Writes the contents of the pipe to this HiveTable. NB: APPEND IS CURRENTLY NOT SUPPORTED. */
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {

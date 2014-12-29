@@ -32,6 +32,7 @@ object Macros {
   def mkTag[A <: ThriftStruct]: Tag[A] =
     macro TagMacro.impl[A]
 
+  @deprecated("Duplicate of mkFields", "1.14.0")
   def getFields[A <: ThriftStruct]: Any =
     macro FieldsMacro.impl[A]
 
@@ -57,7 +58,35 @@ object Macros {
   ): Transform[A, B] = macro TransformMacro.impl[A, B]
 }
 
-trait MacroSupport[A <: ThriftStruct] {
+/** Provides implicit Decode, Tag, etc. views for a ThriftStruct. */
+trait MacroSupport {
+  /** Macro generated Decode for a Thrift struct. */
+  implicit def DerivedDecode[A <: ThriftStruct]: Decode[A] =
+    macro DecodeMacro.impl[A]
+
+  /** Macro generated Encode for a Thrift struct. */
+  implicit def DerivedEncode[A <: ThriftStruct]: Encode[A] =
+    macro EncodeMacro.impl[A]
+
+  /** Macro generated Tag for a Thrift struct. */
+  implicit def DerivedTag[A <: ThriftStruct]: Tag[A] =
+    macro TagMacro.impl[A]
+
+  /** Macro generated structural type containing the fields for a Thrift struct. */
+  // NOTE: This isn't really any, it is a structural type containing all the fields.
+  def Fields[A <: ThriftStruct]: Any =
+    macro FieldsMacro.impl[A]
+}
+
+/** Provides implicit Decode, Tag, etc. views for a ThriftStruct. */
+object MacroSupport extends MacroSupport
+
+
+/**
+  * MacroSupport to still support the old MaestroCascade.
+  * This is now superseded by the newer MacroSupport.
+  */
+trait LegacyMacroSupport[A <: ThriftStruct] {
   implicit def DerivedDecode: Decode[A] =
     macro DecodeMacro.impl[A]
 

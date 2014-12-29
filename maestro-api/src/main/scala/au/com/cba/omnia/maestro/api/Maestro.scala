@@ -18,7 +18,7 @@ import com.twitter.scrooge.ThriftStruct
 
 import com.twitter.scalding.{Args, Job, CascadeJob}
 
-import au.com.cba.omnia.maestro.macros.MacroSupport
+import au.com.cba.omnia.maestro.macros.LegacyMacroSupport
 
 import au.com.cba.omnia.maestro.core.task._
 import au.com.cba.omnia.maestro.core.args.Config
@@ -29,7 +29,7 @@ import au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions
   * Parent class for a more complex maestro job that needs to use cascades. For example, to run hive
   * queries.
   */
-abstract class MaestroCascade[A <: ThriftStruct](args: Args) extends CascadeJob(args) with MacroSupport[A] {
+abstract class MaestroCascade[A <: ThriftStruct](args: Args) extends CascadeJob(args) with LegacyMacroSupport[A] {
   /** Don't run any cascading jobs if the job list is empty. */
   override def run =
     if (jobs.isEmpty) true
@@ -46,7 +46,7 @@ abstract class MaestroCascade[A <: ThriftStruct](args: Args) extends CascadeJob(
 }
 
 /** Parent class for a simple maestro job that does not need to use cascades or run hive queries.*/
-abstract class Maestro[A <: ThriftStruct](args: Args) extends Job(args) with MacroSupport[A]
+abstract class Maestro[A <: ThriftStruct](args: Args) extends Job(args) with LegacyMacroSupport[A]
 
 object Maestro
     extends Load

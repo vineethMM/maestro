@@ -29,4 +29,4 @@ import au.com.cba.omnia.maestro.core.exec.MaestroExecutionMain
   * The job will exit with an error code describing the status of the program.
   * The software running this program can then take the appropriate action.
   */
-trait MaestroJob[A <: ThriftStruct] extends MaestroExecutionMain with MacroSupport[A]
+trait MaestroJob[A <: ThriftStruct] extends MaestroExecutionMain

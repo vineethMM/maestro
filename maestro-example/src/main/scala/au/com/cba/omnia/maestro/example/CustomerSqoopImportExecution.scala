@@ -22,12 +22,11 @@ import com.twitter.scalding.{Config, Execution}
 
 import au.com.cba.omnia.parlour.ParlourImportOptions
 
-import au.com.cba.omnia.maestro.api.exec._
-import au.com.cba.omnia.maestro.api.exec.Maestro._
+import au.com.cba.omnia.maestro.api.exec._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
 /** Configuration for `CustomerSqoopImportExecution` */
-case class CustomerImportConfig(config: Config) extends MacroSupport[Customer] {
+case class CustomerImportConfig(config: Config) {
   val maestro     = MaestroConfig(
     conf          = config,
     source        = "sales",
@@ -37,17 +36,17 @@ case class CustomerImportConfig(config: Config) extends MacroSupport[Customer] {
   val sqoopImport  = maestro.sqoopImport(
     initialOptions = Some(ParlourImportDsl().splitBy("id"))
   )
-  val load        = maestro.load(
+  val load        = maestro.load[Customer](
     none          = "null"
   )
   val catTable    = maestro.partitionedHiveTable[Customer, String](
-    partition     = Partition.byField(Fields.Cat),
+    partition     = Partition.byField(Fields[Customer].Cat),
     tablename     = "by_cat"
   )
 }
 
 /** Example customer execution, importing data via Sqoop */
-object CustomerSqoopImportExecution extends MacroSupport[Customer] {
+object CustomerSqoopImportExecution {
   /** Create an example customer sqoop import execution */
   def execute: Execution[CustomerImportStatus] = for {
     conf               <- Execution.getConfig.map(CustomerImportConfig(_))

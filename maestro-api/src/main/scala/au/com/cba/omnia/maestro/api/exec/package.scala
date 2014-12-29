@@ -17,7 +17,7 @@ package au.com.cba.omnia.maestro.api
 import com.twitter.scrooge.ThriftStruct
 
 package object exec {
-  type MacroSupport[A <: ThriftStruct] = au.com.cba.omnia.maestro.macros.MacroSupport[A]
+  type MacroSupport    = au.com.cba.omnia.maestro.macros.MacroSupport
 
   type JobStatus       = au.com.cba.omnia.maestro.core.exec.JobStatus
   type JobFinished     = au.com.cba.omnia.maestro.core.exec.JobFinished.type

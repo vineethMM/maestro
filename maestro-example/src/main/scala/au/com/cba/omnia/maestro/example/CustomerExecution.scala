@@ -18,12 +18,12 @@ import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
 
 import com.twitter.scalding.{Config, Execution}
 
-import au.com.cba.omnia.maestro.api.exec._
-import au.com.cba.omnia.maestro.api.exec.Maestro._
+import au.com.cba.omnia.maestro.api.exec._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.{Account, Customer}
 
 /** Configuration for a customer execution example */
-case class CustomerConfig(config: Config) extends MacroSupport[Customer] {
+case class CustomerConfig(config: Config) {
+
   val maestro   = MaestroConfig(
     conf        = config,
     source      = "customer",
@@ -31,15 +31,15 @@ case class CustomerConfig(config: Config) extends MacroSupport[Customer] {
     tablename   = "customer"
   )
   val upload    = maestro.upload()
-  val load      = maestro.load(
+  val load      = maestro.load[Customer](
     none        = "null"
   )
   val dateTable = maestro.partitionedHiveTable[Customer, (String, String, String)](
-    partition   = Partition.byDate(Fields.EffectiveDate),
+    partition   = Partition.byDate(Fields[Customer].EffectiveDate),
     tablename   = "by_date"
   )
   val catTable  = maestro.partitionedHiveTable[Customer, String](
-    partition   = Partition.byField(Fields.Cat),
+    partition   = Partition.byField(Fields[Customer].Cat),
     tablename   = "by_cat"
   )
   val writeToCatTableQuery = QueryConfig(
@@ -51,7 +51,7 @@ case class CustomerConfig(config: Config) extends MacroSupport[Customer] {
 }
 
 /** Customer execution example */
-object CustomerExecution extends MacroSupport[Customer] {
+object CustomerExecution {
 
   /** Create an example customer execution */
   def execute: Execution[(LoadSuccess, Long)] = for {

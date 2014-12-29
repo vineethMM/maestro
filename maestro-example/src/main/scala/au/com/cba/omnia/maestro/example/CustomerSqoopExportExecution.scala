@@ -20,12 +20,11 @@ import com.twitter.scalding.{Config, Execution}
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
-import au.com.cba.omnia.maestro.api.exec._
-import au.com.cba.omnia.maestro.api.exec.Maestro._
+import au.com.cba.omnia.maestro.api.exec._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
 /** Configuration for `CustomerSqoopExportExecution` */
-case class CustomerExportConfig(config: Config) extends MacroSupport[Customer] {
+case class CustomerExportConfig(config: Config) {
   val maestro = MaestroConfig(
     conf         = config,
     source       = "customer",
@@ -40,7 +39,7 @@ case class CustomerExportConfig(config: Config) extends MacroSupport[Customer] {
 }
 
 /** Customer execution, exporting data to a database via Sqoop */
-object CustomerSqoopExportExecution extends MacroSupport[Customer] {
+object CustomerSqoopExportExecution {
   def execute: Execution[Unit] = {
     for {
       conf <- Execution.getConfig.map(CustomerExportConfig(_))

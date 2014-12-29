@@ -26,4 +26,5 @@ object Maestro
   with QueryExecution
   with SqoopExecution
   with ExecutionOps
+  with MacroSupport
 

@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e7f39ee64c086970468adcf1c925096a45bb0359//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/56cd9aa9391cfc88e4c7d62c9b2d041c13ee9730//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -160,7 +160,7 @@
       </h4>
       
     </li><li name="au.com.cba.omnia.maestro.api.Maestro" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Maestro[A&lt;:com.twitter.scrooge.ThriftStruct]extendsJobwithMacroSupport[A]"></a>
+      <a id="Maestro[A&lt;:com.twitter.scrooge.ThriftStruct]extendsJobwithLegacyMacroSupport[A]"></a>
       <a id="Maestro[A&lt;:ThriftStruct]:Maestro[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -168,12 +168,12 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Maestro.html"><span class="name">Maestro</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span> with <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.Maestro.A">A</span>]</span>
+        <a href="Maestro.html"><span class="name">Maestro</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span> with <a href="../macros/LegacyMacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.LegacyMacroSupport">LegacyMacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.Maestro.A">A</span>]</span>
       </span>
       </h4>
       <p class="comment cmt">Parent class for a simple maestro job that does not need to use cascades or run hive queries.</p>
     </li><li name="au.com.cba.omnia.maestro.api.MaestroCascade" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="MaestroCascade[A&lt;:com.twitter.scrooge.ThriftStruct]extendsCascadeJobwithMacroSupport[A]"></a>
+      <a id="MaestroCascade[A&lt;:com.twitter.scrooge.ThriftStruct]extendsCascadeJobwithLegacyMacroSupport[A]"></a>
       <a id="MaestroCascade[A&lt;:ThriftStruct]:MaestroCascade[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -181,7 +181,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="MaestroCascade.html"><span class="name">MaestroCascade</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.CascadeJob">CascadeJob</span> with <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade.A">A</span>]</span>
+        <a href="MaestroCascade.html"><span class="name">MaestroCascade</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.CascadeJob">CascadeJob</span> with <a href="../macros/LegacyMacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.LegacyMacroSupport">LegacyMacroSupport</a>[<span class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade.A">A</span>]</span>
       </span>
       </h4>
       <p class="comment cmt">Parent class for a more complex maestro job that needs to use cascades.</p>

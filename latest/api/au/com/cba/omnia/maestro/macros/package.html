@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e7f39ee64c086970468adcf1c925096a45bb0359//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/56cd9aa9391cfc88e4c7d62c9b2d041c13ee9730//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -81,19 +81,32 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="MacroSupport[A&lt;:com.twitter.scrooge.ThriftStruct]extendsAnyRef"></a>
-      <a id="MacroSupport[A&lt;:ThriftStruct]:MacroSupport[A]"></a>
+              <ol><li name="au.com.cba.omnia.maestro.macros.LegacyMacroSupport" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LegacyMacroSupport[A&lt;:com.twitter.scrooge.ThriftStruct]extendsAnyRef"></a>
+      <a id="LegacyMacroSupport[A&lt;:ThriftStruct]:LegacyMacroSupport[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="MacroSupport.html"><span class="name">MacroSupport</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="LegacyMacroSupport.html"><span class="name">LegacyMacroSupport</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      
+      <p class="comment cmt">MacroSupport to still support the old MaestroCascade.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="MacroSupportextendsAnyRef"></a>
+      <a id="MacroSupport:MacroSupport"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="MacroSupport.html"><span class="name">MacroSupport</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Provides implicit Decode, Tag, etc.</p>
     </li><li name="au.com.cba.omnia.maestro.macros.body" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="bodyextendsAnnotationwithStaticAnnotation"></a>
       <a id="body:body"></a>
@@ -179,6 +192,19 @@
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MacroSupport"></a>
+      <a id="MacroSupport:MacroSupport"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MacroSupport$.html"><span class="name">MacroSupport</span></a><span class="result"> extends <a href="MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Provides implicit Decode, Tag, etc.</p>
     </li><li name="au.com.cba.omnia.maestro.macros.MacroUtils" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MacroUtils"></a>
       <a id="MacroUtils:MacroUtils"></a>

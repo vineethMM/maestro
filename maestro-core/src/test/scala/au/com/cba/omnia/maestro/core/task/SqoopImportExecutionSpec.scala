@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
 
 import java.io.{File, InputStream}
 import java.util.UUID
@@ -20,6 +20,8 @@ import java.util.UUID
 import scala.util.Failure
 
 import scalaz.effect.IO
+
+import scalikejdbc.{SQL, AutoSession, ConnectionPool}
 
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 
@@ -33,10 +35,6 @@ import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.tools.Streams
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerRecordReader, ThermometerSpec}, Thermometer._
 
-import au.com.cba.omnia.maestro.core.exec.ParlourInstances._
-import au.com.cba.omnia.maestro.core.task.CustomerImport
-
-
 object SqoopImportExecutionSpec
   extends ThermometerSpec
   with BeforeExample
@@ -48,7 +46,6 @@ object SqoopImportExecutionSpec
   imports data from DB to HDFS using SQL query $endToEndImportWithSqlQuery
   handles exceptions while importing data      $endToEndImportWithException
   handles exceptions while table not set       $endToEndImportWithoutTable
-
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
   val username         = "sa"
@@ -64,6 +61,8 @@ object SqoopImportExecutionSpec
   val options = SqoopImportConfig.options[ParlourImportDsl](
     connectionString, username, password, importTableName
   ).splitBy("id")
+
+  Class.forName("org.hsqldb.jdbcDriver")
 
   SqoopExecutionTest.setupEnv()
 
@@ -82,8 +81,8 @@ object SqoopImportExecutionSpec
     val (path, count) = executesSuccessfully(sqoopImport(config))
     facts(
       ImportPathFact(path),
-      s"$hdfsLandingPath/$timePath" </> "part-m-00000" ==> lines(CustomerImport.data),
-      s"$hdfsArchivePath/$timePath" </> "part-00000.gz" ==> records(compressedRecordReader, CustomerImport.data)
+      s"$hdfsLandingPath/$timePath" </> "part-m-00000" ==> lines(data),
+      s"$hdfsArchivePath/$timePath" </> "part-00000.gz" ==> records(compressedRecordReader, data)
     )
     count must_== 3
   }
@@ -97,9 +96,9 @@ object SqoopImportExecutionSpec
     facts(
       ImportPathFact(path),
       s"$dir/user/hdfs/archive/sales/books" </> importTableName </> "2014/10/10" </> "part-00000.gz" ==>
-        records(compressedRecordReader, CustomerImport.data),
+        records(compressedRecordReader, data),
       s"$dir/user/hdfs/source/sales/books" </> importTableName </> "2014/10/10" </> "part-m-00000"   ==>
-        lines(CustomerImport.data)
+        lines(data)
     )
     count must_== 3
   }
@@ -116,7 +115,29 @@ object SqoopImportExecutionSpec
     execute(sqoopImport(config)) must beLike { case Failure(_) => ok }
   }
 
-  override def before: Any = CustomerImport.tableSetup(
+  val data = List("1|Fred|001|D|M|259", "2|Betty|005|D|M|205", "3|Bart|002|F|M|225")
+
+  def tableSetup(connectionString: String, username: String, password: String, table: String = "customer_import"): Unit = {
+    ConnectionPool.singleton(connectionString, username, password)
+    implicit val session = AutoSession
+
+    SQL(s"""
+      create table $table (
+        id integer,
+        name varchar(20),
+        accr varchar(20),
+        cat varchar(20),
+        sub_cat varchar(20),
+        balance integer
+      )
+    """).execute.apply()
+
+    data.map(line => line.split('|')).foreach(
+      row => SQL(s"""insert into ${table}(id, name, accr, cat, sub_cat, balance)
+        values ('${row(0)}', '${row(1)}', '${row(2)}', '${row(3)}', '${row(4)}', '${row(5)}')""").update().apply())
+  }
+
+  override def before: Any = tableSetup(
     connectionString, username, password, importTableName
   )
 

@@ -20,7 +20,7 @@ import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 
-import au.com.cba.omnia.maestro.api.exec._, Maestro._
+import au.com.cba.omnia.maestro.api._, Maestro._
 
 import au.com.cba.omnia.maestro.test.Records
 

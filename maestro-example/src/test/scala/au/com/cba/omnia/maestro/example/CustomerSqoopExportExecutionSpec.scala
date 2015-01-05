@@ -22,7 +22,7 @@ import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 
-import au.com.cba.omnia.maestro.api.exec.SqoopExecutionTest
+import au.com.cba.omnia.maestro.test.SqoopExecutionTest
 
 object CustomerSqoopExportExecutionSpec extends ThermometerSpec { def is = s2"""
 

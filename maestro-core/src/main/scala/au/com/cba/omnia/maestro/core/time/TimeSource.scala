@@ -100,21 +100,3 @@ object TimeSource {
   def fromDirStructureSecond: TimeSource =
     fromPathSecond(".*/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})/.*".r)
 }
-
-/** Trait for time source factory functions that used to be provided via a trait, maintained for backwards compatibility */
-trait OldTimeSourceFunctions {
-  /** Use the current time yyyy-MM-dd as the load time for the data */
-  def now(format: String = "yyyy-MM-dd") = TimeSource.now(format)
-
-  /**
-    * Derive the load time from the file path using the provided regex.
-    * The regex needs to extract the year,month and day into separate capture groups.
-    */
-  def timeFromPath(regex: Regex): TimeSource = TimeSource.fromPath(regex)
-
-  /** Extracts time from path up to hour level using given Regex */
-  def timeFromPathHour(regex: Regex): TimeSource = TimeSource.fromPathHour(regex)
-
-  /** Extracts time from path up to seconds level using given Regex */
-  def timeFromPathSecond(regex: Regex): TimeSource = TimeSource.fromPathSecond(regex)
-}

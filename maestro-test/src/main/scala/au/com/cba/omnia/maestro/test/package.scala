@@ -12,15 +12,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.scalding
+package au.com.cba.omnia.maestro
 
-import com.twitter.scalding.{Args, Job}
-import java.util.UUID
-
-/** Ensures the scalding job has a unique name.*/
-abstract class UniqueJob(args: Args) extends Job(args) {
-  lazy val unique: UUID = UUID.randomUUID
-
-  override def name: String =
-    super.name + "-" + unique.toString
+package object test {
+  val SqoopExecutionTest = au.com.cba.omnia.maestro.core.task.SqoopExecutionTest
 }

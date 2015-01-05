@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.scalding
 
 import org.slf4j.Logger
 
@@ -50,13 +50,17 @@ object JobFailure {
 }
 
 /**
-  * Create an object which extends this class and run the class as a normal java program.
+  * Create an object which extends this trait to create a main class using the execution api.
   *
-  * The program will exit with an appropriate error code describing the
-  * status of the program. The script which runs this program can then take the
-  * appropriate action.
+  * Objects extending this trait must supply a:
+  *  - job execution: this is the main execution to run for the Maestro job
+  *  - attemptsExceeded execution: this execution should be run if the job execution fails too many times.
+  *  - logger: This will be used to log error messages from the above two executions.
+  *
+  * The job will exit with an error code describing the status of the program.
+  * The software running this program can then take the appropriate action.
   */
-trait MaestroExecutionMain extends Serializable {
+trait MaestroJob extends Serializable {
   /** The job to run */
   def job: Execution[JobStatus]
 

@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
 
 import java.sql.Timestamp
 
@@ -113,16 +113,16 @@ case class MaestroConfig(
     whereCondition: Option[String] = None,
     initialOptions: Option[T]      = None
   ): SqoopImportConfig[T] = {
-    val options =  SqoopEx.createSqoopImportOptions[T](
+    val options =  SqoopImportConfig.options[T](
       connectionString, username, password, dbTablename, outputFieldsTerminatedBy,
-      nullString, whereCondition, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+      nullString, whereCondition, initialOptions
     )
     SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
   }
 
   /**
     * Produce a sqoop import config for this job using standard paths and database options.
-    * 
+    *
     * Use it when you want to use SQL Select query to fetch data. If you do not provide `splitBy`,
     * then `numberOfMappers` is set to 1.
     *
@@ -149,9 +149,9 @@ case class MaestroConfig(
     nullString: String             = "",
     initialOptions: Option[T]      = None
   ): SqoopImportConfig[T] = {
-    val options = SqoopEx.createSqoopImportOptionsWithQuery[T](
+    val options = SqoopImportConfig.optionsWithQuery[T](
       connectionString, username, password, query, splitBy, outputFieldsTerminatedBy,
-      nullString, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+      nullString, initialOptions
     )
     SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
   }

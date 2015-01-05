@@ -61,9 +61,3 @@ object Guard {
     directoryPath foreach ((x)=> Hdfs.create(Hdfs.path(s"$x/_PROCESSED")).run(new Configuration))
   }
 }
-
-/** Trait for guard functions that used to be provided via a trait, maintained for backwards compatibility */
-trait OldGuardFunctions {
-  /** Creates the _PROCESSED flag to indicate completion of processing in given list of paths */
-  def createFlagFile(directoryPath : List[String]) { Guard.createFlagFile(directoryPath) }
-}

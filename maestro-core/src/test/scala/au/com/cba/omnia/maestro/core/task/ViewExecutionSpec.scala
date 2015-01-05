@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
 
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource, ThermometerSpec}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid

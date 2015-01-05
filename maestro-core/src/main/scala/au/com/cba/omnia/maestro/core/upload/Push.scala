@@ -17,11 +17,11 @@ package upload
 
 import java.io.File
 
+import com.google.common.io.Files
+
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream
 
 import org.apache.hadoop.fs.Path
-
-import com.google.common.io.Files
 
 import au.com.cba.omnia.omnitool.file.ops.Temp
 

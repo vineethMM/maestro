@@ -21,16 +21,14 @@ import scala.util.matching.Regex
 
 import scalaz._, Scalaz._
 
-import au.com.cba.omnia.omnitool.Result
-
-/** A file existing in the source directory */
-sealed trait Input
-
 /** A control file, not to be loaded into HDFS */
-case class Control(file: File) extends Input
+case class Control(file: File)
 
 /** A file to be loaded into HDFS */
-case class Data(file: File, fileSubDir: File) extends Input
+case class Data(file: File, fileSubDir: File)
+
+/** Files found by [[findFilese]] */
+case class InputFiles(controlFiles: List[Control], dataFiles: List[Data])
 
 /** Factory for `Input`s */
 object Input {
@@ -41,24 +39,22 @@ object Input {
     * See the description of the file pattern at [[au.cba.com.omnia.meastro.core.task.Upload]]
     */
   def findFiles(
-    sourceDir: File, tableName: String, pattern: String, controlPattern: Regex
-  ): Result[(List[Control], List[Data])] = for {
-    matcher     <- fromDisjunction(InputParsers.forPattern(tableName, pattern))
-    files       <- fromNullable(sourceDir.listFiles, s"$sourceDir is not an existing directory").map(_.toList)
-    results     <- files traverse (file => fromDisjunction(matcher(file.getName)))
-    matches      = (files zip results) collect { case (file, Match(dirs)) => (file, dirs) }
-    (ctrl, data) = matches partition { case (file, _) => isControl(file, controlPattern) }
-    controls     = ctrl map { case (file, _)    => Control(file) }
-    dataFiles    = data map { case (file, dirs) => Data(file, new File(dirs mkString File.separator)) }
-  } yield (controls, dataFiles)
+    sourceDir: String, tablename: String, filePattern: String, controlPattern: Regex
+  ): String \/ InputFiles = for {
+    matcher <- InputParsers.forPattern(tablename, filePattern)
+    files   <- fromNullable((new File(sourceDir)).listFiles, s"${sourceDir} does not exist").map(_.toList)
+    results <- files traverse (file => matcher(file.getName))
+  } yield {
+    val matches      = (files zip results) collect { case (file, Match(dirs)) => (file, dirs) }
+    val (ctrl, data) = matches partition { case (file, _) => isControl(file, controlPattern) }
+    val controls     = ctrl map { case (file, _)    => Control(file) }
+    val dataFiles    = data map { case (file, dirs) => Data(file, new File(dirs mkString File.separator)) }
+    InputFiles(controls, dataFiles)
+  }
 
-  /** Convert a nullable reference into a Result */
-  def fromNullable[A](x: A, msg: String): Result[A] = if (x == null) Result.fail(msg) else Result.ok(x)
-
-  /** Convert a disjunction into a Result */
-  def fromDisjunction[A](x: String \/ A): Result[A] = x.fold(Result.fail(_), Result.ok(_))
-
-  /** check if file matches any of the control file patterns */
   def isControl(file: File, controlPattern: Regex) =
     controlPattern.unapplySeq(file.getName).isDefined
+
+  def fromNullable[A](v: A, msg: String) =
+    if (v == null) msg.left else v.right
 }

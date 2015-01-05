@@ -12,9 +12,11 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
 
 import java.io.File
+
+import org.apache.commons.lang.StringUtils
 
 import org.apache.log4j.Logger
 
@@ -23,16 +25,19 @@ import scalaz.Monoid
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.io.compress.{GzipCodec, CompressionCodec}
 
+//import com.cloudera.sqoop.SqoopOptions
+
 import cascading.flow.FlowDef
 
 import com.twitter.scalding._
 
 import com.cba.omnia.edge.source.compressible.CompressibleTypedTsv
 
-import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourExportOptions, ParlourImportOptions}
+// import au.com.cba.omnia.parlour._
+import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourExportDsl, ParlourImportDsl}
+import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourExportOptions, ParlourImportOptions, ParlourOptions}
 
 import au.com.cba.omnia.maestro.core.scalding.StatKeys
-import au.com.cba.omnia.maestro.core.task.{Sqoop, SqoopDelete}
 
 /**
   * Configuration options for sqoop import
@@ -79,8 +84,8 @@ object SqoopImportConfig {
     whereCondition: Option[String] = None,
     initialOptions: Option[T]      = None
   ): T = SqoopEx.createSqoopImportOptions[T](
-    connectionString, username, password, dbTablename, outputFieldsTerminatedBy,
-    nullString, whereCondition, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+    connectionString, username, password, outputFieldsTerminatedBy, nullString,
+    TableSrc(dbTablename, whereCondition), initialOptions
   )
 
   /**
@@ -94,9 +99,9 @@ object SqoopImportConfig {
    * @param query: SQL Select query
    * @param outputFieldsTerminatedBy: output field terminating character
    * @param nullString: The string to be written for a null value in columns
-   * @param splitBy: splitting column; if None, then `numberOfMappers` is set to 1 
+   * @param splitBy: splitting column; if None, then `numberOfMappers` is set to 1
    * @param options: parlour option to populate
-   * 
+   *
    * @return : Populated parlour option
    */
   def optionsWithQuery[T <: ParlourImportOptions[T] : Monoid](
@@ -108,9 +113,9 @@ object SqoopImportConfig {
     outputFieldsTerminatedBy: Char = '|',
     nullString: String             = "",
     initialOptions: Option[T]      = None
-  ): T = SqoopEx.createSqoopImportOptionsWithQuery[T](
-    connectionString, username, password, query, splitBy, outputFieldsTerminatedBy,
-    nullString, initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+  ): T = SqoopEx.createSqoopImportOptions[T](
+    connectionString, username, password, outputFieldsTerminatedBy, nullString,
+    QuerySrc(query, splitBy), initialOptions
   )
 }
 
@@ -207,10 +212,20 @@ object SqoopExecutionTest {
 }
 
 /**
+  * Different sources for parlour imports.
+  *
   * WARNING: not considered part of the maestro api.
   * We may change this without considering backwards compatibility.
   */
-object SqoopEx extends Sqoop {
+sealed trait ImportSource
+case class TableSrc(table: String, where: Option[String]) extends ImportSource
+case class QuerySrc(query: String, splitBy: Option[String]) extends ImportSource
+
+/**
+  * WARNING: not considered part of the maestro api.
+  * We may change this without considering backwards compatibility.
+  */
+object SqoopEx {
   // system property key for setting custom hadoop map reduce dir
   // this property is a hack to get testing working without impacting our API
   val mrHomeKey = "MAESTRO_HADOOP_MAPRED_HOME"
@@ -222,7 +237,7 @@ object SqoopEx extends Sqoop {
     val archivePath  = config.hdfsArchivePath + File.separator + config.timePath
     val logger       = Logger.getLogger("Sqoop")
     val withDestDir  = config.options.targetDir(importPath)
-    val withMRHome   = getCustomMRHome.fold(withDestDir)(withDestDir.hadoopMapRedHome(_))
+    val withMRHome   = setCustomMRHome(withDestDir)
     val sqoopOptions = withMRHome.toSqoopOptions
 
     logger.info(s"connectionString = ${sqoopOptions.getConnectString}")
@@ -236,18 +251,76 @@ object SqoopEx extends Sqoop {
     } yield (importPath, count)
   }
 
+  def archive[C <: CompressionCodec : ClassManifest](
+    src: String, dest: String
+  ): Execution[Long] =
+    Execution.getConfigMode.flatMap { case (config, mode) =>
+      Execution.fromFuture { cec =>
+        val configWithCompress = Config(config.toMap ++ Map(
+          "mapred.output.compress"          -> "true",
+          "mapred.output.compression.type"  -> "BLOCK",
+          "mapred.output.compression.codec" -> implicitly[ClassManifest[C]].erasure.getName
+        ))
+        TypedPipe.from(TextLine(src))
+          .writeExecution(CompressibleTypedTsv[String](dest))
+          .getAndResetCounters
+          .map( _._2.get(StatKeys.tuplesWritten).getOrElse(0L) )
+          .run(configWithCompress, mode)(cec)
+      }
+    }
+
   def exportExecution[T <: ParlourExportOptions[T]](
     config: SqoopExportConfig[T]
   ): Execution[Unit] = {
     val withDelete =
-      if (config.deleteFromTable) SqoopDelete.trySetDeleteQuery(config.options)
+      if (config.deleteFromTable) trySetDeleteQuery(config.options)
       else config.options
-    val withMRHome = getCustomMRHome.fold(withDelete)(withDelete.hadoopMapRedHome(_))
+    val withMRHome = setCustomMRHome(withDelete)
     ParlourExecution.sqoopExport(withMRHome)
   }
 
-  // mirrors createSqoopImportOptions from Sqoop
-  // except initialOptions is Option[T], to avoid duplicating that code above
+  // Sets DELETE sql query. Throws RuntimeException if sql query already set or table name is not set
+  def trySetDeleteQuery[T <: ParlourExportOptions[T]](options: T): T = {
+    if (options.getSqlQuery.fold(false)(StringUtils.isNotEmpty(_))) {
+      throw new RuntimeException("SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table")
+    }
+
+    val tableName: String = options.getTableName.getOrElse(throw new RuntimeException("Cannot create DELETE query before SqoopExport - table name is not set"))
+    options.sqlQuery(s"DELETE FROM $tableName")
+  }
+
+  def setCustomMRHome[T <: ParlourOptions[T]](options: T): T =
+    Option(System.getProperty(mrHomeKey)).fold(options)(options.hadoopMapRedHome(_))
+
+  def createSqoopImportOptions[T <: ParlourImportOptions[T] : Monoid](
+    connectionString: String,
+    username: String,
+    password: String,
+    outputFieldsTerminatedBy: Char,
+    nullString: String,
+    source: ImportSource,
+    initialOptions: Option[T]
+  ): T = {
+    val initial  = initialOptions.getOrElse(implicitly[Monoid[T]].zero)
+    val noSource = initial
+      .connectionString(connectionString)
+      .username(username)
+      .password(password)
+      .fieldsTerminatedBy(outputFieldsTerminatedBy)
+      .nullString(nullString)
+      .nullNonString(nullString)
+    source match {
+      case TableSrc(table, where) => {
+        val withTable = noSource.tableName(table)
+        where.fold(withTable)(withTable.where(_))
+      }
+      case QuerySrc(query, splitBy) => {
+        val withQuery = noSource.sqlQuery(query)
+        splitBy.fold(withQuery.numberOfMappers(1))(withQuery.splitBy(_))
+      }
+    }
+  }
+
   def createSqoopExportOptions[T <: ParlourExportOptions[T] : Monoid](
     connectionString: String,
     username: String,
@@ -266,25 +339,4 @@ object SqoopEx extends Sqoop {
       .inputFieldsTerminatedBy(inputFieldsTerminatedBy)
       .inputNull(inputNullString)
   }
-
-  def archive[C <: CompressionCodec : ClassManifest](
-    src: String, dest: String
-  ): Execution[Long] =
-    Execution.getConfigMode.flatMap { case (config, mode) =>
-      Execution.fromFuture { cec =>
-        val configWithCompress = Config(config.toMap ++ Map(
-          "mapred.output.compress"          -> "true",
-          "mapred.output.compression.type"  -> "BLOCK",
-          "mapred.output.compression.codec" -> implicitly[ClassManifest[C]].erasure.getName
-        ))
-        TypedPipe.from(TextLine(src))
-          .writeExecution(CompressibleTypedTsv[String](dest))
-          .getAndResetCounters
-          .map(_._2.get(StatKeys.tuplesWritten).getOrElse(0L))  
-          .run(configWithCompress, mode)(cec)
-      }
-    }
-
-  def getCustomMRHome: Option[String] =
-    Option(System.getProperty(mrHomeKey))
 }

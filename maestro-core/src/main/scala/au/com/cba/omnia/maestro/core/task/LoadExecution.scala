@@ -12,9 +12,19 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
 
+import java.nio.ByteBuffer
 import java.security.{MessageDigest, SecureRandom}
+
+import scala.util.hashing.MurmurHash3
+
+import scalaz.{Tag => _, _}, Scalaz._
+
+import cascading.flow.FlowProcess
+import cascading.operation.{BaseOperation, Function, FunctionCall, OperationCall}
+import cascading.tap.hadoop.io.MultiInputSplit.CASCADING_SOURCE_PATH
+import cascading.tuple.Tuple
 
 import com.twitter.scalding.{Execution, ExecutionCounters, MultipleTextLineFiles, TypedPipe, Stat}
 import com.twitter.scalding.typed.TypedPipeFactory
@@ -22,12 +32,11 @@ import com.twitter.scalding.Dsl._ // Pipe.eachTo
 
 import com.twitter.scrooge.ThriftStruct
 
-import au.com.cba.omnia.maestro.core.codec.{Decode, Tag}
+import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
 import au.com.cba.omnia.maestro.core.filter.RowFilter
-import au.com.cba.omnia.maestro.core.scalding.StatKeys
+import au.com.cba.omnia.maestro.core.scalding.{Errors, StatKeys}
 import au.com.cba.omnia.maestro.core.split.Splitter
-import au.com.cba.omnia.maestro.core.task.{ExtractTime, GenerateKey, LoadHelper, RawRow}
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
 
@@ -153,21 +162,48 @@ object LoadEx {
   def execution[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
-    val input =
+    val rawRows =
       if (config.generateKey) pipeWithDateAndKey(sources, config.timeSource)
       else                    pipeWithDate(sources, config.timeSource)
 
     Execution.withId { id =>
-      val stat = Stat(StatKeys.tuplesFiltered)(id)
-      val pipe = LoadHelper.loadProcess(
-        input, config.splitter, config.errors, config.clean, config.validator,
-        config.filter, config.none, Some(stat)
-      )
-      pipe.forceToDiskExecution.getAndResetCounters.map { case (pipe, counters) =>
+      val stat        = Stat(StatKeys.tuplesFiltered)(id)
+      val parsedRows  = parseRows(config, stat, rawRows)
+      val thriftInput = Errors.safely(config.errors)(parsedRows)
+
+      thriftInput.forceToDiskExecution.getAndResetCounters.map { case (pipe, counters) =>
         (pipe, LoadInfo.fromCounters(counters, config.errorThreshold))
       }
     }
   }
+
+  def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](
+    conf: LoadConfig[A], filterCounter: Stat, in: TypedPipe[RawRow]
+  ): TypedPipe[String \/ A] =
+    in
+      .map(row => conf.splitter.run(row.line) ++ row.extraFields)
+      .flatMap(conf.filter.run(_) match {
+        case Some(r) => Some(r)
+        case None    => {
+          filterCounter.inc
+          None
+        }
+      }).map(record =>
+        Tag.tag[A](record).map { case (column, field) => conf.clean.run(field, column) }
+      ).map(record => Decode.decode[A](conf.none, record))
+      .map {
+        case DecodeOk(value) =>
+          conf.validator.run(value).disjunction.leftMap(errors => s"""The following errors occured: ${errors.toList.mkString(",")}""")
+        case e @ DecodeError(remainder, counter, reason) =>
+          reason match {
+            case ParseError(value, expected, error) =>
+              s"unexpected type: $e".left
+            case NotEnoughInput(required, expected) =>
+              s"not enough fields in record: $e".left
+            case TooMuchInput =>
+              s"too many fields in record: $e".left
+          }
+      }
 
   def pipeWithDate(sources: List[String], timeSource: TimeSource): TypedPipe[RawRow] =
     TypedPipeFactory { (flowDef, mode) =>
@@ -194,5 +230,90 @@ object LoadEx {
           .eachTo(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, hashes))
       )(flowDef, mode)
     }
+  }
+}
+
+case class RawRow(line: String, extraFields: List[String])
+
+/**
+  * Used by `Load.loadWithKey` to generates a unique key for each input line.
+  *
+  * It hashes each line and combines that with the hash of the path and the slice number
+  * (map task number) to create a unique key for each line.
+  * It also gets the path from cascading and extracts the time from that using the provided
+  * `timeSource`.
+  */
+class GenerateKey(timeSource: TimeSource, hashes: Map[String, String])
+    extends BaseOperation[(ByteBuffer, MessageDigest, String, Tuple)](('result))
+    with Function[(ByteBuffer, MessageDigest, String, Tuple)] {
+  /** Creates a unique key from the provided information.*/
+  def uid(path: String, slice: Int, offset: Long, line: String, byteBuffer: ByteBuffer, md: MessageDigest): String = {
+    val hash     = hashes(path)
+    val lineHash = md.digest(line.getBytes("UTF-8")).drop(8)
+
+    byteBuffer.clear
+
+    val lineInfo = byteBuffer.putInt(slice).putLong(offset).array
+    val hex      = (lineInfo ++ lineHash).map("%02x".format(_)).mkString
+
+    s"$hash$hex"
+  }
+
+  /**
+    * Sets up the follow on processing by initialising the hashing algorithm, getting the path from
+    * cascading and creating a reusable tuple.
+    */
+  override def prepare(
+    flow: FlowProcess[_],
+    call: OperationCall[(ByteBuffer, MessageDigest, String, Tuple)]
+  ): Unit = {
+    val md   = MessageDigest.getInstance("SHA-1")
+    val path = flow.getProperty(CASCADING_SOURCE_PATH).toString
+    call.setContext((ByteBuffer.allocate(12), md, path, Tuple.size(1)))
+  }
+
+  /** Operates on each line to create a unique key and extract the time from the path.*/
+  def operate(flow: FlowProcess[_], call: FunctionCall[(ByteBuffer, MessageDigest, String, Tuple)])
+      : Unit = {
+    val entry  = call.getArguments
+    val offset = entry.getLong(0)
+    val line   = entry.getString(1)
+    val slice  = flow.getCurrentSliceNum
+
+    val (byteBuffer, md, path, resultTuple) = call.getContext
+    val time = timeSource.getTime(path)
+    val key  = uid(path, slice, offset, line, byteBuffer, md)
+
+    // representation of RawRow: tuple with string and List elements
+    resultTuple.set(0, RawRow(line, List(time, key)))
+    call.getOutputCollector.add(resultTuple)
+  }
+}
+
+/** Gets the path from Cascading and provides it to `timeSource` to get the time.*/
+class ExtractTime(timeSource: TimeSource)
+    extends BaseOperation[(String, Tuple)](('result))
+    with Function[(String, Tuple)] {
+  /**
+    * Sets up the follow on processing by initialising the hashing algorithm, getting the path from
+    * cascading and creating a reusable tuple.
+    */
+  override def prepare(
+    flow: FlowProcess[_],
+    call: OperationCall[(String, Tuple)]
+  ): Unit = {
+    val path = flow.getProperty(CASCADING_SOURCE_PATH).toString
+    call.setContext((path, Tuple.size(1)))
+  }
+
+  /** Operates on each line to extract the time from the path.*/
+  def operate(flow: FlowProcess[_], call: FunctionCall[(String, Tuple)])
+      : Unit = {
+    val line                = call.getArguments.getString(1)
+    val (path, resultTuple) = call.getContext
+
+    // representation of RawRow: tuple with string and List elements
+    resultTuple.set(0, RawRow(line, List(timeSource.getTime(path))))
+    call.getOutputCollector.add(resultTuple)
   }
 }

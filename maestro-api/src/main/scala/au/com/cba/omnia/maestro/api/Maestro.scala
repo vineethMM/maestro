@@ -14,46 +14,19 @@
 
 package au.com.cba.omnia.maestro.api
 
-import com.twitter.scrooge.ThriftStruct
+import au.com.cba.omnia.permafrost.hdfs.HdfsStrings
 
-import com.twitter.scalding.{Args, Job, CascadeJob}
+import au.com.cba.omnia.maestro.core.task.{LoadExecution, SqoopExecution, UploadExecution, ViewExecution, QueryExecution}
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps
 
-import au.com.cba.omnia.maestro.macros.LegacyMacroSupport
 
-import au.com.cba.omnia.maestro.core.task._
-import au.com.cba.omnia.maestro.core.args.Config
-import au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions
-import au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions
-
-/**
-  * Parent class for a more complex maestro job that needs to use cascades. For example, to run hive
-  * queries.
-  */
-abstract class MaestroCascade[A <: ThriftStruct](args: Args) extends CascadeJob(args) with LegacyMacroSupport[A] {
-  /** Don't run any cascading jobs if the job list is empty. */
-  override def run =
-    if (jobs.isEmpty) true
-    else super.run
-
-  override def validate {
-    /* scalding validate class chokes on cascades: don't call super.validate */
-
-    val jobNames = jobs.map(_.name)
-    if (jobNames.toSet.size != jobNames.length) {
-      throw new Exception(s"Cascade jobs do not have unique names. The names are: ${jobNames.mkString(", ")}")
-    }
-  }
-}
-
-/** Parent class for a simple maestro job that does not need to use cascades or run hive queries.*/
-abstract class Maestro[A <: ThriftStruct](args: Args) extends Job(args) with LegacyMacroSupport[A]
-
+/** Provides task methods, and any implicits required to use them. */
 object Maestro
-    extends Load
-    with View
-    with Query
-    with Upload
-    with Sqoop
-    with Config
-    with OldTimeSourceFunctions
-    with OldGuardFunctions
+  extends UploadExecution
+  with LoadExecution
+  with ViewExecution
+  with QueryExecution
+  with SqoopExecution
+  with ExecutionOps
+  with MacroSupport
+  with HdfsStrings

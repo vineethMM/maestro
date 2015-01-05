@@ -16,6 +16,8 @@ package au.com.cba.omnia.maestro.core.scalding
 
 import scala.concurrent.Future
 
+import scalaz._, Scalaz._
+
 import com.twitter.scalding.{Config, Execution}
 
 import org.apache.hadoop.hive.conf.HiveConf
@@ -85,6 +87,13 @@ case class RichExecutionObject(exec: Execution.type) {
       ))
     }
   }
+
+  /** Changes from an action that produces a scalaz Disjunction to an Execution. */
+  def fromEither[T](disjunction: => String \/ T): Execution[T] =
+    Execution.fromFuture(_ => disjunction.fold(
+      msg => Future.failed(new Exception(msg)),
+      x   => Future.successful(x)
+    ))
 }
 
 object ExecutionOps extends ExecutionOps
@@ -97,4 +106,9 @@ trait ExecutionOps {
   /** Implicit conversion of Execution Object to RichExecutionObject. */
   implicit def ExecutionToRichExecution(exec: Execution.type): RichExecutionObject =
     RichExecutionObject(exec)
+
+  implicit val scalazExecutionMonad: Monad[Execution] = new Monad[Execution] {
+    def point[A](v: => A) = Execution.from(v)
+    def bind[A, B](a: Execution[A])(f: A => Execution[B]) = a.flatMap(f)
+  }
 }

@@ -12,18 +12,28 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.core.exec
+package au.com.cba.omnia.maestro.core.task
+
+import java.io.File
 
 import scala.concurrent.Future
 import scala.util.matching.Regex
 
-import com.twitter.scalding.Execution
+import scalaz._, Scalaz._
+
+import org.apache.log4j.Logger
+
+import org.apache.hadoop.conf.Configuration
+
+import com.twitter.scalding._
+
+import au.com.cba.omnia.omnitool.Result
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.maestro.core.scalding.ConfHelper
-import au.com.cba.omnia.maestro.core.task.Upload
-import au.com.cba.omnia.maestro.core.upload.ControlPattern
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
+import au.com.cba.omnia.maestro.core.upload.{ControlPattern, Input, Push}
 
 /** Information about an upload */
 case class UploadInfo(files: List[String]) {
@@ -133,22 +143,35 @@ trait UploadExecution {
   * WARNING: not considered part of the load execution api.
   * We may change this without considering backwards compatibility.
   */
-object UploadEx extends Upload {
-  def execution(config: UploadConfig): Execution[UploadInfo] = for {
-    conf <- Execution.getConfig
-    info <- Execution.fromFuture(ec => Future {
-      val errorPrefix = s"Failed to upload ${config.tablename} files from ${config.localIngestPath}"
-      val res = customUpload(
-        config.tablename, config.filePattern, config.localIngestPath,
-        config.localArchivePath, config.hdfsArchivePath, config.hdfsLandingPath,
-        ConfHelper.getHadoopConf(conf), config.controlPattern
-      )
-      res.foldAll(
-        copied    => UploadInfo(copied),
-        msg       => throw new Exception(s"$errorPrefix: $msg"),
-        ex        => throw new Exception(errorPrefix, ex),
-        (msg, ex) => throw new Exception(s"$errorPrefix: $msg", ex)
-      )
-    }(ec))
-  } yield info
+object UploadEx {
+  val logger = Logger.getLogger("Upload")
+
+  def execution(conf: UploadConfig): Execution[UploadInfo] = for {
+    _      <- Execution.from {
+      logger.info("Start of upload from ${conf.localIngestPath}")
+      logger.info(s"tableName        = ${conf.tablename}")
+      logger.info(s"filePattern      = ${conf.filePattern}")
+      logger.info(s"localIngestPath  = ${conf.localIngestPath}")
+      logger.info(s"localArchivePath = ${conf.localArchivePath}")
+      logger.info(s"hdfsArchivePath  = ${conf.hdfsArchivePath}")
+      logger.info(s"hdfsLandingPath  = ${conf.hdfsLandingPath}")
+    }
+
+    files  <- Execution.fromEither(Input.findFiles(
+      conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
+    ))
+
+    _      <- Execution.from(files.controlFiles.foreach(ctrl =>
+      logger.info(s"skipping control file ${ctrl.file.getName}")
+    ))
+
+    copied <- Execution.fromHdfs(files.dataFiles.traverse(data => for {
+      record <- Push.push(data, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
+      _      =  logger.info("copied ${record.source.getName} to ${record.dest}")
+    } yield record.dest.toString ))
+
+    _      <- Execution.from {
+      logger.info(s"Upload ended from ${conf.localIngestPath}")
+    }
+  } yield UploadInfo(copied)
 }

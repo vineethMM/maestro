@@ -21,8 +21,6 @@ import scalaz._, Scalaz._
 import au.com.cba.omnia.maestro.api.Maestro
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
-import au.com.cba.omnia.omnitool.{Error, Ok, Result}
-
 class CustomerUploadExample(args: Args) extends Maestro[Customer](args) {
   val hdfsRoot    = args("hdfs-root")
   val source      = "customer"
@@ -35,15 +33,21 @@ class CustomerUploadExample(args: Args) extends Maestro[Customer](args) {
   val byDateResult = Maestro.upload(source, domain, "by_date", filePattern, localRoot, archiveRoot, hdfsRoot, conf)
   val byIdResult   = Maestro.upload(source, domain, "by_id",   filePattern, localRoot, archiveRoot, hdfsRoot, conf)
 
-  List(byDateResult, byIdResult).sequence_ match {
-    case Error(_) => {
+  List(byDateResult, byIdResult).sequence_.foldAll(
+    result => {
+      // continue with post-processing here
+    },
+    errorMsg => {
       // do not post-process files when there was an error copying them
       // report the error here
-      ()
+    },
+    exception => {
+      // do not post-process files when there was an error copying them
+      // report the error here
+    },
+    (errorMsg, exception) => {
+      // do not post-process files when there was an error copying them
+      // report the error here
     }
-    case Ok(()) => {
-      // continue with post-processing here
-      ()
-    }
-  }
+  )
 }

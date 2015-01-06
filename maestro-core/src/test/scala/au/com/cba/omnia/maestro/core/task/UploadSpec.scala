@@ -22,8 +22,6 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.fact.PathFactoids
 
-import au.com.cba.omnia.omnitool.{Error, Ok}
-
 object UploadSpec extends ThermometerSpec { def is = s2"""
 
 Upload Cascade
@@ -71,9 +69,11 @@ class UploadTestCascade(args: Args) extends Job(args) {
   override def clear()    {      /* we have no actual scalding jobs to run */ }
   override def run      = { true /* we have no actual scalding jobs to run */ }
 
-  UploadLogic.upload(source, domain, tablename, "{table}_{yyyyMMdd}*",
-    localRoot, archiveRoot, hdfsRoot, new Configuration) match {
-    case Ok(_)    => {}
-    case Error(e) => throw new Exception(s"Failed to upload file to HDFS: $e")
-  }
+  UploadLogic.upload(
+    source, domain, tablename, "{table}_{yyyyMMdd}*",
+    localRoot, archiveRoot, hdfsRoot, new Configuration
+  ).fold(
+    _ => (),
+    e => throw new Exception(s"Failed to upload file to HDFS: $e")
+  )
 }

@@ -22,8 +22,6 @@ import com.twitter.scalding._, TDsl._
 
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
 
-import au.com.cba.omnia.omnitool.{Error, Ok}
-
 import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.{Account, Customer}
 
@@ -47,10 +45,12 @@ class CustomerCascade(args: Args) extends MaestroCascade[Customer](args) {
     HiveTable(domain, "by_cat", Partition.byField(Fields.Cat), args.optional("by_cat"))
   val conf = configuration(args)
 
-  upload(source, domain, tablename, "{table}_{yyyyMMdd}.txt", localRoot, archiveRoot, hdfsRoot, conf) match {
-    case Ok(_)    => {}
-    case Error(e) => throw new Exception(s"Failed to upload file to HDFS: $e")
-  }
+  upload(source, domain, tablename, "{table}_{yyyyMMdd}.txt", localRoot, archiveRoot, hdfsRoot, conf).foldAll(
+    _         => (),
+    msg       => throw new Exception(s"Failed to upload. $msg"),
+    ex        => throw new Exception("Failed to upload", ex),
+    (msg, ex) => throw new Exception(s"Failed to upload. $msg", ex)
+  )
 
   val inputs = Guard.expandPaths(s"${hdfsRoot}/source/${source}/${domain}/${tablename}/*/*/*")
 

@@ -17,11 +17,7 @@ package au.com.cba.omnia.maestro.core.exec
 import scala.concurrent.Future
 import scala.util.matching.Regex
 
-import scalaz.\&/.{This, That, Both}
-
 import com.twitter.scalding.Execution
-
-import au.com.cba.omnia.omnitool.{Error, Ok, Result}
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -147,12 +143,12 @@ object UploadEx extends Upload {
         config.localArchivePath, config.hdfsArchivePath, config.hdfsLandingPath,
         ConfHelper.getHadoopConf(conf), config.controlPattern
       )
-      res match {
-        case Ok(copied)        => UploadInfo(copied)
-        case Error(Both(e, t)) => throw new Exception(s"$errorPrefix: $e", t)
-        case Error(This(e))    => throw new Exception(s"$errorPrefix: $e")
-        case Error(That(t))    => throw new Exception(errorPrefix, t)
-      }
+      res.foldAll(
+        copied    => UploadInfo(copied),
+        msg       => throw new Exception(s"$errorPrefix: $msg"),
+        ex        => throw new Exception(errorPrefix, ex),
+        (msg, ex) => throw new Exception(s"$errorPrefix: $msg", ex)
+      )
     }(ec))
   } yield info
 }

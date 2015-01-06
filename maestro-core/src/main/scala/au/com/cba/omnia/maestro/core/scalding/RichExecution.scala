@@ -16,11 +16,7 @@ package au.com.cba.omnia.maestro.core.scalding
 
 import scala.concurrent.Future
 
-import scalaz.\&/.{This, That, Both}
-
 import com.twitter.scalding.{Config, Execution}
-
-import au.com.cba.omnia.omnitool.{Error, Ok, Result}
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -37,12 +33,12 @@ case class RichExecutionObject(exec: Execution.type) {
   /** Changes from  HDFS context to Execution context. */
   def fromHdfs[T](hdfs: Hdfs[T]): Execution[T] = {
     Execution.getConfig.flatMap { config =>
-      Execution.fromFuture(_ => hdfs.run(ConfHelper.getHadoopConf(config)) match {
-        case Ok(x)             => Future.successful(x)
-        case Error(This(s))    => Future.failed(new Exception(s))
-        case Error(That(e))    => Future.failed(e)
-        case Error(Both(s, e)) => Future.failed(new Exception(s, e))
-      })
+      Execution.fromFuture(_ => hdfs.run(ConfHelper.getHadoopConf(config)).foldAll(
+        x         => Future.successful(x),
+        msg       => Future.failed(new Exception(msg)),
+        ex        => Future.failed(ex),
+        (msg, ex) => Future.failed(new Exception(msg, ex))
+      ))
     }
   }
 }

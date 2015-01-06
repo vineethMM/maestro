@@ -23,7 +23,6 @@ import org.apache.hadoop.fs.Path
 
 import com.google.common.io.Files
 
-import au.com.cba.omnia.omnitool.Result
 import au.com.cba.omnia.omnitool.file.ops.Temp
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
@@ -95,12 +94,10 @@ object Push {
 
   /** Move file to another directory. Convienient to run in a Hdfs operation. */
   def moveToDir(file: File, destDir: File): Hdfs[Unit] =
-    Hdfs.result(
       for {
-        _ <- Result.guard(destDir.isDirectory || destDir.mkdirs, s"$destDir could not be created")
-        _ <- Result.ok[Unit](Files.move(file, new File(destDir, file.getName)))
+        _ <- Hdfs.guard(destDir.isDirectory || destDir.mkdirs, s"$destDir could not be created")
+        _ <- Hdfs.value(Files.move(file, new File(destDir, file.getName)))
       } yield ()
-    )
 
   /** Convert a Hdfs operation that depends on a temporary file into a normal Hdfs operation */
   def hdfsWithTempFile[A](raw: File, fileName: String, action: File => Hdfs[A]): Hdfs[A] =

@@ -23,9 +23,9 @@ import org.apache.hadoop.conf.Configuration
 
 import org.apache.log4j.Logger
 
-import scalaz._, Scalaz._, scalaz.\&/.{This, That, Both}
+import scalaz._, Scalaz._
 
-import au.com.cba.omnia.omnitool.{Error, Ok, Result}
+import au.com.cba.omnia.omnitool.Result
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -138,12 +138,12 @@ trait Upload {
     ).safe.run(conf)
 
     val args = s"$source/$domain/$tableName"
-    result match {
-      case Ok(_)                 => logger.info(s"Upload ended for $args")
-      case Error(This(msg))      => logger.error(s"Upload failed for $args: $msg")
-      case Error(That(exn))      => logger.error(s"Upload failed for $args", exn)
-      case Error(Both(msg, exn)) => logger.error(s"Upload failed for $args: $msg", exn)
-    }
+    result.foldAll(
+      _         => logger.info(s"Upload ended for $args"),
+      msg       => logger.error(s"Upload failed for $args: $msg"),
+      ex        => logger.error(s"Upload failed for $args", ex),
+      (msg, ex) => logger.error(s"Upload failed for $args: $msg", ex)
+    )
 
     result
   }
@@ -191,12 +191,12 @@ trait Upload {
         localArchivePath, hdfsArchivePath, hdfsLandingPath,
         controlPattern).safe.run(conf)
 
-    result match {
-      case Ok(_)                 => logger.info(s"Custom upload ended from $localIngestPath")
-      case Error(This(msg))      => logger.error(s"Custom upload failed from $localIngestPath: $msg")
-      case Error(That(exn))      => logger.error(s"Custom upload failed from $localIngestPath", exn)
-      case Error(Both(msg, exn)) => logger.error(s"Custom upload failed from $localIngestPath: $msg", exn)
-    }
+    result.foldAll(
+      _         => logger.info(s"Custom upload ended from $localIngestPath"),
+      msg       => logger.error(s"Custom upload failed from $localIngestPath: $msg"),
+      ex        => logger.error(s"Custom upload failed from $localIngestPath", ex),
+      (msg, ex) => logger.error(s"Custom upload failed from $localIngestPath: $msg", ex)
+    )
 
     result
   }

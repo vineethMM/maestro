@@ -18,7 +18,11 @@ import scala.concurrent.Future
 
 import com.twitter.scalding.{Config, Execution}
 
+import org.apache.hadoop.hive.conf.HiveConf
+
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
+
+import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 /** Pimps an Execution instance. */
 case class RichExecution[A](execution: Execution[A]) {
@@ -30,10 +34,28 @@ case class RichExecution[A](execution: Execution[A]) {
 
 /** Pimps the Execution object. */
 case class RichExecutionObject(exec: Execution.type) {
-  /** Changes from  HDFS context to Execution context. */
+  /** Changes from HDFS context to Execution context. */
   def fromHdfs[T](hdfs: Hdfs[T]): Execution[T] = {
     Execution.getConfig.flatMap { config =>
       Execution.fromFuture(_ => hdfs.run(ConfHelper.getHadoopConf(config)).foldAll(
+        x         => Future.successful(x),
+        msg       => Future.failed(new Exception(msg)),
+        ex        => Future.failed(ex),
+        (msg, ex) => Future.failed(new Exception(msg, ex))
+      ))
+    }
+  }
+
+  /**
+    * Changes from Hive context to Execution context.
+    *
+    * `modifyConf` can be used to update the hive conf that will be used to run the Hive action.
+    */
+  def fromHive[T](hive: Hive[T], modifyConf: HiveConf => Unit = _ => ()): Execution[T] = {
+    Execution.getConfig.flatMap { config =>
+      val hiveConf = new HiveConf(ConfHelper.getHadoopConf(config), this.getClass)
+      modifyConf(hiveConf)
+      Execution.fromFuture(_ => hive.run(hiveConf).foldAll(
         x         => Future.successful(x),
         msg       => Future.failed(new Exception(msg)),
         ex        => Future.failed(ex),

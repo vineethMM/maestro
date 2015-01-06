@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/56cd9aa9391cfc88e4c7d62c9b2d041c13ee9730//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Macros.scala" target="_blank">Macros.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e09c0421bf74f928ece1ab83f4a649362e91eb44//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Macros.scala" target="_blank">Macros.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -320,6 +320,35 @@
                 <span class="name">@macroImpl</span><span class="args">(<span>
       
       <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.FieldsMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkJoin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]"></a>
+      <a id="mkJoin[A&lt;:Product,B&lt;:ThriftStruct]:Join[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mkJoin</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="scala.Product">Product</span></span>, <span name="B">B &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result">: <a href="../core/transform/Join.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Join">Join</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.B">B</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><p>The macro will generate a <code>Join</code> value which matches input fields to
+output fields if they have the same name and conforming types. If multiple
+input fields match, they must have the same values at runtime or the <code>Join</code>
+value will throw an exception.</p><p>Compilation will succeed when:
+- The input type is a product (e.g. tuple) of thrift structures.
+- Every field in the output thrift struct has matching fields (fields with
+  the same name) amongst the input thrift structs.
+- Every matching input field's type conforms to the type of it's output field.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.JoinMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0, 1))[A, B]">...</span>
     </span>)</span>
               
         </dd></dl></div>

@@ -22,7 +22,7 @@ import com.twitter.scalding._, TDsl._
 
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
 
-import au.com.cba.omnia.permafrost.hdfs.{Error, Ok}
+import au.com.cba.omnia.omnitool.{Error, Ok}
 
 import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.{Account, Customer}

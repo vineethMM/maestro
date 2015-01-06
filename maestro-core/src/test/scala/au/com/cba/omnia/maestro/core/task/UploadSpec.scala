@@ -22,7 +22,7 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.fact.PathFactoids
 
-import au.com.cba.omnia.permafrost.hdfs.{Error, Ok}
+import au.com.cba.omnia.omnitool.{Error, Ok}
 
 object UploadSpec extends ThermometerSpec { def is = s2"""
 

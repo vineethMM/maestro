@@ -21,7 +21,7 @@ import scalaz._, Scalaz._
 import au.com.cba.omnia.maestro.api.Maestro
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
-import au.com.cba.omnia.permafrost.hdfs.{Error, Ok, Result}
+import au.com.cba.omnia.omnitool.{Error, Ok, Result}
 
 class CustomerUploadExample(args: Args) extends Maestro[Customer](args) {
   val hdfsRoot    = args("hdfs-root")

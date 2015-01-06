@@ -21,7 +21,9 @@ import scala.util.matching.Regex
 
 import scalaz._, Scalaz._
 
-import au.com.cba.omnia.permafrost.hdfs.{Hdfs, Result}
+import au.com.cba.omnia.omnitool.Result
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 /** A file existing in the source directory */
 sealed trait Input

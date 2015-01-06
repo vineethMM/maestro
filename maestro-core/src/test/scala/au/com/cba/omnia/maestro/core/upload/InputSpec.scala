@@ -21,7 +21,7 @@ import java.io.File
 
 import org.joda.time.DateTime
 
-import au.com.cba.omnia.permafrost.hdfs.{Error, Ok, Result}
+import au.com.cba.omnia.omnitool.{Error, Ok}
 
 class InputSpec extends Specification { def is = s2"""
 

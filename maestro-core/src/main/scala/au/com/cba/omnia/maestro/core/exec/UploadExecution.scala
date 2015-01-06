@@ -21,7 +21,9 @@ import scalaz.\&/.{This, That, Both}
 
 import com.twitter.scalding.Execution
 
-import au.com.cba.omnia.permafrost.hdfs.{Error, Hdfs, Ok, Result}
+import au.com.cba.omnia.omnitool.{Error, Ok, Result}
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.maestro.core.scalding.ConfHelper
 import au.com.cba.omnia.maestro.core.task.Upload

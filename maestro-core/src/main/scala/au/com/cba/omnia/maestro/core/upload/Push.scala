@@ -23,9 +23,10 @@ import org.apache.hadoop.fs.Path
 
 import com.google.common.io.Files
 
-import au.com.cba.omnia.permafrost.hdfs.{Hdfs, Result}
-
+import au.com.cba.omnia.omnitool.Result
 import au.com.cba.omnia.omnitool.file.ops.Temp
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 /** File copied to HDFS */
 case class Copied(source: File, dest: Path)

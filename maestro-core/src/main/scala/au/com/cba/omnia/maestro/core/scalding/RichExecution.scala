@@ -20,7 +20,9 @@ import scalaz.\&/.{This, That, Both}
 
 import com.twitter.scalding.{Config, Execution}
 
-import au.com.cba.omnia.permafrost.hdfs.{Hdfs, Ok, Error}
+import au.com.cba.omnia.omnitool.{Error, Ok, Result}
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 /** Pimps an Execution instance. */
 case class RichExecution[A](execution: Execution[A]) {

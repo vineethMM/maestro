@@ -14,6 +14,8 @@
 
 package au.com.cba.omnia.maestro.api.exec
 
+import au.com.cba.omnia.permafrost.hdfs.HdfsStrings
+
 import au.com.cba.omnia.maestro.core.exec.{LoadExecution, SqoopExecution, UploadExecution, ViewExecution, QueryExecution}
 import au.com.cba.omnia.maestro.core.scalding.ExecutionOps
 
@@ -27,4 +29,5 @@ object Maestro
   with SqoopExecution
   with ExecutionOps
   with MacroSupport
+  with HdfsStrings
 

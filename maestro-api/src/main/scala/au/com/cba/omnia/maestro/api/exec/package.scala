@@ -83,6 +83,12 @@ package object exec {
   type QueryConfig     = au.com.cba.omnia.maestro.core.exec.QueryConfig
   val  QueryConfig     = au.com.cba.omnia.maestro.core.exec.QueryConfig
 
+  type Hdfs[A]         = au.com.cba.omnia.permafrost.hdfs.Hdfs[A]
+  val  Hdfs            = au.com.cba.omnia.permafrost.hdfs.Hdfs
+
+  type Hive[A]         = au.com.cba.omnia.ebenezer.scrooge.hive.Hive[A]
+  val  Hive            = au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+
   type ParlourImportDsl         = au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
   type ParlourExportDsl         = au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
   type TeradataParlourImportDsl = au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl

@@ -280,7 +280,7 @@ object SqoopEx extends Sqoop {
         TypedPipe.from(TextLine(src))
           .writeExecution(CompressibleTypedTsv[String](dest))
           .getAndResetCounters
-          .map(_._2.get(StatKeys.tuplesWritten).get)
+          .map( _._2.get(StatKeys.tuplesWritten).getOrElse(0L) )  
           .run(configWithCompress, mode)(cec)
       }
     }

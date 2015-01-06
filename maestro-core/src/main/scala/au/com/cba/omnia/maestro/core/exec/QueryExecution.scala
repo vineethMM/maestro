@@ -31,6 +31,7 @@ import au.com.cba.omnia.maestro.core.hive.HiveTable
   * @param queries:  The hive queries to run
   * @param settings: Hive settings. Empty by default.
   */
+@deprecated("Use the query/queries method in Hive instead", "1.15")
 case class QueryConfig(
   name: String,
   queries: Seq[String],
@@ -38,8 +39,10 @@ case class QueryConfig(
 )
 
 /** Factory functions for query configs */
+@deprecated("Use the query/queries method in Hive instead", "1.15")
 object QueryConfig {
   /** QueryConfig with empty hive settings */
+  @deprecated("Use the query/queries method in Hive instead", "1.15")
   def apply(
     name: String,
     queries: String*
@@ -47,6 +50,7 @@ object QueryConfig {
     QueryConfig(name, queries)
 
   /** QueryConfig */
+  @deprecated("Use the query/queries method in Hive instead", "1.15")
   def apply(
     name: String,
     settings: Map[ConfVars, String],
@@ -62,6 +66,7 @@ trait QueryExecution {
     *
     * When specified, the output value is used to create the target table before the job starts
     */
+  @deprecated("Use the query/queries method in Hive instead", "1.15")
   def hiveQuery(config: QueryConfig) : Execution[Unit] =
     HiveExecution.query(config.name, config.settings, config.queries: _*)
  }

@@ -36,7 +36,7 @@ object build extends Build {
   val parquetVersion     = "1.2.5-cdh4.6.0-p485"
 
   lazy val standardSettings: Seq[Sett] =
-    Defaults.defaultSettings ++
+    Defaults.coreDefaultSettings ++
     uniformDependencySettings ++
     uniform.docSettings("https://github.com/CommBank/maestro")
 

@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A trait for API to run hive queries using the execution monad.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/6f2e60b73bc0e2ae1aefc055ff56f26fb1be1bf2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/exec/QueryExecution.scala" target="_blank">QueryExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A trait for API to run hive queries using the execution monad.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1da4ca7cb272a44e212758d7239e74346a0c00ae//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/exec/QueryExecution.scala" target="_blank">QueryExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -256,20 +256,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryExecution#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveQuery(config:au.com.cba.omnia.maestro.core.exec.QueryConfig):com.twitter.scalding.Execution[Unit]"></a>
-      <a id="hiveQuery(QueryConfig):Execution[Unit]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hiveQuery</span><span class="params">(<span name="config">config: <a href="QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">QueryConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>When specified, the output value is used to create the target table before the job starts
-</p></div></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -410,7 +396,27 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="au.com.cba.omnia.maestro.core.exec.QueryExecution#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hiveQuery(config:au.com.cba.omnia.maestro.core.exec.QueryConfig):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="hiveQuery(QueryConfig):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">hiveQuery</span><span class="params">(<span name="config">config: <a href="QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.exec.QueryConfig">QueryConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>When specified, the output value is used to create the target table before the job starts
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.15)</i> Use the query/queries method in Hive instead</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

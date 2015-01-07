@@ -179,20 +179,6 @@ task specific configurations.</p>
       </span>
       </h4>
       <p class="comment cmt">Create an object which extends this class and run the class as a normal java program.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="QueryConfigextendsProductwithSerializable"></a>
-      <a id="QueryConfig:QueryConfig"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="QueryConfig.html"><span class="name">QueryConfig</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="queries">queries: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="settings">settings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="defval" name="scala.this.Predef.Map.empty[org.apache.hadoop.hive.conf.HiveConf.ConfVars, Nothing]">...</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Configuration for hive queries
-</p>
     </li><li name="au.com.cba.omnia.maestro.core.exec.QueryExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="QueryExecutionextendsAnyRef"></a>
       <a id="QueryExecution:QueryExecution"></a>
@@ -310,6 +296,20 @@ task specific configurations.</p>
       </span>
       </h4>
       <p class="comment cmt">Executions for view tasks</p>
+    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfigextendsProductwithSerializable"></a>
+      <a id="QueryConfig:QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryConfig.html"><span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">QueryConfig</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="queries">queries: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="settings">settings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="defval" name="scala.this.Predef.Map.empty[org.apache.hadoop.hive.conf.HiveConf.ConfVars, Nothing]">...</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration for hive queries
+</p>
     </li></ol>
             </div>
 
@@ -434,19 +434,6 @@ task specific configurations.</p>
       </span>
       </h4>
       <p class="comment cmt">Type class instances for parlour configuration dsls.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="QueryConfig"></a>
-      <a id="QueryConfig:QueryConfig"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="QueryConfig$.html"><span class="name">QueryConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Factory functions for query configs</p>
     </li><li name="au.com.cba.omnia.maestro.core.exec.SqoopEx" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SqoopEx"></a>
       <a id="SqoopEx:SqoopEx"></a>
@@ -517,7 +504,23 @@ task specific configurations.</p>
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="au.com.cba.omnia.maestro.core.exec.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfig"></a>
+      <a id="QueryConfig:QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryConfig$.html"><span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">QueryConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory functions for query configs</p>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

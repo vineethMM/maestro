@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/6f2e60b73bc0e2ae1aefc055ff56f26fb1be1bf2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1da4ca7cb272a44e212758d7239e74346a0c00ae//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -255,7 +255,21 @@
         <span class="name">fromHdfs</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="hdfs">hdfs: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.fromHdfs.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.fromHdfs.T">T</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Changes from  HDFS context to Execution context.</p>
+      <p class="shortcomment cmt">Changes from HDFS context to Execution context.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromHive" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromHive[T](hive:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]"></a>
+      <a id="fromHive[T](Hive[T],(HiveConf)⇒Unit):Execution[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromHive</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="hive">hive: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.Hive">Hive</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.fromHive.T">T</span>]</span>, <span name="modifyConf">modifyConf: (<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf">HiveConf</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span> = <span class="symbol">_ =&gt; ()</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.fromHive.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Changes from Hive context to Execution context.</p><div class="fullcomment"><div class="comment cmt"><p>Changes from Hive context to Execution context.</p><p><code>modifyConf</code> can be used to update the hive conf that will be used to run the Hive action.
+</p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>

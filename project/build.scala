@@ -31,7 +31,7 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "0.5.2-20141203051209-fb24dd1"
-  val ebenezerVersion    = "0.12.0-20150106020438-03e71bf"
+  val ebenezerVersion    = "0.12.0-20150107011410-b7947b3"
   val omnitoolVersion    = "1.5.0-20150105001358-0e640c9"
   val parquetVersion     = "1.2.5-cdh4.6.0-p485"
 
@@ -82,7 +82,7 @@ object build extends Build {
       ) ++ depend.scalaz() ++ depend.scalding() ++ depend.hadoop()
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
-        ++ depend.omnia("permafrost",    "0.2.0-20150105050042-0c1c388")
+        ++ depend.omnia("permafrost",    "0.2.0-20150108022704-de9f295")
         ++ depend.omnia("edge",          "3.2.0-20150105054720-4e7ae23")
         ++ depend.omnia("humbug-core",   "0.3.0-20140918054014-3066286")
         ++ depend.omnia("omnitool-time", omnitoolVersion)
@@ -92,11 +92,12 @@ object build extends Build {
           "commons-validator"  % "commons-validator" % "1.4.0",
           "org.apache.commons" % "commons-compress"  % "1.8.1",
           "org.apache.hadoop"  % "hadoop-tools"      % depend.versions.hadoop % "provided",
+          "com.twitter"        % "parquet-cascading" % parquetVersion         % "provided",
+          "au.com.cba.omnia"  %% "ebenezer-test"     % ebenezerVersion        % "test",
           "au.com.cba.omnia"  %% "thermometer-hive"  % thermometerVersion     % "test",
           "org.scalikejdbc"   %% "scalikejdbc"       % "2.1.2"                % "test",
           "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test",
-          "com.twitter"        % "parquet-hive"      % parquetVersion         % "test",
-          "com.twitter"        % "parquet-cascading" % parquetVersion         % "provided"
+          "com.twitter"        % "parquet-hive"      % parquetVersion         % "test"
         ),
       parallelExecution in Test := false
     )

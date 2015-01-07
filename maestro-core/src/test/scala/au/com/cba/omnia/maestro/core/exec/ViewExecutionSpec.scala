@@ -16,11 +16,13 @@ package au.com.cba.omnia.maestro.core.exec
 
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource, ThermometerSpec}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid
+import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.hive.HiveSupport
 
+import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
+
 import au.com.cba.omnia.maestro.core.data.Field
-import au.com.cba.omnia.maestro.core.hive.HiveTable
-import au.com.cba.omnia.maestro.core.hive.UnpartitionedHiveTable
+import au.com.cba.omnia.maestro.core.hive.{HiveTable, UnpartitionedHiveTable}
 import au.com.cba.omnia.maestro.core.partition.Partition
 
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
@@ -33,15 +35,17 @@ View execution properties
 =========================
 
   partitioned:
-    can view using execution monad                          $normal
+    can write using execution monad                         $normal
     view executions can be composed with zip                $zipped
 
-    can view in a hive table using execution monad          $normalHive
+    can write to a hive table using execution monad         $normalHive
+    can append to a hive table using execution monad        $normalHiveAppend
     view hive executions can be composed with flatMap       $flatMappedHive
     view hive executions can be composed with zip           $zippedHive
 
   unpartitioned:
-    can view in a hive table using execution monad          $normalHiveUnpartitioned
+    can write to a hive table using execution monad         $normalHiveUnpartitioned
+    can append to a hive table using execution monad        $normalHiveUnpartitionedAppend
     view hive executions can be composed with flatMap       $flatMappedHiveUnpartitioned
     view hive executions can be composed with zip           $zippedHiveUnpartitioned
 """
@@ -76,6 +80,19 @@ View execution properties
     )
   }
 
+    def normalHiveAppend = {
+      val exec = for {
+        c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+        c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      } yield (c1, c2)
+
+      executesSuccessfully(exec) must_== ((4, 4))
+      facts(
+        hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4),
+        hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4)
+      )
+  }
+
   def flatMappedHive = {
     val exec = for {
       count1 <- ViewExec.viewHive(tableByFirst("flatMappedHive"), source)
@@ -107,6 +124,17 @@ View execution properties
     executesSuccessfully(exec) must_== 4
     facts(
       hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
+    )
+  }
+
+  def normalHiveUnpartitionedAppend = {
+    val exec = for {
+      c1 <- ViewExec.viewHive(tableUnpartitioned("unpart"), source)
+      c2 <- ViewExec.viewHive(tableUnpartitioned("unpart"), source)
+    } yield (c1, c2)
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 8)
     )
   }
 

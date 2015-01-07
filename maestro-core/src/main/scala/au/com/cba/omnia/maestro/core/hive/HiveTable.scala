@@ -14,6 +14,8 @@
 
 package au.com.cba.omnia.maestro.core.hive
 
+import scalaz._, Scalaz._
+
 import org.apache.hadoop.fs.Path
 
 import org.apache.hadoop.hive.conf.HiveConf
@@ -21,10 +23,13 @@ import org.apache.hadoop.hive.conf.HiveConf.ConfVars.METASTOREWAREHOUSE
 
 import cascading.flow.FlowDef
 
-import com.twitter.scalding._
+import com.twitter.scalding.{Hdfs => _, _}
 
 import com.twitter.scrooge.ThriftStruct
 
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
+
+import au.com.cba.omnia.ebenezer.scrooge.ParquetScroogeSource
 import au.com.cba.omnia.ebenezer.scrooge.hive._
 
 import au.com.cba.omnia.maestro.core.partition.Partition
@@ -100,18 +105,51 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
 ) extends HiveTable[A, A] {
 
   override def source =
-    new HiveParquetScroogeSource[A](database, table, externalPath)
+    HiveParquetScroogeSource[A](database, table, externalPath)
 
   override def sink(append: Boolean = true) =
-    new HiveParquetScroogeSource[A](database, table, externalPath)
+    if (append) throw new Exception("APPEND IS CURRENTLY NOT SUPPORTED")
+    else        HiveParquetScroogeSource[A](database, table, externalPath)
 
-  /** Writes the contents of the pipe to this HiveTable. NB: APPEND IS CURRENTLY NOT SUPPORTED. */
+  /** Writes the contents of the pipe to this HiveTable. */
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
-    if (append) System.err.println("APPEND IS CURRENTLY NOT SUPPORTED")
-    pipe
-      .writeExecution(sink(append))
+    // Creates the hive table and gets its path
+    val setup = Execution.fromHive(
+      Hive.createParquetTable[A](database, table, List.empty, externalPath.map(new Path(_))) >>
+      Hive.getPath(database, table)
+    )
+
+    // Runs the scalding job and gets the counters
+    def write(path: Path) = pipe
+      .writeExecution(ParquetScroogeSource[A](path.toString))
       .getAndResetCounters
       .map(_._2)
+
+    //If we are appending the files are written to a temporary location and then copied accross
+    if (append) {
+      def moveFiles(src: Path, dst: Path): Hdfs[Unit] = for {
+        files <- Hdfs.files(src, "*.parquet")
+        time  =  System.currentTimeMillis
+        _     <- Hdfs.mkdirs(dst)
+        _     <- files.zipWithIndex.traverse {
+                   case (file, idx) => Hdfs.move(file, new Path(dst, f"part-$time-$idx%05d.parquet"))
+                 }
+      } yield ()
+
+      setup.flatMap(dst => Execution.fromHdfs(Hdfs.createTempDir()).bracket(
+        tmpDir => Execution.fromHdfs(Hdfs.delete(tmpDir, true))
+      )(
+        tmpDir => for {
+          counters <- write(tmpDir)
+          _        <- Execution.fromHdfs(moveFiles(tmpDir, dst))
+        } yield counters
+      ))
+    } else {
+      for {
+        dst      <- setup
+        counters <- write(dst)
+      } yield counters
+    }
   }
 
   override def write(pipe: TypedPipe[A], append: Boolean = true)
@@ -125,13 +163,13 @@ object HiveTable {
   def apply[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
     database: String, table: String, partition: Partition[A, B], path: String
   ): HiveTable[A, (B,A)] =
-    new PartitionedHiveTable(database, table, partition, Some(path))
+    PartitionedHiveTable(database, table, partition, Some(path))
 
   /** Information need to address/describe a specific partitioned hive table.*/
   def apply[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
     database: String, table: String, partition: Partition[A, B], pathOpt: Option[String] = None
   ): HiveTable[A, (B, A)] =
-    new PartitionedHiveTable(database, table, partition, pathOpt)
+    PartitionedHiveTable(database, table, partition, pathOpt)
 
   /** Information need to address/describe a specific unpartitioned hive table.*/
   def apply[A <: ThriftStruct : Manifest](
@@ -143,5 +181,5 @@ object HiveTable {
   def apply[A <: ThriftStruct : Manifest](
     database: String, table: String, pathOpt: Option[String] = None
   ): HiveTable[A, A] =
-    new UnpartitionedHiveTable(database, table, pathOpt)
+    UnpartitionedHiveTable(database, table, pathOpt)
 }

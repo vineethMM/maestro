@@ -26,10 +26,32 @@ import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 /** Pimps an Execution instance. */
 case class RichExecution[A](execution: Execution[A]) {
+  import ExecutionOps._
+
   def withSubConfig(modifyConfig: Config => Config): Execution[A] =
     Execution.getConfigMode.flatMap { case (config, mode) =>
       Execution.fromFuture(cec => execution.run(modifyConfig(config), mode)(cec))
     }
+
+  /** Like "finally", but only performs the final action if there was an error. */
+  def onException[B](action: Execution[B]): Execution[A] =
+    execution.recoverWith { case e => action.flatMap(_ => Execution.fromFuture(_ => Future.failed(e))) }
+
+  /**
+    * Applies the "during" action, calling "after" regardless of whether there was an error.
+    * All errors are rethrown. Generalizes try/finally.
+    */
+  def bracket[B, C](after: A => Execution[B])(during: A => Execution[C]): Execution[C] = for {
+    a <- execution
+    r <- during(a) onException after(a)
+    _ <- after(a)
+  } yield r
+
+  /** Like "bracket", but takes only a computation to run afterward. Generalizes "finally". */
+  def ensuring[B](sequel: Execution[B]): Execution[A] = for {
+    r <- onException(sequel)
+    _ <- sequel
+  } yield r
 }
 
 /** Pimps the Execution object. */
@@ -75,5 +97,4 @@ trait ExecutionOps {
   /** Implicit conversion of Execution Object to RichExecutionObject. */
   implicit def ExecutionToRichExecution(exec: Execution.type): RichExecutionObject =
     RichExecutionObject(exec)
-
 }

@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps an Execution instance.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9e1fbc21232889bd66cf0989e39b33c6f8b828fc//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps an Execution instance.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/95ce4b0bf6cfef55f02e2c9907faf5238bdb9905//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -179,6 +179,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution#bracket" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="bracket[B,C](after:A=&gt;com.twitter.scalding.Execution[B])(during:A=&gt;com.twitter.scalding.Execution[C]):com.twitter.scalding.Execution[C]"></a>
+      <a id="bracket[B,C]((A)⇒Execution[B])((A)⇒Execution[C]):Execution[C]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">bracket</span><span class="tparams">[<span name="B">B</span>, <span name="C">C</span>]</span><span class="params">(<span name="after">after: (<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>) ⇒ <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.bracket.B">B</span>]</span>)</span><span class="params">(<span name="during">during: (<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>) ⇒ <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.bracket.C">C</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.bracket.C">C</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Applies the &quot;during&quot; action, calling &quot;after&quot; regardless of whether there was an error.</p><div class="fullcomment"><div class="comment cmt"><p>Applies the &quot;during&quot; action, calling &quot;after&quot; regardless of whether there was an error.
+All errors are rethrown. Generalizes try/finally.
+</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -198,6 +213,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring[B](sequel:com.twitter.scalding.Execution[B]):com.twitter.scalding.Execution[A]"></a>
+      <a id="ensuring[B](Execution[B]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ensuring</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="sequel">sequel: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.ensuring.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Like &quot;bracket&quot;, but takes only a computation to run afterward.</p><div class="fullcomment"><div class="comment cmt"><p>Like &quot;bracket&quot;, but takes only a computation to run afterward. Generalizes &quot;finally&quot;.</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -308,6 +336,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution#onException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="onException[B](action:com.twitter.scalding.Execution[B]):com.twitter.scalding.Execution[A]"></a>
+      <a id="onException[B](Execution[B]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">onException</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="action">action: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.onException.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Like &quot;finally&quot;, but only performs the final action if there was an error.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

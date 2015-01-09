@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="Maestro.html" title="Go to companion"><img src="../../../../../../lib/object_to_class_big.png" /></a>
+        <img src="../../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.api">api</a></p>
-        <h1><a href="Maestro.html" title="Go to companion">Maestro</a></h1>
+        <h1>Maestro</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,13 +35,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Maestro</span><span class="result"> extends <a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a> with <a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a> with <a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a> with <a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a> with <a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a> with <a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a> with <a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a> with <a href="../core/hdfs/OldGuardFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">OldGuardFunctions</a> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Maestro</span><span class="result"> extends <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a> with <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a> with <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a> with <a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a> with <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a> with <a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a> with <a href="package.html#MacroSupport=au.com.cba.omnia.maestro.macros.MacroSupport" class="extmbr" name="au.com.cba.omnia.maestro.api.MacroSupport">MacroSupport</a> with <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings">HdfsStrings</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/95ce4b0bf6cfef55f02e2c9907faf5238bdb9905//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides task methods, and any implicits required to use them.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0539610bbcd2e9ad81116de9d0121b3f22b89fd2//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="../core/hdfs/OldGuardFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">OldGuardFunctions</a>, <a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a>, <a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a>, <a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a>, <a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a>, <a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a>, <a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a>, <a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings">HdfsStrings</span>, <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">macros.MacroSupport</a>, <a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a>, <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a>, <a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a>, <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a>, <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a>, <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.api.Maestro"><span>Maestro</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions"><span>OldGuardFunctions</span></li><li class="in" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions"><span>OldTimeSourceFunctions</span></li><li class="in" name="au.com.cba.omnia.maestro.core.args.Config"><span>Config</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.Sqoop"><span>Sqoop</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.Upload"><span>Upload</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.Query"><span>Query</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.View"><span>View</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.Load"><span>Load</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.api.Maestro"><span>Maestro</span></li><li class="in" name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings"><span>HdfsStrings</span></li><li class="in" name="au.com.cba.omnia.maestro.macros.MacroSupport"><span>MacroSupport</span></li><li class="in" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps"><span>ExecutionOps</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.SqoopExecution"><span>SqoopExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.QueryExecution"><span>QueryExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.ViewExecution"><span>ViewExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.LoadExecution"><span>LoadExecution</span></li><li class="in" name="au.com.cba.omnia.maestro.core.task.UploadExecution"><span>UploadExecution</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -79,24 +79,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.task.Sqoop.ArchiveDirectoryJob" visbl="prt" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ArchiveDirectoryJobextendsJob"></a>
-      <a id="ArchiveDirectoryJob:ArchiveDirectoryJob"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="../core/task/Sqoop$ArchiveDirectoryJob.html"><span class="name">ArchiveDirectoryJob</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Archive Job for data imported by sqoop
-</p>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -167,6 +150,108 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedDecode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedDecode[A&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.codec.Decode[A]"></a>
+      <a id="DerivedDecode[A&lt;:com.twitter.scrooge.ThriftStruct]:core.codec.Decode[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedDecode</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>]</span><span class="result">: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport.DerivedDecode.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Macro generated Decode for a Thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro generated Decode for a Thrift struct.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.DecodeMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedEncode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedEncode[A&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.codec.Encode[A]"></a>
+      <a id="DerivedEncode[A&lt;:com.twitter.scrooge.ThriftStruct]:Encode[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedEncode</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>]</span><span class="result">: <a href="../core/codec/Encode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode">Encode</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport.DerivedEncode.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Macro generated Encode for a Thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro generated Encode for a Thrift struct.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.EncodeMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#DerivedTag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DerivedTag[A&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.codec.Tag[A]"></a>
+      <a id="DerivedTag[A&lt;:com.twitter.scrooge.ThriftStruct]:core.codec.Tag[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DerivedTag</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>]</span><span class="result">: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport.DerivedTag.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Macro generated Tag for a Thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro generated Tag for a Thrift struct.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.TagMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps#ExecutionToRichExecution" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ExecutionToRichExecution(exec:com.twitter.scalding.Execution.type):au.com.cba.omnia.maestro.core.scalding.RichExecutionObject"></a>
+      <a id="ExecutionToRichExecution(Execution.type):RichExecutionObject"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ExecutionToRichExecution</span><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result">: <a href="../core/scalding/RichExecutionObject.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject">RichExecutionObject</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion of Execution Object to RichExecutionObject.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion of Execution Object to RichExecutionObject.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport#Fields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Fields[A&lt;:com.twitter.scrooge.ThriftStruct]:Any"></a>
+      <a id="Fields[A&lt;:com.twitter.scrooge.ThriftStruct]:Any"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Fields</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>]</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Macro generated structural type containing the fields for a Thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro generated structural type containing the fields for a Thrift struct.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.FieldsMacro&quot;, &quot;methodName&quot; = &quot;impl&quot;, &quot;signature&quot; = List(-1, 0))[A]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings#StringToHdfsString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StringToHdfsString(s:String):au.com.cba.omnia.permafrost.hdfs.HdfsString"></a>
+      <a id="StringToHdfsString(String):HdfsString"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StringToHdfsString</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.HdfsString">HdfsString</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HdfsStrings</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -199,113 +284,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.args.Config#configuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="configuration(args:com.twitter.scalding.Args):org.apache.hadoop.conf.Configuration"></a>
-      <a id="configuration(Args):Configuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">configuration</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="result">: <span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions#createFlagFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createFlagFile(directoryPath:List[String]):Unit"></a>
-      <a id="createFlagFile(List[String]):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">createFlagFile</span><span class="params">(<span name="directoryPath">directoryPath: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Creates the _PROCESSED flag to indicate completion of processing in given list of paths</p><div class="fullcomment"><div class="comment cmt"><p>Creates the _PROCESSED flag to indicate completion of processing in given list of paths</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/hdfs/OldGuardFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">OldGuardFunctions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#createSqoopImportOptions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createSqoopImportOptions[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](connectionString:String,username:String,password:String,dbTableName:String,outputFieldsTerminatedBy:Char,nullString:String,whereCondition:Option[String],options:T):T"></a>
-      <a id="createSqoopImportOptions[T&lt;:ParlourImportOptions[T]](String,String,String,String,Char,String,Option[String],T):T"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">createSqoopImportOptions</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptions.T">T</span>]</span>]</span><span class="params">(<span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dbTableName">dbTableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="outputFieldsTerminatedBy">outputFieldsTerminatedBy: <span class="extype" name="scala.Char">Char</span></span>, <span name="nullString">nullString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="whereCondition">whereCondition: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptions.T">T</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ParlourImportDsl()</a></span></span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptions.T">T</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Convenience method to populate a parlour import option instance
-</p><div class="fullcomment"><div class="comment cmt"><p>Convenience method to populate a parlour import option instance
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>: Populated parlour option
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#createSqoopImportOptionsWithQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createSqoopImportOptionsWithQuery[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](connectionString:String,username:String,password:String,query:String,splitBy:Option[String],outputFieldsTerminatedBy:Char,nullString:String,options:T):T"></a>
-      <a id="createSqoopImportOptionsWithQuery[T&lt;:ParlourImportOptions[T]](String,String,String,String,Option[String],Char,String,T):T"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">createSqoopImportOptionsWithQuery</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span>]</span>]</span><span class="params">(<span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="outputFieldsTerminatedBy">outputFieldsTerminatedBy: <span class="extype" name="scala.Char">Char</span></span>, <span name="nullString">nullString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ParlourImportDsl()</a></span></span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.createSqoopImportOptionsWithQuery.T">T</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Convenience method to populate a parlour import option instance.</p><div class="fullcomment"><div class="comment cmt"><p>Convenience method to populate a parlour import option instance.
-Use it when you want to use SQL Select query to fetch data.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>: Populated parlour option
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#customSqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="customSqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](options:au.com.cba.omnia.parlour.ParlourExportOptions[T],deleteFromTable:Boolean)(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.Job"></a>
-      <a id="customSqoopExport[T&lt;:ParlourExportOptions[T]](ParlourExportOptions[T],Boolean)(Args)(FlowDef,Mode):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">customSqoopExport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.customSqoopExport.T">T</span>]</span>]</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.customSqoopExport.T">T</span>]</span>, <span name="deleteFromTable">deleteFromTable: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs a sqoop export from HDFS to a database table.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop export from HDFS to a database table.</p><p>If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
-Otherwise the rows will be appended.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Job for this export
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#customSqoopImport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="customSqoopImport(options:au.com.cba.omnia.parlour.ParlourImportOptions[_])(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.Job"></a>
-      <a id="customSqoopImport(ParlourImportOptions[_])(Args)(FlowDef,Mode):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">customSqoopImport</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[_]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Run a custom sqoop import using parlour import options</p><div class="fullcomment"><div class="comment cmt"><p>Run a custom sqoop import using parlour import options</p><p><b>Use this method ONLY if non-standard settings are required</b>
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Upload#customUpload" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="customUpload(tableName:String,filePattern:String,localIngestPath:String,localArchivePath:String,hdfsArchivePath:String,hdfsLandingPath:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.omnitool.Result[List[String]]"></a>
-      <a id="customUpload(String,String,String,String,String,String,Configuration,Regex):Result[List[String]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">customUpload</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="conf">conf: <span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.omnitool.Result">Result</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally, using non-standard file locations.</p><p>As per <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.omnitool.Result[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#upload">upload</a>, except the user has more control where to find data
-files, where to copy them, and where to archive them.</p><p>Data files are found in the local folder <code>$locSourceDir</code>. They are copied
-to <code>$hdfsLandingDir/&lt;year&gt;/&lt;month&gt;/&lt;originalFileName&gt;</code>,
-and archived at <code>$archiveDir/&lt;year&gt;/&lt;month&gt;/&lt;originalFileName&gt;.gz</code>. (These
-directories may change slightly depending on the timestamp format.)</p><p>In all other respects <code>customUpload</code> behaves the same as <a href="#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.omnitool.Result[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#upload">upload</a>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The list of copied hdfs files if successful, or any error occuring when uploading files
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -332,6 +310,19 @@ directories may change slightly depending on the timestamp format.)</p><p>In all
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps#executionToRichExecution" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="executionToRichExecution[A](execution:com.twitter.scalding.Execution[A]):au.com.cba.omnia.maestro.core.scalding.RichExecution[A]"></a>
+      <a id="executionToRichExecution[A](Execution[A]):RichExecution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">executionToRichExecution</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="execution">execution: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps.executionToRichExecution.A">A</span>]</span>)</span><span class="result">: <a href="../core/scalding/RichExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution">RichExecution</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps.executionToRichExecution.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion of an Execution instance to RichExecution.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion of an Execution instance to RichExecution.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -377,62 +368,6 @@ directories may change slightly depending on the timestamp format.)</p><p>In all
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Query#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveQuery(args:com.twitter.scalding.Args,name:String,input:au.com.cba.omnia.maestro.core.hive.HiveTable[_,_],output:Option[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],hiveSettings:Map[org.apache.hadoop.hive.conf.HiveConf.ConfVars,String],query:String*):com.twitter.scalding.Job"></a>
-      <a id="hiveQuery(Args,String,core.hive.HiveTable[_,_],Option[core.hive.HiveTable[_,_]],Map[ConfVars,String],String*):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hiveQuery</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="input">input: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]</span>, <span name="output">output: <span class="extype" name="scala.Option">Option</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="hiveSettings">hiveSettings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>The input and output tables are used to determine dependencies for scheduling.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Query#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveQuery(args:com.twitter.scalding.Args,name:String,inputs:List[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],output:Option[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],hiveSettings:Map[org.apache.hadoop.hive.conf.HiveConf.ConfVars,String],query:String*):com.twitter.scalding.Job"></a>
-      <a id="hiveQuery(Args,String,List[core.hive.HiveTable[_,_]],Option[core.hive.HiveTable[_,_]],Map[ConfVars,String],String*):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hiveQuery</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="inputs">inputs: <span class="extype" name="scala.List">List</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="output">output: <span class="extype" name="scala.Option">Option</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="hiveSettings">hiveSettings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>The input and output tables are used to determine dependencies for scheduling.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Query#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveQuery(args:com.twitter.scalding.Args,name:String,input:au.com.cba.omnia.maestro.core.hive.HiveTable[_,_],output:Option[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],query:String*):com.twitter.scalding.Job"></a>
-      <a id="hiveQuery(Args,String,core.hive.HiveTable[_,_],Option[core.hive.HiveTable[_,_]],String*):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hiveQuery</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="input">input: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]</span>, <span name="output">output: <span class="extype" name="scala.Option">Option</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>The input and output tables are used to determine dependencies for scheduling.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Query#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hiveQuery(args:com.twitter.scalding.Args,name:String,inputs:List[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],output:Option[au.com.cba.omnia.maestro.core.hive.HiveTable[_,_]],query:String*):com.twitter.scalding.Job"></a>
-      <a id="hiveQuery(Args,String,List[core.hive.HiveTable[_,_]],Option[core.hive.HiveTable[_,_]],String*):Job"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hiveQuery</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="inputs">inputs: <span class="extype" name="scala.List">List</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="output">output: <span class="extype" name="scala.Option">Option</span>[<a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[_, _]]</span>, <span name="query">query: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>The input and output tables are used to determine dependencies for scheduling.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -446,49 +381,21 @@ directories may change slightly depending on the timestamp format.)</p><p>In all
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Load#load" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="load[A&lt;:com.twitter.scrooge.ThriftStruct](delimiter:String,sources:List[String],errors:String,timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,clean:au.com.cba.omnia.maestro.core.clean.Clean,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],filter:au.com.cba.omnia.maestro.core.filter.RowFilter,none:String)(implicitevidence$1:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$2:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$3:Manifest[A]):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="load[A&lt;:ThriftStruct](String,List[String],String,core.time.TimeSource,core.clean.Clean,core.validate.Validator[A],core.filter.RowFilter,String)(core.codec.Decode[A],core.codec.Tag[A],Manifest[A]):TypedPipe[A]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadExecution#load" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="load[A&lt;:com.twitter.scrooge.ThriftStruct](config:au.com.cba.omnia.maestro.core.task.LoadConfig[A],sources:List[String])(implicitevidence$1:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$2:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$3:Manifest[A]):com.twitter.scalding.Execution[(com.twitter.scalding.TypedPipe[A],au.com.cba.omnia.maestro.core.task.LoadInfo)]"></a>
+      <a id="load[A&lt;:com.twitter.scrooge.ThriftStruct](core.task.LoadConfig[A],List[String])(core.codec.Decode[A],core.codec.Tag[A],Manifest[A]):Execution[(TypedPipe[A],core.task.LoadInfo)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">load</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="delimiter">delimiter: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="sources">sources: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeSource">timeSource: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>, <span name="clean">clean: <a href="../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">core.clean.Clean</a></span>, <span name="validator">validator: <a href="../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">core.validate.Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.load.A">A</span>]</span>, <span name="filter">filter: <a href="../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">core.filter.RowFilter</a></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.load.A">A</span>]</span>, <span name="arg1">arg1: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.load.A">A</span>]</span>, <span name="arg2">arg2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.load.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.load.A">A</span>]</span>
+        <span class="name">load</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>]</span><span class="params">(<span name="config">config: <a href="../core/task/LoadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadConfig">core.task.LoadConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.load.A">A</span>]</span>, <span name="sources">sources: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.load.A">A</span>]</span>, <span name="arg1">arg1: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.load.A">A</span>]</span>, <span name="arg2">arg2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.load.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[(<span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution.load.A">A</span>], <a href="../core/task/LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">core.task.LoadInfo</a>)]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Loads the supplied text files and converts them to the specified thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Loads the supplied text files and converts them to the specified thrift struct.</p><p>The operations performed are:</p><ol class="decimal"><li>Append a time field to each line using the provided time source.</li><li>Split each line into columns/fields using the provided delimiter.</li><li>Apply the provided filter to each list of fields.</li><li>Clean each field using the provided cleaner.</li><li>Convert the list of fields into the provided thrift struct. Option fields with the <code>none</code>
-    value or empty strings (expect for optional string fields) are set to <code>None</code>.</li><li>Validate each struct.
-</li></ol></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Load#loadFixedLength" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="loadFixedLength[A&lt;:com.twitter.scrooge.ThriftStruct](lengths:List[Int],sources:List[String],errors:String,timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,clean:au.com.cba.omnia.maestro.core.clean.Clean,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],filter:au.com.cba.omnia.maestro.core.filter.RowFilter,none:String)(implicitevidence$7:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$8:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$9:Manifest[A]):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="loadFixedLength[A&lt;:ThriftStruct](List[Int],List[String],String,core.time.TimeSource,core.clean.Clean,core.validate.Validator[A],core.filter.RowFilter,String)(core.codec.Decode[A],core.codec.Tag[A],Manifest[A]):TypedPipe[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">loadFixedLength</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="lengths">lengths: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="sources">sources: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeSource">timeSource: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>, <span name="clean">clean: <a href="../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">core.clean.Clean</a></span>, <span name="validator">validator: <a href="../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">core.validate.Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadFixedLength.A">A</span>]</span>, <span name="filter">filter: <a href="../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">core.filter.RowFilter</a></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadFixedLength.A">A</span>]</span>, <span name="arg1">arg1: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadFixedLength.A">A</span>]</span>, <span name="arg2">arg2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadFixedLength.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadFixedLength.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Same as <code>load</code> but uses a list of column lengths to split the string rather than a delimeter.</p><div class="fullcomment"><div class="comment cmt"><p>Same as <code>load</code> but uses a list of column lengths to split the string rather than a delimeter.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Load#loadWithKey" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="loadWithKey[A&lt;:com.twitter.scrooge.ThriftStruct](delimiter:String,sources:List[String],errors:String,timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,clean:au.com.cba.omnia.maestro.core.clean.Clean,validator:au.com.cba.omnia.maestro.core.validate.Validator[A],filter:au.com.cba.omnia.maestro.core.filter.RowFilter,none:String)(implicitevidence$4:au.com.cba.omnia.maestro.core.codec.Decode[A],implicitevidence$5:au.com.cba.omnia.maestro.core.codec.Tag[A],implicitevidence$6:Manifest[A]):com.twitter.scalding.TypedPipe[A]"></a>
-      <a id="loadWithKey[A&lt;:ThriftStruct](String,List[String],String,core.time.TimeSource,core.clean.Clean,core.validate.Validator[A],core.filter.RowFilter,String)(core.codec.Decode[A],core.codec.Tag[A],Manifest[A]):TypedPipe[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">loadWithKey</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="delimiter">delimiter: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="sources">sources: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeSource">timeSource: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>, <span name="clean">clean: <a href="../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">core.clean.Clean</a></span>, <span name="validator">validator: <a href="../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">core.validate.Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadWithKey.A">A</span>]</span>, <span name="filter">filter: <a href="../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">core.filter.RowFilter</a></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../core/codec/Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">core.codec.Decode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadWithKey.A">A</span>]</span>, <span name="arg1">arg1: <a href="../core/codec/Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">core.codec.Tag</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadWithKey.A">A</span>]</span>, <span name="arg2">arg2: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadWithKey.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Load.loadWithKey.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Same as <code>load</code> but also appends a unique key to each line.</p><div class="fullcomment"><div class="comment cmt"><p>Same as <code>load</code> but also appends a unique key to each line. The last field of <code>A</code>
-needs to be set aside to receive the key as type string.</p><p>The key is generated by:</p><ol class="decimal"><li>Creating a random 4 byte seed for each load</li><li>For each file hashing the seed and the path and then taking the last 8 bytes.</li><li>Hashing each line and taking 12 bytes, taking the map task number (current slice number) and the offset into the file.</li><li>Concatenating the file hash from 2, the slice number, byte offset and line hash</li></ol><p>This produces a 256 bit key.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a></dd></dl></div>
+      <p class="shortcomment cmt">Loads the supplied text files and converts them to the specified thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Loads the supplied text files and converts them to the specified thrift struct.</p><p>The operations performed are:</p><ol class="decimal"><li>Append a time field to each line using the provided time source</li><li>Split each line into columns/fields using the provided splitter</li><li>Apply the provided filter to each list of fields (defaults to no filtering).</li><li>Clean each field using the provided cleaner</li><li>Convert the list of fields into the provided thrift struct.</li><li>Validate each struct (defaults to assuming all structs are ok).</li><li>The fraction of successfull rows is compared against the error threshold
+    and the appropriate <code>LoadInfo</code> value returned.
+</li></ol></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -528,68 +435,62 @@ needs to be set aside to receive the key as type string.</p><p>The key is genera
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions#now" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="now(format:String):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
-      <a id="now(String):core.time.TimeSource"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps#scalazExecutionMonad" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="scalazExecutionMonad:scalaz.Monad[com.twitter.scalding.Execution]"></a>
+      <a id="scalazExecutionMonad:Monad[Execution]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">now</span><span class="params">(<span name="format">format: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;yyyy-MM-dd&quot;</span></span>)</span><span class="result">: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>
+        <span class="name">scalazExecutionMonad</span><span class="result">: <span class="extype" name="scalaz.Monad">Monad</span>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Use the current time yyyy-MM-dd as the load time for the data</p><div class="fullcomment"><div class="comment cmt"><p>Use the current time yyyy-MM-dd as the load time for the data</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](exportDir:String,tableName:String,connectionString:String,username:String,password:String,inputFieldsTerminatedBy:Char,inputNullString:String,options:T,deleteFromTable:Boolean)(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.Job"></a>
-      <a id="sqoopExport[T&lt;:ParlourExportOptions[T]](String,String,String,String,String,Char,String,T,Boolean)(Args)(FlowDef,Mode):Job"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](config:au.com.cba.omnia.maestro.core.task.SqoopExportConfig[T],exportDir:String):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="sqoopExport[T&lt;:parlour.ParlourExportOptions[T]](core.task.SqoopExportConfig[T],String):Execution[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sqoopExport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopExport.T">T</span>]</span>]</span><span class="params">(<span name="exportDir">exportDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="inputFieldsTerminatedBy">inputFieldsTerminatedBy: <span class="extype" name="scala.Char">Char</span></span>, <span name="inputNullString">inputNullString: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopExport.T">T</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ParlourExportDsl()</a></span></span></span>, <span name="deleteFromTable">deleteFromTable: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
+        <span class="name">sqoopExport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">parlour.ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.T">T</span>]</span>]</span><span class="params">(<span name="config">config: <a href="../core/task/SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig">core.task.SqoopExportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.T">T</span>]</span>, <span name="exportDir">exportDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Runs a sqoop export from HDFS to a database table.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop export from HDFS to a database table.</p><p>If 'deleteFromTable' param is true, then all preexisting rows from the target DB table will be deleted first.
-Otherwise the rows will be appended.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Job for this export
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#sqoopImport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopImport[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](hdfsRoot:String,source:String,domain:String,timePath:String,options:T,tableName:Option[String])(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):(Seq[com.twitter.scalding.Job],String)"></a>
-      <a id="sqoopImport[T&lt;:ParlourImportOptions[T]](String,String,String,String,T,Option[String])(Args)(FlowDef,Mode):(Seq[Job],String)"></a>
+      <p class="shortcomment cmt">Exports data from HDFS to a DB via Sqoop.</p><div class="fullcomment"><div class="comment cmt"><p>Exports data from HDFS to a DB via Sqoop.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution#sqoopImport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopImport[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](config:au.com.cba.omnia.maestro.core.task.SqoopImportConfig[T]):com.twitter.scalding.Execution[(String,Long)]"></a>
+      <a id="sqoopImport[T&lt;:parlour.ParlourImportOptions[T]](core.task.SqoopImportConfig[T]):Execution[(String,Long)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sqoopImport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImport.T">T</span>]</span>]</span><span class="params">(<span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImport.T">T</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: (<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="com.twitter.scalding.Job">Job</span>], <span class="extype" name="scala.Predef.String">String</span>)</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs a sqoop import from a database table to HDFS.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop import from a database table to HDFS.</p><p>Data will be copied to a path that is generated. For a given <code>domain</code>,<code>tableName</code> and <code>timePath</code>, a path
-<code>$hdfsRoot/source/$source/$domain/$tableName/$timePath</code> is generated.</p><p>Use <span class="extype" name="Sqoop.createSqoopImportOptions">Sqoop.createSqoopImportOptions</span> to populate the <span class="extype" name="ParlourImportOptions">ParlourImportOptions</span> parameter.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of Seq of jobs for this import and import directory.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop#sqoopImportWithQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopImportWithQuery[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](hdfsRoot:String,source:String,domain:String,timePath:String,tableName:String,options:T)(args:com.twitter.scalding.Args)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):(Seq[com.twitter.scalding.Job],String)"></a>
-      <a id="sqoopImportWithQuery[T&lt;:ParlourImportOptions[T]](String,String,String,String,String,T)(Args)(FlowDef,Mode):(Seq[Job],String)"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">sqoopImportWithQuery</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImportWithQuery.T">T</span>]</span>]</span><span class="params">(<span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop.sqoopImportWithQuery.T">T</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: (<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="com.twitter.scalding.Job">Job</span>], <span class="extype" name="scala.Predef.String">String</span>)</span>
+        <span class="name">sqoopImport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">parlour.ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopImport.T">T</span>]</span>]</span><span class="params">(<span name="config">config: <a href="../core/task/SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig">core.task.SqoopImportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopImport.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Long">Long</span>)]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Runs a sqoop import from a database table to HDFS.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop import from a database table to HDFS.
-Data is fetched using SQL query provided in <code>options</code>.</p><p>WARNING: <code>options.tableName</code> should not be set. Otherwise Sqoop will not use SQL query.</p><p>Data will be copied to a path that is generated. For a given <code>domain</code>,<code>tableName</code> and <code>timePath</code>, a path
-<code>$hdfsRoot/source/$source/$domain/$tableName/$timePath</code> is generated.</p><p>Use <span class="extype" name="Sqoop.createSqoopImportOptionsWithQuery">Sqoop.createSqoopImportOptionsWithQuery</span> to populate the <span class="extype" name="ParlourImportOptions">ParlourImportOptions</span> parameter.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of Seq of jobs for this import and import directory.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of import directory and number of rows imported
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution#sqoopImport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopImport[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]](config:au.com.cba.omnia.maestro.core.task.SqoopImportConfig[T],condition:String):com.twitter.scalding.Execution[(String,Long)]"></a>
+      <a id="sqoopImport[T&lt;:parlour.ParlourImportOptions[T]](core.task.SqoopImportConfig[T],String):Execution[(String,Long)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sqoopImport</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">parlour.ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopImport.T">T</span>]</span>]</span><span class="params">(<span name="config">config: <a href="../core/task/SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig">core.task.SqoopImportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopImport.T">T</span>]</span>, <span name="condition">condition: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Long">Long</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Runs a sqoop import from a database table to HDFS.</p><div class="fullcomment"><div class="comment cmt"><p>Runs a sqoop import from a database table to HDFS.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Tuple of import directory and number of rows imported
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -603,47 +504,6 @@ Data is fetched using SQL query provided in <code>options</code>.</p><p>WARNING:
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions#timeFromPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeFromPath(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
-      <a id="timeFromPath(Regex):core.time.TimeSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeFromPath</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Derive the load time from the file path using the provided regex.</p><div class="fullcomment"><div class="comment cmt"><p>Derive the load time from the file path using the provided regex.
-The regex needs to extract the year,month and day into separate capture groups.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions#timeFromPathHour" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeFromPathHour(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
-      <a id="timeFromPathHour(Regex):core.time.TimeSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeFromPathHour</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Extracts time from path up to hour level using given Regex</p><div class="fullcomment"><div class="comment cmt"><p>Extracts time from path up to hour level using given Regex</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions#timeFromPathSecond" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeFromPathSecond(regex:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.time.TimeSource"></a>
-      <a id="timeFromPathSecond(Regex):core.time.TimeSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeFromPathSecond</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">core.time.TimeSource</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Extracts time from path up to seconds level using given Regex</p><div class="fullcomment"><div class="comment cmt"><p>Extracts time from path up to seconds level using given Regex</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -657,25 +517,22 @@ The regex needs to extract the year,month and day into separate capture groups.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Upload#upload" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.omnitool.Result[List[String]]"></a>
-      <a id="upload(String,String,String,String,String,String,String,Configuration,Regex):Result[List[String]]"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#upload" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="upload(config:au.com.cba.omnia.maestro.core.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]"></a>
+      <a id="upload(core.task.UploadConfig):Execution[core.task.UploadInfo]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">upload</span><span class="params">(<span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localIngestDir">localIngestDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchiveDir">localArchiveDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="conf">conf: <span class="extype" name="org.apache.hadoop.conf.Configuration">Configuration</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.omnitool.Result">Result</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+        <span class="name">upload</span><span class="params">(<span name="config">config: <a href="../core/task/UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadConfig">core.task.UploadConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="../core/task/UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadInfo">core.task.UploadInfo</a>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally.</p><p><code>upload</code> expects data files intended for HDFS to be placed in
-the local folder <code>$localIngestDir/dataFeed/$source/$domain</code>. Different
-source systems will use different values for <code>source</code> and <code>domain</code>.
-<code>upload</code> processes all data files that match a given file pattern.
-The file pattern format is explained below.</p><p>Each data file will be copied onto HDFS as the following file:
-<code>$hdfsRoot/source/$source/$domain/$tableName/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;</code>.</p><p>Data files are also compressed and archived on the local machine and on HDFS.
-Each data file is archived as:</p><ul><li><code>$localArchiveDir/$source/$domain/$tableName/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;.bz2</code></li><li><code>$hdfsRoot/archive/$source/$domain/$tableName/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;.bz2</code></li></ul><p>(These destination paths may change slightly depending on the fields in the file pattern.)</p><p>Some files placed on the local machine are control files. These files
+      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally.</p><p><code>upload</code> expects data files intended for HDFS to be placed in the local
+ingestion path. <code>upload</code> processes all data files that match a given file
+pattern. The file pattern format is explained below.</p><p>Each data file will be copied into the HDFS landing path. Data files are
+also compressed and archived on the local machine and on HDFS.</p><p>Some files placed on the local machine are control files. These files
 are not intended for HDFS and are ignored by <code>upload</code>. <code>upload</code> will log
 a message whenever it ignores a control file.</p><p>When an error occurs, <code>upload</code> stops copying files immediately. Once the
 cause of the error has been addressed, <code>upload</code> can be run again to copy
@@ -683,37 +540,39 @@ any remaining files to HDFS. <code>upload</code> will refuse to copy a file if t
 file or it's control flags are already present in HDFS. If you
 need to overwrite a file that already exists in HDFS, you will need to
 delete the file and it's control flags before <code>upload</code> will replace it.</p><p>The file pattern is a string containing the following elements:</p><ul><li>Literals:<ul><li>Any character other than <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, or <code>\</code> represents itself.</li><li><code>\{</code>, <code>\}</code>, <code>\*</code>, <code>\?</code>, or <code>\\</code> represents <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, and <code>\</code>, respectively.</li><li>The string <code>{table}</code> represents the table name.</li></ul></li><li>Wildcards:<ul><li>The character <code>*</code> represents an arbitrary number of arbitrary characters.</li><li>The character <code>?</code> represents one arbitrary character.</li></ul></li><li>Date times:<ul><li>The string <code>{&lt;timestamp-pattern&gt;}</code> represents a JodaTime timestamp pattern.</li><li><code>upload</code> only supports certain date time fields:<ul><li>year (y),</li><li>month of year (M),</li><li>day of month (d),</li><li>hour of day (H),</li><li>minute of hour (m), and</li><li>second of minute (s).</li></ul></li></ul></li></ul><p>Some example file patterns:</p><ul><li><code>{table}{yyyyMMdd}.DAT</code></li><li><code>{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}</code></li><li><code>??_{table}-{ddMMyy}*</code>
-</li></ul></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The list of copied hdfs files if successful, or any error occuring when uploading files
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.View#view" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="view[A&lt;:com.twitter.scrooge.ThriftStruct,B](partition:au.com.cba.omnia.maestro.core.partition.Partition[A,B],output:String)(pipe:com.twitter.scalding.TypedPipe[A])(implicitevidence$1:Manifest[A],implicitevidence$2:Manifest[B],implicitevidence$3:com.twitter.scalding.TupleSetter[B],implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):Unit"></a>
-      <a id="view[A&lt;:ThriftStruct,B](core.partition.Partition[A,B],String)(TypedPipe[A])(Manifest[A],Manifest[B],TupleSetter[B],FlowDef,Mode):Unit"></a>
+</li></ul></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The list of copied hdfs files.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.ViewExecution#view" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="view[A&lt;:com.twitter.scrooge.ThriftStruct,B](config:au.com.cba.omnia.maestro.core.task.ViewConfig[A,B],pipe:com.twitter.scalding.TypedPipe[A])(implicitevidence$1:Manifest[A],implicitevidence$2:Manifest[B],implicitevidence$3:com.twitter.scalding.TupleSetter[B]):com.twitter.scalding.Execution[Long]"></a>
+      <a id="view[A&lt;:com.twitter.scrooge.ThriftStruct,B](core.task.ViewConfig[A,B],TypedPipe[A])(Manifest[A],Manifest[B],TupleSetter[B]):Execution[Long]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">view</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../core/partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">core.partition.Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.B">B</span>]</span>, <span name="output">output: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.B">B</span>]</span>, <span name="arg2">arg2: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.view.B">B</span>]</span>, <span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">view</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="config">config: <a href="../core/task/ViewConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewConfig">core.task.ViewConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.B">B</span>]</span>, <span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.B">B</span>]</span>, <span name="arg2">arg2: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.view.B">B</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Long">Long</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Partitions a pipe using the given partition scheme and writes out the data.</p><div class="fullcomment"><div class="comment cmt"><p>Partitions a pipe using the given partition scheme and writes out the data.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.View#viewHive" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="viewHive[A&lt;:com.twitter.scrooge.ThriftStruct,ST](table:au.com.cba.omnia.maestro.core.hive.HiveTable[A,ST],append:Boolean)(pipe:com.twitter.scalding.TypedPipe[A])(implicitevidence$4:Manifest[A],implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):Unit"></a>
-      <a id="viewHive[A&lt;:ThriftStruct,ST](core.hive.HiveTable[A,ST],Boolean)(TypedPipe[A])(Manifest[A],FlowDef,Mode):Unit"></a>
+      <p class="shortcomment cmt">Partitions a pipe using the given partition scheme and writes out the data.</p><div class="fullcomment"><div class="comment cmt"><p>Partitions a pipe using the given partition scheme and writes out the data.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the number of rows written.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.ViewExecution#viewHive" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="viewHive[A&lt;:com.twitter.scrooge.ThriftStruct,ST](table:au.com.cba.omnia.maestro.core.hive.HiveTable[A,ST],pipe:com.twitter.scalding.TypedPipe[A],append:Boolean)(implicitevidence$4:Manifest[A]):com.twitter.scalding.Execution[Long]"></a>
+      <a id="viewHive[A&lt;:com.twitter.scrooge.ThriftStruct,ST](core.hive.HiveTable[A,ST],TypedPipe[A],Boolean)(Manifest[A]):Execution[Long]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">viewHive</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="ST">ST</span>]</span><span class="params">(<span name="table">table: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.viewHive.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.View.viewHive.ST">ST</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.viewHive.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.View.viewHive.A">A</span>]</span>, <span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">viewHive</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">com.twitter.scrooge.ThriftStruct</span></span>, <span name="ST">ST</span>]</span><span class="params">(<span name="table">table: <a href="../core/hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">core.hive.HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.viewHive.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.viewHive.ST">ST</span>]</span>, <span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.viewHive.A">A</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution.viewHive.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Long">Long</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Writes out the data to a hive table.</p><div class="fullcomment"><div class="comment cmt"><p>Writes out the data to a hive table.</p><p>This will create the table if it doesn't already exist. If the existing schema doesn't match
 the schema expected the job will fail.
-</p></div><dl class="paramcmts block"><dt class="param">append</dt><dd class="cmt"><p>iff true add files to an already existing table.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the number of rows written.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -776,30 +635,46 @@ the schema expected the job will fail.
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="au.com.cba.omnia.maestro.core.task.QueryExecution#hiveQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hiveQuery(config:au.com.cba.omnia.maestro.core.task.QueryConfig):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="hiveQuery(core.task.QueryConfig):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">hiveQuery</span><span class="params">(<span name="config">config: <a href="../core/task/QueryConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryConfig">core.task.QueryConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Runs the specified hive query.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the specified hive query.</p><p>When specified, the output value is used to create the target table before the job starts
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.15)</i> Use the query/queries method in Hive instead</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="java.io.Serializable">
-              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">
-              <h3>Inherited from <a href="../core/hdfs/OldGuardFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.OldGuardFunctions">OldGuardFunctions</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">
-              <h3>Inherited from <a href="../core/time/OldTimeSourceFunctions.html" class="extype" name="au.com.cba.omnia.maestro.core.time.OldTimeSourceFunctions">OldTimeSourceFunctions</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.args.Config">
-              <h3>Inherited from <a href="../core/args/Config.html" class="extype" name="au.com.cba.omnia.maestro.core.args.Config">Config</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.Sqoop">
-              <h3>Inherited from <a href="../core/task/Sqoop.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Sqoop">Sqoop</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.Upload">
-              <h3>Inherited from <a href="../core/task/Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.Query">
-              <h3>Inherited from <a href="../core/task/Query.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Query">Query</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.View">
-              <h3>Inherited from <a href="../core/task/View.html" class="extype" name="au.com.cba.omnia.maestro.core.task.View">View</a></h3>
-            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.Load">
-              <h3>Inherited from <a href="../core/task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">Load</a></h3>
+        <div class="parent" name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings">
+              <h3>Inherited from <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.HdfsStrings">HdfsStrings</span></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.macros.MacroSupport">
+              <h3>Inherited from <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">macros.MacroSupport</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">
+              <h3>Inherited from <a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">
+              <h3>Inherited from <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.QueryExecution">
+              <h3>Inherited from <a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.ViewExecution">
+              <h3>Inherited from <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.LoadExecution">
+              <h3>Inherited from <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.maestro.core.task.UploadExecution">
+              <h3>Inherited from <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

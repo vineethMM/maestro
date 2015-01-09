@@ -58,20 +58,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.example.CustomerCascade" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CustomerCascadeextendsMaestroCascade[au.com.cba.omnia.maestro.example.thrift.Customer]"></a>
-      <a id="CustomerCascade:CustomerCascade"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="CustomerCascade.html"><span class="name">CustomerCascade</span></a><span class="result"> extends <a href="../api/MaestroCascade.html" class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade">MaestroCascade</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.maestro.example.CustomerConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.example.CustomerConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CustomerConfigextendsProductwithSerializable"></a>
       <a id="CustomerConfig:CustomerConfig"></a>
       <h4 class="signature">
@@ -123,45 +110,19 @@
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.example.CustomerSqoopCascade" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CustomerSqoopCascadeextendsMaestroCascade[au.com.cba.omnia.maestro.example.thrift.Customer]"></a>
-      <a id="CustomerSqoopCascade:CustomerSqoopCascade"></a>
+    </li><li name="au.com.cba.omnia.maestro.example.TransformConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TransformConfigextendsProductwithSerializable"></a>
+      <a id="TransformConfig:TransformConfig"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="CustomerSqoopCascade.html"><span class="name">CustomerSqoopCascade</span></a><span class="result"> extends <a href="../api/MaestroCascade.html" class="extype" name="au.com.cba.omnia.maestro.api.MaestroCascade">MaestroCascade</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
+        <a href="TransformConfig.html"><span class="name">TransformConfig</span></a><span class="params">(<span name="config">config: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      
-    </li><li name="au.com.cba.omnia.maestro.example.CustomerUploadExample" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CustomerUploadExampleextendsMaestro[au.com.cba.omnia.maestro.example.thrift.Customer]"></a>
-      <a id="CustomerUploadExample:CustomerUploadExample"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="CustomerUploadExample.html"><span class="name">CustomerUploadExample</span></a><span class="result"> extends <a href="../api/Maestro.html" class="extype" name="au.com.cba.omnia.maestro.api.Maestro">Maestro</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.maestro.example.TransformCustomerCascade" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TransformCustomerCascadeextendsMaestro[au.com.cba.omnia.maestro.example.thrift.Customer]"></a>
-      <a id="TransformCustomerCascade:TransformCustomerCascade"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="TransformCustomerCascade.html"><span class="name">TransformCustomerCascade</span></a><span class="result"> extends <a href="../api/Maestro.html" class="extype" name="au.com.cba.omnia.maestro.api.Maestro">Maestro</a>[<a href="thrift/Customer.html" class="extype" name="au.com.cba.omnia.maestro.example.thrift.Customer">Customer</a>]</span>
-      </span>
-      </h4>
-      
+      <p class="comment cmt">Configuration for the customer to account transformation example</p>
     </li></ol>
             </div>
 
@@ -208,6 +169,19 @@
       </span>
       </h4>
       <p class="comment cmt">Example customer execution, importing data via Sqoop</p>
+    </li><li name="au.com.cba.omnia.maestro.example.TransformExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TransformExecution"></a>
+      <a id="TransformExecution:TransformExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TransformExecution$.html"><span class="name">TransformExecution</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Customer to account transformation eample</p>
     </li><li name="au.com.cba.omnia.maestro.example.VersionInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="VersionInfo"></a>
       <a id="VersionInfo:VersionInfo"></a>

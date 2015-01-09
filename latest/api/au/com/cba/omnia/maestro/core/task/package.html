@@ -84,32 +84,127 @@
       </span>
       </h4>
       <p class="comment cmt">Used by <code>Load.loadWithKey</code> to generates a unique key for each input line.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Load" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="LoadextendsAnyRef"></a>
-      <a id="Load:Load"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.task.ImportSource" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ImportSourceextendsAnyRef"></a>
+      <a id="ImportSource:ImportSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ImportSource.html"><span class="name">ImportSource</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Different sources for parlour imports.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadConfig[A]extendsProductwithSerializable"></a>
+      <a id="LoadConfig[A]:LoadConfig[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadConfig.html"><span class="name">LoadConfig</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitter">splitter: <a href="../split/Splitter.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">Splitter</a> = <span class="defval" name="au.com.cba.omnia.maestro.core.split.Splitter.delimited(&quot;|&quot;)">...</span></span>, <span name="timeSource">timeSource: <a href="../time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a> = <span class="defval" name="au.com.cba.omnia.maestro.core.time.TimeSource.fromDirStructure">...</span></span>, <span name="generateKey">generateKey: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="filter">filter: <a href="../filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">RowFilter</a> = <span class="defval" name="au.com.cba.omnia.maestro.core.filter.RowFilter.keep">...</span></span>, <span name="clean">clean: <a href="../clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">Clean</a> = <span class="defval" name="au.com.cba.omnia.maestro.core.clean.Clean.default">...</span></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="validator">validator: <a href="../validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadConfig.A">A</span>] = <span class="defval" name="au.com.cba.omnia.maestro.core.validate.Validator.all[A]()">...</span></span>, <span name="errorThreshold">errorThreshold: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">0.05</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration options for load
+</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LoadExecutionextendsAnyRef"></a>
+      <a id="LoadExecution:LoadExecution"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Load.html"><span class="name">Load</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="LoadExecution.html"><span class="name">LoadExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Executions for load tasks</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadFailureextendsLoadInfowithProductwithSerializable"></a>
+      <a id="LoadFailure:LoadFailure"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadFailure.html"><span class="name">LoadFailure</span></a><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="actual">actual: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The number of rows which failed to load exceeded our error threshold
+</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LoadInfoextendsAnyRef"></a>
+      <a id="LoadInfo:LoadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadInfo.html"><span class="name">LoadInfo</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Information about a Load</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadSuccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadSuccessextendsLoadInfowithProductwithSerializable"></a>
+      <a id="LoadSuccess:LoadSuccess"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LoadSuccess.html"><span class="name">LoadSuccess</span></a><span class="params">(<span name="read">read: <span class="extype" name="scala.Long">Long</span></span>, <span name="actual">actual: <span class="extype" name="scala.Long">Long</span></span>, <span name="written">written: <span class="extype" name="scala.Long">Long</span></span>, <span name="failed">failed: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The number of rows which failed to load was within acceptable limits
+</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MaestroConfigextendsProductwithSerializable"></a>
+      <a id="MaestroConfig:MaestroConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="MaestroConfig.html"><span class="name">MaestroConfig</span></a><span class="params">(<span name="conf">conf: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="loadTime">loadTime: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Core configuration settings for loads, and factory functions for
+task specific configurations.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.QueryExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="QueryExecutionextendsAnyRef"></a>
+      <a id="QueryExecution:QueryExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryExecution.html"><span class="name">QueryExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A trait for API to run hive queries using the execution monad.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.QuerySrc" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QuerySrcextendsImportSourcewithProductwithSerializable"></a>
+      <a id="QuerySrc:QuerySrc"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="QuerySrc.html"><span class="name">QuerySrc</span></a><span class="params">(<span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ImportSource">ImportSource</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.task.Query" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="QueryextendsAnyRef"></a>
-      <a id="Query:Query"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Query.html"><span class="name">Query</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A trait for API to run hive queries.</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.RawRow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RawRowextendsProductwithSerializable"></a>
       <a id="RawRow:RawRow"></a>
@@ -123,45 +218,137 @@
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.task.Sqoop" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="SqoopextendsAnyRef"></a>
-      <a id="Sqoop:Sqoop"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="SqoopExecutionextendsAnyRef"></a>
+      <a id="SqoopExecution:SqoopExecution"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Sqoop.html"><span class="name">Sqoop</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="SqoopExecution.html"><span class="name">SqoopExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Import and export data between a database and HDFS.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Upload" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="UploadextendsAnyRef"></a>
-      <a id="Upload:Upload"></a>
+      <p class="comment cmt">Methods to import and export from sqoop</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExportConfig[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]]extendsProductwithSerializable"></a>
+      <a id="SqoopExportConfig[T&lt;:ParlourExportOptions[T]]:SqoopExportConfig[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Upload.html"><span class="name">Upload</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="SqoopExportConfig.html"><span class="name">SqoopExportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig.T">T</span>]</span>]</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig.T">T</span></span>, <span name="deleteFromTable">deleteFromTable: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Push source files to HDFS using <a href="Upload.html#upload(source:String,domain:String,tableName:String,filePattern:String,localIngestDir:String,localArchiveDir:String,hdfsRoot:String,conf:org.apache.hadoop.conf.Configuration,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.omnitool.Result[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.core.task.Upload#upload">upload</a> and archive them.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.task.View" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ViewextendsAnyRef"></a>
-      <a id="View:View"></a>
+      <p class="comment cmt">Configuration options for sqoop export</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopImportConfig[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]]extendsProductwithSerializable"></a>
+      <a id="SqoopImportConfig[T&lt;:ParlourImportOptions[T]]:SqoopImportConfig[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="View.html"><span class="name">View</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="SqoopImportConfig.html"><span class="name">SqoopImportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig.T">T</span>]</span>]</span><span class="params">(<span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig.T">T</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration options for sqoop import</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.TableSrc" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TableSrcextendsImportSourcewithProductwithSerializable"></a>
+      <a id="TableSrc:TableSrc"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="TableSrc.html"><span class="name">TableSrc</span></a><span class="params">(<span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="where">where: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ImportSource">ImportSource</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadConfigextendsProductwithSerializable"></a>
+      <a id="UploadConfig:UploadConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadConfig.html"><span class="name">UploadConfig</span></a><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="defval" name="au.com.cba.omnia.maestro.core.upload.ControlPattern.default">...</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration options for upload.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="UploadExecutionextendsAnyRef"></a>
+      <a id="UploadExecution:UploadExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadExecution.html"><span class="name">UploadExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Push source files to HDFS using <a href="UploadExecution.html#upload(config:au.com.cba.omnia.maestro.core.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.core.task.UploadExecution#upload">upload</a> and archive them.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadInfoextendsProductwithSerializable"></a>
+      <a id="UploadInfo:UploadInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadInfo.html"><span class="name">UploadInfo</span></a><span class="params">(<span name="files">files: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Information about an upload</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.ViewConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ViewConfig[A&lt;:com.twitter.scrooge.ThriftStruct,B]extendsProductwithSerializable"></a>
+      <a id="ViewConfig[A&lt;:ThriftStruct,B]:ViewConfig[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ViewConfig.html"><span class="name">ViewConfig</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewConfig.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.ViewConfig.B">B</span>]</span>, <span name="output">output: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration options for write pipes to HDFS files.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.ViewExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ViewExecutionextendsAnyRef"></a>
+      <a id="ViewExecution:ViewExecution"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ViewExecution.html"><span class="name">ViewExecution</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Executions for view tasks</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfigextendsProductwithSerializable"></a>
+      <a id="QueryConfig:QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryConfig.html"><span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">QueryConfig</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="queries">queries: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="settings">settings: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf.ConfVars">ConfVars</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="defval" name="scala.this.Predef.Map.empty[org.apache.hadoop.hive.conf.HiveConf.ConfVars, Nothing]">...</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration for hive queries
+</p>
     </li></ol>
             </div>
 
@@ -169,51 +356,145 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.task.LoadHelper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="LoadHelper"></a>
-      <a id="LoadHelper:LoadHelper"></a>
+              <ol><li name="au.com.cba.omnia.maestro.core.task.EmptyLoad" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmptyLoad"></a>
+      <a id="EmptyLoad:EmptyLoad"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="LoadHelper$.html"><span class="name">LoadHelper</span></a>
+        <a href="EmptyLoad$.html"><span class="name">EmptyLoad</span></a><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Contains implementation for <code>loadFoo</code> methods in <code>Load</code> trait.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopDelete" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SqoopDelete"></a>
-      <a id="SqoopDelete:SqoopDelete"></a>
+      <p class="comment cmt">The Load had no new data to process</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadEx" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadEx"></a>
+      <a id="LoadEx:LoadEx"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="SqoopDelete$.html"><span class="name">SqoopDelete</span></a>
+        <a href="LoadEx$.html"><span class="name">LoadEx</span></a>
       </span>
       </h4>
-      <p class="comment cmt">Handles setup of delete from table before Sqoop export</p>
-    </li><li name="au.com.cba.omnia.maestro.core.task.Upload" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Upload"></a>
-      <a id="Upload:Upload"></a>
+      <p class="comment cmt">WARNING: not considered part of the load execution api.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LoadInfo"></a>
+      <a id="LoadInfo:LoadInfo"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Upload$.html"><span class="name">Upload</span></a>
+        <a href="LoadInfo$.html"><span class="name">LoadInfo</span></a>
       </span>
       </h4>
-      <p class="comment cmt">Contains implementation for <code>upload</code> methods in <a href="Upload.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Upload">Upload</a> trait.</p>
+      <p class="comment cmt">Factory methods for <code>LoadInfo</code></p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MaestroConfig"></a>
+      <a id="MaestroConfig:MaestroConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MaestroConfig$.html"><span class="name">MaestroConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopEx" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopEx"></a>
+      <a id="SqoopEx:SqoopEx"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopEx$.html"><span class="name">SqoopEx</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">WARNING: not considered part of the maestro api.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecutionTest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExecutionTest"></a>
+      <a id="SqoopExecutionTest:SqoopExecutionTest"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopExecutionTest$.html"><span class="name">SqoopExecutionTest</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Methods to support testing Sqoop execution</p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopExportConfig"></a>
+      <a id="SqoopExportConfig:SqoopExportConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopExportConfig$.html"><span class="name">SqoopExportConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory functions for <a href="SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig">SqoopExportConfig</a></p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopImportConfig"></a>
+      <a id="SqoopImportConfig:SqoopImportConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopImportConfig$.html"><span class="name">SqoopImportConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory functions for <a href="SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopImportConfig">SqoopImportConfig</a></p>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadEx" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UploadEx"></a>
+      <a id="UploadEx:UploadEx"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UploadEx$.html"><span class="name">UploadEx</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">WARNING: not considered part of the load execution api.</p>
     </li></ol>
             </div>
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="au.com.cba.omnia.maestro.core.task.QueryConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="QueryConfig"></a>
+      <a id="QueryConfig:QueryConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="QueryConfig$.html"><span class="name deprecated" title="Deprecated: (Since version 1.15) Use the query/queries method in Hive instead">QueryConfig</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory functions for query configs</p>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

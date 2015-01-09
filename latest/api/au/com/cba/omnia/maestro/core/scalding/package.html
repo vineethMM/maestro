@@ -58,33 +58,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.scalding.Counter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CounterextendsProductwithSerializable"></a>
-      <a id="Counter:Counter"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="Counter.html"><span class="name">Counter</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="group">group: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="counter">counter: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">An individual counter</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CountersextendsProductwithSerializable"></a>
-      <a id="Counters:Counters"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="Counters.html"><span class="name">Counters</span></a><span class="params">(<span name="stats">stats: <span class="extype" name="cascading.stats.CascadingStats">CascadingStats</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Convienient access to stats for a scalding <code>CascadeJob</code></p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ExecutionOpsextendsAnyRef"></a>
       <a id="ExecutionOps:ExecutionOps"></a>
       <h4 class="signature">
@@ -97,19 +71,45 @@
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.NamedJob" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="NamedJobextendsJob"></a>
-      <a id="NamedJob:NamedJob"></a>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobFailureextendsJobStatuswithProductwithSerializable"></a>
+      <a id="JobFailure:JobFailure"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="NamedJob.html"><span class="name">NamedJob</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
+        <a href="JobFailure.html"><span class="name">JobFailure</span></a><span class="params">(<span name="exitCode">exitCode: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Convienient creation of nicely named scalding jobs.</p>
+      <p class="comment cmt">The job failed</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobStatus" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="JobStatusextendsAnyRef"></a>
+      <a id="JobStatus:JobStatus"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="JobStatus.html"><span class="name">JobStatus</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">An enumeration representing possible program status</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="MaestroJobextendsSerializable"></a>
+      <a id="MaestroJob:MaestroJob"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="MaestroJob.html"><span class="name">MaestroJob</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Create an object which extends this trait to create a main class using the execution api.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichExecution[A]extendsProductwithSerializable"></a>
       <a id="RichExecution[A]:RichExecution[A]"></a>
@@ -136,19 +136,6 @@
       </span>
       </h4>
       <p class="comment cmt">Pimps the Execution object.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.UniqueJob" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="UniqueJobextendsJob"></a>
-      <a id="UniqueJob:UniqueJob"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="UniqueJob.html"><span class="name">UniqueJob</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Ensures the scalding job has a unique name.</p>
     </li></ol>
             </div>
 
@@ -169,19 +156,6 @@
       </span>
       </h4>
       <p class="comment cmt">Collection of utility methods around get/setting Config.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.Counters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Counters"></a>
-      <a id="Counters:Counters"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Counters$.html"><span class="name">Counters</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Factory methods for Counters.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Errors"></a>
       <a id="Errors:Errors"></a>
@@ -208,6 +182,58 @@
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobFailure"></a>
+      <a id="JobFailure:JobFailure"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JobFailure$.html"><span class="name">JobFailure</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Companion object for JobFailure to create a default JobFailure.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFinished" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobFinished"></a>
+      <a id="JobFinished:JobFinished"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JobFinished$.html"><span class="name">JobFinished</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The job succeeded and had work to do</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNeverReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobNeverReady"></a>
+      <a id="JobNeverReady:JobNeverReady"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JobNeverReady$.html"><span class="name">JobNeverReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The Job was never ready, and could not be retried any more</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNotReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JobNotReady"></a>
+      <a id="JobNotReady:JobNotReady"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JobNotReady$.html"><span class="name">JobNotReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The job is not ready to run: it's pre-requisites are not available</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.StatKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StatKeys"></a>
       <a id="StatKeys:StatKeys"></a>

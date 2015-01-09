@@ -42,11 +42,11 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents the notion of splitting a string into parts</p><p>There is no requirement that <code>splitter.run(s).mkString == s</code>.
 However, it should be theoretically possible to write a function
 <code>List[String] =&gt; String</code> that reverses the split on good input.</p><p>Originally the idea was that Splitter would return <code>String \/ List[String]</code>.
-However, the code I wrote in <a href="../task/Load.html" class="extype" name="au.com.cba.omnia.maestro.core.task.Load">au.com.cba.omnia.maestro.core.task.Load</a>
+However, the code I wrote in <span class="extype" name="au.com.cba.omnia.maestro.core.task.Load">au.com.cba.omnia.maestro.core.task.Load</span>
 to handle this caused scalding serialization to stop working, so now the
 splitters try to do &quot;sensible&quot; things if they see something incorrect, where
 &quot;sensible&quot; means return a result that will cause a sensible error later.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/95ce4b0bf6cfef55f02e2c9907faf5238bdb9905//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/split/Splitter.scala" target="_blank">Splitter.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0539610bbcd2e9ad81116de9d0121b3f22b89fd2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/split/Splitter.scala" target="_blank">Splitter.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>

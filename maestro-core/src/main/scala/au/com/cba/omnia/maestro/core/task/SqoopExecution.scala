@@ -205,12 +205,22 @@ trait SqoopExecution {
 
 /** Methods to support testing Sqoop execution */
 object SqoopExecutionTest {
-  /** Set up environment variables so that sqoop knows how to run jobs in testing environment */
-  def setupEnv(customMRHome: String = s"${System.getProperty("user.home")}/.ivy2/cache") {
+  /**  Set up environment variables so that sqoop knows how to run jobs in testing environment 
+    *  
+    *  @param customMRHome:  The testing map-reduce home.  Defaults to `~/.ivy2/cache`. 
+    *  @param customConnMan: Optionally set the connection manager class name,
+                             `Some("")` resets it to null.
+    *                        Default is not to set it (`None`).
+    */
+  def setupEnv(
+    customMRHome: String = s"${System.getProperty("user.home")}/.ivy2/cache",
+    customConnMan: Option[String] = None
+  ) {
     // very dodgy way of configuring sqoop for testing,
-    // but this should only ever have one value for single testing run
+    // but these should only ever have one value each in a single testing run
     // and the configuration becomes an implementation details hidden from our API
     System.setProperty(SqoopEx.mrHomeKey, customMRHome)
+    customConnMan.foreach (cm => System.setProperty(SqoopEx.connManKey, cm))
   }
 }
 
@@ -232,26 +242,33 @@ object SqoopEx {
   // system property key for setting custom hadoop map reduce dir
   // this property is a hack to get testing working without impacting our API
   val mrHomeKey = "MAESTRO_HADOOP_MAPRED_HOME"
+  val connManKey = "MAESTRO_PARLOUR_CONNMAN_CLASSNAME"
 
   def importExecution[T <: ParlourImportOptions[T]](
     config: SqoopImportConfig[T]
   ): Execution[(String, Long)] = {
-    val importPath    = config.hdfsLandingPath + File.separator + config.timePath
     val archivePath   = config.hdfsArchivePath + File.separator + config.timePath
     val logger        = Logger.getLogger("Sqoop")
     val withDestDir   = config.options.targetDir(importPath)
     val withMRHome    = setCustomMRHome(withDestDir)
+    val importPath   = config.hdfsLandingPath + File.separator + config.timePath
+    val archivePath  = config.hdfsArchivePath + File.separator + config.timePath
+    val logger       = Logger.getLogger("Sqoop")
+    val withDestDir  = config.options.targetDir(importPath)
+    val withMRHome   = getCustomMRHome.fold(withDestDir)(withDestDir.hadoopMapRedHome(_))
     val withClassName =
       withMRHome.getClassName.fold(withMRHome.className(f"SqoopImport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
-    val sqoopOptions  = withClassName.toSqoopOptions
-
-    logger.info(s"connectionString = ${sqoopOptions.getConnectString}")
-    logger.info(s"tableName        = ${sqoopOptions.getTableName}")
-    logger.info(s"targetDir        = ${sqoopOptions.getTargetDir}")
+    val withConnMan  = getCustomConnMan.fold(withClassName)(withClassName.connectionManager(_))
+    val sqoopOptions = withConnMan.toSqoopOptions
+    
+    logger.info(s"connectionString  = ${sqoopOptions.getConnectString}")
+    logger.info(s"tableName         = ${sqoopOptions.getTableName}")
+    logger.info(s"targetDir         = ${sqoopOptions.getTargetDir}")
+    logger.info(s"connectionManager = ${sqoopOptions.getConnManagerClassName}")
 
     for {
       // can't get count from sqoop, but can get it from archive job
-      _     <- ParlourExecution.sqoopImport(withClassName)
+      _     <- ParlourExecution.sqoopImport(withConnMan)
       count <- archive[GzipCodec](importPath, archivePath)
     } yield (importPath, count)
   }
@@ -276,12 +293,13 @@ object SqoopEx {
   def exportExecution[T <: ParlourExportOptions[T]](
     config: SqoopExportConfig[T]
   ): Execution[Unit] = {
-    val withDelete =
+    val withDelete  =
       if (config.deleteFromTable) trySetDeleteQuery(config.options)
       else config.options
     val withMRHome    = setCustomMRHome(withDelete)
     val withClassName = withMRHome.getClassName.fold(withMRHome.className(f"SqoopExport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
-    ParlourExecution.sqoopExport(withClassName)
+    val withConnMan = getCustomConnMan.fold(withClassName)(withClassName.connectionManager(_))
+    ParlourExecution.sqoopExport(withConnMan)
   }
 
   // Sets DELETE sql query. Throws RuntimeException if sql query already set or table name is not set
@@ -344,4 +362,11 @@ object SqoopEx {
       .inputFieldsTerminatedBy(inputFieldsTerminatedBy)
       .inputNull(inputNullString)
   }
+
+  def getCustomConnMan: Option[String] =
+    System.getProperty(connManKey) match {
+      case null => None
+      case "" => Some(null)
+      case cm => Some(cm)
+    }
 }

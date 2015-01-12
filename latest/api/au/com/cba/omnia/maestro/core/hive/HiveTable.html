@@ -42,7 +42,7 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Base type for partitioned and unpartitioned Hive tables.
 ST - Type parameter of <span class="extype" name="TypedSink">TypedSink</span> and <span class="extype" name="TypedPipe">TypedPipe</span>
 returned in <code>sink</code> and <code>write</code> methods respectively.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0539610bbcd2e9ad81116de9d0121b3f22b89fd2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/a935a925efbc6b6af17a875a98947bd013fffa67//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hive/HiveTable.scala" target="_blank">HiveTable.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -115,19 +115,6 @@ returned in <code>sink</code> and <code>write</code> methods respectively.
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#sink" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="sink(append:Boolean):com.twitter.scalding.TypedSink[ST]withcom.twitter.scalding.Source"></a>
-      <a id="sink(Boolean):TypedSink[ST]withSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">sink</span><span class="params">(<span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedSink">TypedSink</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.ST">ST</span>] with <span class="extype" name="com.twitter.scalding.Source">Source</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Creates a scalding sink to write to the hive table.</p>
     </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#source" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="source:com.twitter.scalding.Mappable[T]"></a>
       <a id="source:Mappable[T]"></a>
@@ -154,19 +141,6 @@ returned in <code>sink</code> and <code>write</code> methods respectively.
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#write" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="write(pipe:com.twitter.scalding.TypedPipe[T],append:Boolean)(implicitflowDef:cascading.flow.FlowDef,implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.TypedPipe[ST]"></a>
-      <a id="write(TypedPipe[T],Boolean)(FlowDef,Mode):TypedPipe[ST]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">write</span><span class="params">(<span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.T">T</span>]</span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="flowDef">flowDef: <span class="extype" name="cascading.flow.FlowDef">FlowDef</span></span>, <span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable.ST">ST</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Writes to <code>this.sink</code> using given <span class="extype" name="TypedPipe">TypedPipe</span>.</p>
     </li><li name="au.com.cba.omnia.maestro.core.hive.HiveTable#writeExecution" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="writeExecution(pipe:com.twitter.scalding.TypedPipe[T],append:Boolean):com.twitter.scalding.Execution[com.twitter.scalding.ExecutionCounters]"></a>
       <a id="writeExecution(TypedPipe[T],Boolean):Execution[ExecutionCounters]"></a>

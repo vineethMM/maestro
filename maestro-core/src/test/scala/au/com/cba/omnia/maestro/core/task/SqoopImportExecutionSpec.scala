@@ -42,10 +42,11 @@ object SqoopImportExecutionSpec
   Sqoop Import Execution test
   ===========================
 
-  imports data from DB to HDFS successfully    $endToEndImportWithSuccess
-  imports data from DB to HDFS using SQL query $endToEndImportWithSqlQuery
-  handles exceptions while importing data      $endToEndImportWithException
-  handles exceptions while table not set       $endToEndImportWithoutTable
+  imports data from DB to HDFS successfully           $endToEndImportWithSuccess
+  imports data from DB to HDFS using SQL query        $endToEndImportWithSqlQuery
+  handles exceptions while importing data             $endToEndImportWithException
+  handles exceptions while table not set              $endToEndImportWithoutTable
+  can import data from two tables in the same session $doubleImport
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
   val username         = "sa"
@@ -115,6 +116,43 @@ object SqoopImportExecutionSpec
     execute(sqoopImport(config)) must beLike { case Failure(_) => ok }
   }
 
+  def doubleImport = {
+    implicit val session = AutoSession
+    val data2 = List("1|1", "2|2", "3|3")
+
+    SQL(s"""
+      create table table2 (
+        id integer,
+        other integer
+      )
+    """).execute.apply()
+
+    data2.map(line => line.split('|')).foreach(row => 
+      SQL(s"""insert into table2(id, other) values ('${row(0)}', '${row(1)}')""").update().apply()
+    )
+
+    val dirStructure2    = s"sales/books/table2"
+    val hdfsLandingPath2 = s"$hdfsRoot/source/$dirStructure2"
+    val hdfsArchivePath2 = s"$hdfsRoot/archive/$dirStructure2"
+    val options          = SqoopImportConfig.optionsWithQuery[ParlourImportDsl](connectionString, username, password,
+      s"SELECT * FROM $importTableName WHERE $$CONDITIONS", Some("id"))
+    val options2         = SqoopImportConfig.optionsWithQuery[ParlourImportDsl](connectionString, username, password,
+      s"SELECT * FROM table2 WHERE $$CONDITIONS", Some("id"))
+    val config           = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, options)
+    val config2          = SqoopImportConfig(hdfsLandingPath2, hdfsArchivePath2, timePath, options2)
+
+    val execution = for {
+      (_, c1) <- sqoopImport(config)
+      (_, c2) <- sqoopImport(config2)
+    } yield (c1, c2)
+
+    executesSuccessfully(execution) must_==((3, 3))
+    facts(
+      s"$hdfsLandingPath/$timePath" </> "part-m-00000" ==> lines(data),
+      s"$hdfsLandingPath2/$timePath" </> "part-m-00000" ==> lines(data2)
+    )
+  }
+
   val data = List("1|Fred|001|D|M|259", "2|Betty|005|D|M|205", "3|Bart|002|F|M|225")
 
   def tableSetup(connectionString: String, username: String, password: String, table: String = "customer_import"): Unit = {
@@ -132,9 +170,10 @@ object SqoopImportExecutionSpec
       )
     """).execute.apply()
 
-    data.map(line => line.split('|')).foreach(
-      row => SQL(s"""insert into ${table}(id, name, accr, cat, sub_cat, balance)
-        values ('${row(0)}', '${row(1)}', '${row(2)}', '${row(3)}', '${row(4)}', '${row(5)}')""").update().apply())
+    data.map(line => line.split('|')).foreach(row => 
+      SQL(s"""insert into ${table}(id, name, accr, cat, sub_cat, balance)
+        values ('${row(0)}', '${row(1)}', '${row(2)}', '${row(3)}', '${row(4)}', '${row(5)}')""").update().apply()
+    )
   }
 
   override def before: Any = tableSetup(

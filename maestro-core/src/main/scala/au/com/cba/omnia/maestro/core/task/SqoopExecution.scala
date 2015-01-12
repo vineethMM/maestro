@@ -38,6 +38,7 @@ import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourExportDsl, ParlourImportDsl}
 import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourExportOptions, ParlourImportOptions, ParlourOptions}
 
 import au.com.cba.omnia.maestro.core.scalding.StatKeys
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
 
 /**
   * Configuration options for sqoop import
@@ -253,21 +254,20 @@ object SqoopEx {
 
   def archive[C <: CompressionCodec : ClassManifest](
     src: String, dest: String
-  ): Execution[Long] =
-    Execution.getConfigMode.flatMap { case (config, mode) =>
-      Execution.fromFuture { cec =>
-        val configWithCompress = Config(config.toMap ++ Map(
-          "mapred.output.compress"          -> "true",
-          "mapred.output.compression.type"  -> "BLOCK",
-          "mapred.output.compression.codec" -> implicitly[ClassManifest[C]].erasure.getName
-        ))
-        TypedPipe.from(TextLine(src))
-          .writeExecution(CompressibleTypedTsv[String](dest))
-          .getAndResetCounters
-          .map( _._2.get(StatKeys.tuplesWritten).getOrElse(0L) )
-          .run(configWithCompress, mode)(cec)
-      }
-    }
+  ): Execution[Long] = {
+    def modifyConfig(config: Config) = Config(config.toMap ++ Map(
+      "mapred.output.compress"          -> "true",
+      "mapred.output.compression.type"  -> "BLOCK",
+      "mapred.output.compression.codec" -> implicitly[ClassManifest[C]].erasure.getName
+    ))
+
+    val execution = TypedPipe.from(TextLine(src))
+      .writeExecution(CompressibleTypedTsv[String](dest))
+      .getAndResetCounters
+      .map( _._2.get(StatKeys.tuplesWritten).getOrElse(0L) )
+
+    execution.withSubConfig(modifyConfig)
+  }
 
   def exportExecution[T <: ParlourExportOptions[T]](
     config: SqoopExportConfig[T]

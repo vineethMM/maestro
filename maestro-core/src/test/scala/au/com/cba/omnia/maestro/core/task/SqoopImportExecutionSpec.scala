@@ -27,7 +27,7 @@ import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 
 import org.specs2.specification.BeforeExample
 
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
+import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourImportDsl,TeradataParlourImportDsl}
 
 import au.com.cba.omnia.thermometer.fact.Fact
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
@@ -47,6 +47,8 @@ object SqoopImportExecutionSpec
   handles exceptions while importing data             $endToEndImportWithException
   handles exceptions while table not set              $endToEndImportWithoutTable
   can import data from two tables in the same session $doubleImport
+  fails with Teradata connection manager       $endToEndImportWithTeradataConnMan
+  succeeds with Teradata reset conn-manager    $endToEndImportWithTeradataResetConnMan
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
   val username         = "sa"
@@ -114,6 +116,21 @@ object SqoopImportExecutionSpec
       hdfsLandingPath, hdfsArchivePath, timePath, options.tableName(null)
     )
     execute(sqoopImport(config)) must beLike { case Failure(_) => ok }
+  }
+
+  val teradataOptions = SqoopImportConfig.options[TeradataParlourImportDsl](
+    connectionString, username, password, importTableName
+  ).splitBy("id")
+  
+  def endToEndImportWithTeradataConnMan = {
+    SqoopExecutionTest.setupEnv()
+    val config = SqoopImportConfig(hdfsLandingPath, hdfsArchivePath, timePath, teradataOptions)
+    execute(sqoopImport(config)) must beLike { case Failure(_) => ok }
+  }
+
+  def endToEndImportWithTeradataResetConnMan = {
+    SqoopExecutionTest.setupEnv(customConnMan=Some(""))
+    endToEndImportWithSuccess
   }
 
   def doubleImport = {

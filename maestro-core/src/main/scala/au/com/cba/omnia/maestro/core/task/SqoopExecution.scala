@@ -220,7 +220,7 @@ object SqoopExecutionTest {
     // but these should only ever have one value each in a single testing run
     // and the configuration becomes an implementation details hidden from our API
     System.setProperty(SqoopEx.mrHomeKey, customMRHome)
-    customConnMan.foreach (cm => System.setProperty(SqoopEx.connManKey, cm))
+    customConnMan.fold { System.clearProperty(SqoopEx.connManKey) } (cm => System.setProperty(SqoopEx.connManKey, cm))
   }
 }
 

@@ -20,8 +20,8 @@ import scala.util.Failure
 import scala.io.Source
 
 import scalikejdbc.{SQL, ConnectionPool, AutoSession}
+import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourExportDsl,TeradataParlourExportDsl}
 
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
@@ -35,6 +35,8 @@ object SqoopExportExecutionSpec
   Exporting data from HDFS to DB appending to existing rows  $endToEndExportWithAppend
   Export data from HDFS to DB deleting all existing rows     $endToEndExportWithDeleteTest
   Fails if sqlQuery set and need to delete all existing rows $endToEndExportWithQuery
+  Fails with Teradata connection manager                     $endToEndExportWithTeradataConnMan
+  Succeeds with Teradata after connection manager reset      $endToEndExportWithTeradataResetConnMan
 
 """
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
@@ -87,6 +89,33 @@ object SqoopExportExecutionSpec
       execute(sqoopExport(config, exportDir)) must throwA[RuntimeException](
         message = "SqoopOptions.getSqlQuery must be empty on Sqoop Export with delete from table"
       )
+    }
+  }
+
+  def TeradataOptions(table: String) = SqoopExportConfig.options[TeradataParlourExportDsl](
+    connectionString, username, password, table
+  )
+
+  def endToEndExportWithTeradataConnMan = {
+    SqoopExecutionTest.setupEnv()
+    val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
+    CustomerExport.tableSetup(connectionString, username, password, table, Option(List()))
+
+    withEnvironment(path(resourceUrl.toString)) {
+      val config = SqoopExportConfig(TeradataOptions(table))
+      execute(sqoopExport(config, exportDir)) must beLike { case Failure(_) => ok }
+    }
+  }
+
+  def endToEndExportWithTeradataResetConnMan = {
+    SqoopExecutionTest.setupEnv(customConnMan=Some(""))
+    val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
+    CustomerExport.tableSetup(connectionString, username, password, table, Option(List()))
+
+    withEnvironment(path(resourceUrl.toString)) {
+      val config = SqoopExportConfig(TeradataOptions(table))
+      executesOk(sqoopExport(config, exportDir))
+      CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
     }
   }
 

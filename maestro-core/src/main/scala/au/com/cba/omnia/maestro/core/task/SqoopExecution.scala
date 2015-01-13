@@ -14,6 +14,8 @@
 
 package au.com.cba.omnia.maestro.core.task
 
+import scala.util.Random
+
 import java.io.File
 
 import org.apache.commons.lang.StringUtils
@@ -234,12 +236,14 @@ object SqoopEx {
   def importExecution[T <: ParlourImportOptions[T]](
     config: SqoopImportConfig[T]
   ): Execution[(String, Long)] = {
-    val importPath   = config.hdfsLandingPath + File.separator + config.timePath
-    val archivePath  = config.hdfsArchivePath + File.separator + config.timePath
-    val logger       = Logger.getLogger("Sqoop")
-    val withDestDir  = config.options.targetDir(importPath)
-    val withMRHome   = setCustomMRHome(withDestDir)
-    val sqoopOptions = withMRHome.toSqoopOptions
+    val importPath    = config.hdfsLandingPath + File.separator + config.timePath
+    val archivePath   = config.hdfsArchivePath + File.separator + config.timePath
+    val logger        = Logger.getLogger("Sqoop")
+    val withDestDir   = config.options.targetDir(importPath)
+    val withMRHome    = setCustomMRHome(withDestDir)
+    val withClassName =
+      withMRHome.getClassName.fold(withMRHome.className(f"SqoopImport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
+    val sqoopOptions  = withClassName.toSqoopOptions
 
     logger.info(s"connectionString = ${sqoopOptions.getConnectString}")
     logger.info(s"tableName        = ${sqoopOptions.getTableName}")
@@ -247,7 +251,7 @@ object SqoopEx {
 
     for {
       // can't get count from sqoop, but can get it from archive job
-      _     <- ParlourExecution.sqoopImport(withMRHome)
+      _     <- ParlourExecution.sqoopImport(withClassName)
       count <- archive[GzipCodec](importPath, archivePath)
     } yield (importPath, count)
   }
@@ -275,8 +279,9 @@ object SqoopEx {
     val withDelete =
       if (config.deleteFromTable) trySetDeleteQuery(config.options)
       else config.options
-    val withMRHome = setCustomMRHome(withDelete)
-    ParlourExecution.sqoopExport(withMRHome)
+    val withMRHome    = setCustomMRHome(withDelete)
+    val withClassName = withMRHome.getClassName.fold(withMRHome.className(f"SqoopExport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
+    ParlourExecution.sqoopExport(withClassName)
   }
 
   // Sets DELETE sql query. Throws RuntimeException if sql query already set or table name is not set

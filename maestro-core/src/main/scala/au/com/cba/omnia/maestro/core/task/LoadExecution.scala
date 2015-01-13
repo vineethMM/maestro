@@ -179,19 +179,30 @@ object LoadEx {
 
   def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](
     conf: LoadConfig[A], filterCounter: Stat, in: TypedPipe[RawRow]
-  ): TypedPipe[String \/ A] =
-    in
-      .map(row => conf.splitter.run(row.line) ++ row.extraFields)
-      .flatMap(conf.filter.run(_) match {
+  ): TypedPipe[String \/ A] = {
+    val pipe = TypedPipeFactory { (flowDef, mode) =>
+      implicit val fd = flowDef
+      implicit val m  = mode
+
+      TypedPipe.from[(RawRow, FlowProcess[_])](
+        in.toPipe('row).eachTo('row, ('row, 'fp))(_ => new AddFlowProcess()),
+        ('row, 'fp)
+      )
+    }
+
+    pipe
+      .map { case (row, fp) => (conf.splitter.run(row.line) ++ row.extraFields, fp) }
+      .flatMap { case (parts, fp) => conf.filter.run(parts) match {
         case Some(r) => Some(r)
         case None    => {
-          filterCounter.inc
+          // Uses Cascading counter instead of Scalding. See `AddFlowProcess` for details.
+          fp.increment("maestro", "tuples_filtered", 1L)
           None
         }
-      }).map(record =>
+      }}.map(record =>
         Tag.tag[A](record).map { case (column, field) => conf.clean.run(field, column) }
       ).map(record => Decode.decode[A](conf.none, record))
-      .map {
+        .map {
         case DecodeOk(value) =>
           conf.validator.run(value).disjunction.leftMap(errors => s"""The following errors occured: ${errors.toList.mkString(",")}""")
         case e @ DecodeError(remainder, counter, reason) =>
@@ -204,6 +215,7 @@ object LoadEx {
               s"too many fields in record: $e".left
           }
       }
+    }
 
   def pipeWithDate(sources: List[String], timeSource: TimeSource): TypedPipe[RawRow] =
     TypedPipeFactory { (flowDef, mode) =>
@@ -314,6 +326,28 @@ class ExtractTime(timeSource: TimeSource)
 
     // representation of RawRow: tuple with string and List elements
     resultTuple.set(0, RawRow(line, List(timeSource.getTime(path))))
+    call.getOutputCollector.add(resultTuple)
+  }
+}
+
+/**
+  * Drops down to the Cascading level to get the FlowProcess.
+  * 
+  * We do this so that we can then use the flow process later to increment a counter.
+  * The Scalding way of doing this seems to be broken see
+  * <a href="https://github.com/CommBank/maestro/issues/300">300</a>.
+  */
+class AddFlowProcess extends BaseOperation[Tuple](('row, 'fp)) with Function[Tuple] {
+  override def prepare(flow: FlowProcess[_], call: OperationCall[Tuple]): Unit = {
+    call.setContext(Tuple.size(2))
+  }
+
+  def operate(flow: FlowProcess[_], call: FunctionCall[Tuple]): Unit = {
+    val row         = call.getArguments.getObject(0)
+    val resultTuple = call.getContext
+
+    resultTuple.set(0, row)
+    resultTuple.set(1, flow)
     call.getOutputCollector.add(resultTuple)
   }
 }

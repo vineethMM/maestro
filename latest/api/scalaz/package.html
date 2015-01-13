@@ -160,15 +160,15 @@
       </h4>
       
     </li><li name="scalaz.@@" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="@@[+T&lt;:&lt;?&gt;,Tag&lt;:&lt;?&gt;]=Twithscalaz.package.Tagged[Tag]"></a>
-      <a id="@@[+T,Tag]:@@[T,Tag]"></a>
+      <a id="@@[T&lt;:&lt;?&gt;,Tag&lt;:&lt;?&gt;]=scalaz.package.Tagged[T,Tag]"></a>
+      <a id="@@[T,Tag]:@@[T,Tag]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $at$at" class="name">@@</span><span class="tparams">[<span name="T">+T</span>, <span name="Tag">Tag</span>]</span><span class="result"> = <span class="extype" name="scalaz.@@.T">T</span> with <a href="#Tagged[T&lt;:&lt;?&gt;]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.@@.Tag">Tag</span>]</span>
+        <span title="gt4s: $at$at" class="name">@@</span><span class="tparams">[<span name="T">T</span>, <span name="Tag">Tag</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -237,6 +237,32 @@
       </span>
       </h4>
       
+    </li><li name="scalaz.Disjunction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Disjunction[+A&lt;:&lt;?&gt;,+B&lt;:&lt;?&gt;]=scalaz.\/[A,B]"></a>
+      <a id="Disjunction[+A,+B]:Disjunction[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Disjunction</span><span class="tparams">[<span name="A">+A</span>, <span name="B">+B</span>]</span><span class="result"> = <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scalaz.Disjunction.A">A</span>, <span class="extype" name="scalaz.Disjunction.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalaz.FirstMaybe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FirstMaybe[A&lt;:&lt;?&gt;]=scalaz.package.@@[scalaz.Maybe[A],scalaz.Tags.First]"></a>
+      <a id="FirstMaybe[A]:FirstMaybe[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FirstMaybe</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
+      </span>
+      </h4>
+      
     </li><li name="scalaz.FirstOf" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FirstOf[A&lt;:&lt;?&gt;]=scalaz.package.@@[A,scalaz.Tags.FirstVal]"></a>
       <a id="FirstOf[A]:FirstOf[A]"></a>
@@ -246,7 +272,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">FirstOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scalaz.FirstOf.A">A</span> with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.FirstVal">FirstVal</span>]</span>
+        <span class="name">FirstOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -259,7 +285,33 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">FirstOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scalaz.FirstOption.A">A</span>] with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.First">First</span>]</span>
+        <span class="name">FirstOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalaz.GlorifiedTuple" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GlorifiedTuple[+A&lt;:&lt;?&gt;,+B&lt;:&lt;?&gt;]=scalaz.\/[A,B]"></a>
+      <a id="GlorifiedTuple[+A,+B]:GlorifiedTuple[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">GlorifiedTuple</span><span class="tparams">[<span name="A">+A</span>, <span name="B">+B</span>]</span><span class="result"> = <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scalaz.GlorifiedTuple.A">A</span>, <span class="extype" name="scalaz.GlorifiedTuple.B">B</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalaz.IMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IMap[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]=scalaz.==&gt;&gt;[A,B]"></a>
+      <a id="IMap[A,B]:IMap[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">IMap</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> = <span class="extype" name="scalaz.==&gt;&gt;">==&gt;&gt;</span>[<span class="extype" name="scalaz.IMap.A">A</span>, <span class="extype" name="scalaz.IMap.B">B</span>]</span>
       </span>
       </h4>
       
@@ -367,6 +419,19 @@
       </span>
       </h4>
       
+    </li><li name="scalaz.LastMaybe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LastMaybe[A&lt;:&lt;?&gt;]=scalaz.package.@@[scalaz.Maybe[A],scalaz.Tags.Last]"></a>
+      <a id="LastMaybe[A]:LastMaybe[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LastMaybe</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
+      </span>
+      </h4>
+      
     </li><li name="scalaz.LastOf" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LastOf[A&lt;:&lt;?&gt;]=scalaz.package.@@[A,scalaz.Tags.LastVal]"></a>
       <a id="LastOf[A]:LastOf[A]"></a>
@@ -376,7 +441,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">LastOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scalaz.LastOf.A">A</span> with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.LastVal">LastVal</span>]</span>
+        <span class="name">LastOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -389,7 +454,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">LastOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scalaz.LastOption.A">A</span>] with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.Last">Last</span>]</span>
+        <span class="name">LastOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -406,6 +471,19 @@
       </span>
       </h4>
       
+    </li><li name="scalaz.MaxMaybe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MaxMaybe[A&lt;:&lt;?&gt;]=scalaz.package.@@[scalaz.Maybe[A],scalaz.Tags.Max]"></a>
+      <a id="MaxMaybe[A]:MaxMaybe[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MaxMaybe</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
+      </span>
+      </h4>
+      
     </li><li name="scalaz.MaxOf" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MaxOf[A&lt;:&lt;?&gt;]=scalaz.package.@@[A,scalaz.Tags.MaxVal]"></a>
       <a id="MaxOf[A]:MaxOf[A]"></a>
@@ -415,7 +493,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">MaxOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scalaz.MaxOf.A">A</span> with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.MaxVal">MaxVal</span>]</span>
+        <span class="name">MaxOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -428,7 +506,20 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">MaxOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scalaz.MaxOption.A">A</span>] with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.Max">Max</span>]</span>
+        <span class="name">MaxOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalaz.MinMaybe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MinMaybe[A&lt;:&lt;?&gt;]=scalaz.package.@@[scalaz.Maybe[A],scalaz.Tags.Min]"></a>
+      <a id="MinMaybe[A]:MinMaybe[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MinMaybe</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -441,7 +532,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">MinOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scalaz.MinOf.A">A</span> with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.MinVal">MinVal</span>]</span>
+        <span class="name">MinOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -454,7 +545,7 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">MinOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scalaz.MinOption.A">A</span>] with <a href="#Tagged[T]=AnyRef{typeTag=T}" class="extmbr" name="scalaz.Tagged">Tagged</a>[<span class="extype" name="scalaz.Tags.Min">Min</span>]</span>
+        <span class="name">MinOption</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { ... /* 2 definitions in type refinement */ }</span>
       </span>
       </h4>
       
@@ -653,19 +744,6 @@
       </span>
       </h4>
       
-    </li><li name="scalaz.Tagged" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Tagged[T]=AnyRef{typeTag=T}"></a>
-      <a id="Tagged[T]:Tagged[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Tagged</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { type Tag = T }</span>
-      </span>
-      </h4>
-      
     </li><li name="scalaz.Unwriter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Unwriter[W&lt;:&lt;?&gt;,A&lt;:&lt;?&gt;]=scalaz.UnwriterT[scalaz.Id.Id,W,A]"></a>
       <a id="Unwriter[W,A]:Unwriter[W,A]"></a>
@@ -757,6 +835,19 @@
       </span>
       </h4>
       
+    </li><li name="scalaz.∨" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="∨[A&lt;:&lt;?&gt;,B&lt;:&lt;?&gt;]=scalaz.\/[A,B]"></a>
+      <a id="∨[A,B]:∨[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2228" class="name">∨</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> = <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scalaz.∨.A">A</span>, <span class="extype" name="scalaz.∨.B">B</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="scalaz.⊤" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="⊤=Any"></a>
       <a id="⊤:⊤"></a>
@@ -806,7 +897,20 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scalaz.package#IRWS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="scalaz.package#IMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IMap:scalaz.==&gt;&gt;.type"></a>
+      <a id="IMap:==&gt;&gt;.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">IMap</span><span class="result">: <span class="extype" name="scalaz.==&gt;&gt;">==&gt;&gt;</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalaz.package#IRWS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="IRWS:scalaz.package.IndexedReaderWriterState.type"></a>
       <a id="IRWS:IndexedReaderWriterState.type"></a>
       <h4 class="signature">

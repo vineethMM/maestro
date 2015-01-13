@@ -247,15 +247,12 @@ object SqoopEx {
   def importExecution[T <: ParlourImportOptions[T]](
     config: SqoopImportConfig[T]
   ): Execution[(String, Long)] = {
+
+    val importPath    = config.hdfsLandingPath + File.separator + config.timePath
     val archivePath   = config.hdfsArchivePath + File.separator + config.timePath
     val logger        = Logger.getLogger("Sqoop")
     val withDestDir   = config.options.targetDir(importPath)
     val withMRHome    = setCustomMRHome(withDestDir)
-    val importPath   = config.hdfsLandingPath + File.separator + config.timePath
-    val archivePath  = config.hdfsArchivePath + File.separator + config.timePath
-    val logger       = Logger.getLogger("Sqoop")
-    val withDestDir  = config.options.targetDir(importPath)
-    val withMRHome   = getCustomMRHome.fold(withDestDir)(withDestDir.hadoopMapRedHome(_))
     val withClassName =
       withMRHome.getClassName.fold(withMRHome.className(f"SqoopImport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
     val withConnMan  = getCustomConnMan.fold(withClassName)(withClassName.connectionManager(_))

@@ -99,7 +99,7 @@ object SqoopExportExecutionSpec
   def endToEndExportWithTeradataConnMan = {
     SqoopExecutionTest.setupEnv()
     val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
-    CustomerExport.tableSetup(connectionString, username, password, table, Option(List()))
+    tableSetup(connectionString, username, password, table, Option(List()))
 
     withEnvironment(path(resourceUrl.toString)) {
       val config = SqoopExportConfig(TeradataOptions(table))
@@ -110,12 +110,12 @@ object SqoopExportExecutionSpec
   def endToEndExportWithTeradataResetConnMan = {
     SqoopExecutionTest.setupEnv(customConnMan=Some(""))
     val table = s"customer_export_${UUID.randomUUID.toString.replace('-', '_')}"
-    CustomerExport.tableSetup(connectionString, username, password, table, Option(List()))
+    tableSetup(connectionString, username, password, table, Option(List()))
 
     withEnvironment(path(resourceUrl.toString)) {
       val config = SqoopExportConfig(TeradataOptions(table))
       executesOk(sqoopExport(config, exportDir))
-      CustomerExport.tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
+      tableData(connectionString, username, password, table) must containTheSameElementsAs(newCustomers)
     }
   }
 

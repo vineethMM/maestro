@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Methods to support testing Sqoop execution</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/5a75733df344a76c63e04141b4d150cc11ff8af6//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/SqoopExecution.scala" target="_blank">SqoopExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Methods to support testing Sqoop execution</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/1155be8efad0141509c28c43094bf693e437a8da//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/SqoopExecution.scala" target="_blank">SqoopExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -306,18 +306,19 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecutionTest#setupEnv" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="setupEnv(customMRHome:String):Unit"></a>
-      <a id="setupEnv(String):Unit"></a>
+      <a id="setupEnv(customMRHome:String,customConnMan:Option[String]):Unit"></a>
+      <a id="setupEnv(String,Option[String]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setupEnv</span><span class="params">(<span name="customMRHome">customMRHome: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="s&quot;${System.getProperty(&quot;user.home&quot;)}/.ivy2/cache&quot;">...</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">setupEnv</span><span class="params">(<span name="customMRHome">customMRHome: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="s&quot;${System.getProperty(&quot;user.home&quot;)}/.ivy2/cache&quot;">...</span></span>, <span name="customConnMan">customConnMan: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Set up environment variables so that sqoop knows how to run jobs in testing environment</p>
+      <p class="shortcomment cmt"> Set up environment variables so that sqoop knows how to run jobs in testing environment
+</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

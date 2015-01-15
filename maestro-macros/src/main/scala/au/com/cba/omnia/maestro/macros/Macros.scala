@@ -98,23 +98,3 @@ trait MacroSupport {
 
 /** Provides implicit Decode, Tag, etc. views for a ThriftStruct. */
 object MacroSupport extends MacroSupport
-
-
-/**
-  * MacroSupport to still support the old MaestroCascade.
-  * This is now superseded by the newer MacroSupport.
-  */
-trait LegacyMacroSupport[A <: ThriftStruct] {
-  implicit def DerivedDecode: Decode[A] =
-    macro DecodeMacro.impl[A]
-
-  implicit def DerivedEncode: Encode[A] =
-    macro EncodeMacro.impl[A]
-
-  implicit def DerivedTag: Tag[A] =
-    macro TagMacro.impl[A]
-
-  /* NOTE: This isn't really any, it is a structural type containing all the fields. */
-  def Fields: Any =
-    macro FieldsMacro.impl[A]
-}

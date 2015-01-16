@@ -151,6 +151,7 @@ object UploadEx {
       logger.info("Start of upload from ${conf.localIngestPath}")
       logger.info(s"tableName        = ${conf.tablename}")
       logger.info(s"filePattern      = ${conf.filePattern}")
+      logger.info(s"controlPattern   = ${conf.controlPattern}")
       logger.info(s"localIngestPath  = ${conf.localIngestPath}")
       logger.info(s"localArchivePath = ${conf.localArchivePath}")
       logger.info(s"hdfsArchivePath  = ${conf.hdfsArchivePath}")
@@ -167,7 +168,7 @@ object UploadEx {
 
     copied <- Execution.fromHdfs(files.dataFiles.traverse(data => for {
       record <- Push.push(data, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
-      _      =  logger.info("copied ${record.source.getName} to ${record.dest}")
+      _      =  logger.info(s"copied ${record.source.getName} to ${record.dest}")
     } yield record.dest.toString ))
 
     _      <- Execution.from {

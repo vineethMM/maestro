@@ -41,7 +41,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Create an object which extends this trait to create a main class using the execution api.</p><p>Objects extending this trait must supply a:</p><ul><li>job execution: this is the main execution to run for the Maestro job</li><li>attemptsExceeded execution: this execution should be run if the job execution fails too many times.</li><li>logger: This will be used to log error messages from the above two executions.</li></ul><p>The job will exit with an error code describing the status of the program.
 The software running this program can then take the appropriate action.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/30cd8c0222bd0bfab7de77cbe0efc55f58cda32b//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/MaestroJob.scala" target="_blank">MaestroJob.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e83358b59b8f34120706dd6a221f8acee03e52b9//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/MaestroJob.scala" target="_blank">MaestroJob.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -111,19 +111,6 @@ The software running this program can then take the appropriate action.
       </span>
       </h4>
       <p class="shortcomment cmt">The job to run</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob#logger" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="logger:org.slf4j.Logger"></a>
-      <a id="logger:Logger"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">logger</span><span class="result">: <span class="extype" name="org.slf4j.Logger">Logger</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The logger to use for this application</p>
     </li></ol>
             </div>
 
@@ -310,6 +297,19 @@ The software running this program can then take the appropriate action.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob#logger" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logger:org.slf4j.Logger"></a>
+      <a id="logger:Logger"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logger</span><span class="result">: <span class="extype" name="org.slf4j.Logger">Logger</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The logger to use for this application</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob#main" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="main(args:Array[String]):Unit"></a>
       <a id="main(Array[String]):Unit"></a>

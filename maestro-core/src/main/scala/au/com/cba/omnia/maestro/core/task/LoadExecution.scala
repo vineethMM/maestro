@@ -16,10 +16,15 @@ package au.com.cba.omnia.maestro.core.task
 
 import java.nio.ByteBuffer
 import java.security.{MessageDigest, SecureRandom}
+import java.util.UUID
 
+import scala.reflect.runtime.currentMirror
+import scala.util.control.NonFatal
 import scala.util.hashing.MurmurHash3
 
 import scalaz.{Tag => _, _}, Scalaz._
+
+import org.apache.hadoop.io.{BytesWritable, NullWritable}
 
 import cascading.flow.FlowProcess
 import cascading.operation.{BaseOperation, Function, FunctionCall, OperationCall}
@@ -30,12 +35,14 @@ import com.twitter.scalding.{Execution, ExecutionCounters, MultipleTextLineFiles
 import com.twitter.scalding.typed.TypedPipeFactory
 import com.twitter.scalding.Dsl._ // Pipe.eachTo
 
-import com.twitter.scrooge.ThriftStruct
+import com.twitter.bijection.scrooge.CompactScalaCodec
+
+import com.twitter.scrooge.{ThriftStruct, ThriftStructCodec}
 
 import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
 import au.com.cba.omnia.maestro.core.filter.RowFilter
-import au.com.cba.omnia.maestro.core.scalding.{Errors, StatKeys}
+import au.com.cba.omnia.maestro.core.scalding._
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
@@ -120,6 +127,9 @@ object LoadInfo {
   *                        Defaults to no validation.
   * @param errorThreshold: The fraction of rows that can fail during the load step
   *                        before the overall job should fail. Defaults to 0.05 or 5%.
+  * @param splitSize:      The size of each split in the job that processes the
+  *                        pipe returned by load. Defaults to 9 blocks, with the
+  *                        hope that this will result in 2-block parquet files.
   */
 case class LoadConfig[A](
   errors: String,
@@ -130,7 +140,8 @@ case class LoadConfig[A](
   clean: Clean            = Clean.default,
   none: String            = "",
   validator: Validator[A] = Validator.all[A](),
-  errorThreshold: Double  = 0.05
+  errorThreshold: Double  = 0.05,
+  splitSize: Long         = 9L * 128 * 1024 * 1024
 )
 
 /** Executions for load tasks */
@@ -159,6 +170,7 @@ trait LoadExecution {
   * We may change this without considering backwards compatibility.
   */
 object LoadEx {
+
   def execution[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
@@ -166,15 +178,23 @@ object LoadEx {
       if (config.generateKey) pipeWithDateAndKey(sources, config.timeSource)
       else                    pipeWithDate(sources, config.timeSource)
 
-    Execution.withId { id =>
+    Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
       val stat        = Stat(StatKeys.tuplesFiltered)(id)
       val parsedRows  = parseRows(config, stat, rawRows)
       val thriftInput = Errors.safely(config.errors)(parsedRows)
 
-      thriftInput.forceToDiskExecution.getAndResetCounters.map { case (pipe, counters) =>
-        (pipe, LoadInfo.fromCounters(counters, config.errorThreshold))
+      val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
+      val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
+
+      val serializer  = CompactScalaCodec[A](getCodec[A])
+      val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
+      val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
+                          .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
+
+      seqFileIn.writeExecution(seqSource).getAndResetCounters.map { case (_, counters) =>
+        (seqFileOut, LoadInfo.fromCounters(counters, config.errorThreshold))
       }
-    }
+    }}}
   }
 
   def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](
@@ -241,6 +261,26 @@ object LoadEx {
           .read(flowDef, mode)
           .eachTo(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, hashes))
       )(flowDef, mode)
+    }
+  }
+
+  /* By convention, all ThriftStruct classes are created with a ThriftStructCodec
+   * companion object. Annoyingly, however, the ThriftStruct constraint does not
+   * allow us to access that object. For the moment, we are using unsafe runtime
+   * reflection to access the companion object.
+   *
+   * Using a compile-time method would be preferable, but would require us to add
+   * extra constraints on A, breaking backwards compatibility slightly. We should
+   * do this sometime in the future.
+   */
+  def getCodec[A <: ThriftStruct : Manifest]: ThriftStructCodec[A] = {
+    val klazz = manifest[A].runtimeClass
+    try {
+      val companionSyb = currentMirror.classSymbol(klazz).companionSymbol
+      val companion    = currentMirror.reflectModule(companionSyb.asModule).instance
+      companion.asInstanceOf[ThriftStructCodec[A]]
+    } catch {
+      case NonFatal(e) => throw new IllegalArgumentException(s"Cannot find ThriftStructCodec companion object for ${klazz.getName}", e)
     }
   }
 }
@@ -332,7 +372,7 @@ class ExtractTime(timeSource: TimeSource)
 
 /**
   * Drops down to the Cascading level to get the FlowProcess.
-  * 
+  *
   * We do this so that we can then use the flow process later to increment a counter.
   * The Scalding way of doing this seems to be broken see
   * <a href="https://github.com/CommBank/maestro/issues/300">300</a>.

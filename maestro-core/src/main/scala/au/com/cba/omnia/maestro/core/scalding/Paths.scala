@@ -12,8 +12,18 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-version in ThisBuild := "2.1.0"
+package au.com.cba.omnia.maestro.core.scalding
 
-uniqueVersionSettings
+import cascading.tap.hadoop.Hfs
 
-licenses := Seq("Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+import com.twitter.scalding.Execution
+
+/** Executions that return paths */
+object Paths {
+  /** Return the temporary directory for this job */
+  def tempDir : Execution[String] =
+    Execution.getConfig.map(conf => {
+      val jobConf = ConfHelper.getHadoopConf(conf)
+      Hfs.getTempPath(jobConf).toString
+    })
+}

@@ -17,8 +17,6 @@ package au.com.cba.omnia.maestro.core.task
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 
 import au.com.cba.omnia.maestro.core.clean.Clean
-import au.com.cba.omnia.maestro.core.codec.{Decode, Tag}
-import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.filter.RowFilter
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
@@ -28,7 +26,7 @@ import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 private object LoadExec extends LoadExecution
 
-object LoadExecutionSpec extends ThermometerSpec { def is = s2"""
+object LoadExecutionSpec extends ThermometerSpec with StringPairSupport { def is = s2"""
 
 Load execution properties
 =========================
@@ -41,22 +39,6 @@ Load execution properties
   calculates the right number of rows after filtering            $filtered
 
 """
-
-  implicit val StringPairDecode: Decode[StringPair] = for {
-    first  <- Decode.of[String]
-    second <- Decode.of[String]
-  } yield StringPair(first, second)
-
-  implicit val StringPairTag: Tag[StringPair] = {
-    val fields =
-      Field("FIRST", (p:StringPair) => p.first) +:
-    Field("SECOND",(p:StringPair) => p.second) +:
-    Stream.continually[Field[StringPair,String]](
-      Field("UNKNOWN", _ => throw new Exception("invalid field"))
-    )
-
-    Tag(_ zip fields)
-  }
 
   val conf = LoadConfig[StringPair](errors = "errors", timeSource = TimeSource.now(), none = "null")
 

@@ -58,7 +58,46 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CombineSequenceFileInputFormat[K,V]extendsCombineFileInputFormat[K,V]"></a>
+      <a id="CombineSequenceFileInputFormat[K,V]:CombineSequenceFileInputFormat[K,V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CombineSequenceFileInputFormat.html"><span class="name">CombineSequenceFileInputFormat</span></a><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapred.lib.CombineFileInputFormat">CombineFileInputFormat</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat.V">V</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The input format for CombinedSequenceFile</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CombinedSequenceFile[K&lt;:org.apache.hadoop.io.Writable,V&lt;:org.apache.hadoop.io.Writable]extendsWritableSequenceFile[K,V]"></a>
+      <a id="CombinedSequenceFile[K&lt;:Writable,V&lt;:Writable]:CombinedSequenceFile[K,V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CombinedSequenceFile.html"><span class="name">CombinedSequenceFile</span></a><span class="tparams">[<span name="K">K &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="V">V &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.WritableSequenceFile">WritableSequenceFile</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile.V">V</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A WritableSequenceFile which merges the input splits sent to downstream mappers.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFileScheme" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CombinedSequenceFileSchemeextendsWritableSequenceFile"></a>
+      <a id="CombinedSequenceFileScheme:CombinedSequenceFileScheme"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CombinedSequenceFileScheme.html"><span class="name">CombinedSequenceFileScheme</span></a><span class="result"> extends <span class="extype" name="cascading.scheme.hadoop.WritableSequenceFile">WritableSequenceFile</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The cascading scheme for CombinedSequenceFile</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ExecutionOpsextendsAnyRef"></a>
       <a id="ExecutionOps:ExecutionOps"></a>
       <h4 class="signature">
@@ -136,6 +175,19 @@
       </span>
       </h4>
       <p class="comment cmt">Pimps the Execution object.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SequenceFileRecordReaderWrapper[K,V]extendsRecordReader[K,V]"></a>
+      <a id="SequenceFileRecordReaderWrapper[K,V]:SequenceFileRecordReaderWrapper[K,V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SequenceFileRecordReaderWrapper.html"><span class="name">SequenceFileRecordReaderWrapper</span></a><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapred.RecordReader">RecordReader</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper.V">V</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The reader that CombineFileRecordReader delegates to to read from the sequence file</p>
     </li></ol>
             </div>
 
@@ -143,7 +195,20 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.scalding.ConfHelper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CombinedSequenceFile"></a>
+      <a id="CombinedSequenceFile:CombinedSequenceFile"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CombinedSequenceFile$.html"><span class="name">CombinedSequenceFile</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory for CombinedSequenceFile</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ConfHelper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ConfHelper"></a>
       <a id="ConfHelper:ConfHelper"></a>
       <h4 class="signature">
@@ -156,6 +221,19 @@
       </span>
       </h4>
       <p class="comment cmt">Collection of utility methods around get/setting Config.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ConfKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfKeys"></a>
+      <a id="ConfKeys:ConfKeys"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfKeys$.html"><span class="name">ConfKeys</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Keys for job conf properties</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Errors"></a>
       <a id="Errors:Errors"></a>
@@ -234,6 +312,19 @@
       </span>
       </h4>
       <p class="comment cmt">The job is not ready to run: it's pre-requisites are not available</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.Paths" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Paths"></a>
+      <a id="Paths:Paths"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Paths$.html"><span class="name">Paths</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Executions that return paths</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.StatKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StatKeys"></a>
       <a id="StatKeys:StatKeys"></a>

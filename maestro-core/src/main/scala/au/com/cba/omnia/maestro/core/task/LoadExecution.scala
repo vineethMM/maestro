@@ -25,6 +25,7 @@ import scala.util.hashing.MurmurHash3
 import scalaz.{Tag => _, _}, Scalaz._
 
 import org.apache.hadoop.io.{BytesWritable, NullWritable}
+import org.apache.hadoop.fs.{FileSystem, Path}
 
 import cascading.flow.FlowProcess
 import cascading.operation.{BaseOperation, Function, FunctionCall, OperationCall}
@@ -162,7 +163,13 @@ trait LoadExecution {
   def load[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] =
-    LoadEx.execution[A](config, sources)
+    for {
+      conf         <- Execution.getConfig
+      fs           =  FileSystem.get(ConfHelper.getHadoopConf(conf))
+      srcsResolved =  sources.map(pathString => fs.resolvePath(new Path(pathString)))
+//      _            <- Execution.from(srcsResolved.map(source => println(source)))  // debugging
+      res          <- LoadEx.execution[A](config, srcsResolved.map(_.toString))
+    } yield res
 }
 
 /**

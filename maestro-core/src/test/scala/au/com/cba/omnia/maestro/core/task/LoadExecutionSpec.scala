@@ -37,6 +37,7 @@ Load execution properties
   returns the right load info for an acceptable number of errors $someErrors
   returns the right load info for too many errors                $manyErrors
   calculates the right number of rows after filtering            $filtered
+  generating keys doesn't throw exceptions                       $normalGenKey
 
 """
 
@@ -85,6 +86,15 @@ Load execution properties
       val filteredConf = conf.copy(errorThreshold = 0.25, filter = RowFilter.byRowLeader("D"))
       val exec         = LoadExec.load[StringPair](filteredConf, List("filtered"))
       executesSuccessfully(exec)._2 must_== LoadSuccess(5, 3, 3, 0)
+    }
+  }
+
+  // This checks for lack of exceptions, but not success - a new thrift type is required.
+  val confGenKey = LoadConfig[StringPair](errors = "errors", timeSource = TimeSource.now(), none = "null", generateKey = true)
+  def normalGenKey = {
+    withEnvironment(path(getClass.getResource("/load-execution").toString)) {
+      val exec = LoadExec.load[StringPair](confGenKey, List("normal"))
+      executesSuccessfully(exec)._2 must_== LoadFailure(4, 4, 0, 4)
     }
   }
 }

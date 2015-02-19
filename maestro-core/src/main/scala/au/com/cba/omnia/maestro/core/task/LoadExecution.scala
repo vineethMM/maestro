@@ -166,7 +166,11 @@ trait LoadExecution {
     for {
       conf         <- Execution.getConfig
       fs           =  FileSystem.get(ConfHelper.getHadoopConf(conf))
-      srcsResolved =  sources.map(pathString => fs.resolvePath(new Path(pathString)))
+      srcsResolved = sources.map (new Path(_))
+                       .flatMap(path =>
+                         if (!fs.isDirectory(path)) List(path)
+                         else fs.globStatus(new Path(path, "*")).map(_.getPath())
+                       ).map(fs.resolvePath)
 //      _            <- Execution.from(srcsResolved.map(source => println(source)))  // debugging
       res          <- LoadEx.execution[A](config, srcsResolved.map(_.toString))
     } yield res

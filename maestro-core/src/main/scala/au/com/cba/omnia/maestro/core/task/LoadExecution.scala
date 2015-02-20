@@ -47,6 +47,9 @@ import au.com.cba.omnia.maestro.core.scalding._
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 /** Information about a Load */
 sealed trait LoadInfo {
@@ -162,18 +165,25 @@ trait LoadExecution {
     */
   def load[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
-  ): Execution[(TypedPipe[A], LoadInfo)] =
+  ): Execution[(TypedPipe[A], LoadInfo)] = {
+    val resolvePath = (srcPath: Path) =>
+      for {
+        isDir <- Hdfs.isDirectory(srcPath)
+        paths <- if (!isDir) Hdfs.value(List(srcPath))
+                 else Hdfs.files(srcPath)
+      } yield paths
+
     for {
-      conf         <- Execution.getConfig
-      fs           =  FileSystem.get(ConfHelper.getHadoopConf(conf))
-      srcsResolved = sources.map (new Path(_))
-                       .flatMap(path =>
-                         if (!fs.isDirectory(path)) List(path)
-                         else fs.globStatus(new Path(path, "*")).map(_.getPath())
-                       ).map(fs.resolvePath)
-//      _            <- Execution.from(srcsResolved.map(source => println(source)))  // debugging
-      res          <- LoadEx.execution[A](config, srcsResolved.map(_.toString))
-    } yield res
+      srcsResolved <- Execution.fromHdfs(
+                        for {
+                          fs       <- Hdfs.filesystem
+                          paths    =  sources.map(Hdfs.path(_))
+                          resPaths <- paths.map(resolvePath).sequence
+                        } yield resPaths.flatten
+                      )
+      (pipe, info) <- LoadEx.execution[A](config, srcsResolved.map(_.toString))
+    } yield (pipe, info)
+  }
 }
 
 /**

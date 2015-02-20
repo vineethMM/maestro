@@ -190,13 +190,12 @@ object LoadEx {
       fs       <- Hdfs.filesystem
       paths    =  srcPaths.map(Hdfs.path(_))
       resPaths <- paths.map(resolvePath).sequence
-    } yield resPaths.flatten
+    } yield resPaths.flatten.map(_.toString)
 
     for {
-      rawRows <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))
-                 else Execution.fromHdfs(resolvePaths(sources)).map { rSources =>
-                        pipeWithDateAndKey(rSources.map(_.toString), config.timeSource)
-                 }
+      rawRows      <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))
+                      else Execution.fromHdfs(resolvePaths(sources))
+                             .map(rSources => pipeWithDateAndKey(rSources, config.timeSource))
       (pipe, info) <-
         Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
           val stat        = Stat(StatKeys.tuplesFiltered)(id)

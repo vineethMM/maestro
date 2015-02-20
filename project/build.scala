@@ -84,7 +84,7 @@ object build extends Build {
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
         ++ depend.omnia("permafrost",    "0.2.0-20150113073328-8994d5b")
         ++ depend.omnia("edge",          "3.2.0-20150113103131-d8aabb2")
-        ++ depend.omnia("humbug-core",   "0.3.0-20150113043431-3dc2531")
+        ++ depend.omnia("humbug-core",   "0.3.0-20150220061008-1e3ca3f")
         ++ depend.omnia("omnitool-time", omnitoolVersion)
         ++ depend.omnia("omnitool-file", omnitoolVersion)
         ++ depend.omnia("parlour",       "1.6.1-20150128235623-bd13c9b")

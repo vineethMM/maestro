@@ -180,19 +180,17 @@ object LoadEx {
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
 
-    val resolvePath = (srcPath: Path) =>
-      for {
-        isDir <- Hdfs.isDirectory(srcPath)
-        paths <- if (!isDir) Hdfs.value(List(srcPath))
-                 else Hdfs.files(srcPath)
-      } yield paths
+    def resolvePath(srcPath: Path) = for {
+      isDir <- Hdfs.isDirectory(srcPath)
+      paths <- if (!isDir) Hdfs.value(List(srcPath))
+               else Hdfs.files(srcPath)
+    } yield paths
 
-    val resolvePaths = (srcPaths: List[String]) =>
-      for {
-        fs       <- Hdfs.filesystem
-        paths    =  srcPaths.map(Hdfs.path(_))
-        resPaths <- paths.map(resolvePath).sequence
-      } yield resPaths.flatten
+    def resolvePaths(srcPaths: List[String]) = for {
+      fs       <- Hdfs.filesystem
+      paths    =  srcPaths.map(Hdfs.path(_))
+      resPaths <- paths.map(resolvePath).sequence
+    } yield resPaths.flatten
 
     for {
       rawRows <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))

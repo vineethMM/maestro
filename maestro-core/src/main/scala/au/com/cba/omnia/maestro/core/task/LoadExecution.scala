@@ -166,23 +166,7 @@ trait LoadExecution {
   def load[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
-    val resolvePath = (srcPath: Path) =>
-      for {
-        isDir <- Hdfs.isDirectory(srcPath)
-        paths <- if (!isDir) Hdfs.value(List(srcPath))
-                 else Hdfs.files(srcPath)
-      } yield paths
-
-    for {
-      srcsResolved <- Execution.fromHdfs(
-                        for {
-                          fs       <- Hdfs.filesystem
-                          paths    =  sources.map(Hdfs.path(_))
-                          resPaths <- paths.map(resolvePath).sequence
-                        } yield resPaths.flatten
-                      )
-      (pipe, info) <- LoadEx.execution[A](config, srcsResolved.map(_.toString))
-    } yield (pipe, info)
+      LoadEx.execution[A](config, sources)
   }
 }
 
@@ -195,27 +179,45 @@ object LoadEx {
   def execution[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
-    val rawRows =
-      if (config.generateKey) pipeWithDateAndKey(sources, config.timeSource)
-      else                    pipeWithDate(sources, config.timeSource)
 
-    Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
-      val stat        = Stat(StatKeys.tuplesFiltered)(id)
-      val parsedRows  = parseRows(config, stat, rawRows)
-      val thriftInput = Errors.safely(config.errors)(parsedRows)
+    val resolvePath = (srcPath: Path) =>
+      for {
+        isDir <- Hdfs.isDirectory(srcPath)
+        paths <- if (!isDir) Hdfs.value(List(srcPath))
+                 else Hdfs.files(srcPath)
+      } yield paths
 
-      val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
-      val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
+    val resolvePaths = (srcPaths: List[String]) =>
+      for {
+        fs       <- Hdfs.filesystem
+        paths    =  srcPaths.map(Hdfs.path(_))
+        resPaths <- paths.map(resolvePath).sequence
+      } yield resPaths.flatten
 
-      val serializer  = CompactScalaCodec[A](getCodec[A])
-      val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
-      val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
-                          .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
+    for {
+      rawRows <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))
+                 else Execution.fromHdfs(resolvePaths(sources)).map { rSources =>
+                        pipeWithDateAndKey(rSources.map(_.toString), config.timeSource)
+                 }
+      (pipe, info) <-
+        Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
+          val stat        = Stat(StatKeys.tuplesFiltered)(id)
+          val parsedRows  = parseRows(config, stat, rawRows)
+          val thriftInput = Errors.safely(config.errors)(parsedRows)
 
-      seqFileIn.writeExecution(seqSource).getAndResetCounters.map { case (_, counters) =>
-        (seqFileOut, LoadInfo.fromCounters(counters, config.errorThreshold))
-      }
-    }}}
+          val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
+          val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
+
+          val serializer  = CompactScalaCodec[A](getCodec[A])
+          val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
+          val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
+                              .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
+
+          seqFileIn.writeExecution(seqSource).getAndResetCounters.map { case (_, counters) =>
+            (seqFileOut, LoadInfo.fromCounters(counters, config.errorThreshold))
+          }
+        }}}
+    } yield (pipe, info)
   }
 
   def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](

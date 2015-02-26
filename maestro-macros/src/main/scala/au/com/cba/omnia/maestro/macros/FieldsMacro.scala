@@ -31,20 +31,22 @@ object FieldsMacro {
   def impl[A <: ThriftStruct: c.WeakTypeTag](c: Context) = {
     import c.universe._
 
-    val typ       = c.universe.weakTypeOf[A]
-    val entries   = Inspect.fields[A](c)
-    val companion = typ.typeSymbol.companionSymbol
+    val typ        = c.universe.weakTypeOf[A]
+    val entries    = Inspect.fields[A](c)
+    val companion  = typ.typeSymbol.companionSymbol
     val nameGetter = newTermName("name")
-
+    val idGetter   = newTermName("id")
+    
     val fields = entries.map({
       case (method, field) =>
-        val name    = q"""$companion.${newTermName(field + "Field")}.$nameGetter"""
-        val extract = Function(List(ValDef(Modifiers(Flag.PARAM), newTermName("x"), TypeTree(), EmptyTree)), Select(Ident(newTermName("x")), method.name))
-        (method, field, q"""au.com.cba.omnia.maestro.core.data.Field[${typ}, ${method.returnType}]($name, ${extract})""")
-    }).map({
-      case (method, field, value) =>
-        val n = newTermName(field)
-        q"""val ${n} = $value"""
+        val term    = q"""$companion.${newTermName(field + "Field")}"""
+        val srcName = q"""$term.$nameGetter"""
+        val srcId   = q"""$term.$idGetter"""
+
+        val get     = q"""au.com.cba.omnia.maestro.core.data.Accessor[${method.returnType}]($srcId)"""
+        val fld     = q"""au.com.cba.omnia.maestro.core.data.Field[$typ, ${method.returnType}]($srcName,$get)"""
+        
+        q"""val ${newTermName(field)} = $fld"""
     })
     val refs = entries.map({
       case (method, field) =>

@@ -16,6 +16,7 @@ package au.com.cba.omnia.maestro.core
 package upload
 
 import org.specs2.Specification
+import org.specs2.matcher.ThrownExpectations
 
 import java.io.File
 
@@ -26,7 +27,7 @@ import au.com.cba.omnia.omnitool.{Error, Ok}
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-class PushSpec extends Specification { def is = s2"""
+class PushSpec extends Specification with ThrownExpectations { def is = s2"""
 
 Push properties
 ===============
@@ -55,8 +56,7 @@ push behaviour
     val local = new File(dirs.testDir, "local.txt")
     local.createNewFile must_== true
 
-    val archiveCheck = Push.archiveFile(local, dirs.archiveDir,
-      dirs.hdfsArchiveDirP, "local.txt.gz")
+    val archiveCheck = Push.archiveFile(local, dirs.archiveDir, dirs.hdfsArchiveDirP)
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
@@ -68,8 +68,7 @@ push behaviour
     val local = new File(dirs.testDir, "local.txt")
     local.createNewFile must_== true
 
-    val archiveCheck = Push.archiveFile(local, dirs.archiveDir,
-      dirs.hdfsArchiveDirP, "local.txt.gz")
+    val archiveCheck = Push.archiveFile(local, dirs.archiveDir, dirs.hdfsArchiveDirP)
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
@@ -82,8 +81,7 @@ push behaviour
     local.createNewFile must_== true
     val destDir = new File(dirs.archiveDir, "subDir")
 
-    val archiveCheck = Push.archiveFile(local, destDir, dirs.hdfsArchiveDirP,
-      "local.txt.gz")
+    val archiveCheck = Push.archiveFile(local, destDir, dirs.hdfsArchiveDirP)
       .run(new Configuration)
     archiveCheck mustEqual Ok(())
 
@@ -92,57 +90,59 @@ push behaviour
   })
 
   def pushCopiesFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("foo/bar"))
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "foo/bar")
     val dest = new Path(List(dirs.hdfsDirS, "foo", "bar", "local20140506.txt") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
-    copyCheck mustEqual Ok(Copied(src.file, dest))
+    copyCheck mustEqual Ok(List(Copied(List(src.file), dest.getParent)))
 
     Hdfs.exists(dest).run(conf) mustEqual Ok(true)
   })
 
   def pushCopiesSapFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "ZCR_DW01_E001_20140612_230441.DAT"), new File("."))
-    val dest = new Path(dirs.hdfsDirS + File.separator + "ZCR_DW01_E001_20140612_230441.DAT")
+    val src  = Data(new File(dirs.testDir, "ZCR_DW01_E001_20140612_230441.DAT"), "foo")
+    val dest = new Path(List(dirs.hdfsDirS, "foo", "ZCR_DW01_E001_20140612_230441.DAT") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
-    copyCheck mustEqual Ok(Copied(src.file, dest))
+    copyCheck mustEqual Ok(List(Copied(List(src.file), dest.getParent)))
 
     Hdfs.exists(dest).run(conf) mustEqual Ok(true)
   })
 
   def pushCreatesIngestionFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("."))
-    val dest = new Path(dirs.hdfsDirS + File.separator + "local20140506.txt")
-    val flag = new Path(dirs.hdfsDirS + File.separator + "_INGESTION_COMPLETE")
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "bar")
+    val dest = new Path(List(dirs.hdfsDirS, "bar", "local20140506.txt") mkString File.separator)
+    val flag = new Path(List(dirs.hdfsDirS, "bar", "_INGESTION_COMPLETE") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
-    copyCheck mustEqual Ok(Copied(src.file, dest))
+
+    copyCheck mustEqual Ok(List(Copied(List(src.file), dest.getParent)))
 
     Hdfs.exists(flag).run(conf) mustEqual Ok(true)
   })
 
   def pushFailsOnIngestionFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("."))
-    val dest = new Path(dirs.hdfsDirS + File.separator + "local20140506.txt")
-    val flag = new Path(dirs.hdfsDirS + File.separator + "_INGESTION_COMPLETE")
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "bar")
+    val dest = new Path(List(dirs.hdfsDirS, "bar", "local20140506.txt") mkString File.separator)
+    val flag = new Path(List(dirs.hdfsDirS, "bar", "_INGESTION_COMPLETE") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
+    Hdfs.mkdirs(flag.getParent).run(conf) must beLike { case Ok(_) => ok }
     Hdfs.create(flag).run(conf) must beLike { case Ok(_) => ok }
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
     copyCheck must beLike { case Error(_) => ok }
@@ -151,14 +151,15 @@ push behaviour
   })
 
   def pushFailsOnArchiveFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("."))
-    val dest = new Path(dirs.hdfsDirS + File.separator + "local20140506.txt")
-    val arch = new Path(dirs.hdfsArchiveDirS + File.separator + "local20140506.txt.gz")
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "bar")
+    val dest = new Path(List(dirs.hdfsDirS, "bar", "local20140506.txt") mkString File.separator)
+    val arch = new Path(List(dirs.hdfsArchiveDirS, "bar", "local20140506.txt.gz") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
+    Hdfs.mkdirs(arch.getParent).run(conf) must beLike { case Ok(_) => ok }
     Hdfs.create(arch).run(conf) must beLike { case Ok(_) => ok }
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
     copyCheck must beLike { case Error(_) => ok }
@@ -167,32 +168,32 @@ push behaviour
   })
 
   def pushFailsOnDuplicate = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("."))
-    val dest = new Path(dirs.hdfsDirS + File.separator + "local20140506.txt")
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "bar")
+    val dest = new Path(List(dirs.hdfsDirS, "bar", "local20140506.txt") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
-    copyCheck mustEqual Ok(Copied(src.file, dest))
+    copyCheck mustEqual Ok(List(Copied(List(src.file), dest.getParent)))
 
-    val duplicateCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val duplicateCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
     duplicateCheck must beLike { case Error(_) => ok }
   })
 
   def pushRemovesSourceFile = isolatedTest((dirs: IsolatedDirs) => {
-    val src  = Data(new File(dirs.testDir, "local20140506.txt"), new File("foo"))
+    val src  = Data(new File(dirs.testDir, "local20140506.txt"), "foo")
     val dest = new Path(List(dirs.hdfsDirS, "foo", "local20140506.txt") mkString File.separator)
     val conf = new Configuration
     src.file.createNewFile must_== true
 
-    val copyCheck = Push.push(src, dirs.hdfsDirS, dirs.archiveDirS,
+    val copyCheck = Push.push(List(src), dirs.hdfsDirS, dirs.archiveDirS,
       dirs.hdfsArchiveDirS)
       .run(conf)
-    copyCheck mustEqual Ok(Copied(src.file, dest))
+    copyCheck mustEqual Ok(List(Copied(List(src.file), dest.getParent)))
 
     src.file.exists mustEqual false
   })

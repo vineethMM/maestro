@@ -16,6 +16,7 @@ package au.com.cba.omnia.maestro.core
 package upload
 
 import org.specs2.Specification
+import org.specs2.matcher.ThrownExpectations
 
 import java.io.File
 
@@ -25,7 +26,7 @@ import scalaz._, Scalaz._
 
 import au.com.cba.omnia.omnitool.{Error, Ok}
 
-class InputSpec extends Specification { def is = s2"""
+class InputSpec extends Specification with ThrownExpectations { def is = s2"""
 
 Input properties
 ================
@@ -62,7 +63,7 @@ control files
   def rejectLateDate = isolatedTest((dirs: IsolatedDirs) => {
     val f1 = new File(dirs.testDirS, "local20140506.txt")
     val f2 = new File(dirs.testDirS, "localname20140506.txt")
-    val data1 = Data(f1, new File(List("2014", "06", "05") mkString File.separator))
+    val data1 = Data(f1, List("2014", "06", "05") mkString File.separator)
     f1.createNewFile
     f2.createNewFile
 
@@ -73,7 +74,7 @@ control files
   def rejectLateLiteral = isolatedTest((dirs: IsolatedDirs) => {
     val f1 = new File(dirs.testDirS, "yahoolocal20140506.txt")
     val f2 = new File(dirs.testDirS, "localname20140506.txt")
-    val data2 = Data(f2, new File(List("2014", "06", "05") mkString File.separator))
+    val data2 = Data(f2, List("2014", "06", "05") mkString File.separator)
     f1.createNewFile
     f2.createNewFile
 
@@ -91,7 +92,7 @@ control files
     val f1 = new File(dirs.testDirS, "local20140605.CTL")
     val f2 = new File(dirs.testDirS, "local20140605.DAT")
     val ctrl1 = Control(f1)
-    val data2 = Data(f2, new File(List("2014", "06", "05") mkString File.separator))
+    val data2 = Data(f2, List("2014", "06", "05") mkString File.separator)
     f1.createNewFile
     f2.createNewFile
 

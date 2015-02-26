@@ -16,6 +16,7 @@ package au.com.cba.omnia.maestro.core
 package upload
 
 import org.specs2.Specification
+import org.specs2.matcher.ThrownExpectations
 
 import java.io.File
 
@@ -23,7 +24,7 @@ import org.joda.time.DateTime
 
 import scalaz.{\/-, -\/}
 
-class InputParsersSpec extends Specification { def is = s2"""
+class InputParsersSpec extends Specification with ThrownExpectations { def is = s2"""
 successfull file pattern parsing
 --------------------------------
 

@@ -25,7 +25,7 @@ import scalaz._, Scalaz._
 case class Control(file: File)
 
 /** A file to be loaded into HDFS */
-case class Data(file: File, fileSubDir: File)
+case class Data(file: File, fileSubDir: String)
 
 /** Files found by [[findFilese]] */
 case class InputFiles(controlFiles: List[Control], dataFiles: List[Data])
@@ -48,7 +48,7 @@ object Input {
     val matches      = (files zip results) collect { case (file, Match(dirs)) => (file, dirs) }
     val (ctrl, data) = matches partition { case (file, _) => isControl(file, controlPattern) }
     val controls     = ctrl map { case (file, _)    => Control(file) }
-    val dataFiles    = data map { case (file, dirs) => Data(file, new File(dirs mkString File.separator)) }
+    val dataFiles    = data map { case (file, dirs) => Data(file, dirs mkString File.separator) }
     InputFiles(controls, dataFiles)
   }
 

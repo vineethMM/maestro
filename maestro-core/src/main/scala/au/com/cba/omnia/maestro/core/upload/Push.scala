@@ -19,6 +19,8 @@ import java.io.File
 
 import com.google.common.io.Files
 
+import scalaz._, Scalaz._
+
 import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream
 
 import org.apache.hadoop.fs.Path
@@ -27,64 +29,72 @@ import au.com.cba.omnia.omnitool.file.ops.Temp
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-/** File copied to HDFS */
-case class Copied(source: File, dest: Path)
+/** Files copied to a directory on HDFS */
+case class Copied(sources: List[File], dest: Path)
 
 /** Functions to push files to HDFS */
 object Push {
 
   /**
-    * Copy the file to HDFS and archive it.
+    * Copy files to HDFS and archive them.
     *
-    * If nothing goes wrong, this methods will:
-    *   - copy the file to Hdfs
-    *   - create an "ingestion complete" flag on Hdfs
-    *   - archive the file
+    * If nothing goes wrong, this method will:
+    *   - copy the files to Hdfs
+    *   - create an "ingestion complete" flag in each directory on Hdfs
+    *   - archive the files
     *
-    * This method will fail if a duplicate of the file or it's
-    * ingestion complete or processed flags already exist in HDFS,
-    * or if an archived copy of the file already exists locally or on HDFS.
+    * This method will fail if a duplicate of the destination directories
+    * already exist in HDFS, or if archived copies of the file already exist
+    * locally or on HDFS.
     *
     * This method is not atomic. It assumes no other process is touching the
-    * source and multiple destination files while this method runs.
+    * source or multiple destination files while this method runs.
     */
-  def push(src: Data, hdfsLandingDir: String, archiveDir: String, hdfsArchiveDir: String): Hdfs[Copied] = {
-    val fileName = src.file.getName
-    val archName = fileName + ".gz"
-    val hdfsDestDir      = Hdfs.path(List(hdfsLandingDir, src.fileSubDir) mkString File.separator)
-    val hdfsDestFile     = new Path(hdfsDestDir, fileName)
-    val hdfsPushFlagFile = new Path(hdfsDestDir, "_INGESTION_COMPLETE")
-    val hdfsProcFlagFile = new Path(hdfsDestDir, "_PROCESSED")
-    val archDestDir      = new File(List(archiveDir, src.fileSubDir) mkString File.separator)
-    val archDestFile     = new File(archDestDir, archName)
-    val archHdfsDestDir  = new Path(List(hdfsArchiveDir, src.fileSubDir) mkString File.separator)
-    val archHdfsDestFile = new Path(archHdfsDestDir, archName)
+  def push(files: List[Data], destRoot: String, archRoot: String, hdfsArchRoot: String): Hdfs[List[Copied]] = {
+    val fileGroups = files.groupBy(_.fileSubDir).mapValues(subDirFiles => subDirFiles.map(_.file)).toList
 
-    for {
-      // fail if any traces of the file already exist on HDFS
-      _ <- Hdfs.forbidden(Hdfs.exists(hdfsDestFile),     s"$fileName already exists at $hdfsDestFile")
-      _ <- Hdfs.forbidden(Hdfs.exists(hdfsPushFlagFile), s"$fileName already has an ingestion complete flag at $hdfsPushFlagFile")
-      _ <- Hdfs.forbidden(Hdfs.exists(hdfsProcFlagFile), s"$fileName already has a processed flag at $hdfsProcFlagFile")
-      _ <- Hdfs.forbidden(Hdfs.exists(archHdfsDestFile), s"$fileName has already been archived to $archHdfsDestFile")
-      _ <- Hdfs.prevent(archDestFile.exists,             s"$fileName has already been archived to $archDestFile")
-
-      // push file everywhere and create flag
-      _ <- copyToHdfs(src.file, hdfsDestDir)
-      _ <- Hdfs.create(hdfsPushFlagFile)
-      _ <- archiveFile(src.file, archDestDir, archHdfsDestDir, archName)
-      _ <- Hdfs.guard(src.file.delete, s"could not delete $fileName after processing")
-
-    } yield Copied(src.file, hdfsDestFile)
+    fileGroups.traverse[Hdfs, Copied] { case (subDir, sources) =>
+      pushToSubDir(sources, subDir, destRoot, archRoot, hdfsArchRoot)
+    }
   }
 
+  def pushToSubDir(sources: List[File], subDir: String, destRoot: String, archRoot: String, hdfsArchRoot: String): Hdfs[Copied] = {
+    val destDir      = new Path(List(destRoot,     subDir) mkString File.separator)
+    val archDir      = new File(List(archRoot,     subDir) mkString File.separator)
+    val archHdfsDir  = new Path(List(hdfsArchRoot, subDir) mkString File.separator)
+    val hdfsFlagFile = new Path(destDir, "_INGESTION_COMPLETE")
+
+    for {
+      // fail if the destination directory already exists or we would overwrite any archived files
+      _ <- Hdfs.forbidden(Hdfs.exists(destDir), s"$destDir already exists")
+      _ <- sources.traverse_(src => {
+        val name         = archiveName(src)
+        val archFile     = new File(archDir,     name)
+        val archHdfsFile = new Path(archHdfsDir, name)
+        for {
+          _ <- Hdfs.prevent(archFile.exists, s"archive file destination $archFile already exists")
+          _ <- Hdfs.forbidden(Hdfs.exists(archHdfsFile), s"archive file destination $archHdfsFile already exists")
+        } yield ()
+      })
+
+      // push files everywhere and create flat
+      _ <- Hdfs.mandatory(Hdfs.mkdirs(destDir), s"$destDir could not be created")
+      _ <- sources.traverse_[Hdfs](src => Hdfs.copyFromLocalFile(src, destDir).map(_ => ()))
+      _ <- Hdfs.create(hdfsFlagFile)
+      _ <- sources.traverse_(src => archiveFile(src, archDir, archHdfsDir))
+      _ <- sources.traverse_(src => Hdfs.guard(src.delete, s"could not delete ${src.getName} after processing"))
+    } yield Copied(sources, destDir)
+  }
+
+  def archiveName(src: File) = src.getName + ".gz"
+
   /** Compress and archive file both locally and in hdfs */
-  def archiveFile(raw: File, archDestDir: File, archHdfsDestDir: Path, archName: String): Hdfs[Unit] =
-    hdfsWithTempFile(raw, archName, compressed => for {
+  def archiveFile(raw: File, archDestDir: File, archHdfsDestDir: Path): Hdfs[Unit] =
+    hdfsWithTempFile(raw, archiveName(raw), compressed => for {
       _ <- copyToHdfs(compressed, archHdfsDestDir)
       _ <- moveToDir(compressed, archDestDir)
     } yield () )
 
-  /** Copy file to hdfs */
   def copyToHdfs(file: File, destDir: Path): Hdfs[Unit] =
     for {
       // mkdirs returns true if dir already exists

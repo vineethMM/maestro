@@ -33,7 +33,7 @@ import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.maestro.core.scalding.ConfHelper
 import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
-import au.com.cba.omnia.maestro.core.upload.{ControlPattern, Input, Push}
+import au.com.cba.omnia.maestro.core.upload.{ControlPattern, Copied, Input, Push}
 
 /** Information about an upload */
 case class UploadInfo(files: List[String]) {
@@ -148,31 +148,27 @@ object UploadEx {
 
   def execution(conf: UploadConfig): Execution[UploadInfo] = for {
     _      <- Execution.from {
-      logger.info("Start of upload from ${conf.localIngestPath}")
-      logger.info(s"tableName        = ${conf.tablename}")
-      logger.info(s"filePattern      = ${conf.filePattern}")
-      logger.info(s"controlPattern   = ${conf.controlPattern}")
-      logger.info(s"localIngestPath  = ${conf.localIngestPath}")
-      logger.info(s"localArchivePath = ${conf.localArchivePath}")
-      logger.info(s"hdfsArchivePath  = ${conf.hdfsArchivePath}")
-      logger.info(s"hdfsLandingPath  = ${conf.hdfsLandingPath}")
-    }
-
+                logger.info("Start of upload from ${conf.localIngestPath}")
+                logger.info(s"tableName        = ${conf.tablename}")
+                logger.info(s"filePattern      = ${conf.filePattern}")
+                logger.info(s"controlPattern   = ${conf.controlPattern}")
+                logger.info(s"localIngestPath  = ${conf.localIngestPath}")
+                logger.info(s"localArchivePath = ${conf.localArchivePath}")
+                logger.info(s"hdfsArchivePath  = ${conf.hdfsArchivePath}")
+                logger.info(s"hdfsLandingPath  = ${conf.hdfsLandingPath}")
+              }
     files  <- Execution.fromEither(Input.findFiles(
-      conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
-    ))
-
-    _      <- Execution.from(files.controlFiles.foreach(ctrl =>
-      logger.info(s"skipping control file ${ctrl.file.getName}")
-    ))
-
-    copied <- Execution.fromHdfs(files.dataFiles.traverse(data => for {
-      record <- Push.push(data, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
-      _      =  logger.info(s"copied ${record.source.getName} to ${record.dest}")
-    } yield record.dest.toString ))
-
+                conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
+              ))
+    _      <- Execution.from(
+                files.controlFiles.foreach(ctrl =>logger.info(s"skipping control file ${ctrl.file.getName}"))
+              )
+    copied <- Execution.fromHdfs(
+                Push.push(files.dataFiles, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
+              )
     _      <- Execution.from {
-      logger.info(s"Upload ended from ${conf.localIngestPath}")
-    }
-  } yield UploadInfo(copied)
+                copied.foreach { case Copied(files, dest) => logger.info(s"Copied ${files.map(_.getName).mkString(", ")} to $dest ") }
+                logger.info(s"Upload ended from ${conf.localIngestPath}")
+              }
+  } yield UploadInfo(copied.map(_.dest.toString))
 }

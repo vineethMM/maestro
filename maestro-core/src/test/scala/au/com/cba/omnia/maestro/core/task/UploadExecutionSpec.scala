@@ -28,6 +28,7 @@ Upload execution properties
   can upload using execution monad                        $normal
   can custom upload using execution monad                 $custom
   can use continue to stop after an empty upload          $continue
+  can upload sequence files for the same timestamp        $sequenceFiles
 """
 
   def normal = withEnvironment(path(getClass.getResource("/upload-execution-normal").toString)) {
@@ -40,8 +41,8 @@ Upload execution properties
     )
 
     executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
-      s"$destDir/2014/11/11/mytable_20141111.dat",
-      s"$destDir/2014/11/12/mytable_20141112.dat"
+      s"$destDir/2014/11/11",
+      s"$destDir/2014/11/12"
     ))
   }
 
@@ -54,8 +55,8 @@ Upload execution properties
     )
 
     executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
-      s"$destDir/2014/11/11/mytable_20141111.dat",
-      s"$destDir/2014/11/12/mytable_20141112.dat"
+      s"$destDir/2014/11/11",
+      s"$destDir/2014/11/12"
     ))
   }
 
@@ -72,5 +73,19 @@ Upload execution properties
     } yield ()
 
     execute(exec).get must throwA[Throwable].like { case e => e.getMessage must startWith("Filter failed on") }
+  }
+
+  def sequenceFiles = withEnvironment(path(getClass.getResource("/upload-execution-sequenceFiles").toString)) {
+    val root      = s"$dir/user"
+    val dirStruct = "normal/mydomain/mytable"
+    val destDir   = "hdfs-root/source/$dirStruct"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/dataFeed/normal/mydomain", destDir,
+      s"$root/local-archive/$dirStruct", "hdfs-root/archive/$dirStruct", "mytable"
+    )
+
+    executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
+      s"$destDir/2014/11/11"
+    ))
   }
 }

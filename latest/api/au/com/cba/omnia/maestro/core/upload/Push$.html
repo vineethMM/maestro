@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Functions to push files to HDFS</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/46129c56659196dc7d15547f5ff18ea732946e91//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Push.scala" target="_blank">Push.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Functions to push files to HDFS</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/5684253319e80bbc956fed4fae0449d448f75dfd//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Push.scala" target="_blank">Push.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -151,18 +151,31 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#archiveFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="archiveFile(raw:java.io.File,archDestDir:java.io.File,archHdfsDestDir:org.apache.hadoop.fs.Path,archName:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[Unit]"></a>
-      <a id="archiveFile(File,File,Path,String):Hdfs[Unit]"></a>
+      <a id="archiveFile(raw:java.io.File,archDestDir:java.io.File,archHdfsDestDir:org.apache.hadoop.fs.Path):au.com.cba.omnia.permafrost.hdfs.Hdfs[Unit]"></a>
+      <a id="archiveFile(File,File,Path):Hdfs[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">archiveFile</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="archDestDir">archDestDir: <span class="extype" name="java.io.File">File</span></span>, <span name="archHdfsDestDir">archHdfsDestDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>, <span name="archName">archName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">archiveFile</span><span class="params">(<span name="raw">raw: <span class="extype" name="java.io.File">File</span></span>, <span name="archDestDir">archDestDir: <span class="extype" name="java.io.File">File</span></span>, <span name="archHdfsDestDir">archHdfsDestDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Compress and archive file both locally and in hdfs</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.Push#archiveName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="archiveName(src:java.io.File):String"></a>
+      <a id="archiveName(File):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">archiveName</span><span class="params">(<span name="src">src: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -207,7 +220,7 @@
         <span class="name">copyToHdfs</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="destDir">destDir: <span class="extype" name="org.apache.hadoop.fs.Path">Path</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Copy file to hdfs</p>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -358,22 +371,35 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Push#push" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="push(src:au.com.cba.omnia.maestro.core.upload.Data,hdfsLandingDir:String,archiveDir:String,hdfsArchiveDir:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[au.com.cba.omnia.maestro.core.upload.Copied]"></a>
-      <a id="push(Data,String,String,String):Hdfs[Copied]"></a>
+      <a id="push(files:List[au.com.cba.omnia.maestro.core.upload.Data],destRoot:String,archRoot:String,hdfsArchRoot:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[List[au.com.cba.omnia.maestro.core.upload.Copied]]"></a>
+      <a id="push(List[Data],String,String,String):Hdfs[List[Copied]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">push</span><span class="params">(<span name="src">src: <a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a></span>, <span name="hdfsLandingDir">hdfsLandingDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archiveDir">archiveDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchiveDir">hdfsArchiveDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<a href="Copied.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Copied">Copied</a>]</span>
+        <span class="name">push</span><span class="params">(<span name="files">files: <span class="extype" name="scala.List">List</span>[<a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a>]</span>, <span name="destRoot">destRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archRoot">archRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchRoot">hdfsArchRoot: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="scala.List">List</span>[<a href="Copied.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Copied">Copied</a>]]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Copy the file to HDFS and archive it.</p><div class="fullcomment"><div class="comment cmt"><p>Copy the file to HDFS and archive it.</p><p>If nothing goes wrong, this methods will:</p><ul><li>copy the file to Hdfs</li><li>create an &quot;ingestion complete&quot; flag on Hdfs</li><li>archive the file</li></ul><p>This method will fail if a duplicate of the file or it's
-ingestion complete or processed flags already exist in HDFS,
-or if an archived copy of the file already exists locally or on HDFS.</p><p>This method is not atomic. It assumes no other process is touching the
-source and multiple destination files while this method runs.
+      <p class="shortcomment cmt">Copy files to HDFS and archive them.</p><div class="fullcomment"><div class="comment cmt"><p>Copy files to HDFS and archive them.</p><p>If nothing goes wrong, this method will:</p><ul><li>copy the files to Hdfs</li><li>create an &quot;ingestion complete&quot; flag in each directory on Hdfs</li><li>archive the files</li></ul><p>This method will fail if a duplicate of the destination directories
+already exist in HDFS, or if archived copies of the file already exist
+locally or on HDFS.</p><p>This method is not atomic. It assumes no other process is touching the
+source or multiple destination files while this method runs.
 </p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.Push#pushToSubDir" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pushToSubDir(sources:List[java.io.File],subDir:String,destRoot:String,archRoot:String,hdfsArchRoot:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[au.com.cba.omnia.maestro.core.upload.Copied]"></a>
+      <a id="pushToSubDir(List[File],String,String,String,String):Hdfs[Copied]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pushToSubDir</span><span class="params">(<span name="sources">sources: <span class="extype" name="scala.List">List</span>[<span class="extype" name="java.io.File">File</span>]</span>, <span name="subDir">subDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="destRoot">destRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="archRoot">archRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchRoot">hdfsArchRoot: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<a href="Copied.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Copied">Copied</a>]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

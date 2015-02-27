@@ -183,14 +183,13 @@ object LoadEx {
     def resolvePath(srcPath: Path) = for {
       isDir <- Hdfs.isDirectory(srcPath)
       paths <- if (!isDir) Hdfs.value(List(srcPath))
-               else Hdfs.files(srcPath)
+               else Hdfs.files(srcPath, "[!_]*")
     } yield paths
 
-    def resolvePaths(srcPaths: List[String]) = for {
-      fs       <- Hdfs.filesystem
-      paths    =  srcPaths.map(Hdfs.path(_))
-      resPaths <- paths.map(resolvePath).sequence
-    } yield resPaths.flatten.map(_.toString)
+    def resolvePaths(srcPaths: List[String]): Hdfs[List[String]] =
+      srcPaths
+        .map(Hdfs.path(_)).map(resolvePath).sequence
+        .map(_.flatten.map(_.toString))
 
     for {
       rawRows      <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))

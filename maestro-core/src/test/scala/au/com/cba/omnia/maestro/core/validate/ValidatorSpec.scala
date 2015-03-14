@@ -32,6 +32,7 @@ Validator properties
   fail validate                          $fail
   validators compose                     $composition
   validators accumulate error            $accumulation
+  pass passes every object               $pass
 
 """
 
@@ -65,6 +66,10 @@ Validator properties
       Validator.by[Person](_.age == (p.age + 1), "[age]")
     )
     validator.run(p) must_== NonEmptyList("[name]", "[age]").failure })
+
+  def pass = prop((p: Person) =>
+    Validator.pass[Person].run(p)  must_== p.success
+  )
 
   implicit def PersonArbitrary: Arbitrary[Person] =
     Arbitrary(Arbitrary.arbitrary[(String, Int)] map Person.tupled)

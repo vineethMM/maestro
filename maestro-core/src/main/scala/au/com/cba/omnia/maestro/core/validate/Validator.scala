@@ -33,15 +33,22 @@ import au.com.cba.omnia.maestro.core.data._
   */
 case class Validator[A](run: A => ValidationNel[String, A])
 
+/** Some helpful functions to create [[Validator]]. */
 object Validator {
+  /** Combines all the provided validators. Running one after the other. */
   def all[A](validators: Validator[A]*): Validator[A] =
     Validator(a => validators.toList.traverseU(_.run(a)).as(a))
 
+  /** Creates a [[Validator]] from a predicate and error message. */
   def by[A](validation: A => Boolean, message: String): Validator[A] =
     Validator(a => if (validation(a)) a.success else message.failNel)
 
+  /** Creates a [[Validator]] from a [[Validator]] for a specific field. */
   def of[A, B](field: Field[A, B], check: Validator[B]): Validator[A] =
     Validator(a => check.run(field.get(a)).as(a))
+
+  /** Creates a [[Validator]] that is always successful. */
+  def pass[A] = Validator[A](a => a.success)
 }
 
 object Check {

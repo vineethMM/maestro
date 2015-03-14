@@ -190,7 +190,7 @@ case class MaestroConfig(
     filter: RowFilter       = RowFilter.keep,
     clean: Clean            = Clean.default,
     none: String            = "",
-    validator: Validator[A] = Validator.all[A](),
+    validator: Validator[A] = Validator.pass[A],
     errorThreshold: Double  = 0.05
   ): LoadConfig[A] = LoadConfig(
     errors, splitter, timeSource, loadWithKey, filter, clean, none,

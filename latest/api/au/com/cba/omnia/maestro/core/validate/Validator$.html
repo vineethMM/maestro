@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7ad8f172568b4884aedc74572800569696e34599//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/validate/Validator.scala" target="_blank">Validator.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Some helpful functions to create <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/80cfad76a0660bd6737af733c8b34d690e175660//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/validate/Validator.scala" target="_blank">Validator.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -150,7 +150,7 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.validate.Validator#all" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.core.validate.Validator#all" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="all[A](validators:au.com.cba.omnia.maestro.core.validate.Validator[A]*):au.com.cba.omnia.maestro.core.validate.Validator[A]"></a>
       <a id="all[A](Validator[A]*):Validator[A]"></a>
       <h4 class="signature">
@@ -162,7 +162,7 @@
         <span class="name">all</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="validators">validators: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.all.A">A</span>]*</span>)</span><span class="result">: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.all.A">A</span>]</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Combines all the provided validators.</p><div class="fullcomment"><div class="comment cmt"><p>Combines all the provided validators. Running one after the other.</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -188,7 +188,7 @@
         <span class="name">by</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="validation">validation: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.by.A">A</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.by.A">A</span>]</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Creates a <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a> from a predicate and error message.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -343,7 +343,20 @@
         <span class="name">of</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="field">field: <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.of.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.of.B">B</span>]</span>, <span name="check">check: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.of.B">B</span>]</span>)</span><span class="result">: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.of.A">A</span>]</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Creates a <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a> from a <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a> for a specific field.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.validate.Validator#pass" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pass[A]:au.com.cba.omnia.maestro.core.validate.Validator[A]"></a>
+      <a id="pass[A]:Validator[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pass</span><span class="tparams">[<span name="A">A</span>]</span><span class="result">: <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.pass.A">A</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Creates a <a href="Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a> that is always successful.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

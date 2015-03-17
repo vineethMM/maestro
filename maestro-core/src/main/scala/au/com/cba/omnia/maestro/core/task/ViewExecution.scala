@@ -19,10 +19,12 @@ import com.twitter.scalding.{Execution, TupleSetter, TypedPipe}
 import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSource
+import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 import au.com.cba.omnia.maestro.core.hive.HiveTable
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.core.scalding.StatKeys
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
 
 /**
   * Configuration options for write pipes to HDFS files.
@@ -61,7 +63,12 @@ trait ViewExecution {
     */
   def viewHive[A <: ThriftStruct : Manifest, ST](
     table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
-  ): Execution[Long] =
-    table.writeExecution(pipe, append)
-      .map(_.get(StatKeys.tuplesWritten).getOrElse(0))
+  ): Execution[Long] = for {
+    /* Creates the database upfront since when Hive is run concurrently uzing `zip` all but the
+     * first attempt fails.
+     * The Hive monad handles this so that the job doesn't fall over.
+     */
+    _ <- Execution.fromHive(Hive.createDatabase(table.database))
+    n <- table.writeExecution(pipe, append).map(_.get(StatKeys.tuplesWritten).getOrElse(0L))
+  } yield n
 }

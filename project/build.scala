@@ -17,8 +17,6 @@ import Keys._
 
 import com.twitter.scrooge.ScroogeSBT._
 
-import sbtassembly.Plugin._, AssemblyKeys._
-
 import au.com.cba.omnia.uniform.core.standard.StandardProjectPlugin._
 import au.com.cba.omnia.uniform.core.version.UniqueVersionPlugin._
 import au.com.cba.omnia.uniform.dependency.UniformDependencyPlugin._
@@ -30,10 +28,9 @@ import au.com.cba.omnia.humbug.HumbugSBT._
 object build extends Build {
   type Sett = Def.Setting[_]
 
-  val thermometerVersion = "0.5.3-20150221124731-40453fc"
-  val ebenezerVersion    = "0.12.0-20150123010146-98a02be"
-  val omnitoolVersion    = "1.5.0-20150113041805-fef6da5"
-  val parquetVersion     = "1.2.5-cdh4.6.0-p485"
+  val thermometerVersion = "0.6.0-20150317012710-6f91910"
+  val ebenezerVersion    = "0.13.0-20150317050806-e331291"
+  val omnitoolVersion    = "1.7.0-20150316053109-4b4b011"
 
   lazy val standardSettings: Seq[Sett] =
     Defaults.coreDefaultSettings ++
@@ -49,7 +46,7 @@ object build extends Build {
     ++ uniform.ghsettings
     ++ Seq[Sett](
          publishArtifact := false
-       , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+       , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )
   , aggregate = Seq(core, macros, api, test, schema)
   )
@@ -78,26 +75,26 @@ object build extends Build {
         (sourceDirectory) { _ / "test" / "thrift" / "scrooge" },
       libraryDependencies ++= Seq(
         "com.google.code.findbugs" % "jsr305"    % "2.0.3" // Needed for guava.
-      , "com.google.guava"         % "guava"     % "16.0.1"
+      // Can't be higher than this since there is a version incompatability with the version of bonecp (0.7.1) used by Hive
+      , "com.google.guava"         % "guava"     % "14.0.1"
       ) ++ depend.scalaz() ++ depend.scalding() ++ depend.hadoop()
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
+        ++ depend.parquet()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
-        ++ depend.omnia("permafrost",    "0.2.0-20150113073328-8994d5b")
-        ++ depend.omnia("edge",          "3.2.0-20150113103131-d8aabb2")
-        ++ depend.omnia("humbug-core",   "0.3.0-20150220061008-1e3ca3f")
+        ++ depend.omnia("permafrost",    "0.4.0-20150316054624-9a8bd1f")
+        ++ depend.omnia("edge",          "3.2.0-20150316063342-0227f48")
+        ++ depend.omnia("humbug-core",   "0.4.0-20150316054843-8380712")
         ++ depend.omnia("omnitool-time", omnitoolVersion)
         ++ depend.omnia("omnitool-file", omnitoolVersion)
-        ++ depend.omnia("parlour",       "1.6.1-20150128235623-bd13c9b")
+        ++ depend.omnia("parlour",       "1.7.0-20150317022830-dfa570c")
         ++ Seq(
           "commons-validator"  % "commons-validator" % "1.4.0",
           "org.apache.commons" % "commons-compress"  % "1.8.1",
           "org.apache.hadoop"  % "hadoop-tools"      % depend.versions.hadoop % "provided",
-          "com.twitter"        % "parquet-cascading" % parquetVersion         % "provided",
           "au.com.cba.omnia"  %% "ebenezer-test"     % ebenezerVersion        % "test",
           "au.com.cba.omnia"  %% "thermometer-hive"  % thermometerVersion     % "test",
           "org.scalikejdbc"   %% "scalikejdbc"       % "2.1.2"                % "test",
-          "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test",
-          "com.twitter"        % "parquet-hive"      % parquetVersion         % "test"
+          "org.hsqldb"         % "hsqldb"            % "1.8.0.10"             % "test"
         ),
       parallelExecution in Test := false
     )
@@ -116,7 +113,7 @@ object build extends Build {
          , "org.scalamacros" %% "quasiquotes"    % "2.0.0"
          , "com.twitter"      % "util-eval_2.10" % "6.22.1" % Test
          ) ++ depend.testing())
-       , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+       , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )
   ).dependsOn(core)
    .dependsOn(test % "test")
@@ -146,9 +143,7 @@ object build extends Build {
     ++ uniformAssemblySettings
     ++ uniformThriftSettings
     ++ Seq[Sett](
-         libraryDependencies ++= depend.hadoop() ++ Seq(
-           "com.twitter"      % "parquet-hive"      % parquetVersion % "test",
-           "com.twitter"      % "parquet-cascading" % parquetVersion % "provided",
+         libraryDependencies ++= depend.hadoop() ++ depend.parquet() ++ Seq(
            "org.scalikejdbc" %% "scalikejdbc"       % "2.1.2"               % "test",
            "org.hsqldb"       % "hsqldb"            % "1.8.0.10"            % "test"
          )

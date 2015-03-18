@@ -28,9 +28,9 @@ import au.com.cba.omnia.humbug.HumbugSBT._
 object build extends Build {
   type Sett = Def.Setting[_]
 
-  val thermometerVersion = "0.6.0-20150317012710-6f91910"
-  val ebenezerVersion    = "0.14.0-20150318021653-e4f64b0"
-  val omnitoolVersion    = "1.7.0-20150316053109-4b4b011"
+  val thermometerVersion = "0.7.0-20150318035217-23adcab"
+  val ebenezerVersion    = "0.15.0-20150318042059-dace5d4"
+  val omnitoolVersion    = "1.8.0-20150318034256-6b79776"
 
   lazy val standardSettings: Seq[Sett] =
     Defaults.coreDefaultSettings ++
@@ -81,12 +81,12 @@ object build extends Build {
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
         ++ depend.parquet()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
-        ++ depend.omnia("permafrost",    "0.4.0-20150316054624-9a8bd1f")
-        ++ depend.omnia("edge",          "3.2.0-20150316063342-0227f48")
-        ++ depend.omnia("humbug-core",   "0.4.0-20150316054843-8380712")
+        ++ depend.omnia("permafrost",    "0.5.0-20150318035605-30a6d2c")
+        ++ depend.omnia("edge",          "3.3.0-20150318041332-398b597")
+        ++ depend.omnia("humbug-core",   "0.5.0-20150318035044-b7d5d90")
         ++ depend.omnia("omnitool-time", omnitoolVersion)
         ++ depend.omnia("omnitool-file", omnitoolVersion)
-        ++ depend.omnia("parlour",       "1.7.0-20150317022830-dfa570c")
+        ++ depend.omnia("parlour",       "1.8.0-20150318041121-52934e3")
         ++ Seq(
           "commons-validator"  % "commons-validator" % "1.4.0",
           "org.apache.commons" % "commons-compress"  % "1.8.1",

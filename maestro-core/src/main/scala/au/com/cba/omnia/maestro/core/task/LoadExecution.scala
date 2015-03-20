@@ -47,9 +47,6 @@ import au.com.cba.omnia.maestro.core.scalding._
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
-import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
-
-import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 /** Information about a Load */
 sealed trait LoadInfo {
@@ -166,7 +163,7 @@ trait LoadExecution {
   def load[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
-      LoadEx.execution[A](config, sources)
+    LoadEx.execution[A](config, sources)
   }
 }
 
@@ -179,41 +176,27 @@ object LoadEx {
   def execution[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
+    val rawRows =
+      if (config.generateKey) pipeWithDateAndKey(sources, config.timeSource)
+      else                    pipeWithDate(sources, config.timeSource)
 
-    def resolvePath(srcPath: Path) = for {
-      isDir <- Hdfs.isDirectory(srcPath)
-      paths <- if (!isDir) Hdfs.value(List(srcPath))
-               else Hdfs.files(srcPath, "[!_]*")
-    } yield paths
+    Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
+      val stat        = Stat(StatKeys.tuplesFiltered)(id)
+      val parsedRows  = parseRows(config, stat, rawRows)
+      val thriftInput = Errors.safely(config.errors)(parsedRows)
 
-    def resolvePaths(srcPaths: List[String]): Hdfs[List[String]] =
-      srcPaths
-        .map(Hdfs.path(_)).map(resolvePath).sequence
-        .map(_.flatten.map(_.toString))
+      val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
+      val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
 
-    for {
-      rawRows      <- if (!config.generateKey) Execution.from(pipeWithDate(sources, config.timeSource))
-                      else Execution.fromHdfs(resolvePaths(sources))
-                             .map(rSources => pipeWithDateAndKey(rSources, config.timeSource))
-      (pipe, info) <-
-        Execution.withId { id => Paths.tempDir.flatMap { tmpDir => {
-          val stat        = Stat(StatKeys.tuplesFiltered)(id)
-          val parsedRows  = parseRows(config, stat, rawRows)
-          val thriftInput = Errors.safely(config.errors)(parsedRows)
+      val serializer  = CompactScalaCodec[A](getCodec[A])
+      val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
+      val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
+                          .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
 
-          val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
-          val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
-
-          val serializer  = CompactScalaCodec[A](getCodec[A])
-          val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
-          val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
-                              .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
-
-          seqFileIn.writeExecution(seqSource).getAndResetCounters.map { case (_, counters) =>
-            (seqFileOut, LoadInfo.fromCounters(counters, config.errorThreshold))
-          }
-        }}}
-    } yield (pipe, info)
+      seqFileIn.writeExecution(seqSource).getAndResetCounters.map { case (_, counters) =>
+        (seqFileOut, LoadInfo.fromCounters(counters, config.errorThreshold))
+      }
+    }}}
   }
 
   def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](
@@ -268,17 +251,11 @@ object LoadEx {
   def pipeWithDateAndKey(sources: List[String], timeSource: TimeSource): TypedPipe[RawRow] = {
     val rnd    = new SecureRandom()
     val seed   = rnd.generateSeed(4)
-    val md     = MessageDigest.getInstance("SHA-1")
-    val hashes =
-      sources
-        .map(k => k -> md.digest(seed ++ k.getBytes("UTF-8")).drop(12).map("%02x".format(_)).mkString)
-        .toMap
-
     TypedPipeFactory { (flowDef, mode) =>
       TypedPipe.fromSingleField[RawRow](
         MultipleTextLineFiles(sources: _*)
           .read(flowDef, mode)
-          .eachTo(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, hashes))
+          .eachTo(('offset, 'line), 'result)(_ => new GenerateKey(timeSource, seed))
       )(flowDef, mode)
     }
   }
@@ -314,12 +291,12 @@ case class RawRow(line: String, extraFields: List[String])
   * It also gets the path from cascading and extracts the time from that using the provided
   * `timeSource`.
   */
-class GenerateKey(timeSource: TimeSource, hashes: Map[String, String])
-    extends BaseOperation[(ByteBuffer, MessageDigest, String, Tuple)](('result))
-    with Function[(ByteBuffer, MessageDigest, String, Tuple)] {
+class GenerateKey(timeSource: TimeSource, seed: Array[Byte])
+    extends BaseOperation[(ByteBuffer, MessageDigest, String, String, Tuple)](('result))
+    with Function[(ByteBuffer, MessageDigest, String, String, Tuple)] {
+
   /** Creates a unique key from the provided information.*/
-  def uid(path: String, slice: Int, offset: Long, line: String, byteBuffer: ByteBuffer, md: MessageDigest): String = {
-    val hash     = hashes(path)
+  def uid(hash: String, slice: Int, offset: Long, line: String, byteBuffer: ByteBuffer, md: MessageDigest): String = {
     val lineHash = md.digest(line.getBytes("UTF-8")).drop(8)
 
     byteBuffer.clear
@@ -336,24 +313,26 @@ class GenerateKey(timeSource: TimeSource, hashes: Map[String, String])
     */
   override def prepare(
     flow: FlowProcess[_],
-    call: OperationCall[(ByteBuffer, MessageDigest, String, Tuple)]
+    call: OperationCall[(ByteBuffer, MessageDigest, String, String, Tuple)]
   ): Unit = {
-    val md   = MessageDigest.getInstance("SHA-1")
+    // It's unclear what happens with `CASCADING_SOURCE_PATH` for aggregated map tasks.  See: #341
     val path = flow.getProperty(CASCADING_SOURCE_PATH).toString
-    call.setContext((ByteBuffer.allocate(12), md, path, Tuple.size(1)))
+    val md   = MessageDigest.getInstance("SHA-1")
+    val hash = md.digest(seed ++ path.getBytes("UTF-8")).drop(12).map("%02x".format(_)).mkString
+    call.setContext((ByteBuffer.allocate(12), md, path, hash, Tuple.size(1)))
   }
 
   /** Operates on each line to create a unique key and extract the time from the path.*/
-  def operate(flow: FlowProcess[_], call: FunctionCall[(ByteBuffer, MessageDigest, String, Tuple)])
+  def operate(flow: FlowProcess[_], call: FunctionCall[(ByteBuffer, MessageDigest, String, String, Tuple)])
       : Unit = {
     val entry  = call.getArguments
     val offset = entry.getLong(0)
     val line   = entry.getString(1)
     val slice  = flow.getCurrentSliceNum
 
-    val (byteBuffer, md, path, resultTuple) = call.getContext
+    val (byteBuffer, md, path, hash, resultTuple) = call.getContext
     val time = timeSource.getTime(path)
-    val key  = uid(path, slice, offset, line, byteBuffer, md)
+    val key  = uid(hash, slice, offset, line, byteBuffer, md)
 
     // representation of RawRow: tuple with string and List elements
     resultTuple.set(0, RawRow(line, List(time, key)))

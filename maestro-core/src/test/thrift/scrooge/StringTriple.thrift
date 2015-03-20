@@ -14,7 +14,8 @@
 
 #@namespace scala au.com.cba.omnia.maestro.core.thrift.scrooge
 
-struct StringPair {
+struct StringTriple {
   1  : string FIRST
   2  : string SECOND
+  3  : string THIRD
 }

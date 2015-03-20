@@ -22,11 +22,12 @@ import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
 
-import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
+import au.com.cba.omnia.maestro.core.thrift.scrooge.{StringPair, StringTriple}
 
 private object LoadExec extends LoadExecution
 
-object LoadExecutionSpec extends ThermometerSpec with StringPairSupport { def is = s2"""
+object LoadExecutionSpec extends ThermometerSpec with StringPairSupport with StringTripleSupport
+{ def is = s2"""
 
 Load execution properties
 =========================
@@ -37,7 +38,7 @@ Load execution properties
   returns the right load info for an acceptable number of errors $someErrors
   returns the right load info for too many errors                $manyErrors
   calculates the right number of rows after filtering            $filtered
-  generating keys doesn't throw exceptions                       $normalGenKey
+  can load while generating keys                                 $normalGenKey
 
 """
 
@@ -89,12 +90,17 @@ Load execution properties
     }
   }
 
-  // This checks for lack of exceptions, but not success - a new thrift type is required.
-  val confGenKey = LoadConfig[StringPair](errors = "errors", timeSource = TimeSource.now(), none = "null", generateKey = true)
+  // Enable generation of keys for rows, and check they are unique.
+  val confGenKey = LoadConfig[StringTriple](
+    errors = "errors", timeSource = TimeSource.now(), none = "null", generateKey = true
+  )
   def normalGenKey = {
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
-      val exec = LoadExec.load[StringPair](confGenKey, List("normal"))
-      executesSuccessfully(exec)._2 must_== LoadFailure(4, 4, 0, 4)
+      val exec             = LoadExec.load[StringTriple](confGenKey, List("normal"))
+      val (pipe, loadInfo) = executesSuccessfully(exec)
+      loadInfo must_== LoadSuccess(4, 4, 4, 0)
+      // Check that the keys are unique.
+      executesSuccessfully(pipe.distinctBy(_._3).map(_ => 1).sum.getExecution) must_== 4
     }
   }
 }

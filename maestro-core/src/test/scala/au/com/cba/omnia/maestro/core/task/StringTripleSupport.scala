@@ -16,23 +16,21 @@ package au.com.cba.omnia.maestro.core.task
 
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.codec.{Decode, Tag}
+import au.com.cba.omnia.maestro.core.thrift.scrooge.StringTriple
 
-import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
+trait StringTripleSupport {
 
-trait StringPairSupport {
-
-  implicit val StringPairDecode: Decode[StringPair] = for {
+  implicit val StringTripleDecode: Decode[StringTriple] = for {
     first  <- Decode.of[String]
     second <- Decode.of[String]
-  } yield StringPair(first, second)
+    third  <- Decode.of[String]
+  } yield StringTriple(first, second, third)
 
-  implicit val StringPairTag: Tag[StringPair] = {
-    val fields =
-      Field("FIRST", (p: StringPair) => p.first) +:
-      Field("SECOND",(p: StringPair) => p.second) +:
-      Stream.continually[Field[StringPair,String]](
-        Field("UNKNOWN", _ => throw new Exception("invalid field"))
-      )
-    Tag(_ zip fields)
+  implicit val StringTripleTag: Tag[StringTriple] = {
+    Tag(_ zip Stream(
+      Field("FIRST",  (p: StringTriple) => p.first),
+      Field("SECOND", (p: StringTriple) => p.second),
+      Field("THIRD",  (p: StringTriple) => p.third)
+    ))
   }
 }

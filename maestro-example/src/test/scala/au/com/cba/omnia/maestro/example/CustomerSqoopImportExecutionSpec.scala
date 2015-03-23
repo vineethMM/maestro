@@ -22,6 +22,7 @@ import au.com.cba.omnia.thermometer.hive.HiveSupport
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
+import au.com.cba.omnia.ebenezer.ParquetLogging
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 
 import au.com.cba.omnia.maestro.api._, Maestro._
@@ -31,7 +32,8 @@ import au.com.cba.omnia.maestro.example.thrift.Customer
 object CustomerSqoopImportExecutionSpec
   extends ThermometerSpec
   with Records
-  with HiveSupport { def is = s2"""
+  with HiveSupport
+  with ParquetLogging { def is = s2"""
 
 CustomerSqoopImportExecution test
 =================================

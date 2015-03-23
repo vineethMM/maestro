@@ -19,6 +19,7 @@ import au.com.cba.omnia.thermometer.fact.PathFactoid
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.hive.HiveSupport
 
+import au.com.cba.omnia.ebenezer.ParquetLogging
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 
 import au.com.cba.omnia.maestro.core.data.Field
@@ -29,7 +30,7 @@ import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 private object ViewExec extends ViewExecution
 
-object ViewExecutionSpec extends ThermometerSpec with HiveSupport { def is = s2"""
+object ViewExecutionSpec extends ThermometerSpec with HiveSupport  with ParquetLogging { def is = s2"""
 
 View execution properties
 =========================

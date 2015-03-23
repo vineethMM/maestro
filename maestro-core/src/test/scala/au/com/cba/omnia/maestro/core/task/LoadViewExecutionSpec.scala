@@ -24,6 +24,7 @@ import com.twitter.scalding.typed.TypedPipe
 import cascading.tap.hadoop.HfsProps
 
 import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.ebenezer.ParquetLogging
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.Fact
@@ -40,7 +41,10 @@ import au.com.cba.omnia.maestro.core.validate.Validator
 
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
-object LoadViewExecutionSpec extends ThermometerSpec with StringPairSupport with HiveSupport { def is = s2"""
+object LoadViewExecutionSpec extends ThermometerSpec
+    with StringPairSupport
+    with HiveSupport
+    with ParquetLogging { def is = s2"""
 
 Load + View execution properties
 ================================

@@ -17,6 +17,7 @@ package au.com.cba.omnia.maestro.example
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
+import au.com.cba.omnia.ebenezer.ParquetLogging
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 
 import au.com.cba.omnia.maestro.api._
@@ -25,7 +26,8 @@ import au.com.cba.omnia.maestro.example.thrift.{Account, Customer}
 
 class TransformExecutionSpec
   extends ThermometerSpec
-  with Records { def is = s2"""
+  with Records
+  with ParquetLogging { def is = s2"""
 TransformCustomer Cascade
 =====================
 

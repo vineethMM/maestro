@@ -17,10 +17,13 @@ package au.com.cba.omnia.maestro.core.scalding
 import scala.concurrent.Future
 
 import scalaz._, Scalaz._
+import scalaz.\&/.{This, That, Both}
 
 import com.twitter.scalding.{Config, Execution}
 
 import org.apache.hadoop.hive.conf.HiveConf
+
+import au.com.cba.omnia.omnitool.Result
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -60,14 +63,16 @@ case class RichExecution[A](execution: Execution[A]) {
 case class RichExecutionObject(exec: Execution.type) {
   /** Changes from HDFS context to Execution context. */
   def fromHdfs[T](hdfs: Hdfs[T]): Execution[T] = {
-    Execution.getConfig.flatMap { config =>
-      Execution.fromFuture(_ => hdfs.run(ConfHelper.getHadoopConf(config)).foldAll(
-        x         => Future.successful(x),
-        msg       => Future.failed(new Exception(msg)),
-        ex        => Future.failed(ex),
-        (msg, ex) => Future.failed(new Exception(msg, ex))
-      ))
-    }
+    /* Need to get the stack trace outside of the execution so we get a stack trace that is from the
+     * main thread which includes the stack that called this function.
+     */
+    val stacktrace = Thread.currentThread.getStackTrace.tail
+
+    Execution.getConfig.flatMap(config =>
+      Execution.fromFuture(_ =>
+        resultToFuture(hdfs.run(ConfHelper.getHadoopConf(config)), "HDFS operation failed", stacktrace)
+      )
+    )
   }
 
   /**
@@ -76,17 +81,42 @@ case class RichExecutionObject(exec: Execution.type) {
     * `modifyConf` can be used to update the hive conf that will be used to run the Hive action.
     */
   def fromHive[T](hive: Hive[T], modifyConf: HiveConf => Unit = _ => ()): Execution[T] = {
+    /* Need to get the stack trace outside of the execution so we get a stack trace that is from the
+     * main thread which includes the stack that called this function.
+     */
+    val stacktrace = Thread.currentThread.getStackTrace.tail
+
     Execution.getConfig.flatMap { config =>
       val hiveConf = new HiveConf(ConfHelper.getHadoopConf(config), this.getClass)
       modifyConf(hiveConf)
-      Execution.fromFuture(_ => hive.run(hiveConf).foldAll(
-        x         => Future.successful(x),
-        msg       => Future.failed(new Exception(msg)),
-        ex        => Future.failed(ex),
-        (msg, ex) => Future.failed(new Exception(msg, ex))
-      ))
+      Execution.fromFuture[T](_ =>
+        resultToFuture(hive.run(hiveConf), "Hive operation failed", stacktrace)
+      )
     }
   }
+
+  /**
+    * Helper function to convert a result to a future.
+    *
+    * For errors it creates a top level exception and fills it in with the provided stack trace.
+    * It also prefixes the exception message with the provided prefix.
+    */
+  def resultToFuture[T](
+    result: Result[T], prefix: String, stacktrace: Array[StackTraceElement]
+  ): Future[T] =
+    result.fold(
+      Future.successful,
+      error => {
+        val (msg, cause) = error match {
+          case This(msg)     => (s"$prefix: $msg", null)
+          case That(ex)      => (s"$prefix."     , ex)
+          case Both(msg, ex) => (s"$prefix: $msg", ex)
+        }
+        val exception = new Exception(msg, cause)
+        exception.setStackTrace(stacktrace)
+        Future.failed(exception)
+      }
+    )
 
   /** Changes from an action that produces a scalaz Disjunction to an Execution. */
   def fromEither[T](disjunction: => String \/ T): Execution[T] =

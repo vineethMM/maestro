@@ -95,6 +95,23 @@ case class RichExecutionObject(exec: Execution.type) {
     }
   }
 
+  /** Changes from an action that produces a Result to an Execution. */
+  def fromResult[T](result: => Result[T]): Execution[T] = {
+    /* Need to get the stack trace outside of the execution so we get a stack trace that is from the
+     * main thread which includes the stack that called this function.
+     */
+    val stacktrace = Thread.currentThread.getStackTrace.tail
+
+    Execution.fromFuture[T](_ => resultToFuture(result, "Operation failed", stacktrace))
+  }
+
+  /** Changes from an action that produces a scalaz Disjunction to an Execution. */
+  def fromEither[T](disjunction: => String \/ T): Execution[T] =
+    Execution.fromFuture(_ => disjunction.fold(
+      msg => Future.failed(new Exception(msg)),
+      x   => Future.successful(x)
+    ))
+
   /**
     * Helper function to convert a result to a future.
     *
@@ -108,22 +125,15 @@ case class RichExecutionObject(exec: Execution.type) {
       Future.successful,
       error => {
         val (msg, cause) = error match {
-          case This(msg)     => (s"$prefix: $msg", null)
-          case That(ex)      => (s"$prefix."     , ex)
-          case Both(msg, ex) => (s"$prefix: $msg", ex)
+          case This(msg)     => (s"$prefix: $msg"            , null)
+          case That(ex)      => (s"$prefix: ${ex.getMessage}", ex)
+          case Both(msg, ex) => (s"$prefix: $msg"            , ex)
         }
         val exception = new Exception(msg, cause)
         exception.setStackTrace(stacktrace)
         Future.failed(exception)
       }
     )
-
-  /** Changes from an action that produces a scalaz Disjunction to an Execution. */
-  def fromEither[T](disjunction: => String \/ T): Execution[T] =
-    Execution.fromFuture(_ => disjunction.fold(
-      msg => Future.failed(new Exception(msg)),
-      x   => Future.successful(x)
-    ))
 }
 
 object ExecutionOps extends ExecutionOps

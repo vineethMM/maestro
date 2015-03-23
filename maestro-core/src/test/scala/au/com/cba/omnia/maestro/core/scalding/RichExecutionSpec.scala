@@ -23,6 +23,8 @@ import org.specs2.matcher.Matcher
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.hive.HiveSupport
 
+import au.com.cba.omnia.omnitool.Result
+
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
@@ -30,8 +32,9 @@ import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 import ExecutionOps._
 
 object Executions {
-  def hive  = Execution.fromHive(Hive.value(throw new Exception("test")))
-  def hdfs  = Execution.fromHdfs(Hdfs.value(throw new Exception("test")))
+  def hive   = Execution.fromHive(Hive.value(throw new Exception("test")))
+  def hdfs   = Execution.fromHdfs(Hdfs.value(throw new Exception("test")))
+  def result = Execution.fromResult(Result.fail("error"))
 }
 
 object RichExecutionSpec extends ThermometerSpec with HiveSupport { def is = s2"""
@@ -40,14 +43,15 @@ Rich Execution
 ==============
 
 The RichExecution object should:
-  provide useful exception information for `fromHive` $hive
-  provide useful exception information for `fromHdfs` $hdfs
+  provide useful exception information for `fromHive`   $hive
+  provide useful exception information for `fromHdfs`   $hdfs
+  provide useful exception information for `fromResult` $result
 
 """
 
-  def hive = Executions.hive must beFailureWithClass(Executions)
-
-  def hdfs = Executions.hdfs must beFailureWithClass(Executions)
+  def hive   = Executions.hive   must beFailureWithClass(Executions)
+  def hdfs   = Executions.hdfs   must beFailureWithClass(Executions)
+  def result = Executions.result must beFailureWithClass(Executions)
 
   def beFailureWithClass[A](clazz: Any): Matcher[Execution[A]] =
     (execution: Execution[A]) => execute(execution) must beLike {

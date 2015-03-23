@@ -107,10 +107,7 @@ case class RichExecutionObject(exec: Execution.type) {
 
   /** Changes from an action that produces a scalaz Disjunction to an Execution. */
   def fromEither[T](disjunction: => String \/ T): Execution[T] =
-    Execution.fromFuture(_ => disjunction.fold(
-      msg => Future.failed(new Exception(msg)),
-      x   => Future.successful(x)
-    ))
+    fromResult(disjunction.fold(Result.fail, Result.ok))
 
   /**
     * Helper function to convert a result to a future.

@@ -16,6 +16,8 @@ package au.com.cba.omnia.maestro.core.scalding
 
 import scala.util.Failure
 
+import scalaz._, Scalaz._
+
 import com.twitter.scalding.Execution
 
 import org.specs2.matcher.Matcher
@@ -35,6 +37,7 @@ object Executions {
   def hive   = Execution.fromHive(Hive.value(throw new Exception("test")))
   def hdfs   = Execution.fromHdfs(Hdfs.value(throw new Exception("test")))
   def result = Execution.fromResult(Result.fail("error"))
+  def either = Execution.fromEither("error".left)
 }
 
 object RichExecutionSpec extends ThermometerSpec with HiveSupport { def is = s2"""
@@ -46,15 +49,17 @@ The RichExecution object should:
   provide useful exception information for `fromHive`   $hive
   provide useful exception information for `fromHdfs`   $hdfs
   provide useful exception information for `fromResult` $result
+  provide useful exception information for `fromEither` $either
 
 """
 
   def hive   = Executions.hive   must beFailureWithClass(Executions)
   def hdfs   = Executions.hdfs   must beFailureWithClass(Executions)
   def result = Executions.result must beFailureWithClass(Executions)
+  def either = Executions.either must beFailureWithClass(Executions, 2)
 
-  def beFailureWithClass[A](clazz: Any): Matcher[Execution[A]] =
+  def beFailureWithClass[A](clazz: Any, skip: Int = 1): Matcher[Execution[A]] =
     (execution: Execution[A]) => execute(execution) must beLike {
-      case Failure(t) => t.getStackTrace()(1).getClassName must_== clazz.getClass.getName
+      case Failure(t) => t.getStackTrace()(skip).getClassName must_== clazz.getClass.getName
     }
 }

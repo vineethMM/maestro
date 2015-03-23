@@ -17,6 +17,8 @@ import Keys._
 
 import com.twitter.scrooge.ScroogeSBT._
 
+import sbtassembly.AssemblyPlugin.autoImport.assembly
+
 import au.com.cba.omnia.uniform.core.standard.StandardProjectPlugin._
 import au.com.cba.omnia.uniform.core.version.UniqueVersionPlugin._
 import au.com.cba.omnia.uniform.dependency.UniformDependencyPlugin._
@@ -35,7 +37,8 @@ object build extends Build {
   lazy val standardSettings: Seq[Sett] =
     Defaults.coreDefaultSettings ++
     uniformDependencySettings ++
-    uniform.docSettings("https://github.com/CommBank/maestro")
+    uniform.docSettings("https://github.com/CommBank/maestro") ++
+    Seq(logLevel in assembly := Level.Error)
 
   lazy val all = Project(
     id = "all"

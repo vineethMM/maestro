@@ -35,7 +35,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">GenerateKey</span><span class="result"> extends <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)] with <span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>
+        <span class="name">GenerateKey</span><span class="result"> extends <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)] with <span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>
       </span>
       </h4>
       
@@ -43,9 +43,9 @@
 (map task number) to create a unique key for each line.
 It also gets the path from cascading and extracts the time from that using the provided
 <code>timeSource</code>.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e4d30683c66f60acd140a6aaa08e0e9d9eb851de//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ab7d0e953552c17b2e6a6f0a17d1a651fcc62497//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.operation.Operation">Operation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.flow.planner.DeclaresResults">DeclaresResults</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.operation.Operation">Operation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)], <span class="extype" name="cascading.flow.planner.DeclaresResults">DeclaresResults</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -84,7 +84,7 @@ It also gets the path from cascading and extracts the time from that using the p
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.maestro.core.task.GenerateKey#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,hashes:Map[String,String]):au.com.cba.omnia.maestro.core.task.GenerateKey"></a>
+      <a id="&lt;init&gt;(timeSource:au.com.cba.omnia.maestro.core.time.TimeSource,seed:Array[Byte]):au.com.cba.omnia.maestro.core.task.GenerateKey"></a>
       <a id="&lt;init&gt;:GenerateKey"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -92,7 +92,7 @@ It also gets the path from cascading and extracts the time from that using the p
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">GenerateKey</span><span class="params">(<span name="timeSource">timeSource: <a href="../time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>, <span name="hashes">hashes: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span>
+        <span class="name">GenerateKey</span><span class="params">(<span name="timeSource">timeSource: <a href="../time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a></span>, <span name="seed">seed: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Byte" class="extype" target="_top">Byte</a>]</span>)</span>
       </span>
       </h4>
       
@@ -185,14 +185,14 @@ It also gets the path from cascading and extracts the time from that using the p
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="cascading.operation.BaseOperation#cleanup" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cleanup(x$1:cascading.flow.FlowProcess[_],x$2:cascading.operation.OperationCall[Context]):Unit"></a>
-      <a id="cleanup(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,Tuple)]):Unit"></a>
+      <a id="cleanup(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,String,Tuple)]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">cleanup</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="arg1">arg1: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">cleanup</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="arg1">arg1: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseOperation → Operation</dd></dl></div>
@@ -262,14 +262,14 @@ It also gets the path from cascading and extracts the time from that using the p
         </dd></dl></div>
     </li><li name="cascading.operation.BaseOperation#flush" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="flush(x$1:cascading.flow.FlowProcess[_],x$2:cascading.operation.OperationCall[Context]):Unit"></a>
-      <a id="flush(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,Tuple)]):Unit"></a>
+      <a id="flush(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,String,Tuple)]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">flush</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="arg1">arg1: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">flush</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="arg1">arg1: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseOperation → Operation</dd></dl></div>
@@ -404,28 +404,28 @@ It also gets the path from cascading and extracts the time from that using the p
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.GenerateKey#operate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="operate(flow:cascading.flow.FlowProcess[_],call:cascading.operation.FunctionCall[(java.nio.ByteBuffer,java.security.MessageDigest,String,cascading.tuple.Tuple)]):Unit"></a>
-      <a id="operate(FlowProcess[_],FunctionCall[(ByteBuffer,MessageDigest,String,Tuple)]):Unit"></a>
+      <a id="operate(flow:cascading.flow.FlowProcess[_],call:cascading.operation.FunctionCall[(java.nio.ByteBuffer,java.security.MessageDigest,String,String,cascading.tuple.Tuple)]):Unit"></a>
+      <a id="operate(FlowProcess[_],FunctionCall[(ByteBuffer,MessageDigest,String,String,Tuple)]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">operate</span><span class="params">(<span name="flow">flow: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="call">call: <span class="extype" name="cascading.operation.FunctionCall">FunctionCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">operate</span><span class="params">(<span name="flow">flow: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="call">call: <span class="extype" name="cascading.operation.FunctionCall">FunctionCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Operates on each line to create a unique key and extract the time from the path.</p><div class="fullcomment"><div class="comment cmt"><p>Operates on each line to create a unique key and extract the time from the path.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.task.GenerateKey">GenerateKey</a> → Function</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.GenerateKey#prepare" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="prepare(flow:cascading.flow.FlowProcess[_],call:cascading.operation.OperationCall[(java.nio.ByteBuffer,java.security.MessageDigest,String,cascading.tuple.Tuple)]):Unit"></a>
-      <a id="prepare(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,Tuple)]):Unit"></a>
+      <a id="prepare(flow:cascading.flow.FlowProcess[_],call:cascading.operation.OperationCall[(java.nio.ByteBuffer,java.security.MessageDigest,String,String,cascading.tuple.Tuple)]):Unit"></a>
+      <a id="prepare(FlowProcess[_],OperationCall[(ByteBuffer,MessageDigest,String,String,Tuple)]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">prepare</span><span class="params">(<span name="flow">flow: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="call">call: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">prepare</span><span class="params">(<span name="flow">flow: <span class="extype" name="cascading.flow.FlowProcess">FlowProcess</span>[_]</span>, <span name="call">call: <span class="extype" name="cascading.operation.OperationCall">OperationCall</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets up the follow on processing by initialising the hashing algorithm, getting the path from
@@ -459,7 +459,7 @@ cascading and creating a reusable tuple.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseOperation → AnyRef → Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.GenerateKey#uid" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="uid(path:String,slice:Int,offset:Long,line:String,byteBuffer:java.nio.ByteBuffer,md:java.security.MessageDigest):String"></a>
+      <a id="uid(hash:String,slice:Int,offset:Long,line:String,byteBuffer:java.nio.ByteBuffer,md:java.security.MessageDigest):String"></a>
       <a id="uid(String,Int,Long,String,ByteBuffer,MessageDigest):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -467,7 +467,7 @@ cascading and creating a reusable tuple.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">uid</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="slice">slice: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="offset">offset: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="byteBuffer">byteBuffer: <span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span></span>, <span name="md">md: <span class="extype" name="java.security.MessageDigest">MessageDigest</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">uid</span><span class="params">(<span name="hash">hash: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="slice">slice: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="offset">offset: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="byteBuffer">byteBuffer: <span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span></span>, <span name="md">md: <span class="extype" name="java.security.MessageDigest">MessageDigest</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a unique key from the provided information.</p>
@@ -538,11 +538,11 @@ cascading and creating a reusable tuple.
 
         <div id="inheritedMembers">
         <div class="parent" name="cascading.operation.Function">
-              <h3>Inherited from <span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
+              <h3>Inherited from <span class="extype" name="cascading.operation.Function">Function</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
             </div><div class="parent" name="cascading.operation.BaseOperation">
-              <h3>Inherited from <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
+              <h3>Inherited from <span class="extype" name="cascading.operation.BaseOperation">BaseOperation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
             </div><div class="parent" name="cascading.operation.Operation">
-              <h3>Inherited from <span class="extype" name="cascading.operation.Operation">Operation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
+              <h3>Inherited from <span class="extype" name="cascading.operation.Operation">Operation</span>[(<span class="extype" name="java.nio.ByteBuffer">ByteBuffer</span>, <span class="extype" name="java.security.MessageDigest">MessageDigest</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="cascading.tuple.Tuple">Tuple</span>)]</h3>
             </div><div class="parent" name="cascading.flow.planner.DeclaresResults">
               <h3>Inherited from <span class="extype" name="cascading.flow.planner.DeclaresResults">DeclaresResults</span></h3>
             </div><div class="parent" name="java.io.Serializable">

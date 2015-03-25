@@ -16,21 +16,26 @@ package au.com.cba.omnia.maestro.core.task
 
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.codec.{Decode, Tag}
+
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringTriple
 
-trait StringTripleSupport {
+// Moved fields into a separate object to avoid serialisation issues.
+object StringTripleFields {
+  val fields: List[Field[StringTriple, _]] = List(
+    Field("first" , (p: StringTriple) => p.first),
+    Field("second", (p: StringTriple) => p.second),
+    Field("date"  , (p: StringTriple) => p.date)
+  )
+}
 
+trait StringTripleSupport {
   implicit val StringTripleDecode: Decode[StringTriple] = for {
     first  <- Decode.of[String]
     second <- Decode.of[String]
-    third  <- Decode.of[String]
-  } yield StringTriple(first, second, third)
+    date   <- Decode.of[String]
+  } yield StringTriple(first, second, date)
 
   implicit val StringTripleTag: Tag[StringTriple] = {
-    Tag(_ zip Stream(
-      Field("FIRST",  (p: StringTriple) => p.first),
-      Field("SECOND", (p: StringTriple) => p.second),
-      Field("THIRD",  (p: StringTriple) => p.third)
-    ))
+    Tag.fromFields(StringTripleFields.fields)
   }
 }

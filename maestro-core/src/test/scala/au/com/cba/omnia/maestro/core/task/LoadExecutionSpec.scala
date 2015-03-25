@@ -14,6 +14,11 @@
 
 package au.com.cba.omnia.maestro.core.task
 
+import scalaz._, Scalaz._
+
+import com.twitter.scalding.{Execution, Stat}
+import com.twitter.scalding.typed.IterablePipe
+
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 
 import au.com.cba.omnia.maestro.core.clean.Clean
@@ -21,13 +26,13 @@ import au.com.cba.omnia.maestro.core.filter.RowFilter
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
+import au.com.cba.omnia.maestro.core.scalding.StatKeys
 
 import au.com.cba.omnia.maestro.core.thrift.scrooge.{StringPair, StringTriple}
 
 private object LoadExec extends LoadExecution
 
-object LoadExecutionSpec extends ThermometerSpec with StringPairSupport with StringTripleSupport
-{ def is = s2"""
+object LoadExecutionSpec extends ThermometerSpec with StringPairSupport with StringTripleSupport { def is = s2"""
 
 Load execution properties
 =========================
@@ -39,6 +44,8 @@ Load execution properties
   returns the right load info for too many errors                $manyErrors
   calculates the right number of rows after filtering            $filtered
   can load while generating keys                                 $normalGenKey
+  load fails rows with too much data                             $tooLong
+  load fails rows with not enough data                           $tooShort
 
 """
 
@@ -90,11 +97,11 @@ Load execution properties
     }
   }
 
-  // Enable generation of keys for rows, and check they are unique.
-  val confGenKey = LoadConfig[StringTriple](
-    errors = "errors", timeSource = TimeSource.now(), none = "null", generateKey = true
-  )
   def normalGenKey = {
+    val confGenKey = LoadConfig[StringTriple](
+      errors = "errors", timeSource = TimeSource.now(), none = "null", generateKey = true
+    )
+
     withEnvironment(path(getClass.getResource("/load-execution").toString)) {
       val exec             = LoadExec.load[StringTriple](confGenKey, List("normal"))
       val (pipe, loadInfo) = executesSuccessfully(exec)
@@ -102,5 +109,47 @@ Load execution properties
       // Check that the keys are unique.
       executesSuccessfully(pipe.distinctBy(_._3).map(_ => 1).sum.getExecution) must_== 4
     }
+  }
+
+  def tooLong = {
+    val tripleConf = LoadConfig[StringTriple](
+      errors = "errors", timeSource = TimeSource.now(), none = "null"
+    )
+
+    val data = List(
+      RawRow("a|b", List("19850823")),
+      RawRow("a|b|c", List("19850823"))
+    )
+
+    val x = Execution.withId { id =>
+      val stat = Stat(StatKeys.tuplesFiltered)(id)
+      LoadEx.parseRows[StringTriple](tripleConf, stat, IterablePipe(data)).toIterableExecution
+    }
+
+    executesSuccessfully(x) must_== List(
+      StringTriple("a", "b", "19850823").right,
+      "Too many cells in the row. Got 4 expected 3.".left
+    )
+  }
+
+  def tooShort = {
+    val tripleConf = LoadConfig[StringTriple](
+      errors = "errors", timeSource = TimeSource.now(), none = "null"
+    )
+
+    val data = List(
+      RawRow("a|b", List("19850823")),
+      RawRow("a", List("19850823"))
+    )
+
+    val x = Execution.withId { id =>
+      val stat = Stat(StatKeys.tuplesFiltered)(id)
+      LoadEx.parseRows[StringTriple](tripleConf, stat, IterablePipe(data)).toIterableExecution
+    }
+
+    executesSuccessfully(x) must_== List(
+      StringTriple("a", "b", "19850823").right,
+      "Not enough cells in the row. Got 2 expected 3.".left
+    )
   }
 }

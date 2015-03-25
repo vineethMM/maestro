@@ -172,7 +172,6 @@ trait LoadExecution {
   * We may change this without considering backwards compatibility.
   */
 object LoadEx {
-
   def execution[A <: ThriftStruct : Decode : Tag : Manifest](
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
@@ -199,6 +198,10 @@ object LoadEx {
     }}}
   }
 
+  /** 
+    * Parse the rows in the provided ThriftStruct.
+    * If any rows are filtered out the counter is increased.
+    */
   def parseRows[A <: ThriftStruct : Decode : Tag : Manifest](
     conf: LoadConfig[A], filterCounter: Stat, in: TypedPipe[RawRow]
   ): TypedPipe[String \/ A] = {
@@ -221,23 +224,30 @@ object LoadEx {
           fp.increment("maestro", "tuples_filtered", 1L)
           None
         }
-      }}.map(record =>
-        Tag.tag[A](record).map { case (column, field) => conf.clean.run(field, column) }
-      ).map(record => Decode.decode[A](conf.none, record))
-        .map {
-        case DecodeOk(value) =>
-          conf.validator.run(value).disjunction.leftMap(errors => s"""The following errors occured: ${errors.toList.mkString(",")}""")
-        case e @ DecodeError(remainder, counter, reason) =>
-          reason match {
-            case ParseError(value, expected, error) =>
-              s"unexpected type: $e".left
-            case NotEnoughInput(required, expected) =>
-              s"not enough fields in record: $e".left
-            case TooMuchInput =>
-              s"too many fields in record: $e".left
-          }
-      }
-    }
+      }}.map(decodeRow[A](conf))
+  }
+
+  /** Decode and validate a single row. */
+  def decodeRow[A <: ThriftStruct : Decode : Tag : Manifest](conf: LoadConfig[A])(row: List[String])
+      : String \/ A = {
+    Tag.tag[A](row)
+      .map(_.map { case (column, field) => conf.clean.run(field, column) })
+      .flatMap(t => Decode.decode[A](conf.none, t) match {
+        case DecodeOk(value) => value.right
+        case e @ DecodeError(remainder, counter, reason) => reason match {
+          case ParseError(value, expected, error) =>
+            s"unexpected type: $e".left
+          case NotEnoughInput(required, expected) =>
+            s"not enough fields in record: $e".left
+          case TooMuchInput =>
+            s"too many fields in record: $e".left
+        }
+      })
+      .flatMap(value => conf.validator.run(value)
+        .disjunction
+        .leftMap(errors => s"""The following errors occured: ${errors.toList.mkString(",")}""")
+      )
+  }
 
   def pipeWithDate(sources: List[String], timeSource: TimeSource): TypedPipe[RawRow] =
     TypedPipeFactory { (flowDef, mode) =>

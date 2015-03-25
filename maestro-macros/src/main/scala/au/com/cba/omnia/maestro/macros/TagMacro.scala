@@ -26,7 +26,7 @@ object TagMacro {
     val fields = FieldsMacro.impl[A](c)
     val result = q"""
       import au.com.cba.omnia.maestro.core.codec.Tag
-      Tag(row => row.zip(${fields}.AllFields))
+      Tag.fromFields(${fields}.AllFields)
     """
     c.Expr[Tag[A]](result)
   }

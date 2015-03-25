@@ -15,7 +15,7 @@
 #@namespace scala au.com.cba.omnia.maestro.core.thrift.scrooge
 
 struct StringTriple {
-  1  : string FIRST
-  2  : string SECOND
-  3  : string THIRD
-}
+  1  : string first
+  2  : string second
+  3  : string date
+ }

@@ -148,7 +148,7 @@ object UploadEx {
 
   def execution(conf: UploadConfig): Execution[UploadInfo] = for {
     _      <- Execution.from {
-                logger.info("Start of upload from ${conf.localIngestPath}")
+                logger.info(s"Start of upload from ${conf.localIngestPath}")
                 logger.info(s"tableName        = ${conf.tablename}")
                 logger.info(s"filePattern      = ${conf.filePattern}")
                 logger.info(s"controlPattern   = ${conf.controlPattern}")

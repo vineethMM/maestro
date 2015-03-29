@@ -162,7 +162,12 @@ _know_ will work before we run the code (for a valid schema).
 | i32: A 32-bit signed integer                      | INT (4-byte signed integer, from -2,147,483,648 to 2,147,483,647)                             | int           |
 | i64: A 64-bit signed integer                      | BIGINT (8-byte signed integer, from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)  | BigInteger    |
 | double: A 64-bit floating point number            | DOUBLE (8-byte double precision floating point number)                                        | double        |
-| string: Encoding agnostic text or binary string   | string 
+| string: Encoding agnostic text or binary string   | string (non-binary only) | String
+
+__ __
+
+Complex thrift types like nested structs, list, sets and maps are not directly supported by Maestro, at least not currently.
+Although, many of the underlying libraries do support some of the forms of complex thrift types.
 
 ### Execution monad
 

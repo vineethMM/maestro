@@ -23,7 +23,7 @@ import com.twitter.scalding.{Config, Execution}
 
 import org.apache.hadoop.hive.conf.HiveConf
 
-import au.com.cba.omnia.omnitool.Result
+import au.com.cba.omnia.omnitool.{Result, ResultantMonad, ResultantOps, ToResultantMonadOps}
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -37,30 +37,12 @@ case class RichExecution[A](execution: Execution[A]) {
     Execution.getConfigMode.flatMap { case (config, mode) =>
       Execution.fromFuture(cec => execution.run(modifyConfig(config), mode)(cec))
     }
-
-  /** Like "finally", but only performs the final action if there was an error. */
-  def onException[B](action: Execution[B]): Execution[A] =
-    execution.recoverWith { case e => action.flatMap(_ => Execution.fromFuture(_ => Future.failed(e))) }
-
-  /**
-    * Applies the "during" action, calling "after" regardless of whether there was an error.
-    * All errors are rethrown. Generalizes try/finally.
-    */
-  def bracket[B, C](after: A => Execution[B])(during: A => Execution[C]): Execution[C] = for {
-    a <- execution
-    r <- during(a) onException after(a)
-    _ <- after(a)
-  } yield r
-
-  /** Like "bracket", but takes only a computation to run afterward. Generalizes "finally". */
-  def ensuring[B](sequel: Execution[B]): Execution[A] = for {
-    r <- onException(sequel)
-    _ <- sequel
-  } yield r
 }
 
 /** Pimps the Execution object. */
-case class RichExecutionObject(exec: Execution.type) {
+case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execution] {
+  implicit val monad: ResultantMonad[Execution] = ExecutionOps.ExecutionResultantMonad
+
   /** Alias for [[fromHive]] */
   def hdfs[T](action: Hdfs[T]): Execution[T] =
     fromHdfs(action)
@@ -102,10 +84,6 @@ case class RichExecutionObject(exec: Execution.type) {
       )
     }
   }
-
-  /** Alias for [[fromResult]] */
-  def result[T](action: => Result[T]): Execution[T] =
-    fromResult(action)
 
   /** Changes from an action that produces a Result to an Execution. */
   def fromResult[T](result: => Result[T]): Execution[T] = {
@@ -151,7 +129,7 @@ case class RichExecutionObject(exec: Execution.type) {
 
 object ExecutionOps extends ExecutionOps
 
-trait ExecutionOps {
+trait ExecutionOps extends ToResultantMonadOps {
   /** Implicit conversion of an Execution instance to RichExecution. */
   implicit def executionToRichExecution[A](execution: Execution[A]): RichExecution[A] =
     RichExecution[A](execution)
@@ -163,5 +141,14 @@ trait ExecutionOps {
   implicit val scalazExecutionMonad: Monad[Execution] = new Monad[Execution] {
     def point[A](v: => A) = Execution.from(v)
     def bind[A, B](a: Execution[A])(f: A => Execution[B]) = a.flatMap(f)
+  }
+
+  implicit def ExecutionResultantMonad: ResultantMonad[Execution] = new ResultantMonad[Execution] {
+    def rPoint[A](v: => Result[A]): Execution[A] = Execution.fromResult(v)
+
+    def rBind[A, B](ma: Execution[A])(f: Result[A] => Execution[B]): Execution[B] =
+      ma.map(Result.ok(_))
+        .recoverWith[Result[A]]{ case thr => Execution.from(Result.exception(thr)) }
+        .flatMap(f)       // flatMap over an Execution[Result[A]] that is overall equivalent to ma.
   }
 }

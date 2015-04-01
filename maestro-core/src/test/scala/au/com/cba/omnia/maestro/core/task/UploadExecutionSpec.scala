@@ -16,7 +16,10 @@ package au.com.cba.omnia.maestro.core.task
 
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
-import au.com.cba.omnia.thermometer.fact.PathFactoids._
+
+import au.com.cba.omnia.omnitool.{Error, Result}
+
+import au.com.cba.omnia.maestro.core.upload.{DataFile, Header, Trailer}
 
 private object UploadExec extends UploadExecution
 
@@ -29,6 +32,15 @@ Upload execution properties
   can custom upload using execution monad                 $custom
   can use continue to stop after an empty upload          $continue
   can upload sequence files for the same timestamp        $sequenceFiles
+
+  can return the files matching the file pattern          $matching
+  can upload the files and return upload info             $uploadFile
+
+  can parse  header and trailer and return right result   $headerTrailerParsing
+  can parse header and return right result                $headerParsing
+  can parse trailer and return right result               $trailerParsing
+  can parse trailer with empty lines at the end of file   $trailerParsingWithEmptyLines
+  parse garbage data and return result failure            $garbageParsing
 """
 
   def normal = withEnvironment(path(getClass.getResource("/upload-execution-normal").toString)) {
@@ -87,5 +99,75 @@ Upload execution properties
     executesSuccessfully(UploadExec.upload(conf)).files must containTheSameElementsAs(List(
       s"$destDir/2014/11/11"
     ))
+  }
+
+  def matching = withEnvironment(path(getClass.getResource("/find-sources").toString)) {
+    val root      = s"$dir/user"
+    val dirStruct = "normal/mydomain/mytable"
+    val destDir   = "hdfs-root/source/$dirStruct"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/dataFeed/normal/mydomain", destDir,
+      s"$root/local-archive/$dirStruct", "hdfs-root/archive/$dirStruct", "mytable"
+    )
+
+    executesSuccessfully(UploadExec.findSources(conf)) must containTheSameElementsAs(List(
+      DataFile(s"$root/local-ingest/dataFeed/normal/mydomain/mytable_20151021.dat","2015/10/21"),
+      DataFile(s"$root/local-ingest/dataFeed/normal/mydomain/mytable_20151022.dat","2015/10/22")
+    ))
+
+  }
+
+  def uploadFile = withEnvironment(path(getClass.getResource("/upload-sources").toString)) {
+    val root      = s"$dir/user"
+    val dirStruct = "normal/mydomain/mytable"
+    val destDir   = "hdfs-root/source/$dirStruct"
+    val conf      = UploadConfig(
+      s"$root/local-ingest/dataFeed/normal/mydomain", destDir,
+      s"$root/local-archive/$dirStruct", "hdfs-root/archive/$dirStruct", "mytable"
+    )
+
+    val src = List(
+      DataFile(s"$root/local-ingest/dataFeed/normal/mydomain/mytable_20141113.dat", "2014/11/13"),
+      DataFile(s"$root/local-ingest/dataFeed/normal/mydomain/mytable_20141114.dat", "2014/11/14")
+    )
+
+    executesSuccessfully(UploadExec.uploadSources(conf, src)).files must containTheSameElementsAs(List(
+      s"$destDir/2014/11/13",
+      s"$destDir/2014/11/14"
+    ))
+  }
+
+  def headerTrailerParsing = withEnvironment(path(getClass.getResource("/ht-parser").toString)) {
+    val path   = DataFile(s"$dir/user/local-ingest/dataFeed/normal/mydomain/mytable_20141118.dat", "")
+    val result = Result.ok((Header("02-10-2014", "2:00:00 pm", "mytable_20141118.dat"), Trailer(4, "034", "name")))
+
+    UploadExec.parseHT()(path) must_== result
+  }
+
+  def trailerParsing = withEnvironment(path(getClass.getResource("/trailer-parser").toString)) {
+    val path   = DataFile(s"$dir/user/local-ingest/dataFeed/normal/mydomain/mytable_20141118.dat", "")
+    val result = Result.ok(Trailer(4, "034", "name"))
+
+    UploadExec.parseTrailer()(path) must_== result
+  }
+
+  def trailerParsingWithEmptyLines = withEnvironment(path(getClass.getResource("/trailer-parser-empty-lines").toString)) {
+    val path   = DataFile(s"$dir/user/local-ingest/dataFeed/normal/mydomain/mytable_20141118.dat", "")
+    val result = Result.ok(Trailer(4, "034", "name"))
+
+    UploadExec.parseTrailer()(path) must_== result
+  }
+
+  def headerParsing = withEnvironment(path(getClass.getResource("/header-parser").toString)) {
+    val path   = DataFile(s"$dir/user/local-ingest/dataFeed/normal/mydomain/mytable_20141118.dat", "")
+    val result = Result.ok(Header("02-10-2014", "2:00:00 pm", "mytable_20141118.dat"))
+
+    UploadExec.parseHeader()(path) must_== result
+  }
+
+  def garbageParsing = withEnvironment(path(getClass.getResource("/garbage-parser").toString)) {
+    val path = DataFile(s"$dir/user/local-ingest/dataFeed/normal/mydomain/mytable_20141118.dat", "")
+
+    UploadExec.parseHeader()(path) must beLike { case Error(_) => ok }
   }
 }

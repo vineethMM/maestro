@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-version in ThisBuild := "2.4.1"
+version in ThisBuild := "2.5.0"
 
 uniqueVersionSettings
 

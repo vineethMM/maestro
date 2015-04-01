@@ -22,13 +22,13 @@ import scala.util.matching.Regex
 import scalaz._, Scalaz._
 
 /** A control file, not to be loaded into HDFS */
-case class Control(file: File)
+case class ControlFile(file: File)
 
-/** A file to be loaded into HDFS */
-case class Data(file: File, fileSubDir: String)
+/** A file to be uploaded, with associated business date directory*/
+case class DataFile(file: String, parsedDate: String)
 
-/** Files found by [[findFilese]] */
-case class InputFiles(controlFiles: List[Control], dataFiles: List[Data])
+/** Files found by [[Input.findFiles]] */
+case class InputFiles(controlFiles: List[ControlFile], dataFiles: List[DataFile])
 
 /** Factory for `Input`s */
 object Input {
@@ -47,8 +47,8 @@ object Input {
   } yield {
     val matches      = (files zip results) collect { case (file, Match(dirs)) => (file, dirs) }
     val (ctrl, data) = matches partition { case (file, _) => isControl(file, controlPattern) }
-    val controls     = ctrl map { case (file, _)    => Control(file) }
-    val dataFiles    = data map { case (file, dirs) => Data(file, dirs mkString File.separator) }
+    val controls     = ctrl map { case (file, _)    => ControlFile(file) }
+    val dataFiles    = data map { case (file, dirs) => DataFile(file.toString, dirs mkString File.separator) }
     InputFiles(controls, dataFiles)
   }
 

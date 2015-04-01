@@ -61,7 +61,12 @@ package object api {
   type GuardFilter     = au.com.cba.omnia.maestro.core.hdfs.GuardFilter
   val  Guard           = au.com.cba.omnia.maestro.core.hdfs.Guard
 
-  val ControlPattern   = au.com.cba.omnia.maestro.core.upload.ControlPattern
+  type Header          = au.com.cba.omnia.maestro.core.upload.Header
+  type Trailer         = au.com.cba.omnia.maestro.core.upload.Trailer
+  type DataFile        = au.com.cba.omnia.maestro.core.upload.DataFile
+  val  HeaderParsers   = au.com.cba.omnia.maestro.core.upload.HeaderParsers
+  val  TrailerParsers  = au.com.cba.omnia.maestro.core.upload.TrailerParsers
+  val  ControlPattern  = au.com.cba.omnia.maestro.core.upload.ControlPattern
 
   type MaestroConfig   = au.com.cba.omnia.maestro.core.task.MaestroConfig
   val  MaestroConfig   = au.com.cba.omnia.maestro.core.task.MaestroConfig

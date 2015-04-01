@@ -14,26 +14,23 @@
 
 package au.com.cba.omnia.maestro.core.task
 
-import java.io.File
+import java.io.{BufferedReader, FileReader, File}
 
-import scala.concurrent.Future
 import scala.util.matching.Regex
 
 import scalaz._, Scalaz._
 
 import org.apache.log4j.Logger
 
-import org.apache.hadoop.conf.Configuration
+import org.apache.commons.io.input.ReversedLinesFileReader
 
 import com.twitter.scalding._
 
 import au.com.cba.omnia.omnitool.Result
 
-import au.com.cba.omnia.permafrost.hdfs.Hdfs
-
 import au.com.cba.omnia.maestro.core.scalding.ConfHelper
 import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
-import au.com.cba.omnia.maestro.core.upload.{ControlPattern, Copied, Input, Push}
+import au.com.cba.omnia.maestro.core.upload._
 
 /** Information about an upload */
 case class UploadInfo(files: List[String]) {
@@ -41,7 +38,8 @@ case class UploadInfo(files: List[String]) {
   def continue: Boolean = !files.isEmpty
 
   /** Returns a non-emtpy list of sources if we should continue the load.
-    * Fails otherwise. */
+    * Fails otherwise.
+    */
   def withSources: Execution[List[String]] = Execution.from(
     if (continue) files else throw new Exception("No files to upload")
   )
@@ -56,16 +54,15 @@ case class UploadInfo(files: List[String]) {
   * to the path. For instance: the actual location of files on HDFS might be
   * `\$hdfsLandingPath/<year>/<month>/<day>/<originalFileName>`.
   *
-  * @param localIngestPath:  The local ingestion path where source files are found.
-  * @param hdfsLandingPath:  The HDFS landing path where files are copied to.
-  * @param localArchivePath: The local archive path where files are archived.
-  * @param hdfsArchivePath:  The HDFS archive path, where files are also archived.
-  * @param tableName:        The table name or file name in database or project.
-  * @param filePattern:      The file pattern, used to identify files to be uploaded.
-  *                          Defaults to expecting `<table name><separator><yyyyMMdd>*`.
-  * @param controlPattern:   The regex which identifies control files. Defaults to
-  *                          detecting files starting with `S_` or files ending with
-  *                          `CTR` or `CTL` (case insensitive).
+  * @param localIngestPath  The local ingestion path where source files are found.
+  * @param hdfsLandingPath  The HDFS landing path where files are copied to.
+  * @param localArchivePath The local archive path where files are archived.
+  * @param hdfsArchivePath  The HDFS archive path, where files are also archived.
+  * @param tablename        The table name or file name in database or project.
+  * @param filePattern      The file pattern, used to identify files to be uploaded.
+  *                         The default value is `{table}?{yyyyMMdd}*`.
+  * @param controlPattern   The regex which identifies control files.
+  *                         The default value is [[au.com.cba.omnia.maestro.core.upload.ControlPattern.default]].
   */
 case class UploadConfig(
   localIngestPath: String,
@@ -75,7 +72,17 @@ case class UploadConfig(
   tablename: String,
   filePattern: String = "{table}?{yyyyMMdd}*",
   controlPattern: Regex = ControlPattern.default
-)
+){
+  def prettyPrint =
+    s"""TableName        = ${tablename},
+       |filePattern      = ${filePattern},
+       |controlPattern   = ${controlPattern},
+       |localIngestPath  = ${localIngestPath},
+       |localArchivePath = ${localArchivePath},
+       |hdfsArchivePath  = ${hdfsArchivePath},
+       |hdfsLandingPath  = ${hdfsLandingPath}
+       |""".stripMargin
+}
 
 /**
   * Push source files to HDFS using [[upload]] and archive them.
@@ -84,7 +91,11 @@ case class UploadConfig(
   *
   * In order to run map-reduce jobs, we first need to get our data onto HDFS.
   * [[upload]] copies data files from the local machine onto HDFS and archives
-  * the files.
+  * the files. The user can also use [[findSources]] and [[uploadSources]],
+  * which allows them to inspect the data files before uploading them.
+  *
+  * The user can run [[parseHeader]], [[parseTrailer]], and [[parseHT]] on
+  * data files to retrieve and validate their metadata.
   */
 trait UploadExecution {
   /**
@@ -131,12 +142,98 @@ trait UploadExecution {
     *  - `{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}`
     *  - `??_{table}-{ddMMyy}*`
     *
-    * @param config: The upload configuration: [[UploadConfig]].
+    * @param config Upload configuration: [[UploadConfig]].
     *
-    * @return The list of copied hdfs files.
+    * @return List of copied hdfs files.
     */
   def upload(config: UploadConfig): Execution[UploadInfo] =
-    UploadEx.execution(config)
+    UploadEx.matcher(config).flatMap(UploadEx.uploader(config, _))
+
+  /**
+    * Attempt to parse the first line of the file into a header data type.
+    *
+    * The default header parser is described in [[parseHT]].
+    * The user can supply their own parsing function and header data type if necesary.
+    *
+    * @tparam H Header data type
+    *
+    * @param parseH Function to parse header
+    * @param file   Input source file
+    *
+    * @return Header data
+    */
+  def parseHeader[H](parseH: String => Result[H] = HeaderParsers.default)(data: DataFile): Result[H] =
+    UploadEx.hParser(parseH, data.file)
+
+  /**
+    * Attempt to parse the last line of the file into the trailer data type.
+    *
+    * The default trailer parser is described in [[parseHT]].
+    * The user can supply their own parsing function and trailer data type if necesary.
+    *
+    * @tparam T Trailer data type
+    *
+    * @param parseT Function to parse trailer
+    * @param file   Input source file
+    *
+    * @return Trailer data
+    */
+  def parseTrailer[T](parseT: String => Result[T] = TrailerParsers.default)(data: DataFile): Result[T] =
+    UploadEx.tParser(parseT, data.file)
+
+  /**
+    * Attempts to parse the first and last line of the file into header and trailer data types.
+    *
+    * The default parser functions assume that the header and trailer lines look like:
+    *
+    * {{{
+    * H|<BusinessDate>|<ExtractTime>|<FileName>
+    * }}}
+    * {{{
+    * T|<RecordCount>|<CheckSumValue>|<CheckSumColumn>
+    * }}}
+    *
+    * The user can supply their own parsing functions and types if required.
+    *
+    * @tparam H Header data type
+    * @tparam T Trailer data type
+    *
+    * @param parseH Function that parses the header
+    * @param parseT Function that parses the trailer
+    *
+    * @return Header and trailer data
+    */
+  def parseHT[H, T](parseH: String => Result[H] = HeaderParsers.default, parseT: String => Result[T] = TrailerParsers.default)(data: DataFile): Result[(H, T)] = {
+    for {
+      header   <- UploadEx.hParser(parseH, data.file)
+      trailer  <- UploadEx.tParser(parseT, data.file)
+    } yield(header, trailer)
+  }
+
+  /**
+    * Find source files in the local ingestion path
+    *
+    * See the description of the files we upload in [[upload]].
+    *
+    * @param config The upload configuration: [[UploadConfig]].
+    *
+    * @return List of source files in the local ingestion path
+    */
+  def findSources(config: UploadConfig): Execution[List[DataFile]] =
+    UploadEx.matcher(config)
+
+  /**
+    * Pushes a list of source files onto HDFS and archives them locally.
+    *
+    * See the description of the HDFS push and archive at [[upload]].
+    *
+    * @param config Upload configuration: [[UploadConfig]]
+    * @param files  List of source files to upload
+    *
+    * @return List of source file destinations on HDFS
+    */
+  def uploadSources(config: UploadConfig, files: List[DataFile]): Execution[UploadInfo] =
+    UploadEx.uploader(config, files)
 }
 
 /**
@@ -146,29 +243,45 @@ trait UploadExecution {
 object UploadEx {
   val logger = Logger.getLogger("Upload")
 
-  def execution(conf: UploadConfig): Execution[UploadInfo] = for {
-    _      <- Execution.from {
-                logger.info(s"Start of upload from ${conf.localIngestPath}")
-                logger.info(s"tableName        = ${conf.tablename}")
-                logger.info(s"filePattern      = ${conf.filePattern}")
-                logger.info(s"controlPattern   = ${conf.controlPattern}")
-                logger.info(s"localIngestPath  = ${conf.localIngestPath}")
-                logger.info(s"localArchivePath = ${conf.localArchivePath}")
-                logger.info(s"hdfsArchivePath  = ${conf.hdfsArchivePath}")
-                logger.info(s"hdfsLandingPath  = ${conf.hdfsLandingPath}")
-              }
-    files  <- Execution.fromEither(Input.findFiles(
-                conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
-              ))
-    _      <- Execution.from(
-                files.controlFiles.foreach(ctrl =>logger.info(s"skipping control file ${ctrl.file.getName}"))
-              )
+  def matcher(conf: UploadConfig): Execution[List[DataFile]] = for {
+    _     <- Execution.from {
+               logger.info("Start of pattern matching from ${conf.localIngestPath}")
+               logger.info(conf.prettyPrint)
+             }
+    files <- Execution.fromEither(Input.findFiles(
+               conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
+             ))
+    _     <- Execution.from(
+               files.controlFiles.foreach(ctrl => logger.info(s"skipping control file ${ctrl.file.getName}"))
+             )
+  } yield files.dataFiles
+
+  def uploader(conf: UploadConfig, files: List[DataFile]): Execution[UploadInfo] = for {
+    _      <- Execution.from(logger.info("Starting fileUploads"))
     copied <- Execution.fromHdfs(
-                Push.push(files.dataFiles, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
+                Push.push(files, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
               )
     _      <- Execution.from {
-                copied.foreach { case Copied(files, dest) => logger.info(s"Copied ${files.map(_.getName).mkString(", ")} to $dest ") }
-                logger.info(s"Upload ended from ${conf.localIngestPath}")
+                copied.foreach { case Copied(files, dest) => logger.info(s"Copied ${files.map(_.getName).mkString(", ")} to $dest ")}
+                logger.info(s"Upload ended")
               }
   } yield UploadInfo(copied.map(_.dest.toString))
+
+  def hParser[H](parseH: String => Result[H], file: String): Result[H] =
+    Result.safe {
+      val reader = new BufferedReader(new FileReader(file))
+      try     { reader.readLine }
+      finally { reader.close }
+    }.flatMap(parseH(_))
+
+  def tParser[T](parseT: String => Result[T], file: String): Result[T] =
+    Result.safe {
+      val reader = new ReversedLinesFileReader(new File(file))
+      try     {
+        var line = reader.readLine
+        while (line.isEmpty || line.forall(_.isWhitespace)) { line = reader.readLine }
+        line
+      }
+      finally { reader.close }
+    }.flatMap(parseT(_))
 }

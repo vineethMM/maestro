@@ -35,11 +35,11 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">InputFiles</span><span class="params">(<span name="controlFiles">controlFiles: <span class="extype" name="scala.List">List</span>[<a href="Control.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Control">Control</a>]</span>, <span name="dataFiles">dataFiles: <span class="extype" name="scala.List">List</span>[<a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">InputFiles</span><span class="params">(<span name="controlFiles">controlFiles: <span class="extype" name="scala.List">List</span>[<a href="ControlFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.ControlFile">ControlFile</a>]</span>, <span name="dataFiles">dataFiles: <span class="extype" name="scala.List">List</span>[<a href="DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">DataFile</a>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Files found by <span class="extype" name="findFilese">findFilese</span></p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ee03b6f4f1d0f2722dfaa909ef2348133af0127d//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Input.scala" target="_blank">Input.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Files found by <a href="Input$.html#findFiles(sourceDir:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex):scalaz.\/[String,au.com.cba.omnia.maestro.core.upload.InputFiles]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.Input#findFiles">Input.findFiles</a></p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7c6bfa536253f821c362ff6fa53eb4ad9fb73d88//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/Input.scala" target="_blank">Input.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -80,7 +80,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.maestro.core.upload.InputFiles#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(controlFiles:List[au.com.cba.omnia.maestro.core.upload.Control],dataFiles:List[au.com.cba.omnia.maestro.core.upload.Data]):au.com.cba.omnia.maestro.core.upload.InputFiles"></a>
+      <a id="&lt;init&gt;(controlFiles:List[au.com.cba.omnia.maestro.core.upload.ControlFile],dataFiles:List[au.com.cba.omnia.maestro.core.upload.DataFile]):au.com.cba.omnia.maestro.core.upload.InputFiles"></a>
       <a id="&lt;init&gt;:InputFiles"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -88,7 +88,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">InputFiles</span><span class="params">(<span name="controlFiles">controlFiles: <span class="extype" name="scala.List">List</span>[<a href="Control.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Control">Control</a>]</span>, <span name="dataFiles">dataFiles: <span class="extype" name="scala.List">List</span>[<a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a>]</span>)</span>
+        <span class="name">InputFiles</span><span class="params">(<span name="controlFiles">controlFiles: <span class="extype" name="scala.List">List</span>[<a href="ControlFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.ControlFile">ControlFile</a>]</span>, <span name="dataFiles">dataFiles: <span class="extype" name="scala.List">List</span>[<a href="DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">DataFile</a>]</span>)</span>
       </span>
       </h4>
       
@@ -199,28 +199,28 @@
               
         </dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputFiles#controlFiles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="controlFiles:List[au.com.cba.omnia.maestro.core.upload.Control]"></a>
-      <a id="controlFiles:List[Control]"></a>
+      <a id="controlFiles:List[au.com.cba.omnia.maestro.core.upload.ControlFile]"></a>
+      <a id="controlFiles:List[ControlFile]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">controlFiles</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Control.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Control">Control</a>]</span>
+        <span class="name">controlFiles</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="ControlFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.ControlFile">ControlFile</a>]</span>
       </span>
       </h4>
       
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputFiles#dataFiles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dataFiles:List[au.com.cba.omnia.maestro.core.upload.Data]"></a>
-      <a id="dataFiles:List[Data]"></a>
+      <a id="dataFiles:List[au.com.cba.omnia.maestro.core.upload.DataFile]"></a>
+      <a id="dataFiles:List[DataFile]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">dataFiles</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Data.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.Data">Data</a>]</span>
+        <span class="name">dataFiles</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">DataFile</a>]</span>
       </span>
       </h4>
       

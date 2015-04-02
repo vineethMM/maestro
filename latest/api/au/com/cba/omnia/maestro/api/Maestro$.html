@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides task methods, and any implicits required to use them.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ee03b6f4f1d0f2722dfaa909ef2348133af0127d//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides task methods, and any implicits required to use them.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7c6bfa536253f821c362ff6fa53eb4ad9fb73d88//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.HdfsStrings" class="extype" target="_top">HdfsStrings</a>, <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">macros.MacroSupport</a>, <a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a>, <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a>, <a href="../core/task/QueryExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.QueryExecution">QueryExecution</a>, <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a>, <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a>, <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -342,6 +342,22 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#findSources" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="findSources(config:au.com.cba.omnia.maestro.core.task.UploadConfig):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFile]]"></a>
+      <a id="findSources(core.task.UploadConfig):Execution[List[core.upload.DataFile]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">findSources</span><span class="params">(<span name="config">config: <a href="../core/task/UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadConfig">core.task.UploadConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.List">List</span>[<a href="../core/upload/DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">core.upload.DataFile</a>]]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Find source files in the local ingestion path</p><div class="fullcomment"><div class="comment cmt"><p>Find source files in the local ingestion path</p><p>See the description of the files we upload in <a href="#upload(config:au.com.cba.omnia.maestro.core.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#upload">upload</a>.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="package.html#UploadConfig=au.com.cba.omnia.maestro.core.task.UploadConfig" class="extmbr" name="au.com.cba.omnia.maestro.api.UploadConfig">UploadConfig</a>.
+</p></dd><dt>returns</dt><dd class="cmt"><p>List of source files in the local ingestion path
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -435,6 +451,57 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#parseHT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parseHT[H,T](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H],parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[(H,T)]"></a>
+      <a id="parseHT[H,T]((String)⇒Result[H],(String)⇒Result[T])(core.upload.DataFile):Result[(H,T)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseHT</span><span class="tparams">[<span name="H">H</span>, <span name="T">T</span>]</span><span class="params">(<span name="parseH">parseH: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHT.H">H</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">HeaderParsers.default</a></span></span></span>, <span name="parseT">parseT: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHT.T">T</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">TrailerParsers.default</a></span></span></span>)</span><span class="params">(<span name="data">data: <a href="../core/upload/DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">core.upload.DataFile</a></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[(<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHT.H">H</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHT.T">T</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Attempts to parse the first and last line of the file into header and trailer data types.</p><div class="fullcomment"><div class="comment cmt"><p>Attempts to parse the first and last line of the file into header and trailer data types.</p><p>The default parser functions assume that the header and trailer lines look like:</p><pre>H|&lt;BusinessDate&gt;|&lt;ExtractTime&gt;|&lt;FileName&gt;</pre><pre>T|&lt;RecordCount&gt;|&lt;CheckSumValue&gt;|&lt;CheckSumColumn&gt;</pre><p>The user can supply their own parsing functions and types if required.
+</p></div><dl class="paramcmts block"><dt class="tparam">H</dt><dd class="cmt"><p>Header data type</p></dd><dt class="tparam">T</dt><dd class="cmt"><p>Trailer data type
+</p></dd><dt class="param">parseH</dt><dd class="cmt"><p>Function that parses the header</p></dd><dt class="param">parseT</dt><dd class="cmt"><p>Function that parses the trailer
+</p></dd><dt>returns</dt><dd class="cmt"><p>Header and trailer data
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#parseHeader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parseHeader[H](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[H]"></a>
+      <a id="parseHeader[H]((String)⇒Result[H])(core.upload.DataFile):Result[H]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseHeader</span><span class="tparams">[<span name="H">H</span>]</span><span class="params">(<span name="parseH">parseH: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHeader.H">H</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">HeaderParsers.default</a></span></span></span>)</span><span class="params">(<span name="data">data: <a href="../core/upload/DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">core.upload.DataFile</a></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseHeader.H">H</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Attempt to parse the first line of the file into a header data type.</p><div class="fullcomment"><div class="comment cmt"><p>Attempt to parse the first line of the file into a header data type.</p><p>The default header parser is described in <a href="#parseHT[H,T](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H],parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[(H,T)]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#parseHT">parseHT</a>.
+The user can supply their own parsing function and header data type if necesary.
+</p></div><dl class="paramcmts block"><dt class="tparam">H</dt><dd class="cmt"><p>Header data type
+</p></dd><dt class="param">parseH</dt><dd class="cmt"><p>Function to parse header</p></dd><dt>returns</dt><dd class="cmt"><p>Header data
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#parseTrailer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parseTrailer[T](parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[T]"></a>
+      <a id="parseTrailer[T]((String)⇒Result[T])(core.upload.DataFile):Result[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseTrailer</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="parseT">parseT: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseTrailer.T">T</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">TrailerParsers.default</a></span></span></span>)</span><span class="params">(<span name="data">data: <a href="../core/upload/DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">core.upload.DataFile</a></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution.parseTrailer.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Attempt to parse the last line of the file into the trailer data type.</p><div class="fullcomment"><div class="comment cmt"><p>Attempt to parse the last line of the file into the trailer data type.</p><p>The default trailer parser is described in <a href="#parseHT[H,T](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H],parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[(H,T)]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#parseHT">parseHT</a>.
+The user can supply their own parsing function and trailer data type if necesary.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>Trailer data type
+</p></dd><dt class="param">parseT</dt><dd class="cmt"><p>Function to parse trailer</p></dd><dt>returns</dt><dd class="cmt"><p>Trailer data
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps#scalazExecutionMonad" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="scalazExecutionMonad:scalaz.Monad[com.twitter.scalding.Execution]"></a>
       <a id="scalazExecutionMonad:Monad[Execution]"></a>
@@ -540,7 +607,24 @@ any remaining files to HDFS. <code>upload</code> will refuse to copy a file if t
 file or it's control flags are already present in HDFS. If you
 need to overwrite a file that already exists in HDFS, you will need to
 delete the file and it's control flags before <code>upload</code> will replace it.</p><p>The file pattern is a string containing the following elements:</p><ul><li>Literals:<ul><li>Any character other than <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, or <code>\</code> represents itself.</li><li><code>\{</code>, <code>\}</code>, <code>\*</code>, <code>\?</code>, or <code>\\</code> represents <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, and <code>\</code>, respectively.</li><li>The string <code>{table}</code> represents the table name.</li></ul></li><li>Wildcards:<ul><li>The character <code>*</code> represents an arbitrary number of arbitrary characters.</li><li>The character <code>?</code> represents one arbitrary character.</li></ul></li><li>Date times:<ul><li>The string <code>{&lt;timestamp-pattern&gt;}</code> represents a JodaTime timestamp pattern.</li><li><code>upload</code> only supports certain date time fields:<ul><li>year (y),</li><li>month of year (M),</li><li>day of month (d),</li><li>hour of day (H),</li><li>minute of hour (m), and</li><li>second of minute (s).</li></ul></li></ul></li></ul><p>Some example file patterns:</p><ul><li><code>{table}{yyyyMMdd}.DAT</code></li><li><code>{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}</code></li><li><code>??_{table}-{ddMMyy}*</code>
-</li></ul></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The list of copied hdfs files.
+</li></ul></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>Upload configuration: <a href="package.html#UploadConfig=au.com.cba.omnia.maestro.core.task.UploadConfig" class="extmbr" name="au.com.cba.omnia.maestro.api.UploadConfig">UploadConfig</a>.
+</p></dd><dt>returns</dt><dd class="cmt"><p>List of copied hdfs files.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadExecution#uploadSources" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadSources(config:au.com.cba.omnia.maestro.core.task.UploadConfig,files:List[au.com.cba.omnia.maestro.core.upload.DataFile]):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]"></a>
+      <a id="uploadSources(core.task.UploadConfig,List[core.upload.DataFile]):Execution[core.task.UploadInfo]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uploadSources</span><span class="params">(<span name="config">config: <a href="../core/task/UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadConfig">core.task.UploadConfig</a></span>, <span name="files">files: <span class="extype" name="scala.List">List</span>[<a href="../core/upload/DataFile.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFile">core.upload.DataFile</a>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="../core/task/UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadInfo">core.task.UploadInfo</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Pushes a list of source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes a list of source files onto HDFS and archives them locally.</p><p>See the description of the HDFS push and archive at <a href="#upload(config:au.com.cba.omnia.maestro.core.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.core.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.api.Maestro#upload">upload</a>.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>Upload configuration: <a href="package.html#UploadConfig=au.com.cba.omnia.maestro.core.task.UploadConfig" class="extmbr" name="au.com.cba.omnia.maestro.api.UploadConfig">UploadConfig</a></p></dd><dt class="param">files</dt><dd class="cmt"><p>List of source files to upload
+</p></dd><dt>returns</dt><dd class="cmt"><p>List of source file destinations on HDFS
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.ViewExecution#view" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="view[A&lt;:com.twitter.scrooge.ThriftStruct,B](config:au.com.cba.omnia.maestro.core.task.ViewConfig[A,B],pipe:com.twitter.scalding.TypedPipe[A])(implicitevidence$1:Manifest[A],implicitevidence$2:Manifest[B],implicitevidence$3:com.twitter.scalding.TupleSetter[B]):com.twitter.scalding.Execution[Long]"></a>

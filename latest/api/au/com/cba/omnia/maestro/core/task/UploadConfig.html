@@ -44,7 +44,10 @@
 are copied to a destination path the effective date of the upload are added
 to the path. For instance: the actual location of files on HDFS might be
 <code>$hdfsLandingPath/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;</code>.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ee03b6f4f1d0f2722dfaa909ef2348133af0127d//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="paramcmts block"><dt class="param">localIngestPath</dt><dd class="cmt"><p>The local ingestion path where source files are found.</p></dd><dt class="param">hdfsLandingPath</dt><dd class="cmt"><p>The HDFS landing path where files are copied to.</p></dd><dt class="param">localArchivePath</dt><dd class="cmt"><p>The local archive path where files are archived.</p></dd><dt class="param">hdfsArchivePath</dt><dd class="cmt"><p>The HDFS archive path, where files are also archived.</p></dd><dt class="param">tablename</dt><dd class="cmt"><p>The table name or file name in database or project.</p></dd><dt class="param">filePattern</dt><dd class="cmt"><p>The file pattern, used to identify files to be uploaded.
+                        The default value is <code>{table}?{yyyyMMdd}*</code>.</p></dd><dt class="param">controlPattern</dt><dd class="cmt"><p>The regex which identifies control files.
+                        The default value is <a href="../upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
+</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/7c6bfa536253f821c362ff6fa53eb4ad9fb73d88//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -84,7 +87,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="&lt;init&gt;(localIngestPath:String,hdfsLandingPath:String,localArchivePath:String,hdfsArchivePath:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.maestro.core.task.UploadConfig"></a>
       <a id="&lt;init&gt;:UploadConfig"></a>
       <h4 class="signature">
@@ -96,7 +99,10 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">UploadConfig</span><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="defval" name="au.com.cba.omnia.maestro.core.upload.ControlPattern.default">...</span></span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt"></p>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">localIngestPath</dt><dd class="cmt"><p>The local ingestion path where source files are found.</p></dd><dt class="param">hdfsLandingPath</dt><dd class="cmt"><p>The HDFS landing path where files are copied to.</p></dd><dt class="param">localArchivePath</dt><dd class="cmt"><p>The local archive path where files are archived.</p></dd><dt class="param">hdfsArchivePath</dt><dd class="cmt"><p>The HDFS archive path, where files are also archived.</p></dd><dt class="param">tablename</dt><dd class="cmt"><p>The table name or file name in database or project.</p></dd><dt class="param">filePattern</dt><dd class="cmt"><p>The file pattern, used to identify files to be uploaded.
+                        The default value is <code>{table}?{yyyyMMdd}*</code>.</p></dd><dt class="param">controlPattern</dt><dd class="cmt"><p>The regex which identifies control files.
+                        The default value is <a href="../upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -203,7 +209,7 @@ to the path. For instance: the actual location of files on HDFS might be
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#controlPattern" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#controlPattern" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="controlPattern:scala.util.matching.Regex"></a>
       <a id="controlPattern:Regex"></a>
       <h4 class="signature">
@@ -215,7 +221,9 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">controlPattern</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The regex which identifies control files.</p><div class="fullcomment"><div class="comment cmt"><p>The regex which identifies control files.
+                        The default value is <a href="../upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
+</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -229,7 +237,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#filePattern" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#filePattern" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="filePattern:String"></a>
       <a id="filePattern:String"></a>
       <h4 class="signature">
@@ -241,7 +249,8 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">filePattern</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The file pattern, used to identify files to be uploaded.</p><div class="fullcomment"><div class="comment cmt"><p>The file pattern, used to identify files to be uploaded.
+                        The default value is <code>{table}?{yyyyMMdd}*</code>.</p></div></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -286,7 +295,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">hdfsArchivePath</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The HDFS archive path, where files are also archived.</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#hdfsLandingPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="hdfsLandingPath:String"></a>
       <a id="hdfsLandingPath:String"></a>
@@ -299,7 +308,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">hdfsLandingPath</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The HDFS landing path where files are copied to.</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -325,7 +334,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">localArchivePath</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The local archive path where files are archived.</p>
     </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#localIngestPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="localIngestPath:String"></a>
       <a id="localIngestPath:String"></a>
@@ -338,7 +347,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">localIngestPath</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The local ingestion path where source files are found.</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -378,6 +387,19 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.UploadConfig#prettyPrint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="prettyPrint:String"></a>
+      <a id="prettyPrint:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">prettyPrint</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -403,7 +425,7 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="name">tablename</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">The table name or file name in database or project.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

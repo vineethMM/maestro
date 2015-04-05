@@ -100,7 +100,9 @@ object build extends Build {
           noHadoop("commons-validator"  % "commons-validator" % "1.4.0"),
           "au.com.cba.omnia"           %% "ebenezer-test"     % ebenezerVersion        % "test",
           "au.com.cba.omnia"           %% "thermometer-hive"  % thermometerVersion     % "test",
-          scalikejdbc                                                                  % "test"
+          scalikejdbc                                                                  % "test",
+          "com.opencsv"                 % "opencsv"           % "3.3"
+            exclude ("org.apache.commons", "commons-lang3") // conflicts with hive
         ),
       parallelExecution in Test := false
     )

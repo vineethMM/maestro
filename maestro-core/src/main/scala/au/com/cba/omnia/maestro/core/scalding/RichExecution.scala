@@ -61,6 +61,10 @@ case class RichExecution[A](execution: Execution[A]) {
 
 /** Pimps the Execution object. */
 case class RichExecutionObject(exec: Execution.type) {
+  /** Alias for [[fromHive]] */
+  def hdfs[T](action: Hdfs[T]): Execution[T] =
+    fromHdfs(action)
+
   /** Changes from HDFS context to Execution context. */
   def fromHdfs[T](hdfs: Hdfs[T]): Execution[T] = {
     /* Need to get the stack trace outside of the execution so we get a stack trace that is from the
@@ -74,6 +78,10 @@ case class RichExecutionObject(exec: Execution.type) {
       )
     )
   }
+
+  /** Alias for [[fromHive]] */
+  def hive[T](action: Hive[T], modifyConf: HiveConf => Unit = _ => ()): Execution[T] =
+    fromHive(action, modifyConf)
 
   /**
     * Changes from Hive context to Execution context.
@@ -95,6 +103,10 @@ case class RichExecutionObject(exec: Execution.type) {
     }
   }
 
+  /** Alias for [[fromResult]] */
+  def result[T](action: => Result[T]): Execution[T] =
+    fromResult(action)
+
   /** Changes from an action that produces a Result to an Execution. */
   def fromResult[T](result: => Result[T]): Execution[T] = {
     /* Need to get the stack trace outside of the execution so we get a stack trace that is from the
@@ -104,6 +116,10 @@ case class RichExecutionObject(exec: Execution.type) {
 
     Execution.fromFuture[T](_ => resultToFuture(result, "Operation failed", stacktrace))
   }
+
+  /** Alias for [[fromEither]] */
+  def either[T](disjunction: => String \/ T): Execution[T] =
+    fromEither(disjunction)
 
   /** Changes from an action that produces a scalaz Disjunction to an Execution. */
   def fromEither[T](disjunction: => String \/ T): Execution[T] =

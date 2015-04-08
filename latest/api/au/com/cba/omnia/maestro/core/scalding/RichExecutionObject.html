@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/90ebbc07a7b6323830590a740769d157a63fd444//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/a6f8c842e9147964f9b26f8a53bb8d1caedbe43e//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -198,6 +198,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#either" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="either[T](disjunction:=&gt;scalaz.\/[String,T]):com.twitter.scalding.Execution[T]"></a>
+      <a id="either[T](⇒\/[String,T]):Execution[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">either</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="disjunction">disjunction: ⇒ <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.either.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.either.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias for <a href="#fromEither[T](disjunction:=&gt;scalaz.\/[String,T]):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromEither">fromEither</a></p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -309,6 +322,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#hdfs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="hdfs[T](action:au.com.cba.omnia.permafrost.hdfs.Hdfs[T]):com.twitter.scalding.Execution[T]"></a>
+      <a id="hdfs[T](Hdfs[T]):Execution[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hdfs</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hdfs.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hdfs.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias for <a href="#fromHive[T](hive:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromHive">fromHive</a></p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#hive" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="hive[T](action:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]"></a>
+      <a id="hive[T](Hive[T],(HiveConf)⇒Unit):Execution[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hive</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: <span class="extype" name="au.com.cba.omnia.ebenezer.scrooge.hive.Hive">Hive</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hive.T">T</span>]</span>, <span name="modifyConf">modifyConf: (<span class="extype" name="org.apache.hadoop.hive.conf.HiveConf">HiveConf</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a> = <span class="symbol">_ =&gt; ()</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hive.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias for <a href="#fromHive[T](hive:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromHive">fromHive</a></p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -361,6 +400,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#result" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="result[T](action:=&gt;au.com.cba.omnia.omnitool.Result[T]):com.twitter.scalding.Execution[T]"></a>
+      <a id="result[T](⇒Result[T]):Execution[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">result</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.result.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.result.T">T</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias for <a href="#fromResult[T](result:=&gt;au.com.cba.omnia.omnitool.Result[T]):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromResult">fromResult</a></p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#resultToFuture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="resultToFuture[T](result:au.com.cba.omnia.omnitool.Result[T],prefix:String,stacktrace:Array[StackTraceElement]):scala.concurrent.Future[T]"></a>
       <a id="resultToFuture[T](Result[T],String,Array[StackTraceElement]):Future[T]"></a>

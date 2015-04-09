@@ -37,8 +37,8 @@ and [object](http://twitter.github.io/scalding/index.html#com.twitter.scalding.E
 
 __Other__
 
-* Github Pages: [https://commbank.github.io/maestro/index.html]()
-* Extended documentation (in progress): [https://github.com/CommBank/maestro/tree/master/doc]()
+* [Github Pages](https://commbank.github.io/maestro/index.html)
+* [Extended documentation (in progress)](https://github.com/CommBank/maestro/tree/master/doc)
 
 starting point
 --------------

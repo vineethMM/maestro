@@ -19,6 +19,8 @@ import scalaz._, Scalaz._
 
 import org.scalacheck.Arbitrary
 
+import au.com.cba.omnia.omnitool.{Result, Ok}
+
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.test.Spec
 
@@ -42,33 +44,33 @@ Validator properties
 
   def entity = prop((p: Person) => {
     val validator = Validator.by[Person](_.name == p.name, "this shouldn't happen")
-    validator.run(p) must_== (p.success) })
+    validator.run(p) must_== Result.ok(p) })
 
   def field = prop((p: Person) => {
     val check = Validator.by[String](_ == p.name, "this shouldn't happen")
     val validator = Validator.of(name, check)
-    validator.run(p) must_== (p.success) })
+    validator.run(p) must_== Result.ok(p) })
 
   def fail = prop((p: Person) => {
     val validator = Validator.by[Person](_.name == (p.name + "x"), "this should happen")
-    validator.run(p) must_== ("this should happen".failNel) })
+    validator.run(p) must_== Result.fail("this should happen") })
 
   def composition = prop((p: Person) => {
     val validator = Validator.all(
       Validator.by[Person](_.name == p.name, "[name]"),
       Validator.by[Person](_.age == p.age, "[age]")
     )
-    validator.run(p) must_== p.success })
+    validator.run(p) must_== Result.ok(p) })
 
   def accumulation = prop((p: Person) => {
     val validator = Validator.all(
       Validator.by[Person](_.name == (p.name + "x"), "[name]"),
       Validator.by[Person](_.age == (p.age + 1), "[age]")
     )
-    validator.run(p) must_== NonEmptyList("[name]", "[age]").failure })
+    validator.run(p) must_== Result.fail("[name], [age]") })
 
   def pass = prop((p: Person) =>
-    Validator.pass[Person].run(p)  must_== p.success
+    Validator.pass[Person].run(p) must_== Result.ok(p)
   )
 
   implicit def PersonArbitrary: Arbitrary[Person] =

@@ -14,12 +14,12 @@
 
 package au.com.cba.omnia.maestro.core.codec
 
-import scalaz._, Scalaz._
+import au.com.cba.omnia.omnitool.Result
 
 import au.com.cba.omnia.maestro.core.data.Field
 
 /** Tags a row of cells with the column names for each cell. */
-case class Tag[A](run: List[String] => String \/ List[(String, Field[A, _])])
+case class Tag[A](run: List[String] => Result[List[(String, Field[A, _])]])
 
 /** [[Tag]] Companion object. */
 object Tag {
@@ -30,16 +30,16 @@ object Tag {
 
     Tag(row => {
       if (row.length < fieldsLength)
-        s"Not enough cells in the row. Got ${row.length} expected ${fields.length}.".left
+        Result.fail(s"Not enough cells in the row. Got ${row.length} expected ${fields.length}.")
       else if (row.length > fieldsLength)
-        s"Too many cells in the row. Got ${row.length} expected ${fields.length}.".left
+        Result.fail(s"Too many cells in the row. Got ${row.length} expected ${fields.length}.")
       else
-        (row zip fields).right
+        Result.safe(row zip fields)
     })
   }
 
   /** Tag the cells in the specified row with its column names. */
-  def tag[A : Tag](row: List[String]): String \/ List[(String, Field[A, _])] =
+  def tag[A : Tag](row: List[String]): Result[List[(String, Field[A, _])]] =
     Tag.of[A].run(row)
 
   /** Gets the [[Tag]] type class instance for `A`. */

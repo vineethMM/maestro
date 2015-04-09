@@ -40,6 +40,8 @@ import com.twitter.bijection.scrooge.CompactScalaCodec
 
 import com.twitter.scrooge.{ThriftStruct, ThriftStructCodec}
 
+import au.com.cba.omnia.omnitool.Result
+
 import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
 import au.com.cba.omnia.maestro.core.filter.RowFilter
@@ -187,7 +189,7 @@ object LoadEx {
       val seqFile     = tmpDir + "/maestro/" + UUID.randomUUID + ".seq"
       val seqSource   = CombinedSequenceFile[NullWritable, BytesWritable](seqFile, config.splitSize)
 
-      val serializer  = CompactScalaCodec[A](getCodec[A])
+      lazy val serializer  = CompactScalaCodec[A](getCodec[A]) // should not create serializer on client machine, as it doesn't serialize
       val seqFileIn   = thriftInput.map(t => (NullWritable.get, new BytesWritable(serializer(t))))
       val seqFileOut  = TypedPipe.from[(NullWritable, BytesWritable)](seqSource)
                           .map { case (_, bytes) => serializer.invert(bytes.getBytes).get }
@@ -198,7 +200,7 @@ object LoadEx {
     }}}
   }
 
-  /** 
+  /**
     * Parse the rows in the provided ThriftStruct.
     * If any rows are filtered out the counter is increased.
     */
@@ -229,25 +231,23 @@ object LoadEx {
 
   /** Decode and validate a single row. */
   def decodeRow[A <: ThriftStruct : Decode : Tag : Manifest](conf: LoadConfig[A])(row: List[String])
-      : String \/ A = {
+      : String \/ A =
     Tag.tag[A](row)
       .map(_.map { case (column, field) => conf.clean.run(field, column) })
-      .flatMap(t => Decode.decode[A](conf.none, t) match {
-        case DecodeOk(value) => value.right
+      .flatMap[A](t => Decode.decode[A](conf.none, t) match {
+        case DecodeOk(value) => Result.ok(value)
         case e @ DecodeError(remainder, counter, reason) => reason match {
           case ParseError(value, expected, error) =>
-            s"unexpected type: $e".left
+            Result.fail(s"unexpected type: $e")
           case NotEnoughInput(required, expected) =>
-            s"not enough fields in record: $e".left
+            Result.fail(s"not enough fields in record: $e")
           case TooMuchInput =>
-            s"too many fields in record: $e".left
+            Result.fail(s"too many fields in record: $e")
         }
       })
-      .flatMap(value => conf.validator.run(value)
-        .disjunction
-        .leftMap(errors => s"""The following errors occured: ${errors.toList.mkString(",")}""")
-      )
-  }
+      .flatMap(value => conf.validator.run(value))
+      .toDisjunction
+      .leftMap(_.fold(identity, _.toString, { case (msg, ex) => s"$msg: $ex"}))
 
   def pipeWithDate(sources: List[String], timeSource: TimeSource): TypedPipe[RawRow] =
     TypedPipeFactory { (flowDef, mode) =>

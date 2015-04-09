@@ -15,9 +15,9 @@
 package au.com.cba.omnia.maestro.core
 package validate
 
-import scalaz._, Scalaz._
-
 import org.scalacheck.{Arbitrary, Gen}
+
+import au.com.cba.omnia.omnitool.{Result, Ok}
 
 import au.com.cba.omnia.maestro.core.test.Spec
 
@@ -36,18 +36,23 @@ Check properties
   case class Category(value: String)
 
   def oneOf = prop((c: Category) =>
-    Check.oneOf(categories:_*).run(c.value) must_== c.value.success)
+    Check.oneOf(categories:_*).run(c.value) must_== Result.ok(c.value))
 
   def oneOfFailure = prop((c: Category) =>
-    Check.oneOf(categories:_*).run(c.value + "bad").isFailure)
+    Check.oneOf(categories:_*).run(c.value + "bad") must beLike {
+      case Ok(_) => ko
+      case _     => ok
+    })
 
   def nonempty = prop((s: String) => !s.isEmpty ==> {
-    Check.nonempty.run(s) == s.success })
+    Check.nonempty.run(s) must_== Result.ok(s) })
 
   def nonemptyFailure =
-    Check.nonempty.run("").isFailure
+    Check.nonempty.run("") must beLike {
+      case Ok(_) => ko
+      case _     => ok
+    }
 
   implicit def CategoryArbitrary: Arbitrary[Category] =
     Arbitrary(Gen.oneOf(categories) map Category)
-
 }

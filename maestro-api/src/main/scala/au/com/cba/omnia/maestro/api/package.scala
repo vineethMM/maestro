@@ -29,6 +29,8 @@ package object api {
   val  JobNotReady     = au.com.cba.omnia.maestro.core.scalding.JobNotReady
   val  JobNeverReady   = au.com.cba.omnia.maestro.core.scalding.JobNeverReady
   val  JobFailure      = au.com.cba.omnia.maestro.core.scalding.JobFailure
+  val MaestroExecution = au.com.cba.omnia.maestro.core.scalding.MaestroExecution
+  val MX               = au.com.cba.omnia.maestro.core.scalding.MaestroExecution
 
   type HiveTable[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.core.hive.HiveTable[A, B]
   type Partition[A, B] = au.com.cba.omnia.maestro.core.partition.Partition[A, B]

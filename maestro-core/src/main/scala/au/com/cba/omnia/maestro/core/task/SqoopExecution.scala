@@ -20,7 +20,7 @@ import java.io.File
 
 import org.apache.commons.lang.StringUtils
 
-import org.apache.log4j.Logger
+import org.slf4j.{Logger, LoggerFactory}
 
 import scalaz.Monoid
 
@@ -205,9 +205,9 @@ trait SqoopExecution {
 
 /** Methods to support testing Sqoop execution */
 object SqoopExecutionTest {
-  /**  Set up environment variables so that sqoop knows how to run jobs in testing environment 
-    *  
-    *  @param customMRHome:  The testing map-reduce home.  Defaults to `~/.ivy2/cache`. 
+  /**  Set up environment variables so that sqoop knows how to run jobs in testing environment
+    *
+    *  @param customMRHome:  The testing map-reduce home.  Defaults to `~/.ivy2/cache`.
     *  @param customConnMan: Optionally set the connection manager class name.
     *                        `Some("")` resets it to null.  Default is not to set it (`None`).
     */
@@ -248,14 +248,14 @@ object SqoopEx {
   ): Execution[(String, Long)] = {
     val importPath    = config.hdfsLandingPath + File.separator + config.timePath
     val archivePath   = config.hdfsArchivePath + File.separator + config.timePath
-    val logger        = Logger.getLogger("Sqoop")
+    val logger        = LoggerFactory.getLogger("Sqoop")
     val withDestDir   = config.options.targetDir(importPath)
     val withMRHome    = setCustomMRHome(withDestDir)
     val withClassName =
       withMRHome.getClassName.fold(withMRHome.className(f"SqoopImport_${Random.nextInt(Int.MaxValue)}%010d"))(_ => withMRHome)
     val withConnMan  = getCustomConnMan.fold(withClassName)(withClassName.connectionManager(_))
     val sqoopOptions = withConnMan.toSqoopOptions
-    
+
     logger.info(s"connectionString  = ${sqoopOptions.getConnectString}")
     logger.info(s"tableName         = ${sqoopOptions.getTableName}")
     logger.info(s"targetDir         = ${sqoopOptions.getTargetDir}")

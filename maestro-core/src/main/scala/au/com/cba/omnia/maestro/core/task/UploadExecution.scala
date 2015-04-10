@@ -20,7 +20,7 @@ import scala.util.matching.Regex
 
 import scalaz._, Scalaz._
 
-import org.apache.log4j.Logger
+import org.slf4j.{Logger, LoggerFactory}
 
 import org.apache.commons.io.input.ReversedLinesFileReader
 
@@ -241,7 +241,7 @@ trait UploadExecution {
   * We may change this without considering backwards compatibility.
   */
 object UploadEx {
-  val logger = Logger.getLogger("Upload")
+  val logger = LoggerFactory.getLogger("Upload")
 
   def matcher(conf: UploadConfig): Execution[List[DataFile]] = for {
     _     <- Execution.from {

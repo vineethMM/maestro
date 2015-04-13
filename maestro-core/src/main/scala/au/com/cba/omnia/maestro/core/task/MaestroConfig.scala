@@ -61,6 +61,10 @@ case class MaestroConfig(
   /** Standard command line arguments, not required unless used */
   lazy val localIngestDir  = args("local-root")
   lazy val localArchiveDir = args("archive-root")
+  lazy val dbRawPrefix     = args("db-raw-prefix")
+  lazy val dbRaw           = s"${dbRawPrefix}_${source}_${domain}"
+  lazy val dbStagingPrefix = args("db-stg-prefix")
+  lazy val dbStaging       = s"${dbStagingPrefix}_${source}_${domain}"
   lazy val connString      = args("jdbc")
   lazy val username        = args("db-user")
   lazy val password        = Option(System.getenv("DBPASSWORD")).getOrElse("")
@@ -205,7 +209,7 @@ case class MaestroConfig(
     */
   def hiveTable[A <: ThriftStruct : Manifest](
     tablename: String    = self.tablename,
-    database: String     = s"${source}_${domain}",
+    database: String     = dbRaw,
     path: Option[String] = None
   ): HiveTable[A, A] =
     HiveTable(database, tablename, path)
@@ -219,7 +223,7 @@ case class MaestroConfig(
   def partitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
     partition: Partition[A, B], // no default for partition
     tablename: String    = self.tablename,
-    database: String     = s"${source}_${domain}",
+    database: String     = dbRaw,
     path: Option[String] = None
   ): HiveTable[A, (B, A)] =
     HiveTable(database, tablename, partition, path)

@@ -40,17 +40,20 @@ Customer Job
   def pipeline = {
     val actualReader   = ParquetThermometerRecordReader[Customer]
     val expectedReader = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val dbRawPrefix    = "dr"
 
     withEnvironment(path(getClass.getResource("/customer").toString)) {
       val args = Map(
-        "hdfs-root"    -> List(s"$dir/user"),
-        "local-root"   -> List(s"$dir/user"),
-        "archive-root" -> List(s"$dir/user/archive")
+        "hdfs-root"     -> List(s"$dir/user"),
+        "local-root"    -> List(s"$dir/user"),
+        "archive-root"  -> List(s"$dir/user/archive"),
+        "db-raw-prefix" -> List(dbRawPrefix)
       )
       executesSuccessfully(CustomerJob.job, args) must_== JobFinished
 
       facts(
-        hiveWarehouse </> "customer_customer.db" </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date")
+        hiveWarehouse </> s"${dbRawPrefix}_customer_customer.db" </> "by_date" ==>
+          recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date")
       )
     }
   }

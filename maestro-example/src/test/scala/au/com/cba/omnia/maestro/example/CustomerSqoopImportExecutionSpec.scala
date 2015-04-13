@@ -49,21 +49,23 @@ CustomerSqoopImportExecution test
   def pipeline = {
     val actualReader   = ParquetThermometerRecordReader[Customer]
     val expectedReader = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val dbRawPrefix    = "dr"
 
     CustomerImport.tableSetup(connectionString, username, password)
     SqoopExecutionTest.setupEnv()
 
     val args = Map(
-      "hdfs-root" -> List(s"$dir/user/hdfs"),
-      "jdbc"      -> List(connectionString),
-      "db-user"   -> List(username)
+      "hdfs-root"     -> List(s"$dir/user/hdfs"),
+      "jdbc"          -> List(connectionString),
+      "db-user"       -> List(username),
+      "db-raw-prefix" -> List(dbRawPrefix)
     )
 
     withEnvironment(path(getClass.getResource("/sqoop-customer/import").toString)) {
       executesSuccessfully(CustomerSqoopImportExecution.execute, args) === CustomerImportStatus(6, 6, 6)
 
       facts(
-        hiveWarehouse </> "sales_books.db" </> "by_cat"  ==>
+        hiveWarehouse </> s"${dbRawPrefix}_sales_books.db" </> "by_cat"  ==>
           recordsByDirectory(actualReader, expectedReader, "expected" </> "by-cat", { (c: Customer) =>
             c.unsetEffectiveDate
           })

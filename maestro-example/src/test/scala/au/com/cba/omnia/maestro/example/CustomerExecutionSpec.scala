@@ -40,14 +40,18 @@ Customer Execution
 """
 
   def pipeline = {
-    val actualReader   = ParquetThermometerRecordReader[Customer]
-    val expectedReader = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val actualReader      = ParquetThermometerRecordReader[Customer]
+    val expectedReader    = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val dbRawprefix       = "dr"
+    val customerWarehouse = hiveWarehouse </> s"${dbRawprefix}_customer_customer.db"
+    val expectedDir       = "expected" </> "customer"
 
     withEnvironment(path(getClass.getResource("/customer").toString)) {
       val args = Map(
-        "hdfs-root"    -> List(s"$dir/user"),
-        "local-root"   -> List(s"$dir/user"),
-        "archive-root" -> List(s"$dir/user/archive")
+        "hdfs-root"     -> List(s"$dir/user"),
+        "local-root"    -> List(s"$dir/user"),
+        "archive-root"  -> List(s"$dir/user/archive"),
+        "db-raw-prefix" -> List(dbRawprefix)
       )
       executesSuccessfully(CustomerExecution.execute, args) must_== ((
         LoadSuccess(8, 8, 8, 0),
@@ -55,8 +59,8 @@ Customer Execution
       ))
 
       facts(
-        hiveWarehouse </> "customer_customer.db" </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date"),
-        hiveWarehouse </> "customer_customer.db" </> "by_cat"  ==> recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-cat")
+        customerWarehouse </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, expectedDir </> "by-date"),
+        customerWarehouse </> "by_cat"  ==> recordsByDirectory(actualReader, expectedReader, expectedDir </> "by-cat")
       )
     }
   }

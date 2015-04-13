@@ -35,13 +35,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Validator</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="../../../../../../../scalaz/package.html#ValidationNel[+E,+X]=scalaz.Validation[scalaz.NonEmptyList[E],X]" class="extmbr" name="scalaz.ValidationNel">ValidationNel</a>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">Validator</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Validator to check that the record conforms to expectations.</p><p>Use this to error out records that don't meet expectations for example
 checking that records all have a positive balance, etc.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/efccaa21a7203aefeccb322ecba3d0bea388fa6e//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/validate/Validator.scala" target="_blank">Validator.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/db1fd68778c12db2ffe4cdb24c0fb04317940463//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/validate/Validator.scala" target="_blank">Validator.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -82,7 +82,7 @@ checking that records all have a positive balance, etc.
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.maestro.core.validate.Validator#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(run:A=&gt;scalaz.ValidationNel[String,A]):au.com.cba.omnia.maestro.core.validate.Validator[A]"></a>
+      <a id="&lt;init&gt;(run:A=&gt;au.com.cba.omnia.omnitool.Result[A]):au.com.cba.omnia.maestro.core.validate.Validator[A]"></a>
       <a id="&lt;init&gt;:Validator[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -90,7 +90,7 @@ checking that records all have a positive balance, etc.
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Validator</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="../../../../../../../scalaz/package.html#ValidationNel[+E,+X]=scalaz.Validation[scalaz.NonEmptyList[E],X]" class="extmbr" name="scalaz.ValidationNel">ValidationNel</a>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>)</span>
+        <span class="name">Validator</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>)</span>
       </span>
       </h4>
       
@@ -298,15 +298,15 @@ checking that records all have a positive balance, etc.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.validate.Validator#run" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="run:A=&gt;scalaz.ValidationNel[String,A]"></a>
-      <a id="run:(A)⇒ValidationNel[String,A]"></a>
+      <a id="run:A=&gt;au.com.cba.omnia.omnitool.Result[A]"></a>
+      <a id="run:(A)⇒Result[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">run</span><span class="result">: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="../../../../../../../scalaz/package.html#ValidationNel[+E,+X]=scalaz.Validation[scalaz.NonEmptyList[E],X]" class="extmbr" name="scalaz.ValidationNel">ValidationNel</a>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>
+        <span class="name">run</span><span class="result">: (<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator.A">A</span>]</span>
       </span>
       </h4>
       

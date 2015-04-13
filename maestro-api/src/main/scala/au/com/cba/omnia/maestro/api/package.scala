@@ -90,9 +90,6 @@ package object api {
   type ViewConfig[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.core.task.ViewConfig[A, B]
   val  ViewConfig      = au.com.cba.omnia.maestro.core.task.ViewConfig
 
-  type QueryConfig     = au.com.cba.omnia.maestro.core.task.QueryConfig
-  val  QueryConfig     = au.com.cba.omnia.maestro.core.task.QueryConfig
-
   type Hdfs[A]         = au.com.cba.omnia.permafrost.hdfs.Hdfs[A]
   val  Hdfs            = au.com.cba.omnia.permafrost.hdfs.Hdfs
 

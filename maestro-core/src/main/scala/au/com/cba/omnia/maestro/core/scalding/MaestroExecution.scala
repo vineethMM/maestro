@@ -31,4 +31,7 @@ object MaestroExecution {
       case JobNotReadyException          => Execution.from(JobNotReady)
       case JobFailureException(exitCode) => Execution.from(JobFailure(exitCode))
     }
+
+  /** Iff the condition is not true changes the status of the Execution to JobNotReady. */
+  def guardReady(check: Boolean): Execution[Unit] = if (check) Execution.from(()) else jobNotReady
 }

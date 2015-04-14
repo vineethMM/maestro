@@ -40,7 +40,7 @@ import com.twitter.bijection.scrooge.CompactScalaCodec
 
 import com.twitter.scrooge.{ThriftStruct, ThriftStructCodec}
 
-import au.com.cba.omnia.omnitool.Result
+import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 
 import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
@@ -218,21 +218,20 @@ object LoadEx {
     }
 
     pipe
-      .map { case (row, fp) => (conf.splitter.run(row.line) ++ row.extraFields, fp) }
-      .flatMap { case (parts, fp) => conf.filter.run(parts) match {
-        case Some(r) => Some(r)
-        case None    => {
-          // Uses Cascading counter instead of Scalding. See `AddFlowProcess` for details.
-          fp.increment("maestro", "tuples_filtered", 1L)
-          None
-        }
-      }}.map(decodeRow[A](conf))
+      .map { case (row, fp) => (conf.splitter.run(row.line).map(_ ++ row.extraFields), fp) }
+      .flatMap { case (result, fp) => result.map(conf.filter.run(_)) match {
+        // Uses Cascading counter instead of Scalding. See `AddFlowProcess` for details.
+        case Ok(None)      => { fp.increment("maestro", "tuples_filtered", 1L); None }
+        case Ok(Some(row)) => Some(Result.ok(row))
+        case Error(err)    => Some(Result.these[List[String]](err))
+      }}
+      .map(decodeRow[A](conf))
   }
 
   /** Decode and validate a single row. */
-  def decodeRow[A <: ThriftStruct : Decode : Tag : Manifest](conf: LoadConfig[A])(row: List[String])
+  def decodeRow[A <: ThriftStruct : Decode : Tag : Manifest](conf: LoadConfig[A])(row: Result[List[String]])
       : String \/ A =
-    Tag.tag[A](row)
+    row.flatMap(Tag.tag[A](_))
       .map(_.map { case (column, field) => conf.clean.run(field, column) })
       .flatMap[A](t => Decode.decode[A](conf.none, t) match {
         case DecodeOk(value) => Result.ok(value)

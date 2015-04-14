@@ -44,7 +44,8 @@ object CustomerSqoopExportExecution {
     for {
       conf <- Execution.getConfig.map(CustomerExportConfig(_))
       _    <- TypedPipe.from(TextLine(conf.rawDataDir))
-                       .map(Splitter.delimited("|").run(_).init.mkString("|"))
+                       .flatMap(Splitter.delimited("|").run(_).toOption)
+                       .map(_.init.mkString("|"))
                        .writeExecution(TypedPsv(conf.exportDir))
       _    <- sqoopExport(conf.export, conf.exportDir)
     } yield ()

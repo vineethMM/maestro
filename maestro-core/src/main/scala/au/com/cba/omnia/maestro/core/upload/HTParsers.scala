@@ -27,18 +27,18 @@ case class Trailer(count: Long, checkValue: String, checkValColumn: String)
 object HeaderParsers {
   /** Default header parser */
   val default: String => Result[Header] =
-    (header: String) => Splitter.delimited("|").run(header) match {
+    (header: String) => Splitter.delimited("|").run(header).flatMap(_ match {
       case List("H", busDate, extractTime, file) => Result.safe(Header(busDate, extractTime, file))
       case _                                     => Result.fail(s"Failed to parse header. Expected [H|<BusinessDate>|<ExtractTime>|<FileName>], but got [$header]")
-    }
+    })
 }
 
 /** Parsers for data file trailer lines */
 object TrailerParsers {
   /** Default trailer parser */
   val default: String => Result[Trailer] =
-    (trailer: String) => Splitter.delimited("|").run(trailer) match {
+    (trailer: String) => Splitter.delimited("|").run(trailer).flatMap(_ match {
       case List("T", count, checkVal, chkValCol) => Result.safe(Trailer(count.toLong, checkVal, chkValCol))
       case _                                     => Result.fail(s"Failed to parse trailer. Expected [T|<RecordCount>|<CheckSumValue>|<CheckSumColumn>], but got [$trailer]")
-    }
+    })
 }

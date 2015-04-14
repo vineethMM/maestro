@@ -21,20 +21,15 @@ import com.google.common.base.{Splitter => GoogSplitter}
 
 import com.opencsv.CSVParser
 
+import au.com.cba.omnia.omnitool.Result
+
 /**
   * Represents the notion of splitting a string into parts
   *
-  * There is no requirement that `splitter.run(s).mkString == s`.
-  * However, it should be theoretically possible to write a function
-  * `List[String] => String` that reverses the split on good input.
-  *
-  * Originally the idea was that Splitter would return `String \/ List[String]`.
-  * However, the code I wrote in [[au.com.cba.omnia.maestro.core.task.Load]]
-  * to handle this caused scalding serialization to stop working, so now the
-  * splitters try to do "sensible" things if they see something incorrect, where
-  * "sensible" means return a result that will cause a sensible error later.
+  * It should be possible to write a function `List[String] => String`
+  * that reverses the split on good input.
   */
-case class Splitter(run: String => List[String])
+case class Splitter(run: String => Result[List[String]])
 
 /** Factory for [[au.com.cba.omnia.maestro.core.split.Splitter]] instances.  */
 object Splitter {
@@ -45,7 +40,14 @@ object Splitter {
     * Valid for all input.
     */
   def delimited(delimiter: String) =
-    Splitter(s => GoogSplitter.on(delimiter).split(s).asScala.toList)
+    Splitter(DelimitedParseFunction(delimiter))
+
+  private case class DelimitedParseFunction(delimiter: String) extends Function[String, Result[List[String]]] {
+    // splitter will not be created until function is used, and so does not have to be serialized
+    lazy val splitter = GoogSplitter.on(delimiter)
+    def apply(line: String): Result[List[String]] =
+      Result.ok(splitter.split(line).asScala.toList)
+  }
 
   /**
     * Creates a splitter that uses a CSV parser, and hence can handle quoted strings.
@@ -55,11 +57,11 @@ object Splitter {
   def csv(delimiter: Char) =
     Splitter(CsvParseFunction(delimiter))
 
-  private case class CsvParseFunction(delimiter: Char) extends Function[String, List[String]] {
+  private case class CsvParseFunction(delimiter: Char) extends Function[String, Result[List[String]]] {
     // parser will not be created until function is used, and so does not have to be serialized
     lazy val parser = new CSVParser(delimiter)
-    def apply(line: String): List[String] =
-      parser.parseLine(line).toList
+    def apply(line: String): Result[List[String]] =
+      Result.safe(parser.parseLine(line).toList)
   }
 
   /**
@@ -67,33 +69,18 @@ object Splitter {
     *
     * Valid on strings containing exactly the number of characters required to
     * fill all columns.
-    *
-    * When passed invalid input (wrong number of characters), we ensure that
-    * `Splitter.fixed(lengths).run(invalid).length != lengths.length`.
     */
   def fixed(lengths: List[Int]) = {
-    val starts = lengths.scanLeft(0)(_ + _)
-    val ends = starts.tail
-    val totalLength = starts.last
+    val indicies    = lengths.scanLeft(0)(_ + _)
+    val starts      = indicies.init
+    val ends        = indicies.tail
+    val totalLength = indicies.last
     Splitter(s =>
-      // we try to be "sensible" by ensuring that, if s has incorrect length,
-      // the number of values we return != lengths.length
-
-      if (s.length > totalLength) {
-        // if we have extra characters, add an extra column to contain them
-        // so we return lengths.length + 1 values, and
-        // hopefully the parsing framework will throw an error on this later
-        (starts, ends).zipped.map(s.substring(_,_)) ++ List(s.substring(totalLength, s.length))
-      }
-      else if (s.length < totalLength) {
-        // if we have less characters, we only return fields we have complete text for
-        // thus ensuring we return less values then lengths.length
-        // hopefully the parsing framework will throw an error on this later
-        val endsPresent = ends.takeWhile(_ <= s.length)
-        (starts, endsPresent).zipped.map(s.substring(_,_))
+      if (s.length != totalLength) {
+        Result.fail(s"Splitter.fixed expected $totalLength characters in string but got ${s.length} characters")
       }
       else {
-        (starts, ends).zipped.map(s.substring(_,_))
+        Result.safe((starts, ends).zipped.map(s.substring(_, _)))
       }
     )
   }

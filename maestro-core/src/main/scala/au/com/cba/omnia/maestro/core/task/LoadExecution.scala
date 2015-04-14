@@ -45,27 +45,40 @@ import au.com.cba.omnia.omnitool.Result
 import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
 import au.com.cba.omnia.maestro.core.filter.RowFilter
-import au.com.cba.omnia.maestro.core.scalding._
+import au.com.cba.omnia.maestro.core.scalding.{StatKeys, Paths, Errors, CombinedSequenceFile}
+import au.com.cba.omnia.maestro.core.scalding.ExecutionOps._
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.core.time.TimeSource
 import au.com.cba.omnia.maestro.core.validate.Validator
 
 /** Information about a Load */
 sealed trait LoadInfo {
-  /** Should we continue the load? */
-  def continue: Boolean = this match {
-    case LoadSuccess(_, _, _, _) => true
-    case _                       => false
-  }
+  /**
+    * `Catamorphism` for LoadInfo. Concise data deconstruction that can be used as an alternative to
+    * pattern matching, providing stronger coverage checks.
+    */
+  @inline final def fold[T](success: LoadSuccess => T, empty: T, failure: LoadFailure => T): T =
+    this match {
+      case ls@LoadSuccess(_, _, _, _) => success(ls)
+      case EmptyLoad                  => empty
+      case lf@LoadFailure(_, _, _, _) => failure(lf)
+    }
+
+  /** Should we continue the load?  We only continue if some data was loaded. */
+  def continue: Boolean = fold(_ => true, false, _ => false)
 
   /**
     * Returns the successfull load stats if we should continue the load.
     * Fails if we should not continue
     */
-  def withSuccess: Execution[LoadSuccess] = Execution.from(this match {
-    case ls@LoadSuccess(_, _, _, _) => ls
-    case _                          => throw new Exception(s"Unsuccessfull load. Load info = $this")
-  })
+  def withSuccess: Execution[LoadSuccess] = fold(
+    Execution.from(_),
+    Execution.fail(s"Emtpy load"),
+    lf => Execution.fail(s"Unsuccessfull load. Load info = $lf")
+  )
+
+  /** True iff this was an empty load. */
+  def isEmpty: Boolean = fold(_ => false, true, _ => false)
 }
 
 /** The Load had no new data to process */

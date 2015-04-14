@@ -41,7 +41,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Core configuration settings for loads, and factory functions for
 task specific configurations.
-</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig">MaestroConfig</a></dd><dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/8b5f51db6410fbe745cc32fd3fcf3e53c7ef6590//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/MaestroConfig.scala" target="_blank">MaestroConfig.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig">MaestroConfig</a></dd><dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/031ac2d92e34943dba390404d6a6499cfe69038e//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/MaestroConfig.scala" target="_blank">MaestroConfig.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -239,6 +239,58 @@ task specific configurations.
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig#dbRaw" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dbRaw:String"></a>
+      <a id="dbRaw:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dbRaw</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig#dbRawPrefix" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dbRawPrefix:String"></a>
+      <a id="dbRawPrefix:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dbRawPrefix</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig#dbStaging" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dbStaging:String"></a>
+      <a id="dbStaging:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dbStaging</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig#dbStagingPrefix" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dbStagingPrefix:String"></a>
+      <a id="dbStagingPrefix:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dbStagingPrefix</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
     </li><li name="au.com.cba.omnia.maestro.core.task.MaestroConfig#dirStructure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="dirStructure:String"></a>
       <a id="dirStructure:String"></a>
@@ -358,7 +410,7 @@ task specific configurations.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#tablename:String">self.tablename</a></span></span></span>, <span name="database">database: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#domain:String">s&quot;${source}_${domain}&quot;</a></span></span></span>, <span name="path">path: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>]</span>)</span><span class="result">: <a href="../hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>]</span>
+        <span class="name">hiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#tablename:String">self.tablename</a></span></span></span>, <span name="database">database: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#dbRaw:String">dbRaw</a></span></span></span>, <span name="path">path: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>]</span>)</span><span class="result">: <a href="../hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.hiveTable.A">A</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">An unpartitioned hive table with default database options.</p><div class="fullcomment"><div class="comment cmt"><p>An unpartitioned hive table with default database options.</p><p>Uses <code>$source_$domain</code> as the default database name, and by default has
@@ -477,7 +529,7 @@ no database path.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">partitionedHiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#tablename:String">self.tablename</a></span></span></span>, <span name="database">database: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#domain:String">s&quot;${source}_${domain}&quot;</a></span></span></span>, <span name="path">path: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>, <span name="arg2">arg2: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>)</span><span class="result">: <a href="../hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>)]</span>
+        <span class="name">partitionedHiveTable</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#tablename:String">self.tablename</a></span></span></span>, <span name="database">database: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#dbRaw:String">dbRaw</a></span></span></span>, <span name="path">path: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>]</span>, <span name="arg1">arg1: <span class="extype" name="scala.Predef.Manifest">Manifest</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>, <span name="arg2">arg2: <span class="extype" name="com.twitter.scalding.TupleSetter">TupleSetter</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>]</span>)</span><span class="result">: <a href="../hive/HiveTable.html" class="extype" name="au.com.cba.omnia.maestro.core.hive.HiveTable">HiveTable</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>, (<span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.B">B</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.task.MaestroConfig.partitionedHiveTable.A">A</span>)]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">A partitioned hive table with default database options.</p><div class="fullcomment"><div class="comment cmt"><p>A partitioned hive table with default database options.</p><p>Uses <code>$source_$domain</code> as the default database name, and by default has

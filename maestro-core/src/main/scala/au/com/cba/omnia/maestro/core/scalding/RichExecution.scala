@@ -17,7 +17,7 @@ package au.com.cba.omnia.maestro.core.scalding
 import scala.concurrent.Future
 
 import scalaz._, Scalaz._
-import scalaz.\&/.{This, That, Both}
+import scalaz.\&/.{These, This, That, Both}
 
 import com.twitter.scalding.{Config, Execution}
 
@@ -43,7 +43,7 @@ case class RichExecution[A](execution: Execution[A]) {
 case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execution] {
   implicit val monad: ResultantMonad[Execution] = ExecutionOps.ExecutionResultantMonad
 
-  /** Alias for [[fromHive]] */
+  /** Alias for [[fromHdfs]] */
   def hdfs[T](action: Hdfs[T]): Execution[T] =
     fromHdfs(action)
 
@@ -55,9 +55,10 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
     val stacktrace = Thread.currentThread.getStackTrace.tail
 
     Execution.getConfig.flatMap(config =>
-      Execution.fromFuture(_ =>
-        resultToFuture(hdfs.run(ConfHelper.getHadoopConf(config)), "HDFS operation failed", stacktrace)
-      )
+      Execution.fromFuture { _ =>
+        val result = hdfs.run(ConfHelper.getHadoopConf(config)).addMessage("HDFS operation failed")
+        resultToFuture(result, stacktrace)
+      }
     )
   }
 
@@ -79,9 +80,10 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
     Execution.getConfig.flatMap { config =>
       val hiveConf = new HiveConf(ConfHelper.getHadoopConf(config), this.getClass)
       modifyConf(hiveConf)
-      Execution.fromFuture[T](_ =>
-        resultToFuture(hive.run(hiveConf), "Hive operation failed", stacktrace)
-      )
+      Execution.fromFuture[T] { _ =>
+        val result = hive.run(hiveConf).addMessage("Hive Operation failed")
+        resultToFuture(result, stacktrace)
+      }
     }
   }
 
@@ -91,8 +93,7 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
      * main thread which includes the stack that called this function.
      */
     val stacktrace = Thread.currentThread.getStackTrace.tail
-
-    Execution.fromFuture[T](_ => resultToFuture(result, "Operation failed", stacktrace))
+    Execution.fromFuture[T](_ => resultToFuture(result, stacktrace))
   }
 
   /** Alias for [[fromEither]] */
@@ -109,21 +110,10 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
     * For errors it creates a top level exception and fills it in with the provided stack trace.
     * It also prefixes the exception message with the provided prefix.
     */
-  def resultToFuture[T](
-    result: Result[T], prefix: String, stacktrace: Array[StackTraceElement]
-  ): Future[T] =
+  def resultToFuture[T](result: Result[T], stacktrace: Array[StackTraceElement]): Future[T] =
     result.fold(
       Future.successful,
-      error => {
-        val (msg, cause) = error match {
-          case This(msg)     => (s"$prefix: $msg"            , null)
-          case That(ex)      => (s"$prefix: ${ex.getMessage}", ex)
-          case Both(msg, ex) => (s"$prefix: $msg"            , ex)
-        }
-        val exception = new Exception(msg, cause)
-        exception.setStackTrace(stacktrace)
-        Future.failed(exception)
-      }
+      error => Future.failed(ResultException.fromError(error, stacktrace))
     )
 }
 
@@ -148,7 +138,49 @@ trait ExecutionOps extends ToResultantMonadOps {
 
     def rBind[A, B](ma: Execution[A])(f: Result[A] => Execution[B]): Execution[B] =
       ma.map(Result.ok(_))
-        .recoverWith[Result[A]]{ case thr => Execution.from(Result.exception(thr)) }
+        .recoverWith[Result[A]]{ case thr => Execution.from(Result.exception[A](thr)) }
         .flatMap(f)       // flatMap over an Execution[Result[A]] that is overall equivalent to ma.
   }
+}
+
+/**
+  * Wraps up Results in a consistent way that also includes a stack trace of the place that produced
+  * the result.
+  */
+case class ResultException(msg: String, stacktrace: Array[StackTraceElement], exception: Option[Throwable] = None)
+    extends Exception(msg, exception.getOrElse(null)) {
+  setStackTrace(stacktrace)
+}
+
+/**
+  * These helper methods provide a lossy mapping from [[Result]] to an exception Execution can
+  * handle and a back again.
+  *
+  * These helper methods map any result to a ResultException. If the result already contains a
+  * ResultException that is used, otherwise a new ResultException is created with the provided stack
+  * trace.
+  * All three error cases from Result are mapped to a ResultException. However, when mapping from
+  * ResultException to Result only the `This` error case is recovered, where the exception is a
+  * ResultException.
+  */
+object ResultException {
+  val prefix = "Result failure"
+
+  /** Converts a Result Error to a ResultException. See object level comments for details. */
+  def fromError(error: These[String, Throwable], stacktrace: Array[StackTraceElement]): ResultException = 
+    error match {
+      case This(msg)     => ResultException(msg, stacktrace)
+      case That(ex)      => liftThrowable(ex, stacktrace)
+      case Both(msg, ex) => liftThrowable(ex, stacktrace, msg)
+    }
+
+  /** Converts an Exception to a ResultException. See object level comments for details. */
+  def liftThrowable(
+    throwable: Throwable, stacktrace: Array[StackTraceElement],
+    msg: String = prefix
+  ): ResultException =
+    throwable match {
+      case r: ResultException => r
+      case ex                 => ResultException(msg, stacktrace, Some(ex))
+    }
 }

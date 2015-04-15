@@ -14,11 +14,13 @@
 
 package au.com.cba.omnia.maestro.core.scalding
 
-import scala.util.Failure
+import scala.util.{Success, Failure}
 
 import scalaz._, Scalaz._
 
 import com.twitter.scalding.Execution
+
+import org.scalacheck.Arbitrary, Arbitrary._
 
 import org.specs2.matcher.Matcher
 
@@ -26,6 +28,8 @@ import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.hive.HiveSupport
 
 import au.com.cba.omnia.omnitool.Result
+import au.com.cba.omnia.omnitool.test.OmnitoolProperties.resultantMonad
+import au.com.cba.omnia.omnitool.test.Arbitraries._
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -45,6 +49,9 @@ object RichExecutionSpec extends ThermometerSpec with HiveSupport { def is = s2"
 Rich Execution
 ==============
 
+Execution operations should:
+  obey resultant monad laws (monad and plus laws)       ${resultantMonad.laws[Execution]}
+
 The RichExecution object should:
   provide useful exception information for `fromHive`   $hive
   provide useful exception information for `fromHdfs`   $hdfs
@@ -62,4 +69,40 @@ The RichExecution object should:
     (execution: Execution[A]) => execute(execution) must beLike {
       case Failure(t) => t.getStackTrace()(skip).getClassName must_== clazz.getClass.getName
     }
+
+  implicit def ExecutionAribtrary[A : Arbitrary]: Arbitrary[Execution[A]] =
+    Arbitrary(arbitrary[Either[Result[A], Either[Throwable, A]]].map {
+      case Left(r)         => Execution.fromResult(r)
+      case Right(Left(ex)) => Execution.from(throw ex)
+      case Right(Right(a)) => Execution.from(a)
+    })
+
+  implicit def ExecutionEqual: Equal[Execution[Int]] =
+    Equal.equal[Execution[Int]]((a, b) => {
+      val ex1 = execute(a)
+      val ex2 = execute(b)
+
+      /*
+       * Can't match the stack traces since for some of the exceptions the last part of the stack
+       * trace is in the thread. While for others it is the main thread.
+       */
+      (ex1, ex2) match {
+        case (Success(x), Success(y)) => x must_== y
+        case (Failure(x), Failure(y)) => (x, y) match {
+          case (r1: ResultException, r2: ResultException) => {
+            r1.msg        must_== r2.msg
+            r1.stacktrace must_== r2.stacktrace
+            (r1.exception, r2.exception) match {
+              case (Some(ex1), Some(ex2)) => ex1.getMessage must_== ex2.getMessage
+              case (None, None)           => true
+              case _                      => false
+            }
+          }
+          case (r: ResultException, t: Throwable)         => r.getCause.getMessage must_== t.getMessage
+          case (t: Throwable, r: ResultException)         => r.getCause.getMessage must_== t.getMessage
+          case (t1: Throwable, t2: Throwable)             => t1.getMessage == t2.getMessage
+        }
+        case _                        => false
+      }
+    })
 }

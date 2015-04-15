@@ -1,31 +1,31 @@
 package au.com.cba.omnia.maestro.core.hdfs
 
-import java.io.File
+import org.specs2.matcher.FileMatchers
 
 import au.com.cba.omnia.thermometer.core.{ThermometerSpec, Thermometer}, Thermometer._
 
-class GuardSpec extends ThermometerSpec { def is = s2"""
+class GuardSpec extends ThermometerSpec with FileMatchers { def is = s2"""
 
 HDFS Guard properties
 =====================
 
   expandPaths:
-    matches globbed dirs               $expandPaths_matchesGlobbedDirs
-    skips files                        $expandPaths_skipsFiles
-    skips processed dirs               $expandPaths_skipsProcessed
+    matches globbed dirs               $matchGlobbedDirs
+    skips files                        $skipFiles
+    skips processed dirs               $skipProcessed
 
   expandTransferredPaths:
-    skips uningested dirs              $expandTransferredPaths_skipsUningested
+    skips uningested dirs              $skipUningested
 
   listNonEmptyFiles:
-    lists non-empty files              $listNonEmptyFiles_listsNonEmptyFiles
-    skips subdirectories               $listNonEmptyFiles_skipsSubdirectories
+    lists non-empty files              $listNonEmptyFiles
+    skips subdirectories               $skipSubdirectories
 
   createFlagFile:
-    creates _PROCESSED                 $createFlagFile_createsPROCESSED
+    creates _PROCESSED                 $createPROCESSED
 """
 
-  def expandPaths_matchesGlobbedDirs = {
+  def matchGlobbedDirs = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       Guard.expandPaths(s"$dir/user/a*") must containTheSameElementsAs(List(
         s"file:$dir/user/a",
@@ -35,7 +35,7 @@ HDFS Guard properties
     }
   }
 
-  def expandPaths_skipsFiles = {
+  def skipFiles = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       Guard.expandPaths(s"$dir/user/b*") must containTheSameElementsAs(List(
         s"file:$dir/user/b1"
@@ -44,7 +44,7 @@ HDFS Guard properties
     }
   }
 
-  def expandPaths_skipsProcessed = {
+  def skipProcessed = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       Guard.expandPaths(s"$dir/user/c*") must containTheSameElementsAs(List(
         s"file:$dir/user/c",
@@ -54,7 +54,7 @@ HDFS Guard properties
     }
   }
 
-  def expandTransferredPaths_skipsUningested = {
+  def skipUningested = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       Guard.expandTransferredPaths(s"$dir/user/c*") must containTheSameElementsAs(List(
         s"file:$dir/user/c_transferred"
@@ -64,7 +64,7 @@ HDFS Guard properties
     }
   }
 
-  def listNonEmptyFiles_listsNonEmptyFiles = {
+  def listNonEmptyFiles = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       val paths = List(s"$dir/user/a", s"$dir/user/c")
       Guard.listNonEmptyFiles(paths) must containTheSameElementsAs(List(
@@ -74,7 +74,7 @@ HDFS Guard properties
     }
   }
 
-  def listNonEmptyFiles_skipsSubdirectories = {
+  def skipSubdirectories = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       val paths = List(s"$dir/user")
       Guard.listNonEmptyFiles(paths) must containTheSameElementsAs(List(
@@ -84,12 +84,12 @@ HDFS Guard properties
     }
   }
 
-  def createFlagFile_createsPROCESSED = {
+  def createPROCESSED = {
     withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) {
       val paths = List(s"$dir/user/a1", s"$dir/user/b1")
       Guard.createFlagFile(paths)
-      new File(s"$dir/user/a1/_PROCESSED").exists() must beTrue
-      new File(s"$dir/user/b1/_PROCESSED").exists() must beTrue
+      s"$dir/user/a1/_PROCESSED" must beAFilePath
+      s"$dir/user/b1/_PROCESSED" must beAFilePath
     }
   }
 }

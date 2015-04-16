@@ -50,5 +50,4 @@ object SplitterBenchmark extends PerformanceTest.OfflineReport {
       }}
     }
   }
-
 }

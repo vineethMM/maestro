@@ -16,38 +16,25 @@ package au.com.cba.omnia.maestro.benchmark.codec
 
 import org.scalameter.api.{PerformanceTest, Gen}
 
-import au.com.cba.omnia.maestro.core.codec.{Encode, Decode}
+import au.com.cba.omnia.maestro.core.codec.Tag
 import au.com.cba.omnia.maestro.macros.Macros
 
 import au.com.cba.omnia.maestro.benchmark.thrift.{Struct10, Struct20, Struct30, Generators}
 import au.com.cba.omnia.maestro.benchmark.thrift.Implicits._
 
-object CodecBenchmark extends PerformanceTest.OfflineReport {
-  def testDecode[A : Decode](gen: Gen[Array[List[String]]]) =
+object TagBenchmark extends PerformanceTest.OfflineReport {
+  def testTag[A : Tag](gen: Gen[Array[List[String]]]) =
     using(gen) in { rows => {
       var i = 0
       while (i < rows.length) {
-        Decode.decode[A]("", rows(i))
+        Tag.tag[A](rows(i))
         i = i+1
       }
     }}
 
-  def testEncode[A : Encode](gen: Gen[Array[A]]) =
-    using(gen) in { values => {
-      var i = 0
-      while (i < values.length) {
-        Encode.encode[A]("", values(i))
-        i = i+1
-      }
-    }}
-
-  performance of "Codecs" in {
-    measure method "decode[Struct10]" in testDecode[Struct10](Generators.struct10Rows)
-    measure method "decode[Struct20]" in testDecode[Struct20](Generators.struct20Rows)
-    measure method "decode[Struct30]" in testDecode[Struct30](Generators.struct30Rows)
-
-    measure method "encode[Struct10]" in testEncode[Struct10](Generators.struct10Values)
-    measure method "encode[Struct20]" in testEncode[Struct20](Generators.struct20Values)
-    measure method "encode[Struct30]" in testEncode[Struct30](Generators.struct30Values)
+  performance of "Tag" in {
+    measure method "tag[Struct10]" in testTag[Struct10](Generators.struct10Rows)
+    measure method "tag[Struct20]" in testTag[Struct20](Generators.struct20Rows)
+    measure method "tag[Struct30]" in testTag[Struct30](Generators.struct30Rows)
   }
 }

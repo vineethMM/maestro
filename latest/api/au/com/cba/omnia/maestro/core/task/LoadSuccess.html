@@ -40,7 +40,7 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The number of rows which failed to load was within acceptable limits
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/c7f7fb2a04c206b104a738c9510412f788f8f4f2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0fdf42738f90c89897cc8cf621ae7f8e5e36a228//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/task/LoadExecution.scala" target="_blank">LoadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -224,7 +224,7 @@
         <span class="name">continue</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Should we continue the load?</p><div class="fullcomment"><div class="comment cmt"><p>Should we continue the load?</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a></dd></dl></div>
+      <p class="shortcomment cmt">Should we continue the load?  We only continue if some data was loaded.</p><div class="fullcomment"><div class="comment cmt"><p>Should we continue the load?  We only continue if some data was loaded.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -270,6 +270,24 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo#fold" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fold[T](success:au.com.cba.omnia.maestro.core.task.LoadSuccess=&gt;T,empty:T,failure:au.com.cba.omnia.maestro.core.task.LoadFailure=&gt;T):T"></a>
+      <a id="fold[T]((LoadSuccess)⇒T,T,(LoadFailure)⇒T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fold</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="success">success: (<a href="" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadSuccess">LoadSuccess</a>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo.fold.T">T</span></span>, <span name="empty">empty: <span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo.fold.T">T</span></span>, <span name="failure">failure: (<a href="LoadFailure.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadFailure">LoadFailure</a>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo.fold.T">T</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo.fold.T">T</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"><code>Catamorphism</code> for LoadInfo.</p><div class="fullcomment"><div class="comment cmt"><p><code>Catamorphism</code> for LoadInfo. Concise data deconstruction that can be used as an alternative to
+pattern matching, providing stronger coverage checks.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@inline</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -283,6 +301,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.LoadInfo#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isEmpty:Boolean"></a>
+      <a id="isEmpty:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isEmpty</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">True iff this was an empty load.</p><div class="fullcomment"><div class="comment cmt"><p>True iff this was an empty load.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadInfo">LoadInfo</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>

@@ -15,8 +15,71 @@
 
 #@namespace scala au.com.cba.omnia.maestro.benchmark.thrift
 
-struct Basic {
-  1  : string isString
-  2  : i32 isInt
-  3  : i64 isLong
+struct Struct10 {
+  1  : string str1
+  2  : string str2
+  3  : string str3
+  4  : i32    int1
+  5  : i64    long1
+  6  : string str4
+  7  : string str5
+  8  : string str6
+  9  : i32    int2
+  10 : i64    long2
+}
+
+struct Struct20 {
+  1  : string str1
+  2  : string str2
+  3  : string str3
+  4  : i32    int1
+  5  : i64    long1
+  6  : string str4
+  7  : string str5
+  8  : string str6
+  9  : i32    int2
+  10 : i64    long2
+  11 : string str7
+  12 : string str8
+  13 : string str9
+  14 : i32    int3
+  15 : i64    long3
+  16 : string str10
+  17 : string str11
+  18 : string str12
+  19 : i32    int4
+  20 : i64    long4
+}
+
+struct Struct30 {
+  1  : string str1
+  2  : string str2
+  3  : string str3
+  4  : i32    int1
+  5  : i64    long1
+  6  : string str4
+  7  : string str5
+  8  : string str6
+  9  : i32    int2
+  10 : i64    long2
+  11 : string str7
+  12 : string str8
+  13 : string str9
+  14 : i32    int3
+  15 : i64    long3
+  16 : string str10
+  17 : string str11
+  18 : string str12
+  19 : i32    int4
+  20 : i64    long4
+  21 : string str13
+  22 : string str14
+  23 : string str15
+  24 : i32    int5
+  25 : i64    long5
+  26 : string str16
+  27 : string str17
+  28 : string str18
+  29 : i32    int6
+  30 : i64    long6
 }

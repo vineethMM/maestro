@@ -35,13 +35,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">RichExecutionObject</span><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">RichExecutionObject</span><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/c151a05c8068d859e0d2414f05f02a97f502d01f//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/c7f7fb2a04c206b104a738c9510412f788f8f4f2//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>], <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject"><span>RichExecutionObject</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject"><span>RichExecutionObject</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.omnitool.ResultantOps"><span>ResultantOps</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -224,6 +224,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="error[A&lt;:&lt;?&gt;](message:&lt;?&gt;,t:&lt;?&gt;):M[A]"></a>
+      <a id="error[A](String,Throwable):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">error</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="t">t: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.error.A">A</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#exception" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="exception[A&lt;:&lt;?&gt;](t:&lt;?&gt;):M[A]"></a>
+      <a id="exception[A](Throwable):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">exception</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="t">t: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.exception.A">A</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#exec" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="exec:com.twitter.scalding.Execution.type"></a>
       <a id="exec:Execution.type"></a>
@@ -237,6 +263,19 @@
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#fail" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fail[A&lt;:&lt;?&gt;](message:&lt;?&gt;):M[A]"></a>
+      <a id="fail[A](String):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fail</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.fail.A">A</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -256,6 +295,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#forbidden" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="forbidden(action:M[Boolean],message:String):M[Unit]"></a>
+      <a id="forbidden(Execution[Boolean],String):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">forbidden</span><span class="params">(<span name="action">action: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromEither" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="fromEither[T](disjunction:=&gt;scalaz.\/[String,T]):com.twitter.scalding.Execution[T]"></a>
       <a id="fromEither[T](⇒\/[String,T]):Execution[T]"></a>
@@ -322,6 +374,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#guard" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="guard(ok:Boolean,message:String):M[Unit]"></a>
+      <a id="guard(Boolean,String):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">guard</span><span class="params">(<span name="ok">ok: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#hdfs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="hdfs[T](action:au.com.cba.omnia.permafrost.hdfs.Hdfs[T]):com.twitter.scalding.Execution[T]"></a>
       <a id="hdfs[T](Hdfs[T]):Execution[T]"></a>
@@ -334,7 +399,7 @@
         <span class="name">hdfs</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hdfs.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.hdfs.T">T</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Alias for <a href="#fromHive[T](hive:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromHive">fromHive</a></p>
+      <p class="shortcomment cmt">Alias for <a href="#fromHdfs[T](hdfs:au.com.cba.omnia.permafrost.hdfs.Hdfs[T]):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromHdfs">fromHdfs</a></p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#hive" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="hive[T](action:au.com.cba.omnia.ebenezer.scrooge.hive.Hive[T],modifyConf:org.apache.hadoop.hive.conf.HiveConf=&gt;Unit):com.twitter.scalding.Execution[T]"></a>
       <a id="hive[T](Hive[T],(HiveConf)⇒Unit):Execution[T]"></a>
@@ -361,6 +426,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#mandatory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mandatory(action:M[Boolean],message:String):M[Unit]"></a>
+      <a id="mandatory(Execution[Boolean],String):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mandatory</span><span class="params">(<span name="action">action: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#monad" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="monad:au.com.cba.omnia.omnitool.ResultantMonad[com.twitter.scalding.Execution]"></a>
+      <a id="monad:ResultantMonad[Execution]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">monad</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantMonad" class="extype" target="_top">ResultantMonad</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject">RichExecutionObject</a> → ResultantOps</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -400,29 +491,42 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#result" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="result[T](action:=&gt;au.com.cba.omnia.omnitool.Result[T]):com.twitter.scalding.Execution[T]"></a>
-      <a id="result[T](⇒Result[T]):Execution[T]"></a>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#prevent" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="prevent(fail:Boolean,message:String):M[Unit]"></a>
+      <a id="prevent(Boolean,String):Execution[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">result</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="action">action: ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.result.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.result.T">T</span>]</span>
+        <span class="name">prevent</span><span class="params">(<span name="fail">fail: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Alias for <a href="#fromResult[T](result:=&gt;au.com.cba.omnia.omnitool.Result[T]):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#fromResult">fromResult</a></p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#resultToFuture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="resultToFuture[T](result:au.com.cba.omnia.omnitool.Result[T],prefix:String,stacktrace:Array[StackTraceElement]):scala.concurrent.Future[T]"></a>
-      <a id="resultToFuture[T](Result[T],String,Array[StackTraceElement]):Future[T]"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#result" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="result[A&lt;:&lt;?&gt;](v:&lt;?&gt;):M[A]"></a>
+      <a id="result[A](⇒Result[A]):Execution[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">resultToFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="result">result: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.resultToFuture.T">T</span>]</span>, <span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="stacktrace">stacktrace: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.concurrent.Future" class="extype" target="_top">Future</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.resultToFuture.T">T</span>]</span>
+        <span class="name">result</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.result.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.result.A">A</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject#resultToFuture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="resultToFuture[T](result:au.com.cba.omnia.omnitool.Result[T],stacktrace:Array[StackTraceElement]):scala.concurrent.Future[T]"></a>
+      <a id="resultToFuture[T](Result[T],Array[StackTraceElement]):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">resultToFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="result">result: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.resultToFuture.T">T</span>]</span>, <span name="stacktrace">stacktrace: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.concurrent.Future" class="extype" target="_top">Future</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject.resultToFuture.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Helper function to convert a result to a future.</p><div class="fullcomment"><div class="comment cmt"><p>Helper function to convert a result to a future.</p><p>For errors it creates a top level exception and fills it in with the provided stack trace.
@@ -441,6 +545,19 @@ It also prefixes the exception message with the provided prefix.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#value" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="value[A](v:=&gt;A):M[A]"></a>
+      <a id="value[A](⇒A):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">value</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.value.A">A</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.value.A">A</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -515,6 +632,8 @@ It also prefixes the exception message with the provided prefix.
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a></h3>
+            </div><div class="parent" name="au.com.cba.omnia.omnitool.ResultantOps">
+              <h3>Inherited from <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">

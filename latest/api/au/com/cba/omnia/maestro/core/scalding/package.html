@@ -98,7 +98,7 @@
       </h4>
       <p class="comment cmt">The cascading scheme for CombinedSequenceFile</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ExecutionOpsextendsAnyRef"></a>
+      <a id="ExecutionOpsextendsToResultantMonadOps"></a>
       <a id="ExecutionOps:ExecutionOps"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -106,7 +106,7 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ExecutionOps.html"><span class="name">ExecutionOps</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="ExecutionOps.html"><span class="name">ExecutionOps</span></a><span class="result"> extends <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ToResultantMonadOps" class="extype" target="_top">ToResultantMonadOps</a></span>
       </span>
       </h4>
       
@@ -162,6 +162,20 @@
       </span>
       </h4>
       <p class="comment cmt">Create an object which extends this trait to create a main class using the execution api.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ResultException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultExceptionextendsExceptionwithProductwithSerializable"></a>
+      <a id="ResultException:ResultException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultException.html"><span class="name">ResultException</span></a><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="stacktrace">stacktrace: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>, <span name="exception">exception: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Throwable">Throwable</span>] = <span class="symbol">scala.None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Wraps up Results in a consistent way that also includes a stack trace of the place that produced
+the result.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichExecution[A]extendsProductwithSerializable"></a>
       <a id="RichExecution[A]:RichExecution[A]"></a>
@@ -176,7 +190,7 @@
       </h4>
       <p class="comment cmt">Pimps an Execution instance.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichExecutionObjectextendsProductwithSerializable"></a>
+      <a id="RichExecutionObjectextendsResultantOps[com.twitter.scalding.Execution]withProductwithSerializable"></a>
       <a id="RichExecutionObject:RichExecutionObject"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -184,7 +198,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RichExecutionObject.html"><span class="name">RichExecutionObject</span></a><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="RichExecutionObject.html"><span class="name">RichExecutionObject</span></a><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       <p class="comment cmt">Pimps the Execution object.</p>
@@ -364,6 +378,20 @@
       </span>
       </h4>
       <p class="comment cmt">Executions that return paths</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ResultException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultException"></a>
+      <a id="ResultException:ResultException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultException$.html"><span class="name">ResultException</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">These helper methods provide a lossy mapping from <span class="extype" name="Result">Result</span> to an exception Execution can
+handle and a back again.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.StatKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StatKeys"></a>
       <a id="StatKeys:StatKeys"></a>

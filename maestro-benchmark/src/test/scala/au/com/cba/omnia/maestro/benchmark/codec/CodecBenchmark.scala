@@ -12,52 +12,51 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.benchmark
-package codec
+package au.com.cba.omnia.maestro.benchmark.codec
 
-import au.com.cba.omnia.maestro.benchmark.thrift._
-import au.com.cba.omnia.maestro.core.codec._
-import au.com.cba.omnia.maestro.macros._
+import java.io.Serializable
 
-import scalaz._, Scalaz._
+import au.com.cba.omnia.maestro.benchmark.thrift.Basic
+import au.com.cba.omnia.maestro.core.codec.{Encode, Decode}
+import au.com.cba.omnia.maestro.macros.Macros
 
-import org.scalameter.api._
+import org.scalameter.api.{PerformanceTest, Gen}
 
 
-object Data extends java.io.Serializable {
+object Data extends Serializable {
   implicit val BasicDecode: Decode[Basic] =
     Macros.mkDecode[Basic]
 
   implicit val BasicEncode: Encode[Basic] =
     Macros.mkEncode[Basic]
 
-  def data(n: Int): List[Basic] = (1 to n).toList.map(n =>
+  def data(n: Int): Array[Basic] = (1 to n).map(n =>
     Basic("basic-" + n, n, Int.MaxValue.toLong + n.toLong)
-  )
+  ).toArray
 
-  def source(n: Int): List[DecodeSource] =
-    data(n).map(d => ValDecodeSource(Encode.encode(d)))
+  def source(n: Int): Array[List[String]] =
+    data(n).map(d => Encode.encode("", d))
 }
 
-object CodecBenchmark extends PerformanceTest.Microbenchmark {
+object CodecBenchmark extends PerformanceTest.OfflineRegressionReport {
   import Data._
 
-  val sizes = Gen.range("size")(10000, 20000, 10000)
+  val sizes = Gen.range("size")(4000, 20000, 4000)
 
   val toEncode = sizes.map(data(_))
 
   val toDecode = sizes.map(source(_))
 
   performance of "Codecs" in {
-    measure method "encode" in {
-      using(toEncode) in { e =>
-        e.map(b => Encode.encode(b))
+    measure method "decode" in {
+      using(toDecode) in { d =>
+        d.map(r => Decode.decode[Basic]("", r))
       }
     }
 
-    measure method "decode" in {
-      using(toDecode) in { d =>
-        d.map(Decode.decode[Basic])
+    measure method "encode" in {
+      using(toEncode) in { e =>
+        e.map(b => Encode.encode[Basic]("", b))
       }
     }
   }

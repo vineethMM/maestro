@@ -170,7 +170,7 @@ object build extends Build {
     ++ uniformThriftSettings
     ++ Seq[Sett](
       libraryDependencies ++= Seq(
-        "com.github.axel22" %% "scalameter" % "0.4"
+        "com.storm-enroute" %% "scalameter" % "0.6"
       ) ++ depend.testing()
     , testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
     , parallelExecution in Test := false

@@ -71,7 +71,7 @@ object Decode extends TypeClassCompanion[Decode] {
 
   /**
     * Creates a Decode that will return `a`
-    * 
+    *
     * Unlike `ok` this does not use call by name.
     */
   def strict[A](a: A): Decode[A] =

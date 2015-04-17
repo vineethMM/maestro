@@ -14,7 +14,7 @@
 
 package au.com.cba.omnia.maestro.benchmark.thrift
 
-import au.com.cba.omnia.maestro.core.codec.{Encode, Decode}
+import au.com.cba.omnia.maestro.core.codec.{Encode, Decode, Tag}
 import au.com.cba.omnia.maestro.macros.Macros
 
 /** Contains implicits for thrift types */
@@ -36,4 +36,14 @@ object Implicits extends Serializable {
 
   implicit val Struct30Encode: Encode[Struct30] =
     Macros.mkEncode[Struct30]
+
+  implicit val Struct10Tag: Tag[Struct10] =
+    Macros.mkTag[Struct10]
+
+  implicit val Struct20Tag: Tag[Struct20] =
+    Macros.mkTag[Struct20]
+
+  implicit val Struct30Tag: Tag[Struct30] =
+    Macros.mkTag[Struct30]
+
 }

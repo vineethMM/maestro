@@ -169,9 +169,11 @@ object build extends Build {
     ++ uniform.project("maestro-benchmark", "au.com.cba.omnia.maestro.benchmark")
     ++ uniformThriftSettings
     ++ Seq[Sett](
-      libraryDependencies ++= Seq(
-        "com.storm-enroute" %% "scalameter" % "0.6"
-      ) ++ depend.testing()
+      libraryDependencies ++=
+        depend.hadoopClasspath ++
+        depend.testing() ++ Seq(
+          noHadoop("com.storm-enroute" %% "scalameter" % "0.6")
+        )
     , testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
     , parallelExecution in Test := false
     , logBuffered := false

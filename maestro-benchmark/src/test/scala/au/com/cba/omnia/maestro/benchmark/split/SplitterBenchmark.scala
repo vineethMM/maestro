@@ -22,21 +22,6 @@ import au.com.cba.omnia.maestro.core.split.Splitter
 
 import au.com.cba.omnia.maestro.benchmark.thrift.Generators
 
-object Data extends Serializable {
-  def mkDelimited(rows: Int, fields: Int, delimiter: String): Array[String] =
-    (0 until rows).map(row =>
-      (0 until fields).map(field => s"r$row-f$field").mkString(delimiter)
-    ).toArray
-
-  val rows   = Gen.range("rows")(10000, 30000, 10000)
-  val fields = Gen.range("fields")(10, 30, 10)
-
-  def delimited(delimiter: String): Gen[Array[String]] = for {
-    numRows   <- rows
-    numFields <- fields
-  } yield mkDelimited(numRows, numFields, delimiter)
-}
-
 object SplitterBenchmark extends PerformanceTest.OfflineReport {
   def testDelimited(rows: Gen[Array[List[String]]]) =
     using (rows.map(_.map(_.mkString("|")))) in { rows => {

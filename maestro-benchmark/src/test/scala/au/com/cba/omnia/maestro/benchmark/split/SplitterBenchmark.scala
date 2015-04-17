@@ -20,6 +20,8 @@ import org.scalameter.api.{PerformanceTest, Gen}
 
 import au.com.cba.omnia.maestro.core.split.Splitter
 
+import au.com.cba.omnia.maestro.benchmark.thrift.Generators
+
 object Data extends Serializable {
   def mkDelimited(rows: Int, fields: Int, delimiter: String): Array[String] =
     (0 until rows).map(row =>
@@ -36,16 +38,19 @@ object Data extends Serializable {
 }
 
 object SplitterBenchmark extends PerformanceTest.OfflineReport {
+  def testDelimited(rows: Gen[Array[List[String]]]) =
+    using (rows.map(_.map(_.mkString("|")))) in { rows => {
+      val splitter = Splitter.delimited("|")
+      var i = 0
+      while (i < rows.length) {
+        splitter.run(rows(i))
+        i = i+1
+      }
+    }}
+
   performance of "Splitter" in {
-    measure method "delimited" in {
-      using (Data.delimited("|")) in { rows => {
-        val splitter = Splitter.delimited("|")
-        var i = 0
-        while (i < rows.length) {
-          splitter.run(rows(i))
-          i = i+1
-        }
-      }}
-    }
+    measure method "delimited[Struct10]" in testDelimited(Generators.struct10Rows)
+    measure method "delimited[Struct20]" in testDelimited(Generators.struct20Rows)
+    measure method "delimited[Struct30]" in testDelimited(Generators.struct30Rows)
   }
 }

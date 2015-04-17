@@ -23,7 +23,7 @@ import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.test.Records
 
-import au.com.cba.omnia.maestro.example.thrift.Customer
+import au.com.cba.omnia.maestro.example.thrift.{Customer, Account}
 
 object CustomerJobSpec
   extends ThermometerSpec
@@ -38,8 +38,8 @@ Customer Job
 """
 
   def pipeline = {
-    val actualReader   = ParquetThermometerRecordReader[Customer]
-    val expectedReader = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val actualReader   = ParquetThermometerRecordReader[Account]
+    val expectedReader = delimitedThermometerRecordReader[Account]('|', "null", implicitly[Decode[Account]])
     val dbRawPrefix    = "dr"
 
     withEnvironment(path(getClass.getResource("/customer").toString)) {
@@ -52,8 +52,8 @@ Customer Job
       executesSuccessfully(CustomerJob.job, args) must_== JobFinished
 
       facts(
-        hiveWarehouse </> s"${dbRawPrefix}_customer_customer.db" </> "by_date" ==>
-          recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "by-date")
+        hiveWarehouse </> s"${dbRawPrefix}_customer_customer.db" </> "account" ==>
+          recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "account")
       )
     }
   }

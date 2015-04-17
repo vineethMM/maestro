@@ -15,9 +15,13 @@
 import sbt._
 import Keys._
 
+
 import com.twitter.scrooge.ScroogeSBT._
 
 import sbtassembly.AssemblyPlugin.autoImport.assembly
+
+import sbtunidoc.Plugin.{ScalaUnidoc, UnidocKeys}
+import UnidocKeys.{unidoc, unidocProjectFilter}
 
 import au.com.cba.omnia.uniform.core.standard.StandardProjectPlugin._
 import au.com.cba.omnia.uniform.core.version.UniqueVersionPlugin._
@@ -57,6 +61,7 @@ object build extends Build {
     ++ Seq[Sett](
          publishArtifact := false
        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
+       , unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(example, schema, benchmark)
     )
   , aggregate = Seq(core, macros, api, test, schema)
   )
@@ -155,6 +160,8 @@ object build extends Build {
            scalikejdbc % "test"
          )
        , parallelExecution in Test := false
+       , sources in doc in Compile := List() 
+       , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )
   ).dependsOn(core)
    .dependsOn(macros)

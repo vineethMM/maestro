@@ -21,8 +21,8 @@ import com.twitter.scalding.{Config, Execution}
 import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 import au.com.cba.omnia.maestro.api._, Maestro._
-
-import au.com.cba.omnia.maestro.example.thrift.Customer
+import au.com.cba.omnia.maestro.example.thrift.{Customer, Account}
+import au.com.cba.omnia.maestro.macros.automap
 
 /** Configuration for a customer execution example */
 case class CustomerJobConfig(config: Config) {
@@ -34,23 +34,32 @@ case class CustomerJobConfig(config: Config) {
   )
   val upload    = maestro.upload()
   val load      = maestro.load[Customer](none = "null")
-  val dateTable = maestro.partitionedHiveTable[Customer, (String, String, String)](
-    partition   = Partition.byDate(Fields[Customer].EffectiveDate),
-    tablename   = "by_date"
+  val acctTable = maestro.partitionedHiveTable[Account, (String, String, String)](
+    partition   = Partition.byDate(Fields[Account].EffectiveDate),
+    tablename   = "account"
   )
 }
 
 /** Customer file load job with an execution for the main program */
 object CustomerJob extends MaestroJob {
-  def job: Execution[JobStatus] = for {
-    conf             <- Execution.getConfig.map(CustomerJobConfig(_))
-    uploadInfo       <- upload(conf.upload)
-    sources          <- uploadInfo.withSources
-    (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
-    loadSuccess      <- loadInfo.withSuccess
-    count            <- viewHive(conf.dateTable, pipe)
-    if count == loadSuccess.actual
-  } yield JobFinished
+  def job: Execution[JobStatus] = {
+    @automap def customerToAccount (x: Customer): Account = (
+      id           := x.acct,
+      customer     := x.id,
+      balance      := x.balance / 100,
+      balanceCents := x.balance % 100
+    )
+    for {
+      conf             <- Execution.getConfig.map(CustomerJobConfig(_))
+      uploadInfo       <- upload(conf.upload)
+      sources          <- uploadInfo.withSources
+      (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+      acctPipe          = pipe.map(customerToAccount)
+      loadSuccess      <- loadInfo.withSuccess
+      count            <- viewHive(conf.acctTable, acctPipe)
+      if count == loadSuccess.actual
+    } yield JobFinished
+  }
 
   def attemptsExceeded = Execution.from(JobNeverReady)   // Elided in the README
 }

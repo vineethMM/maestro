@@ -14,8 +14,6 @@
 
 package au.com.cba.omnia.maestro.benchmark.split
 
-import java.io.Serializable
-
 import org.scalameter.api.{PerformanceTest, Gen}
 
 import au.com.cba.omnia.maestro.core.split.Splitter

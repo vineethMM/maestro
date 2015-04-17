@@ -65,7 +65,7 @@ object Generators extends Serializable {
 
   /** Generator for the number of rows we benchmark */
   val rows: Gen[Int] =
-    Gen.range("rows")(10000, 30000, 10000)
+    Gen.range("rows")(10000, 30000, 5000)
 
   /** Generator for [[Struct10]]s */
   val struct10Values: Gen[Array[Struct10]] =

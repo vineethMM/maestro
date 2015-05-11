@@ -14,13 +14,19 @@
 
 package au.com.cba.omnia.maestro.core.task
 
+import org.specs2.matcher.Matcher
+import org.specs2.execute.{Result => SpecResult}
+
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource, ThermometerSpec}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.hive.HiveSupport
 
 import au.com.cba.omnia.ebenezer.ParquetLogging
+import au.com.cba.omnia.ebenezer.scrooge.hive._
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
+
+import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.hive.{HiveTable, UnpartitionedHiveTable}
@@ -30,7 +36,7 @@ import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 private object ViewExec extends ViewExecution
 
-object ViewExecutionSpec extends ThermometerSpec with HiveSupport  with ParquetLogging { def is = s2"""
+object ViewExecutionSpec extends ThermometerSpec with HiveSupport with ParquetLogging { def is = s2"""
 
 View execution properties
 =========================
@@ -40,6 +46,8 @@ View execution properties
     view executions can be composed with zip                $zipped
 
     can write to a hive table using execution monad         $normalHive
+    can overwrite to a hive table using execution monad     $normalHiveOverwrite
+    can overwrite to an already created hive table          $createdHiveOverwrite
     can append to a hive table using execution monad        $normalHiveAppend
     view hive executions can be composed with flatMap       $flatMappedHive
     view hive executions can be composed with zip           $zippedHive
@@ -79,6 +87,77 @@ View execution properties
       hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
       hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile
     )
+  }
+
+  def normalHiveOverwrite = {
+    val exec = for {
+      c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source2, false)
+    } yield (c1, c2)
+
+    executesSuccessfully(exec) must_== ((4, 2))
+
+    facts(
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2),
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2)
+    )
+
+    val x = for {
+      dbs <- Hive.query("SHOW DATABASES")
+    } yield dbs
+
+    x must beValue(List("normalhive"))
+
+    val ts = for {
+      tbs <- Hive.queries(List("USE normalhive", "SHOW TABLES"))
+    } yield tbs.last
+
+    ts must beValue(List("by_first"))
+
+    val q = for {
+      result <- Hive.queries(List("USE normalhive", "SELECT * FROM by_first"))
+    } yield result.last.size
+
+    q must beValue(4)
+  }
+
+  def createdHiveOverwrite = {
+
+    val init = for {
+      _  <- Hive.createParquetTable[StringPair]("normalHive", "by_first", List("partition_first" -> "string"), None)
+    } yield ()
+
+    init must beValue(())
+
+    val exec = for {
+      c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source2, false)
+    } yield (c1, c2)
+
+    executesSuccessfully(exec) must_== ((4, 2))
+
+    facts(
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2),
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2)
+    )
+
+    val x = for {
+      dbs <- Hive.query("SHOW DATABASES")
+    } yield dbs
+
+    x must beValue(List("normalhive"))
+
+    val ts = for {
+      tbs <- Hive.queries(List("USE normalhive", "SHOW TABLES"))
+    } yield tbs.last
+
+    ts must beValue(List("by_first"))
+
+    val q = for {
+      result <- Hive.queries(List("USE normalhive", "SELECT * FROM by_first"))
+    } yield result.last.size
+
+    q must beValue(4)
   }
 
   def normalHiveAppend = {
@@ -189,5 +268,18 @@ View execution properties
     StringPair("B", "2")
   )
 
+  def source2 = ThermometerSource(data2)
+  def data2 = List(
+    StringPair("B", "11"),
+    StringPair("B", "22")
+  )
+
   def matchesFile = PathFactoid((context, path) => !context.glob(path).isEmpty)
+  def noMatch = PathFactoid((context, path) => context.glob(path).isEmpty)
+
+  def beResult[A](expected: Result[A]): Matcher[Hive[A]] =
+    (h: Hive[A]) => h.run(hiveConf) must_== expected
+
+  def beValue[A](expected: A): Matcher[Hive[A]] =
+    beResult(Result.ok(expected))
 }

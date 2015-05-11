@@ -15,8 +15,10 @@
 package au.com.cba.omnia.maestro.core.hive
 
 import scalaz._, Scalaz._
+import scalaz.syntax.monad._
 
 import org.apache.hadoop.fs.Path
+import org.apache.hadoop.fs.Path._
 
 import org.apache.hadoop.hive.conf.HiveConf
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars.METASTOREWAREHOUSE
@@ -70,18 +72,88 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
     PartitionHiveParquetScroogeSource[A](database, table, partitionMetadata)
 
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
-    def modifyConfig(config: Config) =
-      if (append) ConfHelper.createUniqueFilenames(config)
-      else        config
+    def modifyConfig(config: Config) = ConfHelper.createUniqueFilenames(config)
 
-    val execution = 
+    // Creates the hive table and gets its path
+    val setup = Execution.fromHive(
+      Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_))) >>
+      Hive.getPath(database, table)
+    )
+
+    // Runs the scalding job and gets the counters
+    def write(path: Option[String]) =
       pipe
-        .map(v => partition.extract(v) -> v)
-        .writeExecution(PartitionHiveParquetScroogeSink[B, A](database, table, partitionMetadata, externalPath, append))
-        .getAndResetCounters
-        .map(_._2)
+      .map(v => partition.extract(v) -> v)
+      .writeExecution(PartitionHiveParquetScroogeSink[B, A](database, table, partitionMetadata, path, append))
+      .getAndResetCounters
+      .map(_._2)
 
-    execution.withSubConfig(modifyConfig)
+    def find(dir: Path, globPattern: String = "*") = {
+      def filesDirs(dir: Path) = for {
+        files    <- Hdfs.files(dir, globPattern)
+        allFiles <- Hdfs.files(dir)
+        dirs     <- allFiles.filterM(Hdfs.isDirectory)
+      } yield (files, dirs)
+
+      def inner(dirs: List[Path]): Hdfs[(List[Path], List[Path])] = {
+        val noFiles = (List[Path](), List[Path]())
+
+        def f(b: (List[Path], List[Path]), dir: Path) = for {
+          fds <- filesDirs(dir)
+          files = b._1 ++ fds._1
+          dirs  = b._2 ++ fds._2
+        } yield (files, dirs)
+
+        if (dirs.isEmpty) {
+          Hdfs.value(noFiles)
+        } else {
+          for {
+            fds1 <- dirs.foldLeftM(noFiles)(f)
+            fds2 <- inner(fds1._2)
+          } yield (fds1._1 ++ fds2._1, fds2._2)
+        }
+      }
+
+      inner(List(dir)).map{_._1}
+    }
+
+    if (append) {
+      for {
+        _        <- setup
+        counters <- write(externalPath).withSubConfig(modifyConfig)
+      } yield counters
+    } else {
+      // https://github.com/CommBank/maestro/issues/382
+
+      for {
+        dst <- setup
+
+        // Get list of original parquet files
+        oldFiles <- Execution.fromHdfs(find(dst, "[^_]*"))
+
+        // Run job
+        counters <- write(externalPath)
+
+        // Updated list of all parquet files, including obsolete
+        allFiles <- Execution.fromHdfs(find(dst, "[^_]*"))
+
+        // Files which were created by this job
+        newFiles = allFiles.filterNot(oldFiles.toSet)
+
+        // Partitions which were updated by this job
+        newPartitions = newFiles.map{case p => p.getParent()}.distinct
+
+        // Obsolete files: existed prior to this job, in partitions which have been updated
+        toDelete = oldFiles.filter{case p => newPartitions.contains(p.getParent)}
+
+        // Delete obsolete files
+        _ <- toDelete.map{case p => Execution.fromHdfs(Hdfs.delete(p))}.sequence
+
+        // Repair metadata for hive table
+        _ <- Execution.fromHive(Hive.query(s"MSCK REPAIR TABLE $table"))
+
+      } yield counters
+    }
   }
 }
 

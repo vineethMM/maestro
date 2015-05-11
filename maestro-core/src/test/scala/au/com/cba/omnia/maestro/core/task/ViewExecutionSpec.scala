@@ -81,17 +81,17 @@ View execution properties
     )
   }
 
-    def normalHiveAppend = {
-      val exec = for {
-        c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
-        c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
-      } yield (c1, c2)
+  def normalHiveAppend = {
+    val exec = for {
+      c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+    } yield (c1, c2)
 
-      executesSuccessfully(exec) must_== ((4, 4))
-      facts(
-        hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4),
-        hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4)
-      )
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4),
+      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 4)
+    )
   }
 
   def flatMappedHive = {

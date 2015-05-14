@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides task methods, and any implicits required to use them.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/778ce98b0babe64f80c0d54d8e7859d358da0245//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides task methods, and any implicits required to use them.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/a9660569a1135a5cc2c7a8c08e5b534f83049d46//maestro-api/src/main/scala/au/com/cba/omnia/maestro/api/Maestro.scala" target="_blank">Maestro.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.HdfsStrings" class="extype" target="_top">HdfsStrings</a>, <a href="../macros/MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">macros.MacroSupport</a>, <a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a>, <a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a>, <a href="../core/task/ViewExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.ViewExecution">ViewExecution</a>, <a href="../core/task/LoadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.LoadExecution">LoadExecution</a>, <a href="../core/task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.UploadExecution">UploadExecution</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -541,6 +541,20 @@ The user can supply their own parsing function and trailer data type if necesary
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/scalding/ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T],A](config:au.com.cba.omnia.maestro.core.task.SqoopExportConfig[T],pipe:com.twitter.scalding.TypedPipe[A])(implicitevidence$4:au.com.cba.omnia.maestro.core.codec.Encode[A]):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="sqoopExport[T&lt;:parlour.ParlourExportOptions[T],A](core.task.SqoopExportConfig[T],TypedPipe[A])(Encode[A]):Execution[Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sqoopExport</span><span class="tparams">[<span name="T">T &lt;: <a href="https://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.ParlourExportOptions" class="extype" target="_top">parlour.ParlourExportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.T">T</span>]</span>, <span name="A">A</span>]</span><span class="params">(<span name="config">config: <a href="../core/task/SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExportConfig">core.task.SqoopExportConfig</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.T">T</span>]</span>, <span name="pipe">pipe: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../core/codec/Encode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode">Encode</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution.sqoopExport.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Exports data from a TypedPipe to a DB via Sqoop.</p><div class="fullcomment"><div class="comment cmt"><p>Exports data from a TypedPipe to a DB via Sqoop.</p><p>The provided TypedPipe is flushed to a temporary location on-disk before writing.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../core/task/SqoopExecution.html" class="extype" name="au.com.cba.omnia.maestro.core.task.SqoopExecution">SqoopExecution</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.task.SqoopExecution#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="sqoopExport[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]](config:au.com.cba.omnia.maestro.core.task.SqoopExportConfig[T],exportDir:String):com.twitter.scalding.Execution[Unit]"></a>
       <a id="sqoopExport[T&lt;:parlour.ParlourExportOptions[T]](core.task.SqoopExportConfig[T],String):Execution[Unit]"></a>

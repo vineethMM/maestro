@@ -14,13 +14,14 @@
 
 package au.com.cba.omnia.maestro.core.task
 
-import org.specs2.matcher.Matcher
-import org.specs2.execute.{Result => SpecResult}
+import scalaz.Scalaz._
 
-import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource, ThermometerSpec}, Thermometer._
+import org.specs2.matcher.Matcher
+
+import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
-import au.com.cba.omnia.thermometer.hive.HiveSupport
+import au.com.cba.omnia.thermometer.hive.ThermometerHiveSpec
 
 import au.com.cba.omnia.ebenezer.ParquetLogging
 import au.com.cba.omnia.ebenezer.scrooge.hive._
@@ -36,8 +37,7 @@ import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 private object ViewExec extends ViewExecution
 
-object ViewExecutionSpec extends ThermometerSpec with HiveSupport with ParquetLogging { def is = s2"""
-
+object ViewExecutionSpec extends ThermometerHiveSpec with ParquetLogging { def is = s2"""
 View execution properties
 =========================
 

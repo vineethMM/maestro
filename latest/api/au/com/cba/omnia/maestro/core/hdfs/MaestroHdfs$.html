@@ -39,8 +39,53 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Utility functions for Hdfs monad (the au.com.cba.omnia.permafrost.hdfs.Hdfs), with a maestro flavour.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/aa65a4d7ff2fed0a83116e148326161ac76518cc//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hdfs/MaestroHdfs.scala" target="_blank">MaestroHdfs.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Utility functions for the <a href="https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs" target="_blank">Hdfs monad</a>,
+with a Maestro flavour.</p><p>This object was introduced in Maestro 2.10 to replace the <a href="Guard$.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.Guard">Guard</a> object, which served a similar purpose but
+predated the Hdfs monad. <a href="Guard$.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.Guard">Guard</a> is now deprecated and <i>will be removed</i> in a future version. Users of
+Maestro should update any code which uses <a href="Guard$.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.Guard">Guard</a> to use <a href="" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.MaestroHdfs">MaestroHdfs</a> instead.</p><h4>Migration guide from <code>Guard</code> to <code>MaestroHdfs</code></h4><p><a href="" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.MaestroHdfs">MaestroHdfs</a> provides all the same functions as <a href="Guard$.html" class="extype" name="au.com.cba.omnia.maestro.core.hdfs.Guard">Guard</a>, with the same parameters, but instead of performing
+the work immediately it returns an
+<a href="https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs" target="_blank">Hdfs</a> action.
+This can be composed with other Hdfs actions into a more complex workflow. Alternatively, it can be composed with
+other <a href="http://twitter.github.io/scalding/index.html#com.twitter.scalding.Execution" target="_blank">Execution</a> actions, with the
+help of <code>Execution.fromHdfs</code>.</p><p>Let's examine at a fictional project (loading data about widget sales) which uses some of the deprecated functions.</p><pre><span class="cmt">// old code</span>
+<span class="kw">case</span> <span class="kw">class</span> WidgetSalesConfig[T <span class="kw">&lt;:</span> ThriftStruct : Decode : Tag : <span class="std">Manifest</span>](...)
+{
+  ...
+  <span class="kw">val</span> inputs = Guard.expandTransferredPaths(s<span class="lit">"${maestro.hdfsRoot}/source/${maestro.source}/${maestro.tablename}/*/*/"</span>)</pre><p>Notice that <code>Guard.expandTransferredPaths</code> executes immediately when the class is instantiated (returning a list of
+strings). This is a hidden side-effect. The benefit of the <code>Hdfs</code> monad is that it allows us to reason more easily
+about the order in which operations are performed.</p><p>If we change <code>Guard</code> to <code>MaestroHdfs</code>, then it will no longer compile because the return type has changed (from
+<code>List[String]</code> to <code>Hdfs[List[String]]</code>). The simplest solution in this case is to move the call to <code>expandTransferredPaths</code>
+later in the program, and keep only the glob here:</p><pre><span class="cmt">// new code</span>
+<span class="kw">case</span> <span class="kw">class</span> WidgetSalesConfig[T <span class="kw">&lt;:</span> ThriftStruct : Decode : Tag : <span class="std">Manifest</span>](...)
+{
+  ...
+  <span class="kw">val</span> inputGlob = s<span class="lit">"${maestro.hdfsRoot}/source/${maestro.source}/${maestro.tablename}/*/*/"</span></pre><p>Later in the file, we see where <code>inputs</code> was being used:</p><pre><span class="cmt">// old code</span>
+<span class="kw">def</span> run[T <span class="kw">&lt;:</span> ThriftStruct : Decode : Tag : <span class="std">Manifest</span>](
+  tableName      : <span class="std">String</span>,
+  partitionField : Field[T, <span class="std">String</span>],
+  loadWithKey    : <span class="std">Boolean</span> = <span class="kw">false</span>
+): Execution[JobStatus] = <span class="kw">for</span> {
+    conf             <span class="kw">&lt;-</span> Execution.getConfig.map(WidgetSalesConfig(_, tableName, partitionField, loadWithKey))
+    (pipe, loadInfo) <span class="kw">&lt;-</span> load[T](conf.load, conf.inputs)                                                                    <span class="cmt">// here</span>
+    _                <span class="kw">&lt;-</span> viewHive(conf.hiveTable, pipe)
+    _                <span class="kw">&lt;-</span> Execution.from(Guard.createFlagFile(conf.inputs))                                                  <span class="cmt">// and here</span>
+    _                <span class="kw">&lt;-</span> Execution.fromHdfs { Hdfs.write(Hdfs.path(conf.processingPathFile), conf.inputs.mkString(<span class="lit">"\n"</span>)) }  <span class="cmt">// and here too</span>
+  } <span class="kw">yield</span> JobFinished</pre><p>This <code>for</code> block represents a sequence of actions in the Execution monad. The call to <code>expandTransferredPaths</code> can
+be inserted here by wrapping it with <code>Execution.fromHdfs</code>. The same is required in order to replace <code>Guard.createFlagFile</code>
+with <code>MaestroHdfs.createFlagFile</code>.</p><pre><span class="cmt">// new code</span>
+<span class="kw">def</span> run[T <span class="kw">&lt;:</span> ThriftStruct : Decode : Tag : <span class="std">Manifest</span>](
+  tableName      : <span class="std">String</span>,
+  partitionField : Field[T, <span class="std">String</span>],
+  loadWithKey    : <span class="std">Boolean</span> = <span class="kw">false</span>
+): Execution[JobStatus] = <span class="kw">for</span> {
+    conf             <span class="kw">&lt;-</span> Execution.getConfig.map(WidgetSalesConfig(_, tableName, partitionField, loadWithKey))
+    inputs           <span class="kw">&lt;-</span> Execution.fromHdfs { MaestroHdfs.expandTransferredPaths(conf.findInputs) }                         <span class="cmt">// new line</span>
+    (pipe, loadInfo) <span class="kw">&lt;-</span> load[T](conf.load, inputs)                                                                         <span class="cmt">// edited</span>
+    _                <span class="kw">&lt;-</span> viewHive(conf.hiveTable, pipe)
+    _                <span class="kw">&lt;-</span> Execution.fromHdfs { MaestroHdfs.createFlagFile(inputs) }                                          <span class="cmt">// edited</span>
+    _                <span class="kw">&lt;-</span> Execution.fromHdfs { Hdfs.write(Hdfs.path(conf.processingPathFile), inputs.mkString(<span class="lit">"\n"</span>)) }       <span class="cmt">// edited</span>
+  } <span class="kw">yield</span> JobFinished</pre><p>That's it! We have upgraded our dependency on the deprecated functions.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e4834b09b46746f63d1aeaa2a67cab279003af9c//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hdfs/MaestroHdfs.scala" target="_blank">MaestroHdfs.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>

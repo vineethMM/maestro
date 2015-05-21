@@ -49,6 +49,7 @@ AutomapSpec
     don't show up when annotation is used correctly                      $noErrorsWhenCorrect
     don't show up when annotation is used correctly                      $noErrorsWhenCorrect
     when a field cannot be resolved                                      $couldNotResolveField
+    when two fields cannot be resolved                                   $couldNotResolveTwoFields
 """
 
   implicit val srcFields = Macros.mkFields[HTypes]
@@ -238,5 +239,15 @@ AutomapSpec
 
         @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge = {}""")
     compileErrors(0).contains("Could not resolve `missingField`") must beTrue
+  }
+
+  def couldNotResolveTwoFields = {
+    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+      """import au.com.cba.omnia.maestro.macros._
+         import au.com.cba.omnia.maestro.test.thrift.humbug._
+        import au.com.cba.omnia.maestro.test.thrift.scrooge._
+
+        @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge2 = {}""")
+    compileErrors(0).contains("Could not resolve `missingField2`") must beTrue
   }
 }

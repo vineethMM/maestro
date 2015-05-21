@@ -18,7 +18,7 @@ import scala.annotation.StaticAnnotation
 import scala.reflect.macros.{Context, TypecheckException}
 import scala.language.experimental.macros
 import scala.collection.immutable.StringOps
-
+import scalaz.{\/, \/-, -\/}
 /** Automapper for Thrift structs.
   *
   * One or more input structs are mapped to a single output struct, using a custom syntax to
@@ -73,6 +73,8 @@ import scala.collection.immutable.StringOps
   * outputs, *computation* of field mappings and *generation* of output code.
   */
 object automap {
+  type AutomapError = String
+
   def impl(c: Context)(annottees: c.Expr[Any]*): c.Expr[Any] = {
     import c.universe._
 
@@ -205,16 +207,24 @@ object automap {
       inputs:    Map[Field, List[Struct]],
       outputs:   List[(Field, Struct)],
       overrides: Map[TermName, Tree]
-    ): List[(Field, List[Struct])] =
-      outputs.map(_._1)
-             .filterNot( a => overrides.exists( b => a._2 == b._1 ) )
-             .map(field => inputs.get(field) match { 
-               case Some(matches) => (field, matches)
-               case _ => fail (s"Could not resolve `${field._2}`")
-             })
-        
+    ): Seq[AutomapError] \/ List[(Field, List[Struct])] = {
+      val result = outputs.map(_._1)
+        .filterNot(a => overrides.exists(b => a._2 == b._1))
+        .map(field => inputs.get(field) match {
+        case Some(matches) => \/-((field, matches))
+        case _ => -\/(s"Could not resolve `${field._2}`")
+      })
+
+      if (result.forall(_.isRight)) {
+        \/-(result.flatMap(_.toOption))
+      } else {
+        val errors = result.filter(_.isLeft).map(_.swap)
+        -\/(errors.flatMap(_.toOption))
+      }
+    }
+
     /** Pull apart the source object, pad it out, put it back together. */
-    def mkMapper(src: Tree): Tree = {
+    def mkMapper(src: Tree): Seq[AutomapError] \/ Tree = {
       val q"def $name (..$srcArgs): $srcTo = $srcBody" = src
       val srcRules = srcBody match {
         case Block(xs,x)  => x :: xs
@@ -224,18 +234,26 @@ object automap {
       val (from, inputs) = srcArgs.map{ case q"$m val $x: $t = $v" => inspectTermType(t, x) }.unzip
       val (to, outputs)  = inspectTermType(srcTo, newTermName("out"))
       val overrides      = getOverrides(srcRules)
-      val autos          = automap(priorityMap(inputs.flatten), outputs, overrides)
+      val autosOrErrors  = automap(priorityMap(inputs.flatten), outputs, overrides)
 
-      val fn = if (isHumbug(to._2)) showHumbugSetter (to._2, from, autos, overrides)
-               else showScroogeCtor (to._2, from, autos, overrides)
-      q" def $name (in: (..${from.map(_._2)})): ${to._2} = in match { case $fn }" 
+      autosOrErrors.fold(errors => -\/(errors), { autos =>
+
+        val fn = if (isHumbug(to._2)) showHumbugSetter(to._2, from, autos, overrides)
+        else showScroogeCtor(to._2, from, autos, overrides)
+        \/-(q" def $name (in: (..${from.map(_._2)})): ${to._2} = in match { case $fn }")
+      })
     }
 
     annottees
       .map(_.tree)
-      .map{case (x: DefDef) => c.Expr[Any](mkMapper(x))
-           case _           => fail("Automap annottee must be method accepting thrift structs and returning one.")}.head
-  }
+      .map {
+        case (x: DefDef) => {
+          val mapperOrFail = mkMapper(x)
+          mapperOrFail.fold(errors => fail(errors.mkString("\n")), succ => c.Expr[Any](succ))
+        }
+        case _           => fail("Automap annottee must be method accepting thrift structs and returning one.")
+      }.head
+    }
   
   /** Create a priority map of keys to list of values. */
   def priorityMap[K, V](xs: List[(K, V)]): Map[K, List[V]] =

@@ -44,6 +44,11 @@ AutomapSpec
     can join Scrooge and Humbug to Humbug                                $mixedToHumbug
     can join Scrooge and Humbug to Scrooge                               $mixedToScrooge
 
+  Errors
+    fail when not method definition                                      $annotationOnSomethingOtherThanADef
+    don't show up when annotation is used correctly                      $noErrorsWhenCorrect
+    don't show up when annotation is used correctly                      $noErrorsWhenCorrect
+    when a field cannot be resolved                                      $couldNotResolveField
 """
 
   implicit val srcFields = Macros.mkFields[HTypes]
@@ -197,5 +202,41 @@ AutomapSpec
 
     val resultJoined = JoinableScrooge(true, 1000, 42)
     join((humbugStructOne, scroogeStructTwo)) must beEqualTo(resultJoined)
+  }
+
+
+
+  def annotationOnSomethingOtherThanADef = {
+    //have to write out the whole string directly
+    val compileErrors =  MacroUtils.compileErrors(
+      """import au.com.cba.omnia.maestro.macros._
+        import au.com.cba.omnia.maestro.test.thrift.humbug._
+        import au.com.cba.omnia.maestro.test.thrift.scrooge._
+
+        @automap val a = 1 + 1""")
+
+    compileErrors(0).contains("Automap annottee must be method accepting thrift structs and returning one.") must beTrue
+  }
+
+  def noErrorsWhenCorrect = {
+    //This has already been tested but is useful to have here mainly as a sanity check for MacroUtils.compileErrors
+    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+      """import au.com.cba.omnia.maestro.macros._
+         import au.com.cba.omnia.maestro.test.thrift.humbug._
+        import au.com.cba.omnia.maestro.test.thrift.scrooge._
+
+        @automap def join(x: JoinOneScrooge, y: JoinTwoHumbug): JoinableHumbug = {}""")
+
+    compileErrors must beEmpty
+  }
+
+  def couldNotResolveField = {
+    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+      """import au.com.cba.omnia.maestro.macros._
+         import au.com.cba.omnia.maestro.test.thrift.humbug._
+        import au.com.cba.omnia.maestro.test.thrift.scrooge._
+
+        @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge = {}""")
+    compileErrors(0).contains("Could not resolve `missingField`") must beTrue
   }
 }

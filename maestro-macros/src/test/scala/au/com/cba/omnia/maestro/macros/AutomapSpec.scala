@@ -47,9 +47,10 @@ AutomapSpec
   Errors
     fail when not method definition                                      $annotationOnSomethingOtherThanADef
     don't show up when annotation is used correctly                      $noErrorsWhenCorrect
-    don't show up when annotation is used correctly                      $noErrorsWhenCorrect
     when a field cannot be resolved                                      $couldNotResolveField
     when two fields cannot be resolved                                   $couldNotResolveTwoFields
+    when input and output field have different values                    $differentTypesForInputAndOutput
+    when two input structs have different values on joined field         $differentFieldValuesForJoinedStructs
 """
 
   implicit val srcFields = Macros.mkFields[HTypes]
@@ -249,5 +250,22 @@ AutomapSpec
 
         @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge2 = {}""")
     compileErrors(0).contains("Could not resolve `missingField2`") must beTrue
+  }
+
+  def differentTypesForInputAndOutput = {
+    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+      """import au.com.cba.omnia.maestro.macros._
+        import au.com.cba.omnia.maestro.test.thrift.scrooge._
+
+        @automap def map(x: JoinOneDuplicateScrooge): JoinOneIncompatibleScrooge = {
+        }""")
+    compileErrors(0).contains("Could not resolve `someField`") must beTrue
+  }
+
+  def differentFieldValuesForJoinedStructs = {
+    @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): JoinTwoScrooge = {}
+
+    join((scroogeStructOne, JoinTwoScrooge("different-string", 1000L, 2d)))  must throwAn[IllegalArgumentException]
+
   }
 }

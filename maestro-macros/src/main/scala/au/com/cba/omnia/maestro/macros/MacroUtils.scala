@@ -40,28 +40,20 @@ object MacroUtils {
    *             String - typed value, since the actual check is done at compile time.
    * @return a sequence of error messages, or an empty sequence if `code` compiles correctly.
    */
-  def compileErrors(code:String):Seq[String] = macro compileErrorsImpl
+  def compileErrors(code: String): Seq[String] = macro compileErrorsImpl
 
   def compileErrorsImpl(c:Context)(code: c.Expr[String]):c.Expr[Seq[String]] = {
     import c.universe._
-    def seqToLiteral(errors: Seq[String]): c.Expr[Seq[String]] = {
-      val errorsExpr = c.Expr[Seq[String]](
-        Apply(
-          Select(reify(Seq).tree, newTermName("apply")),
-          errors.map(str => Literal(Constant(str))).toList
-        )
-      )
-      errorsExpr
-    }
 
     val Expr(Literal(Constant(codeStr: String))) = code
-    val attemptToTypecheck = scala.util.Try(c.typeCheck(c.parse(s"{ val NEED_DYNAMIC_NAME_HERE = { $codeStr } ; () }")))
+    val attemptToTypecheck = scala.util.Try(c.typeCheck(c.parse(s"{ val ${newTermName(c.fresh)} = { $codeStr } }")))
 
-    val errors:Seq[String] = attemptToTypecheck match {
-      case Success(_) => Seq()
-      case Failure(e) => Seq(e.getMessage)
+
+    val errors:Option[String] = attemptToTypecheck match {
+      case Success(_) => None
+      case Failure(e) => Some(e.getMessage)
     }
-    seqToLiteral(errors)
+    c.Expr[Seq[String]](q"Seq.apply(..${errors.toSeq})")
   }
 
 }

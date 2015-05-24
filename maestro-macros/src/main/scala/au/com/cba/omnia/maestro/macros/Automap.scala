@@ -18,7 +18,9 @@ import scala.annotation.StaticAnnotation
 import scala.reflect.macros.{Context, TypecheckException}
 import scala.language.experimental.macros
 import scala.collection.immutable.StringOps
-import scalaz.{\/, \/-, -\/}
+import scalaz.\/
+import scalaz.syntax.either._
+
 /** Automapper for Thrift structs.
   *
   * One or more input structs are mapped to a single output struct, using a custom syntax to
@@ -207,19 +209,18 @@ object automap {
       inputs:    Map[Field, List[Struct]],
       outputs:   List[(Field, Struct)],
       overrides: Map[TermName, Tree]
-    ): Seq[AutomapError] \/ List[(Field, List[Struct])] = {
+    ): List[AutomapError] \/ List[(Field, List[Struct])] = {
       val result = outputs.map(_._1)
         .filterNot(a => overrides.exists(b => a._2 == b._1))
         .map(field => inputs.get(field) match {
-        case Some(matches) => \/-((field, matches))
-        case _ => -\/(s"Could not resolve `${field._2}`")
+          case Some(matches) => ((field, matches)).right
+          case _             => s"Could not resolve `${field._2}`".left
       })
 
       if (result.forall(_.isRight)) {
-        \/-(result.flatMap(_.toOption))
+        result.flatMap(_.toOption).right
       } else {
-        val errors = result.filter(_.isLeft).map(_.swap)
-        -\/(errors.flatMap(_.toOption))
+        result.flatMap(_.swap.toOption).left
       }
     }
 
@@ -236,11 +237,10 @@ object automap {
       val overrides      = getOverrides(srcRules)
       val autosOrErrors  = automap(priorityMap(inputs.flatten), outputs, overrides)
 
-      autosOrErrors.fold(errors => -\/(errors), { autos =>
-
+      autosOrErrors.fold(errors => errors.left, { autos =>
         val fn = if (isHumbug(to._2)) showHumbugSetter(to._2, from, autos, overrides)
-        else showScroogeCtor(to._2, from, autos, overrides)
-        \/-(q" def $name (in: (..${from.map(_._2)})): ${to._2} = in match { case $fn }")
+                 else showScroogeCtor(to._2, from, autos, overrides)
+        q" def $name (in: (..${from.map(_._2)})): ${to._2} = in match { case $fn }".right
       })
     }
 
@@ -248,8 +248,7 @@ object automap {
       .map(_.tree)
       .map {
         case (x: DefDef) => {
-          val mapperOrFail = mkMapper(x)
-          mapperOrFail.fold(errors => fail(errors.mkString("\n")), succ => c.Expr[Any](succ))
+          mkMapper(x).fold(errors => fail(errors.mkString("\n")), succ => c.Expr[Any](succ))
         }
         case _           => fail("Automap annottee must be method accepting thrift structs and returning one.")
       }.head

@@ -251,7 +251,7 @@ object automap {
           mkMapper(x).fold(errors => fail(errors.mkString("\n")), succ => c.Expr[Any](succ))
         }
         case _           => fail("Automap annottee must be method accepting thrift structs and returning one.")
-      }.head
+      }.headOption.getOrElse(fail("No annottees found"))
     }
   
   /** Create a priority map of keys to list of values. */

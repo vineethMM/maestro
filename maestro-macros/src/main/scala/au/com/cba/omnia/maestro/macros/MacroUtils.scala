@@ -50,8 +50,8 @@ object MacroUtils {
 
 
     val errors:Option[String] = attemptToTypecheck match {
-      case Success(_) => None
       case Failure(e) => Some(e.getMessage)
+      case _          => None
     }
     c.Expr[Option[String]](q"${errors}")
   }

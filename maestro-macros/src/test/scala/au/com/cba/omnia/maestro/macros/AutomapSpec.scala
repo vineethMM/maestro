@@ -217,7 +217,8 @@ AutomapSpec
 
         @automap val a = 1 + 1""")
 
-    compileErrors.getOrElse(throw new RuntimeException("expected errors")).contains("Automap annottee must be method accepting thrift structs and returning one.") must beTrue
+    compileErrors.getOrElse(throw new RuntimeException("expected errors")).
+      contains("Automap annottee must be method accepting thrift structs and returning one.") must beTrue
   }
 
   def noErrorsWhenCorrect = {

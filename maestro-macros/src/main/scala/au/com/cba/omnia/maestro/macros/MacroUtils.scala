@@ -40,9 +40,9 @@ object MacroUtils {
    *             String - typed value, since the actual check is done at compile time.
    * @return a sequence of error messages, or an empty sequence if `code` compiles correctly.
    */
-  def compileErrors(code: String): Seq[String] = macro compileErrorsImpl
+  def compileErrors(code: String): Option[String] = macro compileErrorsImpl
 
-  def compileErrorsImpl(c:Context)(code: c.Expr[String]):c.Expr[Seq[String]] = {
+  def compileErrorsImpl(c:Context)(code: c.Expr[String]):c.Expr[Option[String]] = {
     import c.universe._
 
     val Expr(Literal(Constant(codeStr: String))) = code
@@ -53,7 +53,7 @@ object MacroUtils {
       case Success(_) => None
       case Failure(e) => Some(e.getMessage)
     }
-    c.Expr[Seq[String]](q"Seq.apply(..${errors.toSeq})")
+    c.Expr[Option[String]](q"${errors}")
   }
 
 }

@@ -217,12 +217,12 @@ AutomapSpec
 
         @automap val a = 1 + 1""")
 
-    compileErrors(0).contains("Automap annottee must be method accepting thrift structs and returning one.") must beTrue
+    compileErrors.getOrElse(throw new RuntimeException("expected errors")).contains("Automap annottee must be method accepting thrift structs and returning one.") must beTrue
   }
 
   def noErrorsWhenCorrect = {
     //This has already been tested but is useful to have here mainly as a sanity check for MacroUtils.compileErrors
-    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+    val compileErrors =  MacroUtils.compileErrors(
       """import au.com.cba.omnia.maestro.macros._
          import au.com.cba.omnia.maestro.test.thrift.humbug._
         import au.com.cba.omnia.maestro.test.thrift.scrooge._
@@ -233,33 +233,33 @@ AutomapSpec
   }
 
   def couldNotResolveField = {
-    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+    val compileErrors = MacroUtils.compileErrors(
       """import au.com.cba.omnia.maestro.macros._
          import au.com.cba.omnia.maestro.test.thrift.humbug._
         import au.com.cba.omnia.maestro.test.thrift.scrooge._
 
         @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge = {}""")
-    compileErrors(0).contains("Could not resolve `missingField`") must beTrue
+    compileErrors.getOrElse(throw new RuntimeException("expected errors")).contains("Could not resolve `missingField`") must beTrue
   }
 
   def couldNotResolveTwoFields = {
-    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+    val compileErrors =  MacroUtils.compileErrors(
       """import au.com.cba.omnia.maestro.macros._
          import au.com.cba.omnia.maestro.test.thrift.humbug._
         import au.com.cba.omnia.maestro.test.thrift.scrooge._
 
         @automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge2 = {}""")
-    compileErrors(0).contains("Could not resolve `missingField2`") must beTrue
+    compileErrors.getOrElse(throw new RuntimeException("expected errors")).contains("Could not resolve `missingField2`") must beTrue
   }
 
   def differentTypesForInputAndOutput = {
-    val compileErrors:Seq[String] =  MacroUtils.compileErrors(
+    val compileErrors = MacroUtils.compileErrors(
       """import au.com.cba.omnia.maestro.macros._
         import au.com.cba.omnia.maestro.test.thrift.scrooge._
 
         @automap def map(x: JoinOneDuplicateScrooge): JoinOneIncompatibleScrooge = {
         }""")
-    compileErrors(0).contains("Could not resolve `someField`") must beTrue
+    compileErrors.getOrElse(throw new RuntimeException("expected errors")).contains("Could not resolve `someField`") must beTrue
   }
 
   def differentFieldValuesForJoinedStructs = {

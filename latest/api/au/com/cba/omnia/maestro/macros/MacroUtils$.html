@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e4834b09b46746f63d1aeaa2a67cab279003af9c//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/MacroUtils.scala" target="_blank">MacroUtils.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ee04264b84dc3595f23d70ff43dcba6471fa9bd1//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/MacroUtils.scala" target="_blank">MacroUtils.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -182,6 +182,42 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroUtils#compileErrors" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="compileErrors(code:String):Option[String]"></a>
+      <a id="compileErrors(String):Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">compileErrors</span><span class="params">(<span name="code">code: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Attempts to compile <code>code</code> and returns a sequence of error messages.</p><div class="fullcomment"><div class="comment cmt"><p>Attempts to compile <code>code</code> and returns a sequence of error messages. The messages are calculated at compile time but
+returned at runtime. Inspired by :</p><p><a href="https://github.com/milessabin/shapeless/blob/master/core/src/main/scala/shapeless/test/typechecking.scala" target="_blank">https://github.com/milessabin/shapeless/blob/master/core/src/main/scala/shapeless/test/typechecking.scala</a>
+</p></div><dl class="paramcmts block"><dt class="param">code</dt><dd class="cmt"><p>the string literal containing the code to compile. NOTE: This must be a string literal, not an arbitrary
+            String - typed value, since the actual check is done at compile time.</p></dd><dt>returns</dt><dd class="cmt"><p>a sequence of error messages, or an empty sequence if <code>code</code> compiles correctly.
+</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@macroImpl</span><span class="args">(<span>
+      
+      <span class="defval" name="`macro`(&quot;versionFormat&quot; = 1, &quot;className&quot; = &quot;au.com.cba.omnia.maestro.macros.MacroUtils$&quot;, &quot;methodName&quot; = &quot;compileErrorsImpl&quot;, &quot;signature&quot; = List(-1, -1))">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroUtils#compileErrorsImpl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="compileErrorsImpl(c:scala.reflect.macros.Context)(code:c.Expr[String]):c.Expr[Option[String]]"></a>
+      <a id="compileErrorsImpl(Context)(scala.reflect.macros.Context.Expr[String]):scala.reflect.macros.Context.Expr[Option[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">compileErrorsImpl</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.reflect.macros.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="code">code: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.Context.Expr</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.Context.Expr</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>

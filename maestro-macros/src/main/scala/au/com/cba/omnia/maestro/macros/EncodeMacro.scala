@@ -28,6 +28,7 @@ import au.com.cba.omnia.maestro.core.codec.Encode
 object EncodeMacro {
   def impl[A <: ThriftStruct: c.WeakTypeTag](c: Context): c.Expr[Encode[A]] = {
     import c.universe._
+    Inspect.ensureThriftType[A](c) 
 
     val companion = weakTypeOf[A].typeSymbol.companionSymbol
     val members   = Inspect.methods[A](c)

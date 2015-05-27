@@ -18,35 +18,47 @@ import com.twitter.scalding.{TextLine, TypedPipe, TypedPsv}
 
 import com.twitter.scalding.{Config, Execution}
 
+import org.apache.hadoop.fs.Path
+
+import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
+
+import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
-import au.com.cba.omnia.maestro.api._, Maestro._
-import au.com.cba.omnia.maestro.example.thrift.Customer
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-/** Configuration for `CustomerSqoopExportExecution` */
+import au.com.cba.omnia.maestro.api._, Maestro._
+import au.com.cba.omnia.maestro.core.codec.Encode
+import au.com.cba.omnia.maestro.example.thrift.Customer
+ 
+/** Sample configuration for exporting data via sqoop. */
 case class CustomerExportConfig(config: Config) {
-  val maestro = MaestroConfig(
-    conf         = config,
-    source       = "customer",
-    domain       = "customer",
-    tablename    = "customer"
+  val maestro   = MaestroConfig(
+    conf        = config,
+    source      = "customer",
+    domain      = "customer",
+    tablename   = "customer"
   )
-  val rawDataDir = s"${maestro.hdfsRoot}/customers"
-  val exportDir  = s"${maestro.hdfsRoot}/processed-customers"
+  val upload    = maestro.upload()
+  val load      = maestro.load[Customer](none = "null")
   val export     = maestro.sqoopExport[ParlourExportDsl](
     dbTablename  = "customer_export"
   )
 }
 
-/** Customer execution, exporting data to a database via Sqoop */
-object CustomerSqoopExportExecution {
-  def execute: Execution[Unit] = {
+/** Sample job. Load customer data and export it via sqoop. */
+object CustomerSqoopExportJob extends MaestroJob {
+  def job: Execution[JobStatus] = {
     for {
-      conf <- Execution.getConfig.map(CustomerExportConfig(_))
-      _    <- TypedPipe.from(TextLine(conf.rawDataDir))
-                       .map(Splitter.delimited("|").run(_).init.mkString("|"))
-                       .writeExecution(TypedPsv(conf.exportDir))
-      _    <- sqoopExport(conf.export, conf.exportDir)
-    } yield ()
+      conf             <- Execution.getConfig.map(CustomerExportConfig(_))
+      uploadInfo       <- upload(conf.upload)
+      sources          <- uploadInfo.withSources
+      (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+      loadSuccess      <- loadInfo.withSuccess
+      count            <- sqoopExport(conf.export, pipe)
+    } yield JobFinished
   }
+
+  def attemptsExceeded = Execution.from(JobNeverReady)
 }

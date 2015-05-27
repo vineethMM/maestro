@@ -23,6 +23,8 @@ import au.com.cba.omnia.maestro.core.codec.Tag
 object TagMacro {
   def impl[A <: ThriftStruct: c.WeakTypeTag](c: Context): c.Expr[Tag[A]] = {
     import c.universe._
+    Inspect.ensureThriftType[A](c)
+
     val fields = FieldsMacro.impl[A](c)
     val result = q"""
       import au.com.cba.omnia.maestro.core.codec.Tag

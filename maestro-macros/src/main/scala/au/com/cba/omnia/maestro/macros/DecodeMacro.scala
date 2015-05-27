@@ -24,6 +24,8 @@ import au.com.cba.omnia.maestro.core.codec._
 
 object DecodeMacro {
   def impl[A <: ThriftStruct: c.WeakTypeTag](c: Context): c.Expr[Decode[A]] = {
+    Inspect.ensureThriftType[A](c) 
+    
     val typ       = c.universe.weakTypeOf[A]
     val humbugTyp = c.universe.weakTypeOf[HumbugThriftStruct]
 

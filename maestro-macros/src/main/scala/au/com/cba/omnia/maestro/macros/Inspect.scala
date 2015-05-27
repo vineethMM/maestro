@@ -42,6 +42,17 @@ object Inspect {
   def fields[A <: ThriftStruct: c.WeakTypeTag](c: Context): List[(c.universe.MethodSymbol, String)] =
     fieldsUnsafe(c)(c.universe.weakTypeOf[A])
 
+  /** Does a type derive from ThriftStruct? */
+  def isThriftType[A: c.WeakTypeTag](c:Context): Boolean =
+    c.universe.weakTypeOf[A] <:< c.universe.weakTypeOf[ThriftStruct]
+
+  /** Abort unless A derives from ThriftStruct. */
+  def ensureThriftType[A: c.WeakTypeTag](c: Context): Unit =
+    // Since type bounds on macro implementations don't currently prevent the macro from expanding
+    // we need this workaround to avoid materializing encoders for primitives. 
+    if (!isThriftType[A](c))
+      c.abort(c.enclosingPosition, s"${c.universe.weakTypeOf[A].toString} does not derive ThriftStruct.")
+
   /** Same as fields but for any type where the type is assumed to be ThriftStruct.*/
   def fieldsUnsafe(c: Context)(typ: c.universe.Type): List[(c.universe.MethodSymbol, String)] = {
     import c.universe._

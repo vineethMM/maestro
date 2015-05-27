@@ -26,10 +26,12 @@ import au.com.cba.omnia.ebenezer.ParquetLogging
 
 import au.com.cba.omnia.maestro.test.SqoopExecutionTest
 
-object CustomerSqoopExportExecutionSpec extends ThermometerSpec with ParquetLogging { def is = s2"""
+object CustomerSqoopExportJobSpec
+  extends ThermometerSpec
+  with ParquetLogging { def is = s2"""
 
-CustomerSqoopExportExecutionSpec test
-=====================================
+CustomerSqoopExportJobSpec test
+===============================
 
   end to end pipeline $pipeline
 
@@ -45,14 +47,16 @@ CustomerSqoopExportExecutionSpec test
     CustomerExport.tableSetup(connectionString, username, password)
     SqoopExecutionTest.setupEnv()
 
-    val args = Map(
-      "hdfs-root" -> List(s"$dir/user"),
-      "jdbc"      -> List(connectionString),
-      "db-user"   -> List(username)
-    )
+    withEnvironment(path(getClass.getResource("/sqoop-customer").toString)) {
+      val args = Map(
+        "hdfs-root"     -> List(s"$dir/user"),
+        "jdbc"          -> List(connectionString),
+        "db-user"       -> List(username),
+        "local-root"    -> List(s"$dir/user"),
+        "archive-root"  -> List(s"$dir/user/archive")
+      )
 
-    withEnvironment(path(resourceUrl.toString)) {
-      executesOk(CustomerSqoopExportExecution.execute, args)
+      executesOk(CustomerSqoopExportJob.job, args)
       CustomerExport.tableData(connectionString, username, password) must containTheSameElementsAs(expectedData)
     }
   }

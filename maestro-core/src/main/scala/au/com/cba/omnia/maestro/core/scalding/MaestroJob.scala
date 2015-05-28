@@ -18,7 +18,7 @@ import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.control.NonFatal
 
-import com.twitter.scalding.{Config, Execution, ExecutionApp}
+import com.twitter.scalding.{Config, Mode, Execution, ExecutionApp}
 
 /** An enumeration representing possible program status */
 sealed trait JobStatus {
@@ -103,6 +103,13 @@ trait MaestroJob extends Serializable {
   }
 
   private object ExApp extends ExecutionApp {
+    val CounterTimeoutConfig = ("cascading.step.counter.timeout", "60") //Sufficiently large
+    
     def job = null // never used
+
+    override def config(inputArgs: Array[String]): (Config, Mode) = {
+      val (config, mode) = super.config(inputArgs)
+      (config + CounterTimeoutConfig, mode)
+    }
   }
 }

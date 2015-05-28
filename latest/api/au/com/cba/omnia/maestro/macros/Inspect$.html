@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/ee04264b84dc3595f23d70ff43dcba6471fa9bd1//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Inspect.scala" target="_blank">Inspect.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/26f779be7ee071590ddce631e097646075b95181//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Inspect.scala" target="_blank">Inspect.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -195,6 +195,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#ensureThriftType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ensureThriftType[A](c:scala.reflect.macros.Context)(implicitevidence$4:c.WeakTypeTag[A]):Unit"></a>
+      <a id="ensureThriftType[A](Context)(scala.reflect.macros.Context.WeakTypeTag[A]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ensureThriftType</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.reflect.macros.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.ensureThriftType.A">A</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Abort unless A derives from ThriftStruct.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -331,8 +344,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#isThriftType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isThriftType[A](c:scala.reflect.macros.Context)(implicitevidence$3:c.WeakTypeTag[A]):Boolean"></a>
+      <a id="isThriftType[A](Context)(scala.reflect.macros.Context.WeakTypeTag[A]):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isThriftType</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.reflect.macros.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.isThriftType.A">A</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Does a type derive from ThriftStruct?</p>
     </li><li name="au.com.cba.omnia.maestro.macros.Inspect#methods" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.Context)(implicitevidence$3:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]"></a>
+      <a id="methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.Context)(implicitevidence$5:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]"></a>
       <a id="methods[A&lt;:ThriftStruct](Context)(scala.reflect.macros.Context.WeakTypeTag[A]):List[scala.reflect.macros.Universe.MethodSymbol]"></a>
       <h4 class="signature">
       <span class="modifier_kind">

@@ -12,20 +12,18 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.maestro.api
+package au.com.cba.omnia.maestro.scalding
 
-import au.com.cba.omnia.permafrost.hdfs.HdfsStrings
+import cascading.tap.hadoop.Hfs
 
-import au.com.cba.omnia.maestro.task.{LoadExecution, SqoopExecution, UploadExecution, ViewExecution}
-import au.com.cba.omnia.maestro.scalding.ExecutionOps
+import com.twitter.scalding.Execution
 
-
-/** Provides task methods, and any implicits required to use them. */
-object Maestro
-  extends UploadExecution
-  with LoadExecution
-  with ViewExecution
-  with SqoopExecution
-  with ExecutionOps
-  with MacroSupport
-  with HdfsStrings
+/** Executions that return paths */
+object Paths {
+  /** Return the temporary directory for this job */
+  def tempDir : Execution[String] =
+    Execution.getConfig.map(conf => {
+      val jobConf = ConfHelper.getHadoopConf(conf)
+      Hfs.getTempPath(jobConf).toString
+    })
+}

@@ -72,7 +72,7 @@ object build extends Build {
        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
        , unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(example, schema, benchmark)
     )
-  , aggregate = Seq(core, macros, api, test, schema)
+  , aggregate = Seq(core, macros, scalding, api, test, schema)
   )
 
   lazy val api = Project(
@@ -86,6 +86,7 @@ object build extends Build {
     )
   ).dependsOn(core)
    .dependsOn(macros)
+   .dependsOn(scalding)
 
   lazy val core = Project(
     id = "core"
@@ -99,12 +100,10 @@ object build extends Build {
       scroogeThriftSourceFolder in Test <<= (sourceDirectory) { _ / "test" / "thrift" / "scrooge" },
       humbugThriftSourceFolder in Test <<= (sourceDirectory) { _ / "test" / "thrift" / "humbug" },
       libraryDependencies ++=
-           depend.scalaz() 
-        ++ depend.scalding()
+           depend.scalaz()
         ++ depend.hadoopClasspath
         ++ depend.hadoop()
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
-        ++ depend.parquet()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
         ++ depend.omnia("permafrost",    permafrostVersion)
         ++ depend.omnia("edge",          edgeVersion)
@@ -117,7 +116,6 @@ object build extends Build {
           "org.specs2"                 %% "specs2-matcher-extra" % "3.5" % "test"
             exclude("org.scala-lang", "scala-compiler"),
           "au.com.cba.omnia"           %% "ebenezer-test"     % ebenezerVersion        % "test",
-          "au.com.cba.omnia"           %% "thermometer-hive"  % thermometerVersion     % "test",
           scalikejdbc                                                                  % "test",
           "com.opencsv"                 % "opencsv"           % "3.3"
             exclude ("org.apache.commons", "commons-lang3") // conflicts with hive
@@ -143,6 +141,29 @@ object build extends Build {
     )
   ).dependsOn(core)
    .dependsOn(test % "test")
+
+  lazy val scalding = Project(
+    id = "scalding"
+  , base = file("maestro-scalding")
+  , settings =
+       standardSettings
+    ++ uniformThriftSettings
+    ++ uniform.project("maestro-scalding", "au.com.cba.omnia.maestro.scalding")
+    ++ Seq[Sett](
+      libraryDependencies ++=
+           depend.scalaz()
+        ++ depend.scalding()
+        ++ depend.hadoopClasspath
+        ++ depend.hadoop()
+        ++ depend.parquet()
+        ++ depend.testing()
+        ++ Seq(
+          "au.com.cba.omnia" %% "thermometer-hive" % thermometerVersion % "test"
+        ),
+      dependencyOverrides += "org.scalacheck" %% "scalacheck" % "1.11.4",
+      parallelExecution in Test := false
+    )
+  ).dependsOn(core % "compile->compile;test->test")
 
   lazy val schema = Project(
     id = "schema"
@@ -173,7 +194,7 @@ object build extends Build {
            scalikejdbc % "test"
          )
        , parallelExecution in Test := false
-       , sources in doc in Compile := List() 
+       , sources in doc in Compile := List()
        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )
   ).dependsOn(core)
@@ -219,5 +240,5 @@ object build extends Build {
            ++ depend.hadoopClasspath ++ depend.hadoop()
            ++ depend.testing(configuration = "test")
     )
-  ).dependsOn(core)
+  ).dependsOn(core, scalding)
 }

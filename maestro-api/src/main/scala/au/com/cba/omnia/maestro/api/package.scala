@@ -15,24 +15,24 @@
 package au.com.cba.omnia.maestro
 
 package object api {
-  type MaestroJob      = au.com.cba.omnia.maestro.core.scalding.MaestroJob
+  type MaestroJob      = au.com.cba.omnia.maestro.scalding.MaestroJob
   type MacroSupport    = au.com.cba.omnia.maestro.macros.MacroSupport
 
-  type JobStatus       = au.com.cba.omnia.maestro.core.scalding.JobStatus
-  type JobFinished     = au.com.cba.omnia.maestro.core.scalding.JobFinished.type
-  type JobNotReady     = au.com.cba.omnia.maestro.core.scalding.JobNotReady.type
-  type JobNeverReady   = au.com.cba.omnia.maestro.core.scalding.JobNeverReady.type
-  type JobFailure      = au.com.cba.omnia.maestro.core.scalding.JobFailure
-  val  JobFinished     = au.com.cba.omnia.maestro.core.scalding.JobFinished
-  val  JobNotReady     = au.com.cba.omnia.maestro.core.scalding.JobNotReady
-  val  JobNeverReady   = au.com.cba.omnia.maestro.core.scalding.JobNeverReady
-  val  JobFailure      = au.com.cba.omnia.maestro.core.scalding.JobFailure
-  val MaestroExecution = au.com.cba.omnia.maestro.core.scalding.MaestroExecution
-  val MX               = au.com.cba.omnia.maestro.core.scalding.MaestroExecution
+  type JobStatus       = au.com.cba.omnia.maestro.scalding.JobStatus
+  type JobFinished     = au.com.cba.omnia.maestro.scalding.JobFinished.type
+  type JobNotReady     = au.com.cba.omnia.maestro.scalding.JobNotReady.type
+  type JobNeverReady   = au.com.cba.omnia.maestro.scalding.JobNeverReady.type
+  type JobFailure      = au.com.cba.omnia.maestro.scalding.JobFailure
+  val  JobFinished     = au.com.cba.omnia.maestro.scalding.JobFinished
+  val  JobNotReady     = au.com.cba.omnia.maestro.scalding.JobNotReady
+  val  JobNeverReady   = au.com.cba.omnia.maestro.scalding.JobNeverReady
+  val  JobFailure      = au.com.cba.omnia.maestro.scalding.JobFailure
+  val MaestroExecution = au.com.cba.omnia.maestro.scalding.MaestroExecution
+  val MX               = au.com.cba.omnia.maestro.scalding.MaestroExecution
 
-  type HiveTable[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.core.hive.HiveTable[A, B]
+  type HiveTable[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.hive.HiveTable[A, B]
   type Partition[A, B] = au.com.cba.omnia.maestro.core.partition.Partition[A, B]
-  val  HiveTable       = au.com.cba.omnia.maestro.core.hive.HiveTable
+  val  HiveTable       = au.com.cba.omnia.maestro.hive.HiveTable
   val  Partition       = au.com.cba.omnia.maestro.core.partition.Partition
   val  HivePartition   = au.com.cba.omnia.maestro.core.partition.HivePartition
 
@@ -70,25 +70,25 @@ package object api {
   val  TrailerParsers  = au.com.cba.omnia.maestro.core.upload.TrailerParsers
   val  ControlPattern  = au.com.cba.omnia.maestro.core.upload.ControlPattern
 
-  type MaestroConfig   = au.com.cba.omnia.maestro.core.task.MaestroConfig
-  val  MaestroConfig   = au.com.cba.omnia.maestro.core.task.MaestroConfig
+  type MaestroConfig   = au.com.cba.omnia.maestro.task.MaestroConfig
+  val  MaestroConfig   = au.com.cba.omnia.maestro.task.MaestroConfig
 
-  type UploadConfig    = au.com.cba.omnia.maestro.core.task.UploadConfig
-  type UploadInfo      = au.com.cba.omnia.maestro.core.task.UploadInfo
-  val  UploadConfig    = au.com.cba.omnia.maestro.core.task.UploadConfig
-  val  UploadInfo      = au.com.cba.omnia.maestro.core.task.UploadInfo
+  type UploadConfig    = au.com.cba.omnia.maestro.task.UploadConfig
+  type UploadInfo      = au.com.cba.omnia.maestro.task.UploadInfo
+  val  UploadConfig    = au.com.cba.omnia.maestro.task.UploadConfig
+  val  UploadInfo      = au.com.cba.omnia.maestro.task.UploadInfo
 
-  type LoadConfig[A]   = au.com.cba.omnia.maestro.core.task.LoadConfig[A]
-  type LoadInfo        = au.com.cba.omnia.maestro.core.task.LoadInfo
-  type LoadSuccess     = au.com.cba.omnia.maestro.core.task.LoadSuccess
-  type LoadFailure     = au.com.cba.omnia.maestro.core.task.LoadFailure
-  val  LoadConfig      = au.com.cba.omnia.maestro.core.task.LoadConfig
-  val  LoadSuccess     = au.com.cba.omnia.maestro.core.task.LoadSuccess
-  val  LoadFailure     = au.com.cba.omnia.maestro.core.task.LoadFailure
-  val  EmptyLoad       = au.com.cba.omnia.maestro.core.task.EmptyLoad
+  type LoadConfig[A]   = au.com.cba.omnia.maestro.task.LoadConfig[A]
+  type LoadInfo        = au.com.cba.omnia.maestro.task.LoadInfo
+  type LoadSuccess     = au.com.cba.omnia.maestro.task.LoadSuccess
+  type LoadFailure     = au.com.cba.omnia.maestro.task.LoadFailure
+  val  LoadConfig      = au.com.cba.omnia.maestro.task.LoadConfig
+  val  LoadSuccess     = au.com.cba.omnia.maestro.task.LoadSuccess
+  val  LoadFailure     = au.com.cba.omnia.maestro.task.LoadFailure
+  val  EmptyLoad       = au.com.cba.omnia.maestro.task.EmptyLoad
 
-  type ViewConfig[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.core.task.ViewConfig[A, B]
-  val  ViewConfig      = au.com.cba.omnia.maestro.core.task.ViewConfig
+  type ViewConfig[A <: ThriftStruct, B] = au.com.cba.omnia.maestro.task.ViewConfig[A, B]
+  val  ViewConfig      = au.com.cba.omnia.maestro.task.ViewConfig
 
   type Hdfs[A]         = au.com.cba.omnia.permafrost.hdfs.Hdfs[A]
   val  Hdfs            = au.com.cba.omnia.permafrost.hdfs.Hdfs
@@ -108,8 +108,8 @@ package object api {
   val  TeradataParlourExportDsl = au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl
   type ParlourImportOptions[+T <: ParlourImportOptions[_]] = au.com.cba.omnia.parlour.ParlourImportOptions[T]
   type ParlourExportOptions[+T <: ParlourExportOptions[_]] = au.com.cba.omnia.parlour.ParlourExportOptions[T]
-  type SqoopImportConfig[T <: ParlourImportOptions[T]]     = au.com.cba.omnia.maestro.core.task.SqoopImportConfig[T]
-  type SqoopExportConfig[T <: ParlourExportOptions[T]]     = au.com.cba.omnia.maestro.core.task.SqoopExportConfig[T]
-  val  SqoopImportConfig                                   = au.com.cba.omnia.maestro.core.task.SqoopImportConfig
-  val  SqoopExportConfig                                   = au.com.cba.omnia.maestro.core.task.SqoopExportConfig
+  type SqoopImportConfig[T <: ParlourImportOptions[T]]     = au.com.cba.omnia.maestro.task.SqoopImportConfig[T]
+  type SqoopExportConfig[T <: ParlourExportOptions[T]]     = au.com.cba.omnia.maestro.task.SqoopExportConfig[T]
+  val  SqoopImportConfig                                   = au.com.cba.omnia.maestro.task.SqoopImportConfig
+  val  SqoopExportConfig                                   = au.com.cba.omnia.maestro.task.SqoopExportConfig
 }

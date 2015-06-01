@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>transform - au.com.cba.omnia.maestro.core.transform</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a></p>
-        <h1>transform</h1>
+        <h1>transform</h1><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.transform.package" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -58,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.transform.Join" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.transform.Join" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Join[A,B]extendsProductwithSerializable"></a>
       <a id="Join[A,B]:Join[A,B]"></a>
       <h4 class="signature">
@@ -67,12 +75,21 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Join.html"><span class="name">Join</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.transform.Join.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.transform.Join.B">B</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Join.html"><span class="name">Join</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.transform.Join.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.transform.Join.B">B</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">By convention, a function that joins a tuple of thrift structures to produce
-a new thrift structure.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.transform.Transform" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.transform.package@Join[A,B]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">By convention, a function that joins a tuple of thrift structures to produce
+a new thrift structure.</p><div class="fullcomment"><div class="comment cmt"><p>By convention, a function that joins a tuple of thrift structures to produce
+a new thrift structure.</p><p><a href="../../macros/Macros$.html#mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]" class="extmbr" name="au.com.cba.omnia.maestro.macros.Macros#mkJoin">au.com.cba.omnia.maestro.macros.Macros.mkJoin</a> will automatically
+generate <a href="Join.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Join">Join</a>s when <code>A</code> is a product of thrift structs and <code>B</code> is a
+thrift struct, by matching fields between the output and input structs, or
+failing compilation if that is not possible.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.transform.Transform" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Transform[A,B]extendsProductwithSerializable"></a>
       <a id="Transform[A,B]:Transform[A,B]"></a>
       <h4 class="signature">
@@ -81,10 +98,17 @@ a new thrift structure.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Transform.html"><span class="name">Transform</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform.B">B</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Transform.html"><span class="name">Transform</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform.B">B</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">By convention, a function between thrift structures.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.transform.package@Transform[A,B]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">By convention, a function between thrift structures.</p><div class="fullcomment"><div class="comment cmt"><p>By convention, a function between thrift structures.</p><p><a href="../../macros/Macros$.html#mkTransform[A&lt;:com.twitter.scrooge.ThriftStruct,B&lt;:com.twitter.scrooge.ThriftStruct](transformations:(Symbol,Function1[A,_])*):au.com.cba.omnia.maestro.core.transform.Transform[A,B]" class="extmbr" name="au.com.cba.omnia.maestro.macros.Macros#mkTransform">au.com.cba.omnia.maestro.macros.Macros.mkTransform</a> will automatically
+generate <a href="Transform.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform">Transform</a>s when <code>A</code> and <code>B</code> are thrift structs, by matching
+their fields, or failing compilation if that is not possible.
+</p></div></div>
     </li></ol>
             </div>
 
@@ -114,6 +138,7 @@ a new thrift structure.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

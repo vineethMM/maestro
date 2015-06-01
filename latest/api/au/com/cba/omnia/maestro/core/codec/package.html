@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>codec - au.com.cba.omnia.maestro.core.codec</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a></p>
-        <h1>codec</h1>
+        <h1>codec</h1><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -58,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.codec.Decode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.codec.Decode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Decode[A]extendsProductwithSerializable"></a>
       <a id="Decode[A]:Decode[A]"></a>
       <h4 class="signature">
@@ -67,10 +75,17 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Decode.html"><span class="name">Decode</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a>) ⇒ <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[(<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a>, <span class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode.A">A</span>)]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Decode.html"><span class="name">Decode</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a>) ⇒ <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[(<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a>, <span class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode.A">A</span>)]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Decoder for a list of strings.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Decode[A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Decoder for a list of strings.</p><div class="fullcomment"><div class="comment cmt"><p>Decoder for a list of strings.</p><p>It also keeps track of the current position in the decode process.
+For optional fields if they have the supplied none value they are decoded as <code>None</code>.
+Empty strings are also decoded as None for optional fields except for optional string fields.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.codec.DecodeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DecodeError[A]extendsDecodeResult[A]withProductwithSerializable"></a>
       <a id="DecodeError[A]:DecodeError[A]"></a>
@@ -80,9 +95,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="DecodeError.html"><span class="name">DecodeError</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="remainder">remainder: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="counter">counter: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="reason">reason: <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a></span>)</span><span class="result"> extends <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeError.A">A</span>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="DecodeError.html"><span class="name">DecodeError</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="remainder">remainder: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="counter">counter: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="reason">reason: <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a></span>)</span><span class="result"> extends <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeError.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@DecodeError[A]extendsDecodeResult[A]withProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.DecodeOk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DecodeOk[A]extendsDecodeResult[A]withProductwithSerializable"></a>
@@ -93,9 +112,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="DecodeOk.html"><span class="name">DecodeOk</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="value">value: <span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeOk.A">A</span></span>)</span><span class="result"> extends <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeOk.A">A</span>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="DecodeOk.html"><span class="name">DecodeOk</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="value">value: <span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeOk.A">A</span></span>)</span><span class="result"> extends <a href="DecodeResult.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeResult">DecodeResult</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.DecodeOk.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@DecodeOk[A]extendsDecodeResult[A]withProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.DecodeResult" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="DecodeResult[A]extendsAnyRef"></a>
@@ -106,11 +129,15 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="DecodeResult.html"><span class="name">DecodeResult</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="DecodeResult.html"><span class="name">DecodeResult</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@DecodeResult[A]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.core.codec.Encode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.core.codec.Encode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Encode[A]extendsProductwithSerializable"></a>
       <a id="Encode[A]:Encode[A]"></a>
       <h4 class="signature">
@@ -119,10 +146,15 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Encode.html"><span class="name">Encode</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode.A">A</span>) ⇒ <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Encode.html"><span class="name">Encode</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode.A">A</span>) ⇒ <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Represents <code>A</code> as a list of string.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Encode[A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Represents <code>A</code> as a list of string.</p><div class="fullcomment"><div class="comment cmt"><p>Represents <code>A</code> as a list of string.</p><p>None values are encoded using the provided string.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.codec.NotEnoughInput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="NotEnoughInputextendsReasonwithProductwithSerializable"></a>
       <a id="NotEnoughInput:NotEnoughInput"></a>
@@ -132,9 +164,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="NotEnoughInput.html"><span class="name">NotEnoughInput</span></a><span class="params">(<span name="required">required: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="expected">expected: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="NotEnoughInput.html"><span class="name">NotEnoughInput</span></a><span class="params">(<span name="required">required: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="expected">expected: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@NotEnoughInputextendsReasonwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.ParseError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ParseErrorextendsReasonwithProductwithSerializable"></a>
@@ -145,9 +181,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ParseError.html"><span class="name">ParseError</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="expected">expected: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="error">error: <span class="extype" name="scalaz.TheseInstances.These">scalaz.\&amp;/.These</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Throwable">Throwable</span>]</span>)</span><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="ParseError.html"><span class="name">ParseError</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="expected">expected: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="error">error: <span class="extype" name="scalaz.TheseInstances.These">scalaz.\&amp;/.These</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Throwable">Throwable</span>]</span>)</span><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@ParseErrorextendsReasonwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.Reason" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ReasonextendsAnyRef"></a>
@@ -158,9 +198,13 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Reason.html"><span class="name">Reason</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="Reason.html"><span class="name">Reason</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@ReasonextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.Tag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Tag[A]extendsProductwithSerializable"></a>
@@ -171,10 +215,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Tag.html"><span class="name">Tag</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag.A">A</span>, _])]]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Tag.html"><span class="name">Tag</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="run">run: (<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]) ⇒ <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../data/Field.html" class="extype" name="au.com.cba.omnia.maestro.core.data.Field">Field</a>[<span class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag.A">A</span>, _])]]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Tags a row of cells with the column names for each cell.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Tag[A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Tags a row of cells with the column names for each cell.</p>
     </li></ol>
             </div>
 
@@ -191,10 +239,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Decode$.html"><span class="name">Decode</span></a><span class="result"> extends <span class="extype" name="shapeless.TypeClassCompanion">TypeClassCompanion</span>[<a href="Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">Decode</a>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Decode$.html"><span class="name">Decode</span></a><span class="result"> extends <span class="extype" name="shapeless.ProductTypeClassCompanion">ProductTypeClassCompanion</span>[<a href="Decode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Decode">Decode</a>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Encode companion object.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Decode" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Encode companion object.</p>
     </li><li name="au.com.cba.omnia.maestro.core.codec.DecodeResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DecodeResult"></a>
       <a id="DecodeResult:DecodeResult"></a>
@@ -206,7 +258,11 @@
       <span class="symbol">
         <a href="DecodeResult$.html"><span class="name">DecodeResult</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@DecodeResult" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.codec.Encode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Encode"></a>
@@ -217,10 +273,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Encode$.html"><span class="name">Encode</span></a><span class="result"> extends <span class="extype" name="shapeless.TypeClassCompanion">TypeClassCompanion</span>[<a href="Encode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode">Encode</a>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Encode$.html"><span class="name">Encode</span></a><span class="result"> extends <span class="extype" name="shapeless.ProductTypeClassCompanion">ProductTypeClassCompanion</span>[<a href="Encode.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Encode">Encode</a>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Encode companion object.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Encode" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Encode companion object.</p>
     </li><li name="au.com.cba.omnia.maestro.core.codec.Tag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Tag"></a>
       <a id="Tag:Tag"></a>
@@ -230,10 +290,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Tag$.html"><span class="name">Tag</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Tag$.html"><span class="name">Tag</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt"><a href="Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">Tag</a> Companion object.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@Tag" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><a href="Tag.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Tag">Tag</a> Companion object.</p>
     </li><li name="au.com.cba.omnia.maestro.core.codec.TooMuchInput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TooMuchInput"></a>
       <a id="TooMuchInput:TooMuchInput"></a>
@@ -243,9 +307,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="TooMuchInput$.html"><span class="name">TooMuchInput</span></a><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="TooMuchInput$.html"><span class="name">TooMuchInput</span></a><span class="result"> extends <a href="Reason.html" class="extype" name="au.com.cba.omnia.maestro.core.codec.Reason">Reason</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.codec.package@TooMuchInput" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>
@@ -272,6 +340,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

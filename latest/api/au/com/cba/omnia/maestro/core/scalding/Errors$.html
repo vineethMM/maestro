@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>Errors - au.com.cba.omnia.maestro.core.scalding.Errors</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
@@ -26,7 +30,13 @@
       <div id="definition">
         <img src="../../../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding">scalding</a></p>
-        <h1>Errors</h1>
+        <h1>Errors</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding">package scalding</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -39,9 +49,9 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e87c93fb39f4b21b3b7494a056346ab1c455010f//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/Errors.scala" target="_blank">Errors.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(ae3eb6d387ad24e21015ebde801e4a27ae694ac3)//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/scalding/Errors.scala" target="_blank">Errors.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -86,19 +96,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -107,10 +104,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -120,24 +121,15 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@##():Int" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -146,10 +138,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.twitter.scalding.LowPriorityFieldConversions#anyToFieldArg" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="anyToFieldArg(f:&lt;?&gt;):Comparable[_]"></a>
       <a id="anyToFieldArg(Any):Comparable[_]"></a>
@@ -159,9 +155,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">anyToFieldArg</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <span class="extype" name="java.lang.Comparable">Comparable</span>[_]</span>
+        <span class="name">anyToFieldArg</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <span class="extype" name="java.lang.Comparable">Comparable</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@anyToFieldArg(f:Any):Comparable[_]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>LowPriorityFieldConversions</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -174,7 +174,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#asList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asList(f:&lt;?&gt;):List[Comparable[_]]"></a>
@@ -187,7 +191,11 @@
       <span class="symbol">
         <span class="name">asList</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="java.lang.Comparable">Comparable</span>[_]]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@asList(f:cascading.tuple.Fields):List[Comparable[_]]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#asSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asSet(f:&lt;?&gt;):Set[Comparable[_]]"></a>
@@ -200,7 +208,11 @@
       <span class="symbol">
         <span class="name">asSet</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="java.lang.Comparable">Comparable</span>[_]]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@asSet(f:cascading.tuple.Fields):Set[Comparable[_]]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -211,9 +223,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@clone():Object" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -232,7 +248,11 @@
       <span class="symbol">
         <span class="name">defaultMode</span><span class="params">(<span name="fromFields">fromFields: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="toFields">toFields: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@defaultMode(fromFields:cascading.tuple.Fields,toFields:cascading.tuple.Fields):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#ensureUniqueFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensureUniqueFields(left:&lt;?&gt;,right:&lt;?&gt;,rightPipe:&lt;?&gt;):(cascading.tuple.Fields,cascading.pipe.Pipe)"></a>
@@ -245,7 +265,11 @@
       <span class="symbol">
         <span class="name">ensureUniqueFields</span><span class="params">(<span name="left">left: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="right">right: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="rightPipe">rightPipe: <span class="extype" name="cascading.pipe.Pipe">Pipe</span></span>)</span><span class="result">: (<span class="extype" name="cascading.tuple.Fields">Fields</span>, <span class="extype" name="cascading.pipe.Pipe">Pipe</span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@ensureUniqueFields(left:cascading.tuple.Fields,right:cascading.tuple.Fields,rightPipe:cascading.pipe.Pipe):(cascading.tuple.Fields,cascading.pipe.Pipe)" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#enumValueToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="enumValueToFields(x:Enumeration#Value):cascading.tuple.Fields"></a>
@@ -258,7 +282,11 @@
       <span class="symbol">
         <span class="name">enumValueToFields</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Enumeration.Value">Value</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@enumValueToFields(x:Enumeration#Value):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
@@ -269,9 +297,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a>
@@ -282,9 +314,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#fieldFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fieldFields[T&lt;:TraversableOnce[com.twitter.scalding.Field[_]]](f:T):com.twitter.scalding.RichFields"></a>
@@ -297,7 +333,11 @@
       <span class="symbol">
         <span class="name">fieldFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<span class="extype" name="com.twitter.scalding.Field">Field</span>[_]]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.fieldFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.RichFields">RichFields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@fieldFields[T&lt;:TraversableOnce[com.twitter.scalding.Field[_]]](f:T):com.twitter.scalding.RichFields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#fieldToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fieldToFields(f:com.twitter.scalding.Field[_]):com.twitter.scalding.RichFields"></a>
@@ -310,7 +350,11 @@
       <span class="symbol">
         <span class="name">fieldToFields</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.Field">Field</span>[_]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.RichFields">RichFields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@fieldToFields(f:com.twitter.scalding.Field[_]):com.twitter.scalding.RichFields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#fields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fields[T&lt;:TraversableOnce[Symbol]](f:T):cascading.tuple.Fields"></a>
@@ -321,9 +365,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Symbol" class="extype" target="_top">Symbol</a>]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.fields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">fields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.Symbol">Symbol</span>]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.fields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@fields[T&lt;:TraversableOnce[Symbol]](f:T):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#fieldsToRichFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fieldsToRichFields(fields:cascading.tuple.Fields):com.twitter.scalding.RichFields"></a>
@@ -336,7 +384,11 @@
       <span class="symbol">
         <span class="name">fieldsToRichFields</span><span class="params">(<span name="fields">fields: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.RichFields">RichFields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@fieldsToRichFields(fields:cascading.tuple.Fields):com.twitter.scalding.RichFields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -347,9 +399,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -366,9 +422,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fromEnum</span><span class="tparams">[<span name="T">T &lt;: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Enumeration" class="extype" target="_top">Enumeration</a></span>]</span><span class="params">(<span name="enumeration">enumeration: <span class="extype" name="com.twitter.scalding.FieldConversions.fromEnum.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">fromEnum</span><span class="tparams">[<span name="T">T &lt;: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Enumeration" class="extype" target="_top">Enumeration</a></span>]</span><span class="params">(<span name="enumeration">enumeration: <span class="extype" name="com.twitter.scalding.FieldConversions.fromEnum.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@fromEnum[T&lt;:Enumeration](enumeration:T):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
@@ -381,7 +441,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#getField" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getField(f:&lt;?&gt;,idx:&lt;?&gt;):cascading.tuple.Fields"></a>
@@ -392,9 +456,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getField</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="idx">idx: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">getField</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="idx">idx: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@getField(f:cascading.tuple.Fields,idx:Int):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors#handle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="handle[A](p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]],errors:com.twitter.scalding.Sourcewithcom.twitter.scalding.typed.TypedSink[Any]):com.twitter.scalding.TypedPipe[A]"></a>
@@ -405,9 +473,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">handle</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]]</span>, <span name="errors">errors: <span class="extype" name="com.twitter.scalding.Source">Source</span> with <span class="extype" name="com.twitter.scalding.typed.TypedSink">TypedSink</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]</span>
+        <span class="name">handle</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]]</span>, <span name="errors">errors: <span class="extype" name="com.twitter.scalding.Source">Source</span> with <span class="extype" name="com.twitter.scalding.typed.TypedSink">TypedSink</span>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.handle.A">A</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@handle[A](p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]],errors:com.twitter.scalding.Sourcewithcom.twitter.scalding.typed.TypedSink[Any]):com.twitter.scalding.TypedPipe[A]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="com.twitter.scalding.FieldConversions#hasInts" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hasInts(f:&lt;?&gt;):Boolean"></a>
@@ -418,9 +490,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hasInts</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">hasInts</span><span class="params">(<span name="f">f: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@hasInts(f:cascading.tuple.Fields):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
@@ -431,9 +507,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#intFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="intFields[T&lt;:TraversableOnce[Int]](f:T):cascading.tuple.Fields"></a>
@@ -444,9 +524,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">intFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.intFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">intFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.intFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@intFields[T&lt;:TraversableOnce[Int]](f:T):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#intToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="intToFields(x:Int):cascading.tuple.Fields"></a>
@@ -457,9 +541,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">intToFields</span><span class="params">(<span name="x">x: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">intToFields</span><span class="params">(<span name="x">x: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@intToFields(x:Int):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#integerToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="integerToFields(x:Integer):cascading.tuple.Fields"></a>
@@ -472,7 +560,11 @@
       <span class="symbol">
         <span class="name">integerToFields</span><span class="params">(<span name="x">x: <span class="extype" name="java.lang.Integer">Integer</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@integerToFields(x:Integer):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -483,9 +575,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -496,9 +592,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#newSymbol" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="newSymbol(avoid:&lt;?&gt;,guess:&lt;?&gt;,trial:&lt;?&gt;):Symbol"></a>
@@ -509,9 +609,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">newSymbol</span><span class="params">(<span name="avoid">avoid: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Symbol" class="extype" target="_top">Symbol</a>]</span>, <span name="guess">guess: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Symbol" class="extype" target="_top">Symbol</a></span>, <span name="trial">trial: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Symbol" class="extype" target="_top">Symbol</a></span>
+        <span class="name">newSymbol</span><span class="params">(<span name="avoid">avoid: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Symbol">Symbol</span>]</span>, <span name="guess">guess: <span class="extype" name="scala.Symbol">Symbol</span></span>, <span name="trial">trial: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <span class="extype" name="scala.Symbol">Symbol</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@newSymbol(avoid:Set[Symbol],guess:Symbol,trial:Int):Symbol" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd><dt>Annotations</dt><dd>
                 <span class="name">@tailrec</span><span class="args">()</span>
               
@@ -525,9 +629,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@notify():Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -538,9 +646,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#parseAnySeqToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="parseAnySeqToFields[T&lt;:TraversableOnce[Any]](anyf:T):cascading.tuple.Fields"></a>
@@ -551,9 +663,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">parseAnySeqToFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a>]</span>]</span><span class="params">(<span name="anyf">anyf: <span class="extype" name="com.twitter.scalding.FieldConversions.parseAnySeqToFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">parseAnySeqToFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a>]</span>]</span><span class="params">(<span name="anyf">anyf: <span class="extype" name="com.twitter.scalding.FieldConversions.parseAnySeqToFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@parseAnySeqToFields[T&lt;:TraversableOnce[Any]](anyf:T):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.LowPriorityFieldConversions#productToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="productToFields(f:Product):cascading.tuple.Fields"></a>
@@ -564,9 +680,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">productToFields</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">productToFields</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@productToFields(f:Product):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>LowPriorityFieldConversions</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors#safely" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="safely[A](path:String)(p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]]):com.twitter.scalding.TypedPipe[A]"></a>
@@ -579,7 +699,11 @@
       <span class="symbol">
         <span class="name">safely</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="p">p: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.TypedPipe">TypedPipe</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.Errors.safely.A">A</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@safely[A](path:String)(p:com.twitter.scalding.TypedPipe[scalaz.\/[String,A]]):com.twitter.scalding.TypedPipe[A]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="com.twitter.scalding.FieldConversions#strFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="strFields[T&lt;:TraversableOnce[String]](f:T):cascading.tuple.Fields"></a>
@@ -592,7 +716,11 @@
       <span class="symbol">
         <span class="name">strFields</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.TraversableOnce">TraversableOnce</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>]</span><span class="params">(<span name="f">f: <span class="extype" name="com.twitter.scalding.FieldConversions.strFields.T">T</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@strFields[T&lt;:TraversableOnce[String]](f:T):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#stringToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stringToFields(x:String):cascading.tuple.Fields"></a>
@@ -605,7 +733,11 @@
       <span class="symbol">
         <span class="name">stringToFields</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@stringToFields(x:String):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#symbolToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="symbolToFields(x:Symbol):cascading.tuple.Fields"></a>
@@ -616,9 +748,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">symbolToFields</span><span class="params">(<span name="x">x: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Symbol" class="extype" target="_top">Symbol</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">symbolToFields</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Symbol">Symbol</span></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@symbolToFields(x:Symbol):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -631,7 +767,11 @@
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
@@ -644,7 +784,11 @@
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@toString():String" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#tuple2ToFieldsPair" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="tuple2ToFieldsPair[T,U](pair:(T,U))(implicittf:T=&gt;cascading.tuple.Fields,implicituf:U=&gt;cascading.tuple.Fields):(cascading.tuple.Fields,cascading.tuple.Fields)"></a>
@@ -657,7 +801,11 @@
       <span class="symbol">
         <span class="name">tuple2ToFieldsPair</span><span class="tparams">[<span name="T">T</span>, <span name="U">U</span>]</span><span class="params">(<span name="pair">pair: (<span class="extype" name="com.twitter.scalding.FieldConversions.tuple2ToFieldsPair.T">T</span>, <span class="extype" name="com.twitter.scalding.FieldConversions.tuple2ToFieldsPair.U">U</span>)</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="tf">tf: (<span class="extype" name="com.twitter.scalding.FieldConversions.tuple2ToFieldsPair.T">T</span>) ⇒ <span class="extype" name="cascading.tuple.Fields">Fields</span></span>, <span name="uf">uf: (<span class="extype" name="com.twitter.scalding.FieldConversions.tuple2ToFieldsPair.U">U</span>) ⇒ <span class="extype" name="cascading.tuple.Fields">Fields</span></span>)</span><span class="result">: (<span class="extype" name="cascading.tuple.Fields">Fields</span>, <span class="extype" name="cascading.tuple.Fields">Fields</span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@tuple2ToFieldsPair[T,U](pair:(T,U))(implicittf:T=&gt;cascading.tuple.Fields,implicituf:U=&gt;cascading.tuple.Fields):(cascading.tuple.Fields,cascading.tuple.Fields)" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="com.twitter.scalding.FieldConversions#unitToFields" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="unitToFields(u:Unit):cascading.tuple.Fields"></a>
@@ -668,9 +816,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">unitToFields</span><span class="params">(<span name="u">u: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
+        <span class="name">unitToFields</span><span class="params">(<span name="u">u: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@unitToFields(u:Unit):cascading.tuple.Fields" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>FieldConversions</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
@@ -681,9 +833,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@wait():Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -700,9 +856,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -719,9 +879,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.Errors$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -743,9 +907,9 @@
             </div><div class="parent" name="com.twitter.scalding.LowPriorityFieldConversions">
               <h3>Inherited from <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span></h3>
             </div><div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>
@@ -762,6 +926,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

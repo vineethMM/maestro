@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>macros - au.com.cba.omnia.maestro.macros</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a></p>
-        <h1>macros</h1>
+        <h1>macros</h1><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -39,9 +47,9 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e87c93fb39f4b21b3b7494a056346ab1c455010f//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(ae3eb6d387ad24e21015ebde801e4a27ae694ac3)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -81,7 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="MacroSupportextendsAnyRef"></a>
       <a id="MacroSupport:MacroSupport"></a>
       <h4 class="signature">
@@ -90,23 +98,37 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="MacroSupport.html"><span class="name">MacroSupport</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="MacroSupport.html"><span class="name">MacroSupport</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Provides implicit Decode, Tag, etc.</p>
-    </li><li name="au.com.cba.omnia.maestro.macros.automap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@MacroSupportextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides implicit Decode, Tag, etc.</p><div class="fullcomment"><div class="comment cmt"><p>Provides implicit Decode, Tag, etc. views for a ThriftStruct.</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.automap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="automapextendsAnnotationwithStaticAnnotation"></a>
       <a id="automap:automap"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">macro </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="automap.html"><span class="name">automap</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.annotation.Annotation" class="extype" target="_top">Annotation</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.annotation.StaticAnnotation" class="extype" target="_top">StaticAnnotation</a></span>
+        <a href="automap.html"><span class="name">automap</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.annotation.Annotation" class="extype" target="_top">Annotation</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.annotation.StaticAnnotation" class="extype" target="_top">StaticAnnotation</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@automapextendsAnnotationwithStaticAnnotation" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@compileTimeOnly</span><span class="args">(<span>
       
+      <span class="defval" name="&quot;macro annotation could not be expanded (the most common reason for that is that you need to enable the macro paradise plugin; another possibility is that you try to use macro annotation in the same compilation run that defines it)&quot;">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.macros.body" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="bodyextendsAnnotationwithStaticAnnotation"></a>
       <a id="body:body"></a>
@@ -116,9 +138,13 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="body.html"><span class="name">body</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.annotation.Annotation" class="extype" target="_top">Annotation</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.annotation.StaticAnnotation" class="extype" target="_top">StaticAnnotation</a></span>
+        <a href="body.html"><span class="name">body</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.annotation.Annotation" class="extype" target="_top">Annotation</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.annotation.StaticAnnotation" class="extype" target="_top">StaticAnnotation</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@bodyextendsAnnotationwithStaticAnnotation" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>
@@ -138,9 +164,13 @@
       <span class="symbol">
         <a href="DecodeMacro$.html"><span class="name">DecodeMacro</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@DecodeMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.EncodeMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.EncodeMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="EncodeMacro"></a>
       <a id="EncodeMacro:EncodeMacro"></a>
       <h4 class="signature">
@@ -151,9 +181,14 @@
       <span class="symbol">
         <a href="EncodeMacro$.html"><span class="name">EncodeMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Converts a thrift struct into a list of its fields.</p>
-    </li><li name="au.com.cba.omnia.maestro.macros.FieldsMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@EncodeMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Converts a thrift struct into a list of its fields.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a thrift struct into a list of its fields.</p><p>Each field is encoded as the <span class="extype" name="Val">Val</span> corresponding to its type.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.FieldsMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="FieldsMacro"></a>
       <a id="FieldsMacro:FieldsMacro"></a>
       <h4 class="signature">
@@ -164,9 +199,15 @@
       <span class="symbol">
         <a href="FieldsMacro$.html"><span class="name">FieldsMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">A macro that generates a <code>Field</code> for every field in the thrift struct.</p>
-    </li><li name="au.com.cba.omnia.maestro.macros.HumbugDecodeMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@FieldsMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A macro that generates a <code>Field</code> for every field in the thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>A macro that generates a <code>Field</code> for every field in the thrift struct. All the fields are
+members of FieldsWrapper.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.HumbugDecodeMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="HumbugDecodeMacro"></a>
       <a id="HumbugDecodeMacro:HumbugDecodeMacro"></a>
       <h4 class="signature">
@@ -177,8 +218,60 @@
       <span class="symbol">
         <a href="HumbugDecodeMacro$.html"><span class="name">HumbugDecodeMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Creates a custom Decode for the given thrift struct where the scala code is generated by Humbug.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@HumbugDecodeMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates a custom Decode for the given thrift struct where the scala code is generated by Humbug.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a custom Decode for the given thrift struct where the scala code is generated by Humbug.</p><p>The Decode will look like this:</p><pre>Decode((none, source, position) <span class="kw">=&gt;</span> {
+  <span class="kw">if</span> (source.length &lt; <span class="num">7</span>)
+    DecodeError(source, position, NotEnoughInput(<span class="num">7</span>, <span class="lit">"au.com.cba.omnia.maestro.test.thrift.humbug.Types"</span>))
+  <span class="kw">else</span>
+    {
+      <span class="kw">val</span> fields = source.take(<span class="num">7</span>).toArray
+      <span class="kw">var</span> index = -<span class="num">1</span>
+      <span class="kw">var</span> tag = <span class="lit">""</span>
+      <span class="kw">try</span> {
+        <span class="kw">val</span> struct = <span class="kw">new</span> Types()
+        struct._1 = fields(<span class="num">0</span>)
+        {
+          tag = <span class="lit">"Boolean"</span>
+          index = <span class="num">1</span>
+          struct._2 = fields(index).toBoolean
+        }
+        {
+          tag = <span class="lit">"Int"</span>
+          index = <span class="num">2</span>
+          struct._3 = fields(index).toInt
+        }
+        {
+          tag = <span class="lit">"Long"</span>
+          index = <span class="num">3</span>
+          struct._4 = fields(index).toLong
+        }
+        {
+          tag = <span class="lit">"Double"</span>
+          index = <span class="num">4</span>
+          struct._5 = fields(index).toDouble
+        }
+        {
+          tag = <span class="lit">"Option[Int]"</span>
+          index = <span class="num">5</span>
+          struct._6 = <span class="kw">if</span> (fields(index).isEmpty || fields(index) == none)
+            <span class="std">Option</span>.empty[<span class="std">Int</span>]
+          <span class="kw">else</span>
+            <span class="std">Option</span>(fields(index).toInt)
+        }
+        struct._7 = <span class="kw">if</span> (fields(<span class="num">6</span>) == none)
+          <span class="std">Option</span>.empty[<span class="std">String</span>]
+        <span class="kw">else</span>
+          <span class="std">Option</span>(fields(<span class="num">6</span>))
+        DecodeOk(scala.Tuple3(source.drop(<span class="num">7</span>), position + <span class="num">7</span>, struct))
+      } <span class="kw">catch</span> {
+        <span class="kw">case</span> NonFatal((e @ _)) <span class="kw">=&gt;</span> DecodeError(source.drop(index - position), position + index, ParseError(fields(index), tag, That(e)))
+      }
+    }
+})</pre></div></div>
     </li><li name="au.com.cba.omnia.maestro.macros.Inspect" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Inspect"></a>
       <a id="Inspect:Inspect"></a>
@@ -190,9 +283,13 @@
       <span class="symbol">
         <a href="Inspect$.html"><span class="name">Inspect</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@Inspect" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.JoinMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.JoinMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JoinMacro"></a>
       <a id="JoinMacro:JoinMacro"></a>
       <h4 class="signature">
@@ -203,10 +300,23 @@
       <span class="symbol">
         <a href="JoinMacro$.html"><span class="name">JoinMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Macro to automatically derive transformations from a tuple of thrift structs
-to one resulting output thrift struct.</p>
-    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@JoinMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><p>The macro will generate a <code>Join</code> value which matches input fields to
+output fields if they have the same name and conforming types. If multiple
+input fields match, they must have the same values at runtime or the <code>Join</code>
+value will throw an exception.</p><p>Compilation will succeed when:
+- The input type is a product (e.g. tuple) of thrift structures.
+- Every field in the output thrift struct has matching fields (fields with
+  the same name) amongst the input thrift structs.
+- Every matching input field's type conforms to the type of it's output field.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.MacroSupport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MacroSupport"></a>
       <a id="MacroSupport:MacroSupport"></a>
       <h4 class="signature">
@@ -217,8 +327,12 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="MacroSupport$.html"><span class="name">MacroSupport</span></a><span class="result"> extends <a href="MacroSupport.html" class="extype" name="au.com.cba.omnia.maestro.macros.MacroSupport">MacroSupport</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Provides implicit Decode, Tag, etc.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@MacroSupport" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides implicit Decode, Tag, etc.</p><div class="fullcomment"><div class="comment cmt"><p>Provides implicit Decode, Tag, etc. views for a ThriftStruct.</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.macros.MacroUtils" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MacroUtils"></a>
       <a id="MacroUtils:MacroUtils"></a>
@@ -230,7 +344,11 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="MacroUtils$.html"><span class="name">MacroUtils</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@MacroUtils" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.macros.Macros" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Macros"></a>
@@ -243,9 +361,13 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="Macros$.html"><span class="name">Macros</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@Macros" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.ScroogeDecodeMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.ScroogeDecodeMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ScroogeDecodeMacro"></a>
       <a id="ScroogeDecodeMacro:ScroogeDecodeMacro"></a>
       <h4 class="signature">
@@ -256,8 +378,53 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="ScroogeDecodeMacro$.html"><span class="name">ScroogeDecodeMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Creates a custom Decode for the given thrift struct where the scala code is generated by Scrooge.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@ScroogeDecodeMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates a custom Decode for the given thrift struct where the scala code is generated by Scrooge.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a custom Decode for the given thrift struct where the scala code is generated by Scrooge.</p><p>The Decode will look like this:</p><pre>Decode((none, source, position) <span class="kw">=&gt;</span> {
+  <span class="kw">if</span> (source.length &lt; <span class="num">7</span>)
+    DecodeError(source, position, NotEnoughInput(<span class="num">7</span>, <span class="lit">"au.com.cba.omnia.maestro.test.thrift.scrooge.Types"</span>))
+  <span class="kw">else</span>
+    {
+      <span class="kw">val</span> fields = source.take(<span class="num">7</span>).toArray
+      <span class="kw">var</span> index  = -<span class="num">1</span>
+      <span class="kw">var</span> tag    = <span class="lit">""</span>
+      <span class="kw">try</span> {
+        <span class="kw">val</span> result = Types.apply(fields(<span class="num">0</span>), {
+          tag = <span class="lit">"Boolean"</span>
+          index = <span class="num">1</span>
+          fields(index).toBoolean
+        }, {
+          tag = <span class="lit">"Int"</span>
+          index = <span class="num">2</span>
+          fields(index).toInt
+        }, {
+          tag = <span class="lit">"Long"</span>
+          index = <span class="num">3</span>
+          fields(index).toLong
+        }, {
+          tag = <span class="lit">"Double"</span>
+          index = <span class="num">4</span>
+          fields(index).toDouble
+        }, {
+          tag = <span class="lit">"Option[Int]"</span>
+          index = <span class="num">5</span>
+          <span class="kw">if</span> (fields(index).isEmpty || fields(index) == none)
+            <span class="std">Option</span>.empty[<span class="std">Int</span>]
+          <span class="kw">else</span>
+            <span class="std">Option</span>(fields(index).toInt)
+        }, <span class="kw">if</span> (fields(<span class="num">6</span>) == none)
+          <span class="std">Option</span>.empty[<span class="std">String</span>]
+        <span class="kw">else</span>
+          <span class="std">Option</span>(fields(<span class="num">6</span>)))
+        DecodeOk(scala.Tuple3(source.drop(<span class="num">7</span>), position + <span class="num">7</span>, result))
+      } <span class="kw">catch</span> {
+        <span class="kw">case</span> NonFatal((e @ _)) <span class="kw">=&gt;</span> DecodeError(source.drop(index - position), position + index, ParseError(fields(index), tag, That(e)))
+      }
+    }
+})</pre></div></div>
     </li><li name="au.com.cba.omnia.maestro.macros.TagMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TagMacro"></a>
       <a id="TagMacro:TagMacro"></a>
@@ -269,9 +436,13 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="TagMacro$.html"><span class="name">TagMacro</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@TagMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.TransformMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.TransformMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TransformMacro"></a>
       <a id="TransformMacro:TransformMacro"></a>
       <h4 class="signature">
@@ -282,8 +453,16 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="TransformMacro$.html"><span class="name">TransformMacro</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Macro to automatically derive Transformations from one thrift struct to another.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@TransformMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Macro to automatically derive Transformations from one thrift struct to another.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive Transformations from one thrift struct to another.</p><p>It can take a variable number of rules that determine how to calculate the value for the
+specified target field. Target fields that don't have specified rules are copied from a source
+field with the same name. If there are no source fields with the same name, and no explicit
+transformation exists to populate the target field, then the compilation will fail.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.macros.VersionInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="VersionInfo"></a>
       <a id="VersionInfo:VersionInfo"></a>
@@ -295,9 +474,13 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="VersionInfo$.html"><span class="name">VersionInfo</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@VersionInfo" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.automap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.automap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="automap"></a>
       <a id="automap:automap"></a>
       <h4 class="signature">
@@ -308,8 +491,19 @@ to one resulting output thrift struct.</p>
       <span class="symbol">
         <a href="automap$.html"><span class="name">automap</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Automapper for Thrift structs.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@automap" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Automapper for Thrift structs.</p><div class="fullcomment"><div class="comment cmt"><p>Automapper for Thrift structs.</p><p>One or more input structs are mapped to a single output struct, using a custom syntax to
+define mapping rules for each field. Output struct fields for which mapping rules are
+unspecified are mapped to matching fields with the same name and type in the input structs.
+If more than one such input candidate exists, all structs with a field by this name must
+agree on its value, otherwise a runtime exception is raised.</p><p>To use the automapper, declare a method with the desired signature, assign to it a block of
+transformation rules and annotate it with @automapper. The macro fills in the method with the
+required logic. A simple use of the automapper annotation macro might look like this:
+</p></div></div>
     </li></ol>
             </div>
 
@@ -320,9 +514,9 @@ to one resulting output thrift struct.</p>
 
         <div id="inheritedMembers">
         <div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>
@@ -339,6 +533,7 @@ to one resulting output thrift struct.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

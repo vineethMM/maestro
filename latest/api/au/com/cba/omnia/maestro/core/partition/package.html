@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>partition - au.com.cba.omnia.maestro.core.partition</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a></p>
-        <h1>partition</h1>
+        <h1>partition</h1><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.partition.package" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -58,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.partition.Partition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.partition.Partition" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Partition[A,B]extendsProductwithSerializable"></a>
       <a id="Partition[A,B]:Partition[A,B]"></a>
       <h4 class="signature">
@@ -67,11 +75,18 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Partition.html"><span class="name">Partition</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="fieldNames">fieldNames: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="extract">extract: (<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.B">B</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Partition.html"><span class="name">Partition</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="fieldNames">fieldNames: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="extract">extract: (<span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition.B">B</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Partitioning schema to create partition <code>B</code>, usually a string or tuple of strings
-from <code>A</code>.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.partition.package@Partition[A,B]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Partitioning schema to create partition <code>B</code>, usually a string or tuple of strings
+from <code>A</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Partitioning schema to create partition <code>B</code>, usually a string or tuple of strings
+from <code>A</code>.</p><p>It has the names of the partition columns, a way to get the partition values from an instance
+of <code>A</code> and a pattern to create from the values, e.g <code>&quot;id=%s&quot;</code>.
+</p></div></div>
     </li></ol>
             </div>
 
@@ -90,8 +105,12 @@ from <code>A</code>.</p>
       <span class="symbol">
         <a href="HivePartition$.html"><span class="name">HivePartition</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Various partitioning schemes using a hive style output path such as
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.partition.package@HivePartition" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Various partitioning schemes using a hive style output path such as
 <code>field_name=value</code>.</p>
     </li><li name="au.com.cba.omnia.maestro.core.partition.Partition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Partition"></a>
@@ -102,10 +121,14 @@ from <code>A</code>.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Partition$.html"><span class="name">Partition</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Partition$.html"><span class="name">Partition</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Various partitioning schemes.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.partition.package@Partition" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Various partitioning schemes.</p>
     </li></ol>
             </div>
 
@@ -131,6 +154,7 @@ from <code>A</code>.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

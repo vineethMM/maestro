@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>scalding - au.com.cba.omnia.maestro.core.scalding</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
@@ -26,7 +30,11 @@
       <div id="definition">
         <img src="../../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro.core">core</a></p>
-        <h1>scalding</h1>
+        <h1>scalding</h1><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -58,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="CombineSequenceFileInputFormat[K,V]extendsCombineFileInputFormat[K,V]"></a>
       <a id="CombineSequenceFileInputFormat[K,V]:CombineSequenceFileInputFormat[K,V]"></a>
       <h4 class="signature">
@@ -69,8 +77,14 @@
       <span class="symbol">
         <a href="CombineSequenceFileInputFormat.html"><span class="name">CombineSequenceFileInputFormat</span></a><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapred.lib.CombineFileInputFormat">CombineFileInputFormat</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombineSequenceFileInputFormat.V">V</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">The input format for CombinedSequenceFile</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@CombineSequenceFileInputFormat[K,V]extendsCombineFileInputFormat[K,V]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The input format for CombinedSequenceFile</p><div class="fullcomment"><div class="comment cmt"><p>The input format for CombinedSequenceFile</p><p>When we upgrade to a later version of hadoop, we should be able to remove
+this class in favor of hadoop's version.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CombinedSequenceFile[K&lt;:org.apache.hadoop.io.Writable,V&lt;:org.apache.hadoop.io.Writable]extendsWritableSequenceFile[K,V]"></a>
       <a id="CombinedSequenceFile[K&lt;:Writable,V&lt;:Writable]:CombinedSequenceFile[K,V]"></a>
@@ -82,9 +96,13 @@
       <span class="symbol">
         <a href="CombinedSequenceFile.html"><span class="name">CombinedSequenceFile</span></a><span class="tparams">[<span name="K">K &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="V">V &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>]</span><span class="result"> extends <span class="extype" name="com.twitter.scalding.WritableSequenceFile">WritableSequenceFile</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFile.V">V</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">A WritableSequenceFile which merges the input splits sent to downstream mappers.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFileScheme" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@CombinedSequenceFile[K&lt;:org.apache.hadoop.io.Writable,V&lt;:org.apache.hadoop.io.Writable]extendsWritableSequenceFile[K,V]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A WritableSequenceFile which merges the input splits sent to downstream mappers.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.CombinedSequenceFileScheme" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="CombinedSequenceFileSchemeextendsWritableSequenceFile"></a>
       <a id="CombinedSequenceFileScheme:CombinedSequenceFileScheme"></a>
       <h4 class="signature">
@@ -95,8 +113,14 @@
       <span class="symbol">
         <a href="CombinedSequenceFileScheme.html"><span class="name">CombinedSequenceFileScheme</span></a><span class="result"> extends <span class="extype" name="cascading.scheme.hadoop.WritableSequenceFile">WritableSequenceFile</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">The cascading scheme for CombinedSequenceFile</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@CombinedSequenceFileSchemeextendsWritableSequenceFile" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The cascading scheme for CombinedSequenceFile</p><div class="fullcomment"><div class="comment cmt"><p>The cascading scheme for CombinedSequenceFile</p><p>We only merge the splits sent to downstream mappers, not the data coming
+from upstream.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ExecutionOpsextendsAnyRef"></a>
       <a id="ExecutionOps:ExecutionOps"></a>
@@ -106,11 +130,15 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ExecutionOps.html"><span class="name">ExecutionOps</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="ExecutionOps.html"><span class="name">ExecutionOps</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ExecutionOpsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailure" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JobFailureextendsJobStatuswithProductwithSerializable"></a>
       <a id="JobFailure:JobFailure"></a>
       <h4 class="signature">
@@ -119,11 +147,16 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="JobFailure.html"><span class="name">JobFailure</span></a><span class="params">(<span name="exitCode">exitCode: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobFailure.html"><span class="name">JobFailure</span></a><span class="params">(<span name="exitCode">exitCode: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">The job failed</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailureException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobFailureextendsJobStatuswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The job failed</p><div class="fullcomment"><div class="comment cmt"><p>The job failed</p><p>The exit code has to be negative.
+</p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailureException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JobFailureExceptionextendsExceptionwithProductwithSerializable"></a>
       <a id="JobFailureException:JobFailureException"></a>
       <h4 class="signature">
@@ -132,10 +165,17 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="JobFailureException.html"><span class="name">JobFailureException</span></a><span class="params">(<span name="exitCode">exitCode: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobFailureException.html"><span class="name">JobFailureException</span></a><span class="params">(<span name="exitCode">exitCode: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Exception representation of the <span class="extype" name="JobFailureStatus">JobFailureStatus</span> status.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobFailureExceptionextendsExceptionwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exception representation of the <span class="extype" name="JobFailureStatus">JobFailureStatus</span> status.</p><div class="fullcomment"><div class="comment cmt"><p>Exception representation of the <span class="extype" name="JobFailureStatus">JobFailureStatus</span> status.</p><p>This is used so that we can represent these statuses as errors that Execution understands.
+A better way would be to create a proper wrapper with Execution but this is a more lightweight
+bridging solution.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.JobStatus" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="JobStatusextendsAnyRef"></a>
       <a id="JobStatus:JobStatus"></a>
@@ -145,11 +185,15 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="JobStatus.html"><span class="name">JobStatus</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="JobStatus.html"><span class="name">JobStatus</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">An enumeration representing possible program status</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobStatusextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An enumeration representing possible program status</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroJob" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="MaestroJobextendsSerializable"></a>
       <a id="MaestroJob:MaestroJob"></a>
       <h4 class="signature">
@@ -158,10 +202,16 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="MaestroJob.html"><span class="name">MaestroJob</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="MaestroJob.html"><span class="name">MaestroJob</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Create an object which extends this trait to create a main class using the execution api.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@MaestroJobextendsSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an object which extends this trait to create a main class using the execution api.</p><div class="fullcomment"><div class="comment cmt"><p>Create an object which extends this trait to create a main class using the execution api.</p><p>Objects extending this trait must supply a:</p><ul><li>job execution: this is the main execution to run for the Maestro job</li><li>attemptsExceeded execution: this execution should be run if the job execution fails too many times.</li><li>logger: This will be used to log error messages from the above two executions.</li></ul><p>The job will exit with an error code describing the status of the program.
+The software running this program can then take the appropriate action.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ResultException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ResultExceptionextendsExceptionwithProductwithSerializable"></a>
       <a id="ResultException:ResultException"></a>
@@ -171,10 +221,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ResultException.html"><span class="name">ResultException</span></a><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="stacktrace">stacktrace: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>, <span name="exception">exception: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Throwable">Throwable</span>] = <span class="symbol">scala.None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="ResultException.html"><span class="name">ResultException</span></a><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="stacktrace">stacktrace: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>, <span name="exception">exception: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Throwable">Throwable</span>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Wraps up Results in a consistent way that also includes a stack trace of the place that produced
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ResultExceptionextendsExceptionwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps up Results in a consistent way that also includes a stack trace of the place that produced
 the result.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichExecution[A]extendsProductwithSerializable"></a>
@@ -185,10 +239,14 @@ the result.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RichExecution.html"><span class="name">RichExecution</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="execution">execution: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="RichExecution.html"><span class="name">RichExecution</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="execution">execution: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.RichExecution.A">A</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Pimps an Execution instance.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@RichExecution[A]extendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Pimps an Execution instance.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.RichExecutionObject" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichExecutionObjectextendsResultantOps[com.twitter.scalding.Execution]withProductwithSerializable"></a>
       <a id="RichExecutionObject:RichExecutionObject"></a>
@@ -198,11 +256,15 @@ the result.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RichExecutionObject.html"><span class="name">RichExecutionObject</span></a><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="RichExecutionObject.html"><span class="name">RichExecutionObject</span></a><span class="params">(<span name="exec">exec: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>.type</span>)</span><span class="result"> extends <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Pimps the Execution object.</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@RichExecutionObjectextendsResultantOps[com.twitter.scalding.Execution]withProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Pimps the Execution object.</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="SequenceFileRecordReaderWrapper[K,V]extendsRecordReader[K,V]"></a>
       <a id="SequenceFileRecordReaderWrapper[K,V]:SequenceFileRecordReaderWrapper[K,V]"></a>
       <h4 class="signature">
@@ -213,8 +275,14 @@ the result.</p>
       <span class="symbol">
         <a href="SequenceFileRecordReaderWrapper.html"><span class="name">SequenceFileRecordReaderWrapper</span></a><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapred.RecordReader">RecordReader</span>[<span class="extype" name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.core.scalding.SequenceFileRecordReaderWrapper.V">V</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">The reader that CombineFileRecordReader delegates to to read from the sequence file</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@SequenceFileRecordReaderWrapper[K,V]extendsRecordReader[K,V]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The reader that CombineFileRecordReader delegates to to read from the sequence file</p><div class="fullcomment"><div class="comment cmt"><p>The reader that CombineFileRecordReader delegates to to read from the sequence file</p><p>This is just a wrapper that converts the (CombineFileSplit, index) pair supplied
+by CombineFileRecordReader into the FileSplit required by SequenceFileInputFormat
+</p></div></div>
     </li></ol>
             </div>
 
@@ -231,10 +299,14 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="CombinedSequenceFile$.html"><span class="name">CombinedSequenceFile</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="CombinedSequenceFile$.html"><span class="name">CombinedSequenceFile</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Factory for CombinedSequenceFile</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@CombinedSequenceFile" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for CombinedSequenceFile</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ConfHelper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ConfHelper"></a>
       <a id="ConfHelper:ConfHelper"></a>
@@ -246,8 +318,12 @@ the result.</p>
       <span class="symbol">
         <a href="ConfHelper$.html"><span class="name">ConfHelper</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Collection of utility methods around get/setting Config.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ConfHelper" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Collection of utility methods around get/setting Config.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ConfKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ConfKeys"></a>
       <a id="ConfKeys:ConfKeys"></a>
@@ -259,8 +335,12 @@ the result.</p>
       <span class="symbol">
         <a href="ConfKeys$.html"><span class="name">ConfKeys</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Keys for job conf properties</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ConfKeys" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Keys for job conf properties</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Errors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Errors"></a>
       <a id="Errors:Errors"></a>
@@ -272,7 +352,11 @@ the result.</p>
       <span class="symbol">
         <a href="Errors$.html"><span class="name">Errors</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@Errors" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExecutionOps"></a>
@@ -285,7 +369,11 @@ the result.</p>
       <span class="symbol">
         <a href="ExecutionOps$.html"><span class="name">ExecutionOps</span></a><span class="result"> extends <a href="ExecutionOps.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.ExecutionOps">ExecutionOps</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ExecutionOps" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFailure" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="JobFailure"></a>
@@ -296,10 +384,14 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="JobFailure$.html"><span class="name">JobFailure</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobFailure$.html"><span class="name">JobFailure</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object for JobFailure to create a default JobFailure.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobFailure" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for JobFailure to create a default JobFailure.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.JobFinished" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="JobFinished"></a>
       <a id="JobFinished:JobFinished"></a>
@@ -309,10 +401,14 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="JobFinished$.html"><span class="name">JobFinished</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobFinished$.html"><span class="name">JobFinished</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">The job succeeded and had work to do</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobFinished" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The job succeeded and had work to do</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNeverReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="JobNeverReady"></a>
       <a id="JobNeverReady:JobNeverReady"></a>
@@ -322,10 +418,14 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="JobNeverReady$.html"><span class="name">JobNeverReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobNeverReady$.html"><span class="name">JobNeverReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">The Job was never ready, and could not be retried any more</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobNeverReady" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The Job was never ready, and could not be retried any more</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNotReady" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="JobNotReady"></a>
       <a id="JobNotReady:JobNotReady"></a>
@@ -335,11 +435,15 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="JobNotReady$.html"><span class="name">JobNotReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobNotReady$.html"><span class="name">JobNotReady</span></a><span class="result"> extends <a href="JobStatus.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobStatus">JobStatus</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">The job is not ready to run: it's pre-requisites are not available</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNotReadyException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobNotReady" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The job is not ready to run: it's pre-requisites are not available</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.JobNotReadyException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JobNotReadyException"></a>
       <a id="JobNotReadyException:JobNotReadyException"></a>
       <h4 class="signature">
@@ -348,10 +452,17 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="JobNotReadyException$.html"><span class="name">JobNotReadyException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="JobNotReadyException$.html"><span class="name">JobNotReadyException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Exception representation of the <a href="JobNotReady$.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobNotReady">JobNotReady</a> status.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@JobNotReadyException" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exception representation of the <a href="JobNotReady$.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobNotReady">JobNotReady</a> status.</p><div class="fullcomment"><div class="comment cmt"><p>Exception representation of the <a href="JobNotReady$.html" class="extype" name="au.com.cba.omnia.maestro.core.scalding.JobNotReady">JobNotReady</a> status.</p><p>This is used so that we can represent these statuses as errors that Execution understands.
+A better way would be to create a proper wrapper with Execution but this is a more lightweight
+bridging solution.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.MaestroExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MaestroExecution"></a>
       <a id="MaestroExecution:MaestroExecution"></a>
@@ -363,8 +474,12 @@ the result.</p>
       <span class="symbol">
         <a href="MaestroExecution$.html"><span class="name">MaestroExecution</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Maestro specific Execution functions.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@MaestroExecution" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Maestro specific Execution functions.</p>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.Paths" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Paths"></a>
       <a id="Paths:Paths"></a>
@@ -376,9 +491,13 @@ the result.</p>
       <span class="symbol">
         <a href="Paths$.html"><span class="name">Paths</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Executions that return paths</p>
-    </li><li name="au.com.cba.omnia.maestro.core.scalding.ResultException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@Paths" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Executions that return paths</p>
+    </li><li name="au.com.cba.omnia.maestro.core.scalding.ResultException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ResultException"></a>
       <a id="ResultException:ResultException"></a>
       <h4 class="signature">
@@ -387,11 +506,22 @@ the result.</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="ResultException$.html"><span class="name">ResultException</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="ResultException$.html"><span class="name">ResultException</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">These helper methods provide a lossy mapping from <span class="extype" name="Result">Result</span> to an exception Execution can
-handle and a back again.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@ResultException" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">These helper methods provide a lossy mapping from <span class="extype" name="Result">Result</span> to an exception Execution can
+handle and a back again.</p><div class="fullcomment"><div class="comment cmt"><p>These helper methods provide a lossy mapping from <span class="extype" name="Result">Result</span> to an exception Execution can
+handle and a back again.</p><p>These helper methods map any result to a ResultException. If the result already contains a
+ResultException that is used, otherwise a new ResultException is created with the provided stack
+trace.
+All three error cases from Result are mapped to a ResultException. However, when mapping from
+ResultException to Result only the <code>This</code> error case is recovered, where the exception is a
+ResultException.
+</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.scalding.StatKeys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StatKeys"></a>
       <a id="StatKeys:StatKeys"></a>
@@ -403,8 +533,12 @@ handle and a back again.</p>
       <span class="symbol">
         <a href="StatKeys$.html"><span class="name">StatKeys</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Common counter keys.</p>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.scalding.package@StatKeys" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common counter keys.</p>
     </li></ol>
             </div>
 
@@ -430,6 +564,7 @@ handle and a back again.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../../lib/template.js"></script>
+
+
     </body>
       </html>

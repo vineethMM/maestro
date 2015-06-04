@@ -45,13 +45,10 @@ object TransformMacro {
 
     val srcType       = c.universe.weakTypeOf[A]
     val dstType       = c.universe.weakTypeOf[B]
-    val humbugTyp     = c.universe.weakTypeOf[HumbugThriftStruct]
     val srcFieldsInfo = Inspect.fields[A](c).map { case (f, n) => (WordUtils.uncapitalize(n), f) }.toMap
     val dstFields     = Inspect.fields[B](c).map { case (f, n)  => (f, WordUtils.uncapitalize(n)) }
     val expectedTypes = dstFields.map { case (f, n) => (n, f.returnType) }.toMap
-
-    val in  = TermName(c.freshName)
-    val out = TermName(c.freshName)
+    val in            = TermName(c.freshName)
 
     /** Fail compilation with nice error message. */
     def abort(msg: String) =
@@ -96,29 +93,6 @@ object TransformMacro {
       }
     }
 
-    /** Create the transform for Humbug thrift structs.*/
-    def humbugTransform(transforms: List[(String, c.Tree)]) = {
-      val mapped = transforms.map { case (n, f) =>
-        val t = TermName(n)
-        q"$out.$t = $f"
-      }
-
-      q"""
-        val $out = new $dstType()
-        ..$mapped
-
-        $out
-      """
-    }
-
-    /** Create the transform for Scrooge thrift structs.*/
-    def scroogeTransform(transforms: List[(String, c.Tree)]) = {
-      val companion = dstType.typeSymbol.companion
-      val order = dstFields.map(_._2).zipWithIndex.toMap
-      val mapped = transforms.map { case (n, f) => (order(n), f)}.sortBy(_._1).map(_._2)
-      Apply(Select(Ident(companion), TermName("apply")), mapped)
-    }
-
     val (invalidManuals, manuals) =
       transformations
         .map(t => parseTransform(t))
@@ -143,14 +117,10 @@ object TransformMacro {
       abort(invalids.mkString("\n"))
     }
 
-    val body = dstType match {
-      case t if t <:< humbugTyp => humbugTransform(defaults ++ manuals)
-      case _                    => scroogeTransform(defaults ++ manuals)
-    }
-
-    val result = q"""
+    val combined = Inspect.constructNamed[B](c)(defaults ++ manuals)
+    val result   = q"""
       import au.com.cba.omnia.maestro.core.transform.Transform
-      Transform[$srcType, $dstType](($in: $srcType) => $body)
+      Transform[$srcType, $dstType](($in: $srcType) => $combined)
     """
 
     c.Expr[Transform[A, B]](result)

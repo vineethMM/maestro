@@ -15,7 +15,7 @@ package au.com.cba.omnia.maestro.schema
 package commands
 
 import scala.io.Source
-import scala.collection._
+import scala.util.parsing.json.{JSON}
 
 import com.quantifind.sumac.ArgMain
 import com.quantifind.sumac.validation._
@@ -25,7 +25,6 @@ import au.com.cba.omnia.maestro.schema
 import au.com.cba.omnia.maestro.schema._
 import au.com.cba.omnia.maestro.schema.pretty._
 import au.com.cba.omnia.maestro.schema.taste.{Load => TasteLoad}
-import scala.util.parsing.json.{JSON}
 
 
 /** Arguments for `Infer` command. .*/
@@ -38,10 +37,10 @@ class InferArgs extends FieldArgs {
   @Required var table: String = _
 
   /** File containing names and storage types of columns.
-   *  Each line is treated as a description of a single column, 
-   *  where the first  word is the column name, 
+   *  Each line is treated as a description of a single column,
+   *  where the first  word is the column name,
    *  and   the second word is the hive storage type.
-   * 
+   *
    *  Example:
    *    paty_i   string
    *    acct_i   string
@@ -64,21 +63,21 @@ object Infer extends ArgMain[InferArgs]
     val taste = TasteLoad.loadNamesTaste(args.names, args.taste)
     val names = taste .map { _._1 }
     val hists = taste .map { _._2 } .map { h => schema.Squash.squash(h) }
-        
+
     // Infer specs for all the columns.
-    val colSpecs = 
+    val colSpecs =
       names .zip (hists)
-        .map { case (name, hist) => 
-            ColumnSpec( 
-              name, 
-              hive.HiveType.HiveString, 
-              schema.Infer.infer(hist), 
+        .map { case (name, hist) =>
+            ColumnSpec(
+              name,
+              hive.HiveType.HiveString,
+              schema.Infer.infer(hist),
               hist,
               "") }
 
     // Build the overall spec for the table.
     val tableSpec: TableSpec =
-      TableSpec( 
+      TableSpec(
         args.database,
         args.table,
         List(),
@@ -86,6 +85,5 @@ object Infer extends ArgMain[InferArgs]
 
     // Print the JSONified table spec to console.
     println(JsonDoc.render(0, tableSpec.toJson))
-  }  
+  }
 }
-

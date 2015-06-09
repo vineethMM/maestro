@@ -174,9 +174,10 @@ object build extends Build {
     ++ uniformAssemblySettings
     ++ Seq[Sett](
           libraryDependencies <++= scalaVersion.apply(sv => Seq(
-            "com.quantifind"     %% "sumac"         % "0.3.0"
-          , "org.scala-lang"     %  "scala-reflect" % sv
-          , "org.apache.commons" %  "commons-lang3" % "3.1"
+            "com.quantifind"         %% "sumac"                    % "0.3.0"
+          , "org.scala-lang"         %  "scala-reflect"            % sv
+          , "org.apache.commons"     %  "commons-lang3"            % "3.1"
+          , "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4"
           ) ++ depend.scalding() ++ depend.hadoopClasspath ++ depend.hadoop())
        )
     )

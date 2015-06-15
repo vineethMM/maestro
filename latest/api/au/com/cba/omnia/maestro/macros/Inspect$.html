@@ -49,7 +49,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(cd87df87362895d1b73549e9154895ad54525673)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Inspect.scala" target="_blank">Inspect.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(bb394e374b1c7e6e5c81afdabcd3b3ae42223076)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Inspect.scala" target="_blank">Inspect.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -203,8 +203,118 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructHumbugUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructHumbugUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree"></a>
+      <a id="constructHumbugUnsafe(Context)(scala.reflect.macros.Universe.Type,List[scala.reflect.macros.Universe.Tree]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructHumbugUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>, <span name="fields">fields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructHumbugUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a Humbug thrift struct of the specified type given code to
+generate values for each field.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructIndexed" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructIndexed[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(fields:List[c.universe.Tree])(implicitevidence$7:c.WeakTypeTag[A]):c.universe.Tree"></a>
+      <a id="constructIndexed[A&lt;:ThriftStruct](Context)(List[scala.reflect.macros.Universe.Tree])(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructIndexed</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="fields">fields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.constructIndexed.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructIndexed[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(fields:List[c.universe.Tree])(implicitevidence$7:c.WeakTypeTag[A]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a thrift struct of the specified type given code to generate
+values for each field where the code in the provided fields corresponds to the order of fields
+in the thrift struct.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructIndexedUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructIndexedUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree"></a>
+      <a id="constructIndexedUnsafe(Context)(scala.reflect.macros.Universe.Type,List[scala.reflect.macros.Universe.Tree]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructIndexedUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>, <span name="fields">fields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructIndexedUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a thrift struct of the specified type given code to generate
+values for each field where the code in the provided fields corresponds to the order of fields
+in the thrift struct.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructNamed" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructNamed[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(fields:List[(String,c.universe.Tree)])(implicitevidence$8:c.WeakTypeTag[A]):c.universe.Tree"></a>
+      <a id="constructNamed[A&lt;:ThriftStruct](Context)(List[(String,scala.reflect.macros.Universe.Tree)])(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructNamed</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="fields">fields: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>)]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.constructNamed.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructNamed[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(fields:List[(String,c.universe.Tree)])(implicitevidence$8:c.WeakTypeTag[A]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a thrift struct of the specified type given code to generate
+values for each named field.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructNamedUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructNamedUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[(String,c.universe.Tree)]):c.universe.Tree"></a>
+      <a id="constructNamedUnsafe(Context)(scala.reflect.macros.Universe.Type,List[(String,scala.reflect.macros.Universe.Tree)]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructNamedUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>, <span name="fields">fields: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>)]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructNamedUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[(String,c.universe.Tree)]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a thrift struct of the specified type given code to generate
+values for each named field.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#constructScroogeUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="constructScroogeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree"></a>
+      <a id="constructScroogeUnsafe(Context)(scala.reflect.macros.Universe.Type,List[scala.reflect.macros.Universe.Tree]):scala.reflect.macros.Universe.Tree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">constructScroogeUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>, <span name="fields">fields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span>]</span>)</span><span class="result">: <span class="extype" name="scala.reflect.api.Trees.Tree">scala.reflect.macros.Universe.Tree</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@constructScroogeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type,fields:List[c.universe.Tree]):c.universe.Tree" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates the code to construct a Scrooge thrift struct of the specified type given code to
+generate values for each field.</p>
     </li><li name="au.com.cba.omnia.maestro.macros.Inspect#ensureThriftType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ensureThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$4:c.WeakTypeTag[A]):Unit"></a>
+      <a id="ensureThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$5:c.WeakTypeTag[A]):Unit"></a>
       <a id="ensureThriftType[A](Context)(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -215,11 +325,28 @@
         <span class="name">ensureThriftType</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.ensureThriftType.A">A</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@ensureThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$4:c.WeakTypeTag[A]):Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@ensureThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$5:c.WeakTypeTag[A]):Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Abort unless A derives from ThriftStruct.</p>
+      <p class="shortcomment cmt">Abort unless <code>A</code><code> derives from ThriftStruct.</code></p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#ensureThriftTypeUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ensureThriftTypeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Unit"></a>
+      <a id="ensureThriftTypeUnsafe(Context)(scala.reflect.macros.Universe.Type):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ensureThriftTypeUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@ensureThriftTypeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Unit" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Abort unless <code>A</code> derives from ThriftStruct.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -379,6 +506,40 @@
       </a>
     </span>
       <p class="shortcomment cmt">Same as indexed but for any type where the type is assumed to be ThriftStruct.</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#isHumbug" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isHumbug[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$6:c.WeakTypeTag[A]):Boolean"></a>
+      <a id="isHumbug[A](Context)(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isHumbug</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.isHumbug.A">A</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@isHumbug[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$6:c.WeakTypeTag[A]):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Does a tupe derive from <code>HumbugThriftStruct</code>?</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#isHumbugUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isHumbugUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Boolean"></a>
+      <a id="isHumbugUnsafe(Context)(scala.reflect.macros.Universe.Type):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isHumbugUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@isHumbugUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Does a tupe derive from <code>HumbugThriftStruct</code>?</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -397,7 +558,7 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.macros.Inspect#isThriftType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$3:c.WeakTypeTag[A]):Boolean"></a>
+      <a id="isThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$4:c.WeakTypeTag[A]):Boolean"></a>
       <a id="isThriftType[A](Context)(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -408,13 +569,30 @@
         <span class="name">isThriftType</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.isThriftType.A">A</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@isThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$3:c.WeakTypeTag[A]):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@isThriftType[A](c:scala.reflect.macros.whitebox.Context)(implicitevidence$4:c.WeakTypeTag[A]):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Does a type derive from ThriftStruct?</p>
+    </li><li name="au.com.cba.omnia.maestro.macros.Inspect#isThriftTypeUnsafe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isThriftTypeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Boolean"></a>
+      <a id="isThriftTypeUnsafe(Context)(scala.reflect.macros.Universe.Type):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isThriftTypeUnsafe</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="typ">typ: <span class="extype" name="scala.reflect.api.Types.Type">scala.reflect.macros.Universe.Type</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@isThriftTypeUnsafe(c:scala.reflect.macros.whitebox.Context)(typ:c.universe.Type):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
       <p class="shortcomment cmt">Does a type derive from ThriftStruct?</p>
     </li><li name="au.com.cba.omnia.maestro.macros.Inspect#methods" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(implicitevidence$5:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]"></a>
+      <a id="methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(implicitevidence$3:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]"></a>
       <a id="methods[A&lt;:ThriftStruct](Context)(scala.reflect.macros.whitebox.Context.WeakTypeTag[A]):List[scala.reflect.macros.Universe.MethodSymbol]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -425,7 +603,7 @@
         <span class="name">methods</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.macros.Aliases.WeakTypeTag">scala.reflect.macros.whitebox.Context.WeakTypeTag</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Inspect.methods.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.reflect.api.Symbols.MethodSymbol">scala.reflect.macros.Universe.MethodSymbol</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(implicitevidence$5:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Inspect$@methods[A&lt;:com.twitter.scrooge.ThriftStruct](c:scala.reflect.macros.whitebox.Context)(implicitevidence$3:c.WeakTypeTag[A]):List[c.universe.MethodSymbol]" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>

@@ -37,7 +37,7 @@ object build extends Build {
   val thermometerVersion = "1.0.0-20150513002558-a6bcf7f"
   val ebenezerVersion    = "0.18.1-20150602022504-3af467a"
   val omnitoolVersion    = "1.10.0-20150430044321-3ca9118"
-  val permafrostVersion  = "0.9.0-20150527025810-992b2bd"
+  val permafrostVersion  = "0.10.0-20150615051457-13dbbaa"
   val edgeVersion        = "3.4.0-20150513004502-4b6d30d"
   val humbugVersion      = "0.6.1-20150513010955-5eb6297"
   val parlourVersion     = "1.9.0-20150514050504-a530fa1"

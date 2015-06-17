@@ -63,7 +63,7 @@ object JoinMacro {
       c.abort(c.enclosingPosition, msg)
 
     def thriftType(typ: Type): ThriftType =
-      ThriftType(typ, Inspect.fieldsUnsafe(c)(typ).map { case (method, name) =>
+      ThriftType(typ, Inspect.infoUnsafe(c)(typ).map { case (_, name, method) =>
         ThriftField(TermName(WordUtils.uncapitalize(name)), method.typeSignatureIn(typ))
       })
 
@@ -118,7 +118,7 @@ object JoinMacro {
      *     throw new IllegalArgumentException("Ambiguous source values: " + details)
      *   }
      */
-    def unambSource(inpTerm: TermName, mapping: Mapping) = {
+    def disambiguateSource(inpTerm: TermName, mapping: Mapping) = {
       val head@(input1, field1) = mapping.sources.head
       val headValue = q"""$inpTerm.${input1.name}.${field1.name}"""
 
@@ -164,7 +164,7 @@ object JoinMacro {
     def joinTree(inputType: Type, output: ThriftType, inputs: List[ThriftInput], mappings: List[Mapping]): Tree = {
       val inpTerm = TermName(c.freshName("input"))
       val struct  = Inspect.constructNamed[B](c)(
-        mappings.map(m => (m.dest.name.toString, unambSource(inpTerm, m)))
+        mappings.map(m => (m.dest.name.toString, disambiguateSource(inpTerm, m)))
       )
 
       q"""

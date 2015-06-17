@@ -23,47 +23,58 @@ import com.twitter.scrooge.ThriftStruct
 import au.com.cba.omnia.humbug.HumbugThriftStruct
 
 object Inspect {
+  /** Regex to match Scala `Product` style field names. */
   val ProductField = """_(\d+)""".r
 
-  /** Gets all the `_1` style getters and their number for a thrift struct in numerical order.*/
-  def indexed[A <: ThriftStruct: c.WeakTypeTag](c: Context): List[(c.universe.MethodSymbol, Int)] = 
-    indexedUnsafe(c)(c.universe.weakTypeOf[A])
+  /**
+    * For a given ThriftStruct returns information about each field.
+    * 
+    * For each field it gives the Scala product index for the field, the field name using as it is
+    * in the generated code (camel case) for the thrift struct and the MethodSymbol representing the
+    * getter for the field.
+    */
+  def info[A <: ThriftStruct : c.WeakTypeTag](c: Context): List[(Int, String, c.universe.MethodSymbol)] =
+    infoUnsafe(c)(c.universe.weakTypeOf[A])
 
-  /** Same as indexed but for any type where the type is assumed to be ThriftStruct.*/
-  def indexedUnsafe(c: Context)(typ: c.universe.Type): List[(c.universe.MethodSymbol, Int)] = {
-    typ.members.toList.map(member => (member, member.name.toString)).collect({
-      case (member, ProductField(n)) =>
-        (member.asMethod, n.toInt)
-    }).sortBy(_._2)
-  }
-
-  /** Gets all the fields of a Thrift struct sorted in order of definition.*/
-  def fields[A <: ThriftStruct: c.WeakTypeTag](c: Context): List[(c.universe.MethodSymbol, String)] =
-    fieldsUnsafe(c)(c.universe.weakTypeOf[A])
-  /** Same as fields but for any type where the type is assumed to be ThriftStruct.*/
-  def fieldsUnsafe(c: Context)(typ: c.universe.Type): List[(c.universe.MethodSymbol, String)] = {
+  /** Same as `info` but for any type where the type is assumed to be ThriftStruct.*/
+  def infoUnsafe(c: Context)(typ: c.universe.Type): List[(Int, String, c.universe.MethodSymbol)] = {
     import c.universe._
 
-    val fields =
+    ensureThriftTypeUnsafe(c)(typ)
+
+    val fieldNames =
       if (typ <:< c.universe.weakTypeOf[HumbugThriftStruct]) {
         // Get the fields in declaration order
         typ.decls.sorted.toList.collect {
-          case sym: TermSymbol if sym.isVar => sym.name.toString.trim.capitalize
+          case sym: TermSymbol if sym.isVar => sym.name.toString.trim
         }
       } else
         typ.typeSymbol.companion.typeSignature
-          .member(TermName("apply")).asMethod.paramLists.head.map(_.name.toString.capitalize)
+          .member(TermName("apply")).asMethod.paramLists.head.map(_.name.toString)
 
-    methodsUnsafe(c)(typ).zip(fields)
+
+    val fieldGetters = typ.members.toList.map(member => (member, member.name.toString)).collect {
+      case (member, ProductField(n)) =>
+        (n.toInt, member.asMethod)
+    }.sortBy(_._1)
+
+    if (fieldNames.length != fieldGetters.length) c.abort(
+      c.enclosingPosition,
+      s"Error trying to get the field info for $typ. Got these field names $fieldNames which does not match the getters $fieldGetters"
+    )
+
+    fieldNames.zip(fieldGetters)
+      .map { case (name, (idx, method)) => (idx, name, method) }
+      .sortBy(_._1)
   }
 
-  /** Gets all the `_1` style getters for a thrift struct in numerical order.*/
-  def methods[A <: ThriftStruct: c.WeakTypeTag](c: Context): List[c.universe.MethodSymbol] =
-    indexed(c).map({ case (method, _) => method })
+  /** For a given ThriftStruct returns a map of each fields name to the getter method. */
+  def fieldsMap[A <: ThriftStruct : c.WeakTypeTag](c: Context): Map[String, c.universe.MethodSymbol] =
+    fieldsMapUnsafe(c)(c.weakTypeOf[A])
 
-  /** Same as methods but for any type where the type is assumed to be ThriftStruct.*/
-  def methodsUnsafe(c: Context)(typ: c.universe.Type): List[c.universe.MethodSymbol] =
-    indexedUnsafe(c)(typ).map({ case (method, _) => method })
+  /** Same as `fieldsMap` but for any type where the type is assumed to be ThriftStruct.*/
+  def fieldsMapUnsafe(c: Context)(typ: c.universe.Type): Map[String, c.universe.MethodSymbol] =
+    infoUnsafe(c)(typ).map { case (_, n, f) => (n, f) }.toMap
 
   /** Does a type derive from ThriftStruct? */
   def isThriftType[A : c.WeakTypeTag](c: Context): Boolean =
@@ -73,14 +84,14 @@ object Inspect {
   def isThriftTypeUnsafe(c: Context)(typ: c.universe.Type): Boolean =
     typ <:< c.universe.weakTypeOf[ThriftStruct]
 
-  /** Abort unless `A`` derives from ThriftStruct. */
+  /** Aborts unless `A`` derives from ThriftStruct. */
   def ensureThriftType[A : c.WeakTypeTag](c: Context): Unit =
     // Since type bounds on macro implementations don't currently prevent the macro from expanding
     // we need this workaround to avoid materializing encoders for primitives.
     if (!isThriftType[A](c))
       c.abort(c.enclosingPosition, s"${c.universe.weakTypeOf[A].toString} does not derive ThriftStruct.")
 
-  /** Abort unless `A` derives from ThriftStruct. */
+  /** Aborts unless `A` derives from ThriftStruct. */
   def ensureThriftTypeUnsafe(c: Context)(typ: c.universe.Type): Unit =
     // Since type bounds on macro implementations don't currently prevent the macro from expanding
     // we need this workaround to avoid materializing encoders for primitives. 
@@ -124,7 +135,7 @@ object Inspect {
     * values for each named field.
     */
   def constructNamedUnsafe(c: Context)(typ: c.universe.Type, fields: List[(String, c.universe.Tree)]): c.universe.Tree = {
-    val order  = Inspect.fieldsUnsafe(c)(typ).map(x => WordUtils.uncapitalize(x._2)).zipWithIndex.toMap
+    val order  = Inspect.infoUnsafe(c)(typ).map { case (i, name, _) => (name, i) }.toMap
     val sorted = fields.map { case (n, f) => (order(n), f)}.sortBy(_._1).map(_._2)
 
     constructIndexedUnsafe(c)(typ, sorted)
@@ -143,7 +154,7 @@ object Inspect {
       q"""$dst.${TermName(s"_${i+1}")} = $f"""
     }
 
-    val numFields = fieldsUnsafe(c)(typ).length
+    val numFields = Inspect.infoUnsafe(c)(typ).length
     if (fields.length != numFields)
       c.abort(
         c.enclosingPosition,

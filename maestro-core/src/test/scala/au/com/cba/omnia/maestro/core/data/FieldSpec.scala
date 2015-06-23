@@ -84,7 +84,7 @@ Fields with
 
   def fieldLift = {
     val aToI = Field("a.i", (x: A)  => x.i)
-    val bToI = aToI.lift[B](_.a)
+    val bToI = aToI.zoom[B](_.a)
     bToI.get(B(A(2), "whatever")) must_== 2
   }
 }

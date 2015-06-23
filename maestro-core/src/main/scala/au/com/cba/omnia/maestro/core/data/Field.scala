@@ -52,5 +52,5 @@ case class Field[A : Manifest, B : Manifest](name: String, get: A => B) {
    * @tparam C the type of the bigger structure
    * @return Field[C, B]
    */
-  def lift[C : Manifest](f: C => A):Field[C, B] = Field(name, f andThen get)
+  def zoom[C : Manifest](f: C => A):Field[C, B] = Field(name, f andThen get)
 }

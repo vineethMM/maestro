@@ -45,4 +45,12 @@ case class Field[A : Manifest, B : Manifest](name: String, get: A => B) {
   }
 
   override def hashCode: Int = name.hashCode * 41 + structType.hashCode
+
+  /**
+   * Creates a field accessor for a higher structure, if this field is contained inside a bigger structure
+   * @param f function from the bigger structure to `B`
+   * @tparam C the type of the bigger structure
+   * @return Field[C,B]
+   */
+  def lift[C : Manifest](f:C => A):Field[C, B] = Field(name, f andThen get)
 }

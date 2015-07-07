@@ -53,14 +53,29 @@ case class CustomerHiveConfig(config: Config) {
 object CustomerHiveJob extends MaestroJob {
   /** Create an example customer execution */
   def job: Execution[JobStatus] = for {
+      // Load configuration
     conf           <- Execution.getConfig.map(CustomerHiveConfig(_))
+    // Upload local text files to HDFS
     uploadInfo     <- upload(conf.upload)
+    // Fail execution if there was a problem with the upload
     sources        <- uploadInfo.withSources
+    // Load text files from HDFS and convert to appropriate Thrift format
     (pipe, ldInfo) <- load[Customer](conf.load, uploadInfo.files)
+    // Fail if there was a problem with the load
     loadSuccess    <- ldInfo.withSuccess
+    // Write out the Customers to a Hive table partitioned by date and another Hive table partitioned by category
     (count1, _)    <- viewHive(conf.dateTable, pipe) zip viewHive(conf.catTable, pipe)
+    // Verify that we wrote out the same amount of data as we received.
     _              <- Execution.guard(count1 == loadSuccess.actual, "Wrote out different number of reads than received.")
-    _              <- Execution.fromHive(Hive.queries(conf.queries), _.setVar(HIVEMERGEMAPFILES, "true"))
+    // Perform some queries on the tables
+    _              <- Execution.fromHive(
+                        Hive.queries(conf.queries),
+                        c => {
+                          c.setVar(DYNAMICPARTITIONING, "true")
+                          c.setVar(DYNAMICPARTITIONINGMODE, "nonstrict")
+                          c.setVar(HIVEMERGEMAPFILES, "true")
+                        }
+                      )
   } yield JobFinished
 
   def attemptsExceeded = Execution.from(JobNeverReady)   // Elided in the README

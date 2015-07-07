@@ -45,10 +45,15 @@ case class CustomerImportConfig(config: Config) {
 object CustomerSqoopImportJob extends MaestroJob {
   /** Create an example customer sqoop import execution */
   def job: Execution[JobStatus] = for {
+    // Load configuration
     conf               <- Execution.getConfig.map(CustomerImportConfig(_))
+    // Import data from SQL source to HDFS
     (path, sqoopCount) <- sqoopImport(conf.sqoopImport)
+    // Load data from HDFS and convert to appropriate Thrift format
     (pipe, loadInfo)   <- load[Customer](conf.load, List(path))
+    // Fail if there was a problem with the load
     loadSuccess        <- loadInfo.withSuccess
+    // Write out the Customers to a Hive table
     hiveCount          <- viewHive(conf.catTable, pipe)
   } yield JobFinished
 

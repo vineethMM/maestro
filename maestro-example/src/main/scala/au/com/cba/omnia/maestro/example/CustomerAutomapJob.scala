@@ -47,13 +47,21 @@ object CustomerAutomapJob extends MaestroJob {
     }
 
     for {
+      // Load configuration
       conf             <- Execution.getConfig.map(CustomerAutomapConfig(_))
+      // Upload local text files to HDFS
       uploadInfo       <- upload(conf.upload)
+      // Fail Execution if there was a problem with the upload
       sources          <- uploadInfo.withSources
+      // Load text files from HDFS and convert to appropriate Thrift format
       (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+      // Define a map from the loaded Customers to Accounts
       acctPipe          = pipe.map(customerToAccount)
+      // Fail if there was a problem with the load
       loadSuccess      <- loadInfo.withSuccess
+      // Write out the results of the map to a Hive table
       count            <- viewHive(conf.acctTable, acctPipe)
+      // Check that the number of rows written to Hive matches the number of rows loaded
       if count == loadSuccess.actual
     } yield JobFinished
   }

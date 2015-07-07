@@ -40,11 +40,17 @@ case class CustomerExportConfig(config: Config) {
 object CustomerSqoopExportJob extends MaestroJob {
   def job: Execution[JobStatus] = {
     for {
+      // Load configuration
       conf             <- Execution.getConfig.map(CustomerExportConfig(_))
+      // Upload local text files to HDFS
       uploadInfo       <- upload(conf.upload)
+      // Fail if there was a problem with the upload
       sources          <- uploadInfo.withSources
+      // Load text files from HDFS and convert to appropriate Thrift format
       (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+      // Fail if there was a problem with the load
       loadSuccess      <- loadInfo.withSuccess
+      // Write out the Customers to SQL target 
       count            <- sqoopExport(conf.export, pipe)
     } yield JobFinished
   }

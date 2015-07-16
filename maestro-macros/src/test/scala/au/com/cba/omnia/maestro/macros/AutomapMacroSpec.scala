@@ -19,7 +19,7 @@ import au.com.cba.omnia.maestro.test.Arbitraries._
 import au.com.cba.omnia.maestro.test.thrift.humbug.{Types => HTypes, _}
 import au.com.cba.omnia.maestro.test.thrift.scrooge._
 
-object AutomapSpec extends Spec { def is = s2"""
+object AutomapMacroSpec extends Spec { def is = s2"""
 AutomapSpec
 ==================
 
@@ -172,13 +172,15 @@ AutomapSpec
   def multipleDifferingSourcesHumbug = {
     @automap def join (x: JoinOneHumbug, y: JoinTwoHumbug, z: JoinOneDuplicateHumbug): JoinableHumbug = {}
 
-    join((humbugStructOne, humbugStructTwo, humbugDuplicateBad)) must throwAn[IllegalArgumentException]
+    join((humbugStructOne, humbugStructTwo, humbugDuplicateBad)) must
+      throwAn[IllegalArgumentException](message = "Ambiguous source values for someField: x.someField = 42, z.someField = 13")
   }
 
   def multipleDifferingSourcesScrooge = {
     @automap def join (x: JoinOneScrooge, y: JoinTwoScrooge, z: JoinOneDuplicateScrooge): JoinableScrooge = {}
 
-    join((scroogeStructOne, scroogeStructTwo, scroogeDuplicateBad)) must throwAn[IllegalArgumentException]
+    join((scroogeStructOne, scroogeStructTwo, scroogeDuplicateBad)) must 
+      throwAn[IllegalArgumentException](message = "Ambiguous source values for someField: x.someField = 42, z.someField = 13")
   }
 
   def mixedToHumbug = {
@@ -221,7 +223,7 @@ AutomapSpec
       "@automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge = {}"
     )
 
-    compileErrors must beSome("Could not resolve `missingField`")
+    compileErrors must beSome("Got errors trying to create automap for au.com.cba.omnia.maestro.test.thrift.scrooge.UnjoinableScrooge. Got no default or manual value for the these fields: missingField.")
   }
 
   def couldNotResolveTwoFields = {
@@ -229,7 +231,7 @@ AutomapSpec
       "@automap def join(x: JoinOneScrooge, y: JoinTwoScrooge): UnjoinableScrooge2 = {}"
     )
 
-    compileErrors must beSome("Could not resolve `missingField`\nCould not resolve `missingField2`")
+    compileErrors must beSome("Got errors trying to create automap for au.com.cba.omnia.maestro.test.thrift.scrooge.UnjoinableScrooge2. Got no default or manual value for the these fields: missingField, missingField2.")
   }
 
   def differentTypesForInputAndOutput = {
@@ -237,7 +239,7 @@ AutomapSpec
       "@automap def map(x: JoinOneDuplicateScrooge): JoinOneIncompatibleScrooge = {}"
     )
 
-    compileErrors must beSome("Could not resolve `someField`")
+    compileErrors must beSome("Got errors trying to create automap for au.com.cba.omnia.maestro.test.thrift.scrooge.JoinOneIncompatibleScrooge. Got no default or manual value for the these fields: someField.")
   }
 
   def differentFieldValuesForJoinedStructs = {

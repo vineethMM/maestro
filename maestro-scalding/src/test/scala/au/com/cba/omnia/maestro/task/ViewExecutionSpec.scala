@@ -16,7 +16,11 @@ package au.com.cba.omnia.maestro.task
 
 import scalaz.Scalaz._
 
+import com.twitter.scalding.Execution
+
 import org.specs2.matcher.Matcher
+
+import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.thermometer.core.{Thermometer, ThermometerSource}, Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoid
@@ -32,7 +36,7 @@ import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.hive.{HiveTable, UnpartitionedHiveTable}
-
+import au.com.cba.omnia.maestro.scalding.ExecutionOps._
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
 private object ViewExec extends ViewExecution
@@ -42,22 +46,26 @@ View execution properties
 =========================
 
   partitioned:
-    can write using execution monad                         $normal
-    view executions can be composed with zip                $zipped
+    can write using execution monad                                      $normal
+    view executions can be composed with zip                             $zipped
 
-    can write to a hive table using execution monad         $normalHive
-    can overwrite to a hive table using execution monad     $normalHiveOverwrite
-    can overwrite to an already created hive table          $createdHiveOverwrite
-    can append to a hive table using execution monad        $normalHiveAppend
-    view hive executions can be composed with flatMap       $flatMappedHive
-    view hive executions can be composed with zip           $zippedHive
+    can write to a hive table using execution monad                      $normalHive
+    can overwrite to a hive table using execution monad                  $normalHiveOverwrite
+    can overwrite to an already created hive table                       $createdHiveOverwrite
+    can append to a hive table using execution monad                     $normalHiveAppend
+    view hive executions can be composed with flatMap                    $flatMappedHive
+    view hive executions can be composed with zip                        $zippedHive
+    can write to tables where the underlying folder has been deleted     $withoutFolder
 
   unpartitioned:
-    can write to a hive table using execution monad         $normalHiveUnpartitioned
-    can append to a hive table using execution monad        $normalHiveUnpartitionedAppend
-    view hive executions can be composed with flatMap       $flatMappedHiveUnpartitioned
-    view hive executions can be composed with zip           $zippedHiveUnpartitioned
+    can write to a hive table using execution monad                      $normalHiveUnpartitioned
+    can append to a hive table using execution monad                     $normalHiveUnpartitionedAppend
+    view hive executions can be composed with flatMap                    $flatMappedHiveUnpartitioned
+    view hive executions can be composed with zip                        $zippedHiveUnpartitioned
+    can write to tables where the underlying folder has been deleted     $withoutFolderUnpartitioned
 """
+
+  // Partitioned tests
 
   def normal = {
     val exec = ViewExec.view(ViewConfig(byFirst, s"$dir/normal"), source)
@@ -81,11 +89,18 @@ View execution properties
   }
 
   def normalHive = {
-    val exec = ViewExec.viewHive(tableByFirst("normalHive"), source)
-    executesSuccessfully(exec) must_== 4
+    val exec = for {
+      a <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      b <- ViewExec.viewHive(tableByFirst("normalHive2"), source, false)
+    } yield (a, b)
+
+    executesSuccessfully(exec) must_== ((4, 4))
+
     facts(
-      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
-      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile
+      hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive2.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive2.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile
     )
   }
 
@@ -122,7 +137,6 @@ View execution properties
   }
 
   def createdHiveOverwrite = {
-
     val init = for {
       _  <- Hive.createParquetTable[StringPair]("normalHive", "by_first", List("partition_first" -> "string"), None)
     } yield ()
@@ -199,11 +213,37 @@ View execution properties
     )
   }
 
-  def normalHiveUnpartitioned = {
-    val exec = ViewExec.viewHive(tableUnpartitioned("unpart"), source)
-    executesSuccessfully(exec) must_== 4
+  def withoutFolder = {
+    val exec = for {
+      _ <- Execution.fromHive(Hive.createParquetTable[StringPair]("normalhive",  "by_first", List("partition_first" -> "string")))
+      _ <- Execution.fromHive(Hive.createParquetTable[StringPair]("normalhive2", "by_first", List("partition_first" -> "string")))
+      _ <- Execution.fromHdfs(Hdfs.delete(s"$hiveWarehouse/normalhive.db".toPath,  true))
+      _ <- Execution.fromHdfs(Hdfs.delete(s"$hiveWarehouse/normalhive2.db".toPath, true))
+      a <- ViewExec.viewHive(tableByFirst("normalHive"), source)
+      b <- ViewExec.viewHive(tableByFirst("normalHive2"), source, false)
+    } yield (a, b)
+
+    executesSuccessfully(exec) must_== ((4, 4))
+
     facts(
-      hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
+      hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive2.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "normalhive2.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile
+    )
+  }
+
+  // Unpartitioned tests
+
+  def normalHiveUnpartitioned = {
+    val exec = for {
+      a <- ViewExec.viewHive(tableUnpartitioned("unpart"),  source)
+      b <- ViewExec.viewHive(tableUnpartitioned("unpart2"), source, false)
+    } yield (a, b)
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "unpart.db"  </> "unpart_table" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "unpart2.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
     )
   }
 
@@ -247,6 +287,26 @@ View execution properties
       hiveWarehouse </> "zippedhiveunpart2.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
     )
   }
+
+  def withoutFolderUnpartitioned = {
+    val exec = for {
+      _ <- Execution.fromHive(Hive.createParquetTable[StringPair]("unpart",  "unpart_table", List.empty))
+      _ <- Execution.fromHive(Hive.createParquetTable[StringPair]("unpart2", "unpart_table", List.empty))
+      _ <- Execution.fromHdfs(Hdfs.delete(s"$hiveWarehouse/unpart.db".toPath,  true))
+      _ <- Execution.fromHdfs(Hdfs.delete(s"$hiveWarehouse/unpart2.db".toPath, true))
+      a <- ViewExec.viewHive(tableUnpartitioned("unpart"),  source)
+      b <- ViewExec.viewHive(tableUnpartitioned("unpart2"), source, false)
+    } yield (a, b)
+
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "unpart.db"  </> "unpart_table" </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "unpart2.db" </> "unpart_table" </> "part-*.parquet" ==> matchesFile
+    )
+  }
+
+
+  // Helper methods
 
   def tableUnpartitioned(database: String) =
     HiveTable[StringPair](database, "unpart_table", None)

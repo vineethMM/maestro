@@ -97,6 +97,9 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
       for {
         dst <- setup
 
+        // Create the folder if it doesn't already exist for some reason.
+        _   <- Execution.fromHdfs(Hdfs.mkdirs(dst))
+
         // Get list of original parquet files
         oldFiles <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))
 
@@ -117,10 +120,6 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
 
         // Delete obsolete files
         _ <- toDelete.map{case p => Execution.fromHdfs(Hdfs.delete(p))}.sequence
-
-        // Repair metadata for hive table
-        _ <- Execution.fromHive(Hive.query(s"MSCK REPAIR TABLE $table"))
-
       } yield counters
     }
   }
@@ -151,6 +150,7 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
     //If we are appending the files are written to a temporary location and then copied accross
     if (append) {
       def moveFiles(src: Path, dst: Path): Hdfs[Unit] = for {
+        _     <- Hdfs.mkdirs(dst) // Create the folder if it doesn't already exist for some reason.
         files <- Hdfs.files(src, "*.parquet")
         time  =  System.currentTimeMillis
         _     <- Hdfs.mkdirs(dst)

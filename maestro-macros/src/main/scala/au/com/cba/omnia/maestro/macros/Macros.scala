@@ -53,6 +53,7 @@ object Macros {
     * val result: TypedPipe[SubTwo] = pipe.map(transform.run(_))
     * }}}
     */
+  @deprecated("Superseded by automap", "2.13.0")
   def mkTransform[A <: ThriftStruct, B <: ThriftStruct](
     transformations: (Symbol, A => _)*
   ): Transform[A, B] = macro TransformMacro.impl[A, B]
@@ -72,6 +73,7 @@ object Macros {
     *   the same name) amongst the input thrift structs.
     * - Every matching input field's type conforms to the type of it's output field.
     */
+  @deprecated("Superseded by automap", "2.13.0")
   def mkJoin[A <: Product, B <: ThriftStruct]: Join[A, B] =
     macro JoinMacro.impl[A, B]
 }

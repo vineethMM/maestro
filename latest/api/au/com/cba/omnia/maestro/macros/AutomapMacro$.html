@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>automap - au.com.cba.omnia.maestro.macros.automap</title>
-          <meta name="description" content="automap - au.com.cba.omnia.maestro.macros.automap" />
-          <meta name="keywords" content="automap au.com.cba.omnia.maestro.macros.automap" />
+          <title>AutomapMacro - au.com.cba.omnia.maestro.macros.AutomapMacro</title>
+          <meta name="description" content="AutomapMacro - au.com.cba.omnia.maestro.macros.AutomapMacro" />
+          <meta name="keywords" content="AutomapMacro au.com.cba.omnia.maestro.macros.AutomapMacro" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.maestro.macros.automap$';
+            var hash = 'au.com.cba.omnia.maestro.macros.AutomapMacro$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,14 +28,12 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="automap.html" title="See companion class"><img src="../../../../../../lib/object_to_class_big.png" /></a>
+        <img src="../../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.macros">macros</a></p>
-        <h1><a href="automap.html" title="See companion class">automap</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="automap.html" title="See companion class">class automap</a>
-            | <a href="package.html" class="extype" name="au.com.cba.omnia.maestro.macros">package macros</a>
+        <h1>AutomapMacro</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="au.com.cba.omnia.maestro.macros">package macros</a>
           </div></span></h3><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -47,7 +45,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">automap</span>
+        <span class="name">AutomapMacro</span>
       </span>
       </h4>
       
@@ -57,8 +55,15 @@ unspecified are mapped to matching fields with the same name and type in the inp
 If more than one such input candidate exists, all structs with a field by this name must
 agree on its value, otherwise a runtime exception is raised.</p><p>To use the automapper, declare a method with the desired signature, assign to it a block of
 transformation rules and annotate it with @automapper. The macro fills in the method with the
-required logic. A simple use of the automapper annotation macro might look like this:
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(87386a01eb2595ed2c99037f4921580851533855)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Automap.scala" target="_blank">Automap.scala</a></dd></dl><div class="toggleContainer block">
+required logic. A simple use of the automapper annotation macro might look like this:</p><pre>@automap <span class="kw">def</span> mkFooBar(foo: Foo, bar: Bar): FooBar = {
+    thisInt    := foo.thatInt
+    thisString := bar.thatString
+}</pre><p>Note that the macro will create a function <code>mkFooBar: ((Foo, Bar)) =&gt; FooBar</code>. This is different
+from the original <code>mkFooBar</code><code> declaration which took two arguments, whereas the generated method
+takes a tuple. This is merely a syntactic convenience: it is clearer to write mapping rules in
+terms of named arguments, but Scalding pipes work with tuples. The Automapper is intended to
+help bridge that gap.
+</code></p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(1b1508386858857bae688950d20a060addb24ca3)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/AutomapMacro.scala" target="_blank">AutomapMacro.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -78,7 +83,7 @@ required logic. A simple use of the automapper annotation macro might look like 
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.maestro.macros.automap"><span>automap</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.maestro.macros.AutomapMacro"><span>AutomapMacro</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -98,27 +103,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.macros.automap.AutomapError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="AutomapError=String"></a>
-      <a id="AutomapError:AutomapError"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">AutomapError</span><span class="result"> = <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@AutomapError=String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
-      </a>
-    </span>
-      
-    </li></ol>
-            </div>
+        
 
         
 
@@ -136,7 +121,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -153,7 +138,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@##():Int" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@##():Int" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -170,7 +155,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -187,7 +172,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -204,7 +189,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@clone():Object" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@clone():Object" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -227,7 +212,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -244,7 +229,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -261,7 +246,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@finalize():Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -284,7 +269,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -301,12 +286,12 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@hashCode():Int" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.macros.automap#impl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="au.com.cba.omnia.maestro.macros.AutomapMacro#impl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="impl(c:scala.reflect.macros.whitebox.Context)(annottees:c.Expr[Any]*):c.Expr[Any]"></a>
       <a id="impl(Context)(scala.reflect.macros.whitebox.Context.Expr[Any]*):scala.reflect.macros.whitebox.Context.Expr[Any]"></a>
       <h4 class="signature">
@@ -318,7 +303,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">impl</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.reflect.macros.whitebox.Context" class="extype" target="_top">Context</a></span>)</span><span class="params">(<span name="annottees">annottees: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.whitebox.Context.Expr</span>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a>]*</span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.whitebox.Context.Expr</span>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@impl(c:scala.reflect.macros.whitebox.Context)(annottees:c.Expr[Any]*):c.Expr[Any]" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@impl(c:scala.reflect.macros.whitebox.Context)(annottees:c.Expr[Any]*):c.Expr[Any]" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -335,7 +320,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -352,7 +337,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -369,7 +354,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@notify():Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@notify():Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -386,28 +371,11 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.maestro.macros.automap#priorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="priorityMap[K,V](xs:List[(K,V)]):Map[K,List[V]]"></a>
-      <a id="priorityMap[K,V](List[(K,V)]):Map[K,List[V]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">priorityMap</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="au.com.cba.omnia.maestro.macros.automap.priorityMap.K">K</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.automap.priorityMap.V">V</span>)]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.automap.priorityMap.K">K</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="au.com.cba.omnia.maestro.macros.automap.priorityMap.V">V</span>]]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@priorityMap[K,V](xs:List[(K,V)]):Map[K,List[V]]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Create a priority map of keys to list of values.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -420,7 +388,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -437,7 +405,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@toString():String" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@toString():String" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -454,7 +422,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@wait():Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@wait():Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -477,7 +445,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
@@ -500,7 +468,7 @@ required logic. A simple use of the automapper annotation macro might look like 
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.automap$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.AutomapMacro$@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>

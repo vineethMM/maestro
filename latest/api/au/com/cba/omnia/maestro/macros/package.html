@@ -47,7 +47,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(87386a01eb2595ed2c99037f4921580851533855)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(1b1508386858857bae688950d20a060addb24ca3)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -122,7 +122,7 @@
         <img src="../../../../../../lib/permalink.png" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+      <p class="shortcomment cmt">Annotation to involve automap macro.</p><div class="fullcomment"><div class="comment cmt"><p>Annotation to involve automap macro. See <a href="AutomapMacro$.html" class="extype" name="au.com.cba.omnia.maestro.macros.AutomapMacro">AutomapMacro</a> for more detail.</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@compileTimeOnly</span><span class="args">(<span>
       
       <span class="defval" name="&quot;macro annotation could not be expanded (the most common reason for that is that you need to enable the macro paradise plugin; another possibility is that you try to use macro annotation in the same compilation run that defines it)&quot;">...</span>
@@ -153,7 +153,38 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="au.com.cba.omnia.maestro.macros.DecodeMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.maestro.macros.AutomapMacro" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="AutomapMacro"></a>
+      <a id="AutomapMacro:AutomapMacro"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="AutomapMacro$.html"><span class="name">AutomapMacro</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@AutomapMacro" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Automapper for Thrift structs.</p><div class="fullcomment"><div class="comment cmt"><p>Automapper for Thrift structs.</p><p>One or more input structs are mapped to a single output struct, using a custom syntax to
+define mapping rules for each field. Output struct fields for which mapping rules are
+unspecified are mapped to matching fields with the same name and type in the input structs.
+If more than one such input candidate exists, all structs with a field by this name must
+agree on its value, otherwise a runtime exception is raised.</p><p>To use the automapper, declare a method with the desired signature, assign to it a block of
+transformation rules and annotate it with @automapper. The macro fills in the method with the
+required logic. A simple use of the automapper annotation macro might look like this:</p><pre>@automap <span class="kw">def</span> mkFooBar(foo: Foo, bar: Bar): FooBar = {
+    thisInt    := foo.thatInt
+    thisString := bar.thatString
+}</pre><p>Note that the macro will create a function <code>mkFooBar: ((Foo, Bar)) =&gt; FooBar</code>. This is different
+from the original <code>mkFooBar</code><code> declaration which took two arguments, whereas the generated method
+takes a tuple. This is merely a syntactic convenience: it is clearer to write mapping rules in
+terms of named arguments, but Scalding pipes work with tuples. The Automapper is intended to
+help bridge that gap.
+</code></p></div></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.DecodeMacro" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DecodeMacro"></a>
       <a id="DecodeMacro:DecodeMacro"></a>
       <h4 class="signature">
@@ -357,30 +388,6 @@ transformation exists to populate the target field, then the compilation will fa
       </a>
     </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.automap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="automap"></a>
-      <a id="automap:automap"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="automap$.html"><span class="name">automap</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.package@automap" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Automapper for Thrift structs.</p><div class="fullcomment"><div class="comment cmt"><p>Automapper for Thrift structs.</p><p>One or more input structs are mapped to a single output struct, using a custom syntax to
-define mapping rules for each field. Output struct fields for which mapping rules are
-unspecified are mapped to matching fields with the same name and type in the input structs.
-If more than one such input candidate exists, all structs with a field by this name must
-agree on its value, otherwise a runtime exception is raised.</p><p>To use the automapper, declare a method with the desired signature, assign to it a block of
-transformation rules and annotate it with @automapper. The macro fills in the method with the
-required logic. A simple use of the automapper annotation macro might look like this:
-</p></div></div>
     </li></ol>
             </div>
 

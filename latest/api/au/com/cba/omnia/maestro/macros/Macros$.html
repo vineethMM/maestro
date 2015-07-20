@@ -49,7 +49,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(87386a01eb2595ed2c99037f4921580851533855)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Macros.scala" target="_blank">Macros.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/Dirty(1b1508386858857bae688950d20a060addb24ca3)//maestro-macros/src/main/scala/au/com/cba/omnia/maestro/macros/Macros.scala" target="_blank">Macros.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -345,33 +345,6 @@
       </a>
     </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkJoin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]"></a>
-      <a id="mkJoin[A&lt;:Product,B&lt;:ThriftStruct]:Join[A,B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">macro </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">mkJoin</span><span class="tparams">[<span name="A">A &lt;: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a></span>, <span name="B">B &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result">: <a href="../core/transform/Join.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Join">Join</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.B">B</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Macros$@mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Macro to automatically derive transformations from a tuple of thrift structs
-to one resulting output thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive transformations from a tuple of thrift structs
-to one resulting output thrift struct.</p><p>The macro will generate a <code>Join</code> value which matches input fields to
-output fields if they have the same name and conforming types. If multiple
-input fields match, they must have the same values at runtime or the <code>Join</code>
-value will throw an exception.</p><p>Compilation will succeed when:
-- The input type is a product (e.g. tuple) of thrift structures.
-- Every field in the output thrift struct has matching fields (fields with
-  the same name) amongst the input thrift structs.
-- Every matching input field's type conforms to the type of it's output field.
-</p></div></div>
     </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="mkTag[A&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.codec.Tag[A]"></a>
       <a id="mkTag[A&lt;:ThriftStruct]:Tag[A]"></a>
@@ -389,30 +362,6 @@ value will throw an exception.</p><p>Compilation will succeed when:
       </a>
     </span>
       
-    </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkTransform" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mkTransform[A&lt;:com.twitter.scrooge.ThriftStruct,B&lt;:com.twitter.scrooge.ThriftStruct](transformations:(Symbol,Function1[A,_])*):au.com.cba.omnia.maestro.core.transform.Transform[A,B]"></a>
-      <a id="mkTransform[A&lt;:ThriftStruct,B&lt;:ThriftStruct]((Symbol,Function1[A,_])*):Transform[A,B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">macro </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">mkTransform</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="transformations">transformations: (<span class="extype" name="scala.Symbol">Symbol</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Function1" class="extype" target="_top">Function1</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.A">A</span>, _])*</span>)</span><span class="result">: <a href="../core/transform/Transform.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform">Transform</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.B">B</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Macros$@mkTransform[A&lt;:com.twitter.scrooge.ThriftStruct,B&lt;:com.twitter.scrooge.ThriftStruct](transformations:(Symbol,Function1[A,_])*):au.com.cba.omnia.maestro.core.transform.Transform[A,B]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Macro to automatically derive Transformations from one thrift struct to another.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive Transformations from one thrift struct to another.</p><p>It can take a variable number of rules that determine how to calculate the value for the
-specified target field. Target fields that don't have specified rules are copied from a source
-field with the same name. If there are no source fields with the same name, and no explicit
-transformation exists to populate the target field, then the compilation will fail.</p><p>Example:</p><pre><span class="kw">val</span> transform = Macros.mkTransform[Types, SubTwo](
-  ('intField,  (x: Types) <span class="kw">=&gt;</span> x.intField + <span class="num">1</span>),
-  ('longField, (x: Types) <span class="kw">=&gt;</span> x.longField - <span class="num">1</span>)
-)
-<span class="kw">val</span> result: TypedPipe[SubTwo] = pipe.map(transform.run(_))</pre></div></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -594,6 +543,63 @@ transformation exists to populate the target field, then the compilation will fa
                 <span class="name">@deprecated</span>
               
         </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.14.0)</i> Duplicate of mkFields</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkJoin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]"></a>
+      <a id="mkJoin[A&lt;:Product,B&lt;:ThriftStruct]:Join[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">macro </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.13.0) Superseded by automap">mkJoin</span><span class="tparams">[<span name="A">A &lt;: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a></span>, <span name="B">B &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="result">: <a href="../core/transform/Join.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Join">Join</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkJoin.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Macros$@mkJoin[A&lt;:Product,B&lt;:com.twitter.scrooge.ThriftStruct]:au.com.cba.omnia.maestro.core.transform.Join[A,B]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive transformations from a tuple of thrift structs
+to one resulting output thrift struct.</p><p>The macro will generate a <code>Join</code> value which matches input fields to
+output fields if they have the same name and conforming types. If multiple
+input fields match, they must have the same values at runtime or the <code>Join</code>
+value will throw an exception.</p><p>Compilation will succeed when:
+- The input type is a product (e.g. tuple) of thrift structures.
+- Every field in the output thrift struct has matching fields (fields with
+  the same name) amongst the input thrift structs.
+- Every matching input field's type conforms to the type of it's output field.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.13.0)</i> Superseded by automap</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.macros.Macros#mkTransform" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkTransform[A&lt;:com.twitter.scrooge.ThriftStruct,B&lt;:com.twitter.scrooge.ThriftStruct](transformations:(Symbol,Function1[A,_])*):au.com.cba.omnia.maestro.core.transform.Transform[A,B]"></a>
+      <a id="mkTransform[A&lt;:ThriftStruct,B&lt;:ThriftStruct]((Symbol,Function1[A,_])*):Transform[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">macro </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.13.0) Superseded by automap">mkTransform</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>]</span><span class="params">(<span name="transformations">transformations: (<span class="extype" name="scala.Symbol">Symbol</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Function1" class="extype" target="_top">Function1</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.A">A</span>, _])*</span>)</span><span class="result">: <a href="../core/transform/Transform.html" class="extype" name="au.com.cba.omnia.maestro.core.transform.Transform">Transform</a>[<span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.macros.Macros.mkTransform.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.macros.Macros$@mkTransform[A&lt;:com.twitter.scrooge.ThriftStruct,B&lt;:com.twitter.scrooge.ThriftStruct](transformations:(Symbol,Function1[A,_])*):au.com.cba.omnia.maestro.core.transform.Transform[A,B]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Macro to automatically derive Transformations from one thrift struct to another.</p><div class="fullcomment"><div class="comment cmt"><p>Macro to automatically derive Transformations from one thrift struct to another.</p><p>It can take a variable number of rules that determine how to calculate the value for the
+specified target field. Target fields that don't have specified rules are copied from a source
+field with the same name. If there are no source fields with the same name, and no explicit
+transformation exists to populate the target field, then the compilation will fail.</p><p>Example:</p><pre><span class="kw">val</span> transform = Macros.mkTransform[Types, SubTwo](
+  ('intField,  (x: Types) <span class="kw">=&gt;</span> x.intField + <span class="num">1</span>),
+  ('longField, (x: Types) <span class="kw">=&gt;</span> x.longField - <span class="num">1</span>)
+)
+<span class="kw">val</span> result: TypedPipe[SubTwo] = pipe.map(transform.run(_))</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.13.0)</i> Superseded by automap</p></dd></dl></div>
     </li></ol>
             </div>
         </div>

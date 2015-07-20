@@ -108,6 +108,7 @@ import Guard.{NotProcessed, IngestionComplete}
 object MaestroHdfs {
   /**
     * Expands the globs in the provided path and only keeps those directories that pass the filter.
+    * Results are sorted by their names.
     */
   def expandPaths(path: String, filter: GuardFilter = NotProcessed): Hdfs[List[String]] = for {
     paths   <- Hdfs.glob(Hdfs.path(path))  // already sorted (since permafrost 0.8.1)

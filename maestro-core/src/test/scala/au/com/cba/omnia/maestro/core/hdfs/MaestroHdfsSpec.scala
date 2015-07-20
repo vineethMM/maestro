@@ -41,62 +41,50 @@ MaestroHdfs properties
   def around[T: AsResult](t: => T) = withEnvironment(path(getClass.getResource("/hdfs-guard").toString)) { AsResult(t) }
 
   def matchGlobbedDirs = {
-    MaestroHdfs.expandPaths(s"$dir/user/a*") must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/a",
-        s"file:$dir/user/a1"
-        // excludes various other directories that don't match the glob
-      ))
-    }
+    MaestroHdfs.expandPaths(s"$dir/user/a*") must beValue(List(
+      s"file:$dir/user/a",
+      s"file:$dir/user/a1"
+      // excludes various other directories that don't match the glob
+    ))
   }
 
   def skipFiles = {
-    MaestroHdfs.expandPaths(s"$dir/user/b*") must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/b1"
-        // excludes "b2" because it's not a directory
-      ))
-    }
+    MaestroHdfs.expandPaths(s"$dir/user/b*") must beValue(List(
+      s"file:$dir/user/b1"
+      // excludes "b2" because it's not a directory
+    ))
   }
 
   def skipProcessed = {
-    MaestroHdfs.expandPaths(s"$dir/user/c*") must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/c",
-        s"file:$dir/user/c_transferred"
-        // excludes "c_processed"
-      ))
-    }
+    MaestroHdfs.expandPaths(s"$dir/user/c*") must beValue(List(
+      s"file:$dir/user/c",
+      s"file:$dir/user/c_transferred"
+      // excludes "c_processed"
+    ))
   }
 
   def skipUningested = {
-    MaestroHdfs.expandTransferredPaths(s"$dir/user/c*") must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/c_transferred"
-        // excludes "c"
-        // excludes "c_processed"
-      ))
-    }
+    MaestroHdfs.expandTransferredPaths(s"$dir/user/c*") must beValue(List(
+      s"file:$dir/user/c_transferred"
+      // excludes "c"
+      // excludes "c_processed"
+    ))
   }
 
   def listNonEmptyFiles = {
     val paths = List(s"$dir/user/a", s"$dir/user/c")
-    MaestroHdfs.listNonEmptyFiles(paths) must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/c/c.dat"
-        // excludes "a/a.dat" because it is zero-length
-      ))
-    }
+    MaestroHdfs.listNonEmptyFiles(paths) must beValue(List(
+      s"file:$dir/user/c/c.dat"
+      // excludes "a/a.dat" because it is zero-length
+    ))
   }
 
   def skipSubdirs = {
     val paths = List(s"$dir/user")
-    MaestroHdfs.listNonEmptyFiles(paths) must beValueLike {
-      _ must containTheSameElementsAs(List(
-        s"file:$dir/user/b2"
-        // excludes all subdirectories
-      ))
-    }
+    MaestroHdfs.listNonEmptyFiles(paths) must beValue(List(
+      s"file:$dir/user/b2"
+      // excludes all subdirectories
+    ))
   }
 
   def createPROCESSED = {

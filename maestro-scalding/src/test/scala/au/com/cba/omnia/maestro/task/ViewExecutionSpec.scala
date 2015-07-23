@@ -16,7 +16,8 @@ package au.com.cba.omnia.maestro.task
 
 import scalaz.Scalaz._
 
-import com.twitter.scalding.Execution
+import com.twitter.scalding.{Execution, TypedPipe, TypedCsv}
+import com.twitter.scalding.TDsl._
 
 import org.specs2.matcher.Matcher
 
@@ -51,6 +52,10 @@ View execution properties
 
     can write to a hive table using execution monad                      $normalHive
     can overwrite to a hive table using execution monad                  $normalHiveOverwrite
+      * this verifies that existing data in a partition gets overwritten
+      * that if multiple files in a partition are being overwritten by less files
+        the additional files are cleaned up
+      * that existing data in a partition without new data is untouched
     can overwrite to an already created hive table                       $createdHiveOverwrite
     can append to a hive table using execution monad                     $normalHiveAppend
     view hive executions can be composed with flatMap                    $flatMappedHive
@@ -104,36 +109,30 @@ View execution properties
     )
   }
 
-  def normalHiveOverwrite = {
+  // Uses withEnvironment so that we can force multiple map tasks to run and write out multiple files.
+  def normalHiveOverwrite = withEnvironment(path(getClass.getResource("/view-execution").toString)) {
+    val expectedA = List(StringPair("A", "10"))
+    val expectedB = List(StringPair("B", "10"), StringPair("B", "11"))
+    val expectedC = List(StringPair("C", "1"), StringPair("C", "2"), StringPair("C", "3"), StringPair("C", "4"))
+
+    val s1 = TypedCsv[(String, String)]("partitioned-overwrite1").map { case (x, y) => StringPair(x, y) }
+    val s2 = TypedCsv[(String, String)]("partitioned-overwrite2").map { case (x, y) => StringPair(x, y) }
     val exec = for {
-      c1 <- ViewExec.viewHive(tableByFirst("normalHive"), source)
-      c2 <- ViewExec.viewHive(tableByFirst("normalHive"), source2, false)
+      c1 <- ViewExec.viewHive(tableByFirst("normalHive"), s1, false)
+      c2 <- ViewExec.viewHive(tableByFirst("normalHive"), s2, false)
     } yield (c1, c2)
 
-    executesSuccessfully(exec) must_== ((4, 2))
+    executesSuccessfully(exec) must_== ((10, 3))
 
+    val result = Hive.query("SELECT * FROM normalhive.by_first").map(_.length)
+    result must beValue(expectedA.length + expectedB.length + expectedC.length)
+
+    val path = hiveWarehouse </> "normalhive.db" </> "by_first"
     facts(
-      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2),
-      hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2)
+      path </> "partition_first=A" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedA),
+      path </> "partition_first=B" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedB),
+      path </> "partition_first=C" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedC)
     )
-
-    val x = for {
-      dbs <- Hive.query("SHOW DATABASES")
-    } yield dbs
-
-    x must beValue(List("normalhive"))
-
-    val ts = for {
-      tbs <- Hive.queries(List("USE normalhive", "SHOW TABLES"))
-    } yield tbs.last
-
-    ts must beValue(List("by_first"))
-
-    val q = for {
-      result <- Hive.queries(List("USE normalhive", "SELECT * FROM by_first"))
-    } yield result.last.size
-
-    q must beValue(4)
   }
 
   def createdHiveOverwrite = {
@@ -150,28 +149,12 @@ View execution properties
 
     executesSuccessfully(exec) must_== ((4, 2))
 
+    val result = Hive.query("SELECT * FROM normalhive.by_first").map(_.length) must beValue(4)
+
     facts(
       hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2),
       hiveWarehouse </> "normalhive.db" </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 2)
     )
-
-    val x = for {
-      dbs <- Hive.query("SHOW DATABASES")
-    } yield dbs
-
-    x must beValue(List("normalhive"))
-
-    val ts = for {
-      tbs <- Hive.queries(List("USE normalhive", "SHOW TABLES"))
-    } yield tbs.last
-
-    ts must beValue(List("by_first"))
-
-    val q = for {
-      result <- Hive.queries(List("USE normalhive", "SELECT * FROM by_first"))
-    } yield result.last.size
-
-    q must beValue(4)
   }
 
   def normalHiveAppend = {

@@ -92,8 +92,6 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
         counters <- write(externalPath).withSubConfig(modifyConfig)
       } yield counters
     } else {
-      // https://github.com/CommBank/maestro/issues/382
-
       for {
         dst <- setup
 
@@ -104,7 +102,7 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
         oldFiles <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))
 
         // Run job
-        counters <- write(externalPath)
+        counters <- write(externalPath).withSubConfig(modifyConfig)
 
         // Updated list of all parquet files, including obsolete
         allFiles <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))
@@ -113,13 +111,13 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
         newFiles = allFiles.filterNot(oldFiles.toSet)
 
         // Partitions which were updated by this job
-        newPartitions = newFiles.map{case p => p.getParent()}.distinct
+        newPartitions = newFiles.map(_.getParent).distinct
 
         // Obsolete files: existed prior to this job, in partitions which have been updated
-        toDelete = oldFiles.filter{case p => newPartitions.contains(p.getParent)}
+        toDelete = oldFiles.filter(f => newPartitions.contains(f.getParent))
 
         // Delete obsolete files
-        _ <- toDelete.map{case p => Execution.fromHdfs(Hdfs.delete(p))}.sequence
+        _ <- toDelete.map(p => Execution.fromHdfs(Hdfs.delete(p))).sequence
       } yield counters
     }
   }

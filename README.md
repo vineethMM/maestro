@@ -110,28 +110,45 @@ various other convenient ways of specifying operations and combining steps.
 
 An example `maestro` job that loads a customer data file into a hive table
 is in the example 
-[`CustomerJob.scala`](maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerJob.scala).
+[`CustomerJob.scala`](maestro-example/src/main/scala/au/com/cba/omnia/maestro/example/CustomerAutomapJob.scala).
 An extract follows to give the flavour of executions and the their configuration.
 
 ```scala
-case class CustomerJobConfig(config: Config)  {
-  val maestro   = MaestroConfig(...)
-  val upload    = maestro.upload(...)
-  val load      = maestro.load[Customer] (...)
-  val dateTable = maestro.partitionedHiveTable[Customer, (String, String, String)] (...)
+case class CustomerAutomapConfig(config: Config) {
+  val maestro   = MaestroConfig(
+    conf        = config,
+    source      = "customer",
+    domain      = "customer",
+    tablename   = "customer"
+  )
+  val upload    = maestro.upload()
+  val load      = maestro.load[Customer](none = "null")
+  val acctTable = maestro.partitionedHiveTable[Account, (String, String, String)](
+    partition   = Partition.byDate(Fields[Account].EffectiveDate),
+    tablename   = "account"
+  )
 }
 
-/** Customer file load job with an execution for the main program */
-object CustomerJob extends MaestroJob {
-  def job: Execution[JobStatus] = for {
-    conf             <- Execution.getConfig.map(CustomerJobConfig(_))
-    uploadInfo       <- upload(conf.upload)
-    sources          <- uploadInfo.withSources
-    (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
-    loadSuccess      <- loadInfo.withSuccess
-    count            <- viewHive(conf.dateTable, pipe)
-    if count == loadSuccess.actual
-  } yield JobFinished
+object CustomerAutomapJob extends MaestroJob {
+  def job: Execution[JobStatus] = {
+    @automap def customerToAccount (x: Customer): Account = {
+      id           := x.acct
+      customer     := x.id
+      balance      := x.balance / 100
+      balanceCents := x.balance % 100
+    }
+      
+    for {
+      conf             <- Execution.getConfig.map(CustomerAutomapConfig(_))
+      uploadInfo       <- upload(conf.upload)
+      sources          <- uploadInfo.withSources
+      (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)
+      acctPipe          = pipe.map(customerToAccount)
+      loadSuccess      <- loadInfo.withSuccess
+      count            <- viewHive(conf.acctTable, acctPipe)
+      if count == loadSuccess.actual
+    } yield JobFinished
+  }
   ...
 }
 ```

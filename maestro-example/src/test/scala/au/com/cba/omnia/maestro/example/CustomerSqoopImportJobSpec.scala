@@ -29,13 +29,13 @@ import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.test.{Records, SqoopExecutionTest}
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
-object CustomerSqoopImportExecutionSpec
+object CustomerSqoopImportJobSpec
   extends ThermometerHiveSpec
   with Records
   with ParquetLogging { def is = s2"""
 
-CustomerSqoopImportExecution test
-=================================
+Customer Sqoop Import Job test
+==============================
 
   end to end pipeline $pipeline
 
@@ -61,7 +61,7 @@ CustomerSqoopImportExecution test
     )
 
     withEnvironment(path(getClass.getResource("/sqoop-customer/import").toString)) {
-      executesSuccessfully(CustomerSqoopImportExecution.execute, args) === CustomerImportStatus(6, 6, 6)
+      executesSuccessfully(CustomerSqoopImportJob.job, args) === JobFinished
 
       facts(
         hiveWarehouse </> s"${dbRawPrefix}_sales_books.db" </> "by_cat"  ==>

@@ -21,7 +21,7 @@ import au.com.cba.omnia.maestro.example.thrift.{Customer, Account}
 import au.com.cba.omnia.maestro.macros.automap
 
 /** Configuration for a customer execution example */
-case class CustomerJobConfig(config: Config) {
+case class CustomerAutomapConfig(config: Config) {
   val maestro   = MaestroConfig(
     conf        = config,
     source      = "customer",
@@ -37,7 +37,7 @@ case class CustomerJobConfig(config: Config) {
 }
 
 /** Customer file load job with an execution for the main program */
-object CustomerJob extends MaestroJob {
+object CustomerAutomapJob extends MaestroJob {
   def job: Execution[JobStatus] = {
     @automap def customerToAccount (x: Customer): Account = {
       id           := x.acct
@@ -45,8 +45,9 @@ object CustomerJob extends MaestroJob {
       balance      := x.balance / 100
       balanceCents := x.balance % 100
     }
+
     for {
-      conf             <- Execution.getConfig.map(CustomerJobConfig(_))
+      conf             <- Execution.getConfig.map(CustomerAutomapConfig(_))
       uploadInfo       <- upload(conf.upload)
       sources          <- uploadInfo.withSources
       (pipe, loadInfo) <- load[Customer](conf.load, uploadInfo.files)

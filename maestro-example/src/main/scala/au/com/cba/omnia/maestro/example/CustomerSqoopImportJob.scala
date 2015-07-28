@@ -42,15 +42,15 @@ case class CustomerImportConfig(config: Config) {
 }
 
 /** Example customer execution, importing data via Sqoop */
-object CustomerSqoopImportExecution {
+object CustomerSqoopImportJob extends MaestroJob {
   /** Create an example customer sqoop import execution */
-  def execute: Execution[CustomerImportStatus] = for {
+  def job: Execution[JobStatus] = for {
     conf               <- Execution.getConfig.map(CustomerImportConfig(_))
     (path, sqoopCount) <- sqoopImport(conf.sqoopImport)
     (pipe, loadInfo)   <- load[Customer](conf.load, List(path))
     loadSuccess        <- loadInfo.withSuccess
     hiveCount          <- viewHive(conf.catTable, pipe)
-  } yield (CustomerImportStatus(sqoopCount, loadSuccess.written, hiveCount))
-}
+  } yield JobFinished
 
-case class CustomerImportStatus(sqoopCount: Long, loadCount: Long, hiveCount: Long)
+  def attemptsExceeded = Execution.from(JobNeverReady)   // Elided in the README
+}

@@ -25,8 +25,7 @@ import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.Customer
 
 /** Configuration for a customer execution example */
-case class CustomerConfig(config: Config) {
-
+case class CustomerHiveConfig(config: Config) {
   val maestro   = MaestroConfig(
     conf        = config,
     source      = "customer",
@@ -51,15 +50,18 @@ case class CustomerConfig(config: Config) {
 }
 
 /** Customer execution example */
-object CustomerExecution {
+object CustomerHiveJob extends MaestroJob {
   /** Create an example customer execution */
-  def execute: Execution[(LoadSuccess, Long)] = for {
-    conf           <- Execution.getConfig.map(CustomerConfig(_))
+  def job: Execution[JobStatus] = for {
+    conf           <- Execution.getConfig.map(CustomerHiveConfig(_))
     uploadInfo     <- upload(conf.upload)
     sources        <- uploadInfo.withSources
     (pipe, ldInfo) <- load[Customer](conf.load, uploadInfo.files)
     loadSuccess    <- ldInfo.withSuccess
     (count1, _)    <- viewHive(conf.dateTable, pipe) zip viewHive(conf.catTable, pipe)
+    _              <- Execution.guard(count1 == loadSuccess.actual, "Wrote out different number of reads than received.")
     _              <- Execution.fromHive(Hive.queries(conf.queries), _.setVar(HIVEMERGEMAPFILES, "true"))
-  } yield (loadSuccess, count1)
+  } yield JobFinished
+
+  def attemptsExceeded = Execution.from(JobNeverReady)   // Elided in the README
 }

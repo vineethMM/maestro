@@ -18,41 +18,45 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.hive.ThermometerHiveSpec
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
+import au.com.cba.omnia.ebenezer.ParquetLogging
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
 
 import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.test.Records
 
-import au.com.cba.omnia.maestro.example.thrift.{Customer, Account}
+import au.com.cba.omnia.maestro.example.thrift.Customer
 
-object CustomerJobSpec
+object CustomerHiveJobSpec
   extends ThermometerHiveSpec
-  with Records { def is = s2"""
+  with Records
+  with ParquetLogging { def is = s2"""
 
-Customer Job
-============
+Customer Hive Job
+=================
 
   end to end pipeline        $pipeline
 
 """
 
   def pipeline = {
-    val actualReader   = ParquetThermometerRecordReader[Account]
-    val expectedReader = delimitedThermometerRecordReader[Account]('|', "null", implicitly[Decode[Account]])
-    val dbRawPrefix    = "dr"
+    val actualReader      = ParquetThermometerRecordReader[Customer]
+    val expectedReader    = delimitedThermometerRecordReader[Customer]('|', "null", implicitly[Decode[Customer]])
+    val dbRawprefix       = "dr"
+    val customerWarehouse = hiveWarehouse </> s"${dbRawprefix}_customer_customer.db"
+    val expectedDir       = "expected" </> "customer"
 
     withEnvironment(path(getClass.getResource("/customer").toString)) {
       val args = Map(
         "hdfs-root"     -> List(s"$dir/user"),
         "local-root"    -> List(s"$dir/user"),
         "archive-root"  -> List(s"$dir/user/archive"),
-        "db-raw-prefix" -> List(dbRawPrefix)
+        "db-raw-prefix" -> List(dbRawprefix)
       )
-      executesSuccessfully(CustomerJob.job, args) must_== JobFinished
+      executesSuccessfully(CustomerHiveJob.job, args) must_== JobFinished
 
       facts(
-        hiveWarehouse </> s"${dbRawPrefix}_customer_customer.db" </> "account" ==>
-          recordsByDirectory(actualReader, expectedReader, "expected" </> "customer" </> "account")
+        customerWarehouse </> "by_date" ==> recordsByDirectory(actualReader, expectedReader, expectedDir </> "by-date"),
+        customerWarehouse </> "by_cat"  ==> recordsByDirectory(actualReader, expectedReader, expectedDir </> "by-cat")
       )
     }
   }

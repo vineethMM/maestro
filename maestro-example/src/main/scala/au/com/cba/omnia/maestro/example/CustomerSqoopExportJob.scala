@@ -14,22 +14,11 @@
 
 package au.com.cba.omnia.maestro.example
 
-import com.twitter.scalding.{TextLine, TypedPipe, TypedPsv}
-
 import com.twitter.scalding.{Config, Execution}
-
-import org.apache.hadoop.fs.Path
-
-import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
-
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 
-import au.com.cba.omnia.permafrost.hdfs.Hdfs
-
 import au.com.cba.omnia.maestro.api._, Maestro._
-import au.com.cba.omnia.maestro.core.codec.Encode
 import au.com.cba.omnia.maestro.example.thrift.Customer
  
 /** Sample configuration for exporting data via sqoop. */

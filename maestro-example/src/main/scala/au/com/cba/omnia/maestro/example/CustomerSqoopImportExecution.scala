@@ -14,10 +14,6 @@
 
 package au.com.cba.omnia.maestro.example
 
-import java.io.File
-
-import org.joda.time.{DateTime, DateTimeZone}
-
 import com.twitter.scalding.{Config, Execution}
 
 import au.com.cba.omnia.parlour.ParlourImportOptions

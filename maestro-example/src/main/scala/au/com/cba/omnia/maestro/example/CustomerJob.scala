@@ -16,8 +16,6 @@ package au.com.cba.omnia.maestro.example
 
 import com.twitter.scalding.{Config, Execution}
 
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
-
 import au.com.cba.omnia.maestro.api._, Maestro._
 import au.com.cba.omnia.maestro.example.thrift.{Customer, Account}
 import au.com.cba.omnia.maestro.macros.automap

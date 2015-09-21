@@ -103,7 +103,7 @@ object build extends Build {
            depend.scalaz()
         ++ depend.hadoopClasspath
         ++ depend.hadoop()
-        ++ depend.shapeless() ++ depend.testing() ++ depend.time()
+        ++ depend.shapeless("2.2.5") ++ depend.testing() ++ depend.time()
         ++ depend.omnia("ebenezer-hive", ebenezerVersion)
         ++ depend.omnia("permafrost",    permafrostVersion)
         ++ depend.omnia("edge",          edgeVersion)

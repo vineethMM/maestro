@@ -209,7 +209,7 @@ object build extends Build {
   , settings =
        standardSettings
     ++ uniform.project("maestro-benchmark", "au.com.cba.omnia.maestro.benchmark")
-    ++ uniformThriftSettings
+    ++ humbugSettings
     ++ Seq[Sett](
       libraryDependencies ++= Seq(
         "com.storm-enroute" %% "scalameter" % "0.6"

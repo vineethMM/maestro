@@ -19,7 +19,7 @@ import org.scalameter.api.{PerformanceTest, Gen}
 import au.com.cba.omnia.maestro.core.codec.{Encode, Decode}
 import au.com.cba.omnia.maestro.macros.Macros
 
-import au.com.cba.omnia.maestro.benchmark.thrift.{Struct10, Struct20, Struct30, Struct500, Generators}
+import au.com.cba.omnia.maestro.benchmark.thrift.{Struct10, Struct20, Struct30, Struct500, HStruct10, Generators}
 import au.com.cba.omnia.maestro.benchmark.thrift.Implicits._
 
 object CodecBenchmark extends PerformanceTest.OfflineReport {
@@ -42,7 +42,7 @@ object CodecBenchmark extends PerformanceTest.OfflineReport {
     }}
 
   performance of "Codecs" in {
-    measure method "decode[Struct10]"  in testDecode[Struct10](Generators.struct10Rows)
+    /*measure method "decode[Struct10]"  in testDecode[Struct10](Generators.struct10Rows)
     measure method "decode[Struct20]"  in testDecode[Struct20](Generators.struct20Rows)
     measure method "decode[Struct30]"  in testDecode[Struct30](Generators.struct30Rows)
     measure method "decode[Struct500]" in testDecode[Struct500](Generators.struct500Rows)
@@ -51,5 +51,8 @@ object CodecBenchmark extends PerformanceTest.OfflineReport {
     measure method "encode[Struct20]"  in testEncode[Struct20](Generators.struct20Values)
     measure method "encode[Struct30]"  in testEncode[Struct30](Generators.struct30Values)
     measure method "encode[Struct500]" in testEncode[Struct500](Generators.struct500Values)
+     */
+
+    measure method "decode[HStruct10]"  in testDecode[HStruct10](Generators.hstruct10Rows)
   }
 }

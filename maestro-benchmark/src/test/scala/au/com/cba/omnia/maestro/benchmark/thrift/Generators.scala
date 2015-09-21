@@ -16,6 +16,8 @@ package au.com.cba.omnia.maestro.benchmark.thrift
 
 import org.scalameter.api.Gen
 
+import shapeless._
+
 /** Contains generators for thrift types */
 object Generators extends Serializable {
   def mkStruct10Values(rows: Int): Array[Struct10] =
@@ -644,4 +646,18 @@ object Generators extends Serializable {
   /** Generator for rows which can be parsed into [[Struct30]]s */
   val struct500Rows: Gen[Array[List[String]]] =
     struct500Values.map(_.map(mkRow))
+
+  def mkHStruct10Values(rows: Int): Array[HStruct10] =
+    (0 until rows).map { row =>
+      new HStruct10(s"r$row-f0" :: s"r$row-f1" :: row * 10 + 2.5 :: row * 10 + 3 :: Int.MaxValue.toLong + row * 10 + 4 :: s"r$row-f5" :: s"r$row-f6" :: row * 10 + 7.5 :: row * 10 + 8 :: Int.MaxValue.toLong + row * 10 + 9 :: HNil)
+    }.toArray
+
+  /** Generator for [[HStruct10]]s */
+  val hstruct10Values: Gen[Array[HStruct10]] =
+    rows.map(mkHStruct10Values(_))
+
+  /** Generator for rows which can be parsed into [[HStruct10]]s */
+  val hstruct10Rows: Gen[Array[List[String]]] =
+    hstruct10Values.map(_.map(mkRow))
+
 }

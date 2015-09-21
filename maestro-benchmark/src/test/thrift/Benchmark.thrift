@@ -23,7 +23,7 @@ struct Struct10 {
   5  : i64    long5
   6  : string str6
   7  : string str7
-  8  : double dlb8
+  8  : double dbl8
   9  : i32    int9
   10 : i64    long10
 }
@@ -77,9 +77,9 @@ struct Struct30 {
   23 : double dbl23
   24 : i32    int24
   25 : i64    long25
-  26 : string str126
+  26 : string str26
   27 : string str27
   28 : double dbl28
   29 : i32    int29
-  30 : i64    long0
+  30 : i64    long30
 }

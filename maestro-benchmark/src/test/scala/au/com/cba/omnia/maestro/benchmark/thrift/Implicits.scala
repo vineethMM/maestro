@@ -28,6 +28,9 @@ object Implicits extends Serializable {
   implicit val Struct30Decode: Decode[Struct30] =
     Macros.mkDecode[Struct30]
 
+  implicit val Struct230Decode: Decode[Struct230] =
+    Macros.mkDecode[Struct230]
+
   implicit val Struct500Decode: Decode[Struct500] =
     Macros.mkDecode[Struct500]
 
@@ -40,6 +43,9 @@ object Implicits extends Serializable {
   implicit val Struct30Encode: Encode[Struct30] =
     Macros.mkEncode[Struct30]
 
+  implicit val Struct230Encode: Encode[Struct230] =
+    Macros.mkEncode[Struct230]
+
   implicit val Struct500Encode: Encode[Struct500] =
     Macros.mkEncode[Struct500]
 
@@ -51,6 +57,9 @@ object Implicits extends Serializable {
 
   implicit val Struct30Tag: Tag[Struct30] =
     Macros.mkTag[Struct30]
+
+  implicit val Struct230Tag: Tag[Struct230] =
+    Macros.mkTag[Struct230]
 
   implicit val Struct500Tag: Tag[Struct500] =
     Macros.mkTag[Struct500]

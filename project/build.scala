@@ -132,10 +132,7 @@ object build extends Build {
     ++ uniform.project("maestro-macros", "au.com.cba.omnia.maestro.macros")
     ++ Seq[Sett](
          libraryDependencies <++= scalaVersion.apply(sv => Seq(
-          "org.scala-lang"   % "scala-compiler" % sv
-            exclude("org.scala-lang.modules", "scala-parser-combinators_2.11")
-            exclude("org.scala-lang.modules", "scala-xml_2.11")
-         , "org.scala-lang"   % "scala-reflect"  % sv
+           "org.scala-lang" % "scala-reflect" % sv
          ) ++ depend.testing())
        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
     )

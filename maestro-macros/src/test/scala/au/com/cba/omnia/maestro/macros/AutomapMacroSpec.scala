@@ -44,6 +44,7 @@ AutomapSpec
   Errors
     fail when not method definition                                      $annotationOnSomethingOtherThanADef
     don't show up when annotation is used correctly                      $noErrorsWhenCorrect
+    don't show up when same level bindings are used                      $noErrorsWhenSameLevelBindings
     when a field cannot be resolved                                      $couldNotResolveField
     when two fields cannot be resolved                                   $couldNotResolveTwoFields
     when input and output field have different values                    $differentTypesForInputAndOutput
@@ -215,6 +216,15 @@ AutomapSpec
       "@automap def join(x: JoinOneScrooge, y: JoinTwoHumbug): JoinableHumbug = {}"
     )
 
+    compileErrors must beEmpty
+  }
+
+  def noErrorsWhenSameLevelBindings = {
+    //This test is motivated by a bug which lead to errors being reported when using local bindings
+    val compileErrors = MacroUtils.compileErrors("""
+      def notNot(x: Boolean) = !(!x)
+      @automap def join(x: JoinOneScrooge, y: JoinTwoHumbug): JoinableHumbug = { booleanField := notNot(false) }
+    """)
     compileErrors must beEmpty
   }
 

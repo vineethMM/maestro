@@ -116,18 +116,8 @@ object AutomapMacro {
       val (invalidOverrides, validOverrides) =
         rules
           .map { case q"$x := $expr" =>
-            dstFields.get(x.toString).cata(f =>
-              // Check that the code block evaluates to the same type as `x`
-              try {
-                val params     = srcs.map { case (n, t) => q"$n: $t" }
-                val paramTypes = srcs.map(_._2)
-                val wrapper    = q"(..$params) => $expr"
-                c.typecheck(q"$wrapper: (..$paramTypes => ${f.returnType})")
-
-                (x.toString, expr).right
-              } catch {
-                case TypecheckException(_, msg) => s"Invalid type for transforming '$x: $msg.".left
-              },
+            dstFields.get(x.toString).cata(_ =>
+              (x.toString, expr).right,
               s"$x is not a member of $dst.".left
             )
         }.separate

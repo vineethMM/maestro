@@ -34,6 +34,9 @@ case object JobNotReady extends JobStatus { val exitCode = 1 }
 /** The Job was never ready, and could not be retried any more */
 case object JobNeverReady extends JobStatus { val exitCode = 2 }
 
+/** The Job was not scheduled to run, and should not be retried */
+case object JobNotScheduled extends JobStatus { val exitCode = 3 }
+
 /**
   * The job failed
   *

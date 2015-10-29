@@ -22,6 +22,7 @@ package object api {
   type JobFinished     = au.com.cba.omnia.maestro.scalding.JobFinished.type
   type JobNotReady     = au.com.cba.omnia.maestro.scalding.JobNotReady.type
   type JobNeverReady   = au.com.cba.omnia.maestro.scalding.JobNeverReady.type
+  type JobNotScheduled = au.com.cba.omnia.maestro.scalding.JobNotScheduled.type
   type JobFailure      = au.com.cba.omnia.maestro.scalding.JobFailure
   val  JobFinished     = au.com.cba.omnia.maestro.scalding.JobFinished
   val  JobNotReady     = au.com.cba.omnia.maestro.scalding.JobNotReady

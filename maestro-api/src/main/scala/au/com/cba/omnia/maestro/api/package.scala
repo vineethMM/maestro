@@ -28,6 +28,7 @@ package object api {
   val  JobNotReady     = au.com.cba.omnia.maestro.scalding.JobNotReady
   val  JobNeverReady   = au.com.cba.omnia.maestro.scalding.JobNeverReady
   val  JobFailure      = au.com.cba.omnia.maestro.scalding.JobFailure
+  val  JobNotScheduled = au.com.cba.omnia.maestro.scalding.JobNotScheduled
   val MaestroExecution = au.com.cba.omnia.maestro.scalding.MaestroExecution
   val MX               = au.com.cba.omnia.maestro.scalding.MaestroExecution
 

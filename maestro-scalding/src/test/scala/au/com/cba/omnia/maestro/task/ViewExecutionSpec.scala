@@ -58,6 +58,7 @@ View execution properties
       * that existing data in a partition without new data is untouched
     can overwrite to an already created hive table                       $createdHiveOverwrite
     can append to a hive table using execution monad                     $normalHiveAppend
+    can append to a hive table using zipped execution                    $zippedHiveAppend
     view hive executions can be composed with flatMap                    $flatMappedHive
     view hive executions can be composed with zip                        $zippedHive
     can write to tables where the underlying folder has been deleted     $withoutFolder
@@ -65,6 +66,7 @@ View execution properties
   unpartitioned:
     can write to a hive table using execution monad                      $normalHiveUnpartitioned
     can append to a hive table using execution monad                     $normalHiveUnpartitionedAppend
+    can append to a hive table using zipped execution                    $zippedHiveUnpartitionedAppend
     view hive executions can be composed with flatMap                    $flatMappedHiveUnpartitioned
     view hive executions can be composed with zip                        $zippedHiveUnpartitioned
     can write to tables where the underlying folder has been deleted     $withoutFolderUnpartitioned
@@ -170,6 +172,16 @@ View execution properties
     )
   }
 
+  def zippedHiveAppend = {
+    val exec = ViewExec.viewHive(tableByFirst("zippedHive"), source)
+      .zip(ViewExec.viewHive(tableByFirst("zippedHive"), source))
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "zippedhive.db" </> "by_first"  </> "partition_first=A"  </> "part-*.parquet" ==> matchesFile,
+      hiveWarehouse </> "zippedhive.db" </> "by_first"  </> "partition_first=B"  </> "part-*.parquet" ==> matchesFile
+    )
+  }
+
   def flatMappedHive = {
     val exec = for {
       count1 <- ViewExec.viewHive(tableByFirst("flatMappedHive"), source)
@@ -235,6 +247,16 @@ View execution properties
       c1 <- ViewExec.viewHive(tableUnpartitioned("unpart"), source)
       c2 <- ViewExec.viewHive(tableUnpartitioned("unpart"), source)
     } yield (c1, c2)
+    executesSuccessfully(exec) must_== ((4, 4))
+    facts(
+      hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 8)
+    )
+  }
+
+  def zippedHiveUnpartitionedAppend = {
+    val exec = ViewExec.viewHive(tableUnpartitioned("unpart"), source)
+      .zip(ViewExec.viewHive(tableUnpartitioned("unpart"), source))
+
     executesSuccessfully(exec) must_== ((4, 4))
     facts(
       hiveWarehouse </> "unpart.db" </> "unpart_table" </> "part-*.parquet" ==> recordCount(ParquetThermometerRecordReader[StringPair], 8)

@@ -150,10 +150,10 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
       def moveFiles(src: Path, dst: Path): Hdfs[Unit] = for {
         _     <- Hdfs.mkdirs(dst) // Create the folder if it doesn't already exist for some reason.
         files <- Hdfs.files(src, "*.parquet")
-        time  =  System.currentTimeMillis
+        uniq  =  UniqueID.getRandom.get
         _     <- Hdfs.mkdirs(dst)
         _     <- files.zipWithIndex.traverse {
-                   case (file, idx) => Hdfs.move(file, new Path(dst, f"part-$time-$idx%05d.parquet"))
+                   case (file, idx) => Hdfs.move(file, new Path(dst, f"part-$uniq-$idx%05d.parquet"))
                  }
       } yield ()
 

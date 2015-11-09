@@ -16,7 +16,7 @@ package au.com.cba.omnia.maestro.scalding
 
 import org.apache.hadoop.mapred.JobConf
 
-import com.twitter.scalding.Config
+import com.twitter.scalding.{Config, UniqueID}
 
 /** Collection of utility methods around get/setting Config. */
 object ConfHelper {
@@ -33,6 +33,7 @@ object ConfHelper {
     *
     * This is used to get cascading to append to files to existing partitions.
     */
-  def createUniqueFilenames(config: Config): Config =
-    config + ("cascading.tapcollector.partname" -> s"%s%spart-${System.currentTimeMillis}-%05d-%05d")
+  def createUniqueFilenames(config: Config): Config = {
+    config + ("cascading.tapcollector.partname" -> s"%s%spart-${UniqueID.getRandom.get}-%05d-%05d")
+  }
 }

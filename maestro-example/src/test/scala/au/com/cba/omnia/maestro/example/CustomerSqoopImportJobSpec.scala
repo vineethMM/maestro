@@ -75,11 +75,12 @@ Customer Sqoop Import Job test
   object CustomerImport {
     Class.forName("org.hsqldb.jdbcDriver")
 
+    // hiveDropImportDelims option removes the \n and \u0001
     val data = List(
-      "C001|Fred|0001|F|M|25",
+      "C001|Fred\n|0001|F|M|25",
       "C002|Barney|0002|S|M|2260",
       "C003|Home|0003|S|M|-10",
-      "C004|Wilma|0004|F|F|1003",
+      "C004|Wilma\u0001|0004|F|F|1003",
       "C005|Betty|0005|F|F|10000",
       "C006|Marge|0006|S|F|10"
     )

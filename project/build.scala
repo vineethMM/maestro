@@ -34,7 +34,7 @@ import au.com.cba.omnia.humbug.HumbugSBT._
 object build extends Build {
   type Sett = Def.Setting[_]
 
-  val thermometerVersion = "1.0.2-20150724061242-6a77919"
+  val thermometerVersion = "1.2.0-20151022053411-06d7289"
   val ebenezerVersion    = "0.18.4-20150724063316-827415b"
   val omnitoolVersion    = "1.10.0-20150430044321-3ca9118"
   val permafrostVersion  = "0.10.0-20150729223234-1f86afc"

@@ -27,8 +27,8 @@ import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-import au.com.cba.omnia.ebenezer.scrooge.ParquetScroogeSource
-import au.com.cba.omnia.ebenezer.scrooge.hive._
+import au.com.cba.omnia.ebenezer.scrooge.{ParquetScroogeSource, PartitionParquetScroogeSource, PartitionParquetScroogeSink}
+import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.scalding.ConfHelper
@@ -44,7 +44,7 @@ sealed trait HiveTable[T <: ThriftStruct, ST] {
   val name: String = s"$database.$table"
 
   /** Path of the table. */
-  lazy val path = new Path(externalPath.getOrElse(
+  lazy val tablePath = new Path(externalPath.getOrElse(
     s"${(new HiveConf()).getVar(METASTOREWAREHOUSE)}/$database.db/$table"
   ))
 
@@ -65,60 +65,56 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
 
   /** List of partition column names and type (string by default). */
   val partitionMetadata: List[(String, String)] = partition.fieldNames.map(n => (n, "string"))
+  //Enforce the Hive partition pattern
+  val hivePartitionPattern: String = partition.fieldNames.map(_ + "=%s").mkString("/")
 
-  override def source: PartitionHiveParquetScroogeSource[A] =
-    PartitionHiveParquetScroogeSource[A](database, table, partitionMetadata)
+  override def source: PartitionParquetScroogeSource[B, A] =
+    PartitionParquetScroogeSource[B, A](hivePartitionPattern, tablePath.toString)
 
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
     def modifyConfig(config: Config) = ConfHelper.createUniqueFilenames(config)
 
-    // Creates the hive table and gets its path
-    val setup = Execution.fromHive(
-      Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_))) >>
-      Hive.getPath(database, table)
-    )
+    def withTable(ops: Path => Execution[ExecutionCounters]): Execution[ExecutionCounters] =
+      for {
+        _       <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_)))) 
+       location <- Execution.hive(Hive.getPath(database, table))
+       counter  <- ops(location)
+       _        <- Execution.hive(Hive.repair(database, table))
+      } yield counter
 
     // Runs the scalding job and gets the counters
-    def write(path: Option[String]) =
+    def write(path: Path) =
       pipe
-      .map(v => partition.extract(v) -> v)
-      .writeExecution(PartitionHiveParquetScroogeSink[B, A](database, table, partitionMetadata, path, append))
-      .getAndResetCounters
-      .map(_._2)
+        .map(v => partition.extract(v) -> v)
+        .writeExecution(PartitionParquetScroogeSink[B, A](hivePartitionPattern, path.toString))
+        .getAndResetCounters
+        .map(_._2)
 
     if (append) {
-      for {
-        _        <- setup
-        counters <- write(externalPath).withSubConfig(modifyConfig)
-      } yield counters
+      withTable(write(_).withSubConfig(modifyConfig)) 
     } else {
-      for {
-        dst <- setup
-
-        // Create the folder if it doesn't already exist for some reason.
-        _   <- Execution.fromHdfs(Hdfs.mkdirs(dst))
-
-        // Get list of original parquet files
-        oldFiles <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))
-
-        // Run job
-        counters <- write(externalPath).withSubConfig(modifyConfig)
-
-        // Updated list of all parquet files, including obsolete
-        allFiles <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))
-
-        // Files which were created by this job
-        newFiles = allFiles.filterNot(oldFiles.toSet)
-
-        // Partitions which were updated by this job
-        newPartitions = newFiles.map(_.getParent).distinct
-
-        // Obsolete files: existed prior to this job, in partitions which have been updated
-        toDelete = oldFiles.filter(f => newPartitions.contains(f.getParent))
-
-        // Delete obsolete files
-        _ <- toDelete.map(p => Execution.fromHdfs(Hdfs.delete(p))).sequence
-      } yield counters
+      /** Steps that happen below :-
+        * 1) Create the folder if folder doesn't exist
+        * 2) Get list of original parquet files
+        * 3) Run the job
+        * 4) Get the list of all updated parquet files, including obsolete
+        * 5) Get files created by this job
+        * 6) Get partitions updated by this job
+        * 7) Get obsolete files: existed prior to this job, in partitions which have been updated
+        * 8) Delete obsolete files
+        */
+      withTable { dst =>
+        for {
+          _            <- Execution.fromHdfs(Hdfs.mkdirs(dst))// Step 1
+          oldFiles     <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))// Step 2
+          counters     <- write(dst).withSubConfig(modifyConfig)// Step 3
+          allFiles     <- Execution.fromHdfs(Hdfs.files(dst, "[^_]*", recursive=true))// Step 4
+          newFiles      = allFiles.filterNot(oldFiles.toSet)// Step 5
+          newPartitions = newFiles.map(_.getParent).distinct // Step 6
+          toDelete      = oldFiles.filter(f => newPartitions.contains(f.getParent))// Step 7
+          _            <- toDelete.map(p => Execution.fromHdfs(Hdfs.delete(p))).sequence//Step 8
+        } yield counters
+      }
     }
   }
 }
@@ -129,11 +125,11 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
 ) extends HiveTable[A, A] {
 
   override def source =
-    HiveParquetScroogeSource[A](database, table, externalPath)
+    ParquetScroogeSource[A](tablePath.toString)
 
   /** Writes the contents of the pipe to this HiveTable. */
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
-    // Creates the hive table and gets its path
+    // Creates the hive table
     val setup = Execution.fromHive(
       Hive.createParquetTable[A](database, table, List.empty, externalPath.map(new Path(_))) >>
       Hive.getPath(database, table)
@@ -150,21 +146,21 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
       def moveFiles(src: Path, dst: Path): Hdfs[Unit] = for {
         _     <- Hdfs.mkdirs(dst) // Create the folder if it doesn't already exist for some reason.
         files <- Hdfs.files(src, "*.parquet")
-        uniq  =  UniqueID.getRandom.get
-        _     <- Hdfs.mkdirs(dst)
+        uniq   =  UniqueID.getRandom.get
         _     <- files.zipWithIndex.traverse {
                    case (file, idx) => Hdfs.move(file, new Path(dst, f"part-$uniq-$idx%05d.parquet"))
                  }
       } yield ()
 
-      setup.flatMap(dst => Execution.fromHdfs(Hdfs.createTempDir()).bracket(
-        tmpDir => Execution.fromHdfs(Hdfs.delete(tmpDir, true))
-      )(
-        tmpDir => for {
-          counters <- write(tmpDir)
-          _        <- Execution.fromHdfs(moveFiles(tmpDir, dst))
-        } yield counters
-      ))
+      setup.flatMap(dst => 
+        Execution.fromHdfs(Hdfs.createTempDir()).bracket(
+          tmpDir => Execution.fromHdfs(Hdfs.delete(tmpDir, true))
+        )(tmpDir => 
+          for {
+            counters <- write(tmpDir)
+            _        <- Execution.fromHdfs(moveFiles(tmpDir, dst))
+          } yield counters
+        ))
     } else {
       for {
         dst      <- setup

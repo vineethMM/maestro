@@ -18,7 +18,7 @@ import com.twitter.scalding.{Execution, TupleSetter, TypedPipe}
 
 import com.twitter.scrooge.ThriftStruct
 
-import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSource
+import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSink
 import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
 
 import au.com.cba.omnia.maestro.core.partition.Partition
@@ -49,7 +49,7 @@ trait ViewExecution {
   ): Execution[Long] =
     pipe
       .map(v => config.partition.extract(v) -> v)
-      .writeExecution(PartitionParquetScroogeSource[B, A](config.partition.pattern, config.output))
+      .writeExecution(PartitionParquetScroogeSink[B, A](config.partition.pattern, config.output))
       .getAndResetCounters
       .map { case (_, counters) => counters.get(StatKeys.tuplesWritten).getOrElse(0) }
 

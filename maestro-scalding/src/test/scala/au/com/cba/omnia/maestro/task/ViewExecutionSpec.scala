@@ -102,7 +102,7 @@ View execution properties
     } yield (a, b)
 
     executesSuccessfully(exec) must_== ((4, 4))
-
+ 
     facts(
       hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
       hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile,

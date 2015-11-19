@@ -35,11 +35,11 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "1.2.0-20151022053411-06d7289"
-  val ebenezerVersion    = "0.18.4-20150724063316-827415b"
-  val omnitoolVersion    = "1.10.0-20150430044321-3ca9118"
-  val permafrostVersion  = "0.10.0-20150729223234-1f86afc"
-  val edgeVersion        = "3.4.0-20150513004502-4b6d30d"
-  val humbugVersion      = "0.6.1-20150513010955-5eb6297"
+  val ebenezerVersion    = "0.19.1-20151120011019-c3dc932"
+  val omnitoolVersion    = "1.12.0-20151021050758-700b9d0"
+  val permafrostVersion  = "0.11.0-20151104041218-5b4e90f"
+  val edgeVersion        = "3.4.0-20151008042132-d51a10e"
+  val humbugVersion      = "0.6.1-20151008040202-1f0ccb9"
   val parlourVersion     = "1.10.0-20151105012616-a7fb575"
 
   val scalikejdbc = noHadoop("org.scalikejdbc" %% "scalikejdbc" % "2.2.6")

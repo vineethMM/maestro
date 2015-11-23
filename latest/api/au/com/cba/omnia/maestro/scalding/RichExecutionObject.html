@@ -49,7 +49,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/0fd6259f06da61157c58c02a865e15831135b20d//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps the Execution object.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/3ab62942ebfa6ec19b5a819c950d4afffa710f86//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.ResultantOps" class="extype" target="_top">ResultantOps</a>[<span class="extype" name="com.twitter.scalding.Execution">Execution</span>], <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -223,6 +223,57 @@
       </a>
     </span>
       <p class="shortcomment cmt">Alias for <a href="#fromEither[T](disjunction:=&gt;scalaz.\/[String,T]):com.twitter.scalding.Execution[T]" class="extmbr" name="au.com.cba.omnia.maestro.scalding.RichExecutionObject#fromEither">fromEither</a></p>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#eitherError" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eitherError[A&lt;:&lt;?&gt;](v:&lt;?&gt;):M[A]"></a>
+      <a id="eitherError[A](⇒Either[(String,Throwable),A]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherError</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <span class="extype" name="scala.Either">Either</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Throwable">Throwable</span>), <span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherError.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherError.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject@eitherError[A](v:=&gt;Either[(String,Throwable),A]):M[A]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#eitherException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eitherException[A&lt;:&lt;?&gt;](v:&lt;?&gt;):M[A]"></a>
+      <a id="eitherException[A](⇒Either[Throwable,A]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherException</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Throwable">Throwable</span>, <span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherException.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherException.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject@eitherException[A](v:=&gt;Either[Throwable,A]):M[A]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#eitherFail" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eitherFail[A&lt;:&lt;?&gt;](v:&lt;?&gt;):M[A]"></a>
+      <a id="eitherFail[A](⇒Either[String,A]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eitherFail</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherFail.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.eitherFail.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject@eitherFail[A](v:=&gt;Either[String,A]):M[A]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -417,6 +468,23 @@
       </a>
     </span>
       <p class="shortcomment cmt">Changes from an action that produces a Result to an Execution.</p>
+    </li><li name="au.com.cba.omnia.omnitool.ResultantOps#fromTry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromTry[A&lt;:&lt;?&gt;](v:&lt;?&gt;):M[A]"></a>
+      <a id="fromTry[A](⇒Try[A]):Execution[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromTry</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="v">v: ⇒ <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.fromTry.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="au.com.cba.omnia.omnitool.ResultantOps.fromTry.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject@fromTry[A](v:=&gt;scala.util.Try[A]):M[A]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ResultantOps</dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>

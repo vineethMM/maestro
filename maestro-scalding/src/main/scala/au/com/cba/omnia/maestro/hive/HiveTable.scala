@@ -79,7 +79,8 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
         _       <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_)))) 
        location <- Execution.hive(Hive.getPath(database, table))
        counter  <- ops(location)
-       _        <- Execution.hive(Hive.repair(database, table))
+        _       <- Execution.hdfs(Hdfs.delete(new Path(location, new Path("_temporary")), true))
+        _       <- Execution.hive(Hive.repair(database, table))
       } yield counter
 
     // Runs the scalding job and gets the counters

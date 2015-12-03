@@ -224,9 +224,10 @@ case class MaestroConfig(
     partition: Partition[A, B], // no default for partition
     tablename: String    = self.tablename,
     database: String     = dbRaw,
-    path: Option[String] = None
+    path: Option[String] = None,
+    partitionBatchSize: Int = 100
   ): HiveTable[A, (B, A)] =
-    HiveTable(database, tablename, partition, path)
+    HiveTable(database, tablename, partition, path, partitionBatchSize)
 }
 
 object MaestroConfig {

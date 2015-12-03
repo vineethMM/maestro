@@ -14,7 +14,7 @@
 
 package au.com.cba.omnia.maestro.hive
 
-import scalaz.Scalaz._
+import scalaz._, Scalaz._
 
 import org.apache.hadoop.fs.Path
 
@@ -60,13 +60,15 @@ sealed trait HiveTable[T <: ThriftStruct, ST] {
 
 /** Information need to address/describe a specific partitioned hive table.*/
 case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
-  database: String, table: String, partition: Partition[A, B], externalPath: Option[String] = None
+  database: String, table: String, partition: Partition[A, B], 
+  externalPath: Option[String] = None, partitionBatchSize: Int = 100
 ) extends HiveTable[A, (B, A)] {
 
   /** List of partition column names and type (string by default). */
-  val partitionMetadata: List[(String, String)] = partition.fieldNames.map(n => (n, "string"))
+  val partitionMetadata    = partition.fieldNames.map(n => (n, "string"))
   //Enforce the Hive partition pattern
-  val hivePartitionPattern: String = partition.fieldNames.map(_ + "=%s").mkString("/")
+  val hivePartitionPattern = partition.fieldNames.map(_ + "=%s").mkString("/")
+  val hdfsPartitionGlob    = partition.fieldNames.map(_ => "*").mkString("/")
 
   override def source: PartitionParquetScroogeSource[B, A] =
     PartitionParquetScroogeSource[B, A](hivePartitionPattern, tablePath.toString)
@@ -74,13 +76,21 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
   override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
     def modifyConfig(config: Config) = ConfHelper.createUniqueFilenames(config)
 
+    def addPartitions(paths: List[Path]): Execution[Unit] =
+      paths.grouped(partitionBatchSize)
+        .map((ps: List[Path]) => Execution.hive(Hive.addPartitions(database, table, partition.fieldNames, ps)))
+        .toList.sequence_
+
     def withTable(ops: Path => Execution[ExecutionCounters]): Execution[ExecutionCounters] =
       for {
-        _       <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_)))) 
-       location <- Execution.hive(Hive.getPath(database, table))
-       counter  <- ops(location)
-        _       <- Execution.hdfs(Hdfs.delete(new Path(location, new Path("_temporary")), true))
-        _       <- Execution.hive(Hive.repair(database, table))
+       _             <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_)))) 
+       tablePath     <- Execution.hive(Hive.getPath(database, table))
+       foldersBefore <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
+       counter       <- ops(tablePath)
+       _             <- Execution.hdfs(Hdfs.delete(new Path(tablePath, new Path("_temporary")), true))
+       foldersAfter  <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
+       created        = foldersAfter.diff(foldersBefore)
+       _             <- addPartitions(created)
       } yield counter
 
     // Runs the scalding job and gets the counters
@@ -187,9 +197,10 @@ object HiveTable {
 
   /** Information need to address/describe a specific partitioned hive table.*/
   def apply[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
-    database: String, table: String, partition: Partition[A, B], pathOpt: Option[String]
+    database: String, table: String, partition: Partition[A, B], 
+    pathOpt: Option[String], partitionBatchSize: Int = 100
   ): HiveTable[A, (B, A)] =
-    PartitionedHiveTable(database, table, partition, pathOpt)
+    PartitionedHiveTable(database, table, partition, pathOpt, partitionBatchSize)
 
   /** Information need to address/describe a specific unpartitioned hive table.*/
   def apply[A <: ThriftStruct : Manifest](

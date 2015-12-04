@@ -1,4 +1,4 @@
 name: maestro
 exclude: [Gemfile]
 markdown: kramdown
-releaseVersion:  "2.16.2-20151203053255-2ec72cc"
+releaseVersion:  "2.16.2-20151204043034-2cea808"

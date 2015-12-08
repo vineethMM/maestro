@@ -68,7 +68,8 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
   val partitionMetadata    = partition.fieldNames.map(n => (n, "string"))
   //Enforce the Hive partition pattern
   val hivePartitionPattern = partition.fieldNames.map(_ + "=%s").mkString("/")
-  val hdfsPartitionGlob    = partition.fieldNames.map(_ => "*").mkString("/")
+  val partitionGlob        = partition.fieldNames.map(_ => "*").mkString("/")
+  val hdfsPartitionGlob    = s"[^_.]$partitionGlob"
 
   override def source: PartitionParquetScroogeSource[B, A] =
     PartitionParquetScroogeSource[B, A](hivePartitionPattern, tablePath.toString)
@@ -87,7 +88,6 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
        tablePath     <- Execution.hive(Hive.getPath(database, table))
        foldersBefore <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
        counter       <- ops(tablePath)
-       _             <- Execution.hdfs(Hdfs.delete(new Path(tablePath, new Path("_temporary")), true))
        foldersAfter  <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
        created        = foldersAfter.diff(foldersBefore)
        _             <- addPartitions(created)

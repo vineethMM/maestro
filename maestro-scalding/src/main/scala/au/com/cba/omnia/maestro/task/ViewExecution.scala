@@ -14,7 +14,7 @@
 
 package au.com.cba.omnia.maestro.task
 
-import com.twitter.scalding.{Execution, TupleSetter, TypedPipe}
+import com.twitter.scalding.{Execution, TupleSetter, TypedPipe, Stat}
 
 import com.twitter.scrooge.ThriftStruct
 
@@ -25,7 +25,6 @@ import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.hive.HiveTable
 import au.com.cba.omnia.maestro.scalding.StatKeys
 import au.com.cba.omnia.maestro.scalding.ExecutionOps._
-
 /**
   * Configuration options for write pipes to HDFS files.
   *
@@ -47,11 +46,16 @@ trait ViewExecution {
   def view[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
     config: ViewConfig[A, B], pipe: TypedPipe[A]
   ): Execution[Long] =
-    pipe
-      .map(v => config.partition.extract(v) -> v)
-      .writeExecution(PartitionParquetScroogeSink[B, A](config.partition.pattern, config.output))
-      .getAndResetCounters
-      .map { case (_, counters) => counters.get(StatKeys.tuplesWritten).getOrElse(0) }
+    Execution.withId { id =>
+      val statKey = StatKeys.tuplesOutput
+      val stat    = Stat(statKey)(id)
+
+      pipe
+        .map { v => stat.inc; config.partition.extract(v) -> v }
+        .writeExecution(PartitionParquetScroogeSink[B, A](config.partition.pattern, config.output))
+        .getAndResetCounters
+        .map { case (_, counters) => counters.get(statKey).getOrElse(0) }
+    }
 
   /**
     * Writes out the data to a hive table.
@@ -63,12 +67,14 @@ trait ViewExecution {
     */
   def viewHive[A <: ThriftStruct : Manifest, ST](
     table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
-  ): Execution[Long] = for {
+  ): Execution[Long] = Execution.withId { id => for {
     /* Creates the database upfront since when Hive is run concurrently uzing `zip` all but the
      * first attempt fails.
      * The Hive monad handles this so that the job doesn't fall over.
      */
-    _ <- Execution.fromHive(Hive.createDatabase(table.database))
-    n <- table.writeExecution(pipe, append).map(_.get(StatKeys.tuplesWritten).getOrElse(0L))
-  } yield n
+    _      <- Execution.fromHive(Hive.createDatabase(table.database))
+    statKey = StatKeys.tuplesOutput
+    stat    = Stat(statKey)(id)
+    n      <- table.writeExecution(pipe.map(row => { stat.inc; row }), append).map(_.get(statKey).getOrElse(0L))
+  } yield n }
 }

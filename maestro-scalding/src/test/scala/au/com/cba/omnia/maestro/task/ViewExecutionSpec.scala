@@ -70,6 +70,10 @@ View execution properties
     view hive executions can be composed with flatMap                    $flatMappedHiveUnpartitioned
     view hive executions can be composed with zip                        $zippedHiveUnpartitioned
     can write to tables where the underlying folder has been deleted     $withoutFolderUnpartitioned
+
+  generic:
+    view counts are correct with internal stages                         $outputCountIgnoresInternalSteps
+    viewHive counts are correct with internal stages                     $outputCountIgnoresInternalStepsHive
 """
 
   // Partitioned tests
@@ -102,7 +106,7 @@ View execution properties
     } yield (a, b)
 
     executesSuccessfully(exec) must_== ((4, 4))
- 
+
     facts(
       hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=A" </> "part-*.parquet" ==> matchesFile,
       hiveWarehouse </> "normalhive.db"  </> "by_first" </> "partition_first=B" </> "part-*.parquet" ==> matchesFile,
@@ -310,6 +314,25 @@ View execution properties
     )
   }
 
+  def outputCountIgnoresInternalSteps = {
+    val exec = ViewExec.view(
+      ViewConfig(byFirst, s"$dir/internalSteps"),
+      source                                        // produces ("A", 1), ("B", 1), ("A", 2), ("B", 2)
+        .groupBy(_.first).maxBy(_.second).values    // produces ("A", 2), ("B", 2)
+        .groupBy(_.second).maxBy(_.first).values    // produces ("B", 2)
+    )
+    executesSuccessfully(exec) must_== 1
+  }
+
+  def outputCountIgnoresInternalStepsHive = {
+    val exec = ViewExec.viewHive(
+      tableByFirst("normalHive"),
+      source                                       // produces ("A", 1), ("B", 1), ("A", 2), ("B", 2)
+       .groupBy(_.first).maxBy(_.second).values    // produces ("A", 2), ("B", 2)
+       .groupBy(_.second).maxBy(_.first).values    // produces ("B", 2)
+    )
+    executesSuccessfully(exec) must_== 1
+  }
 
   // Helper methods
 

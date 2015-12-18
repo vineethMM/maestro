@@ -31,4 +31,10 @@ object StatKeys {
 
   /** Key for number of tuples filtered out by using a filter. */
   val tuplesFiltered = StatKey("tuples_filtered", "maestro")
+
+  /** Key for number of tuples filtered out by using a filter.
+    * Alas, using [[tuplesWritten]] incorrectly includes internal writes when there are multiple steps,
+    * since currently scalding only provides access to the total counts for a whole flow.
+    */
+  val tuplesOutput = StatKey("tuples_output", "maestro")
 }

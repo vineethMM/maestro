@@ -29,8 +29,8 @@ __Handy links for related Scaladoc__
 *  omnia.permafrost.hdfs.Hdfs [class](https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs) and 
 [object](https://commbank.github.io/permafrost/latest/api/index.html#au.com.cba.omnia.permafrost.hdfs.Hdfs$)
 * omnia.ebenezer.scrooge.hive.Hive [class](https://commbank.github.io/ebenezer/latest/api/index.html#au.com.cba.omnia.ebenezer.scrooge.hive.Hive) and [object](https://commbank.github.io/ebenezer/latest/api/index.html#au.com.cba.omnia.ebenezer.scrooge.hive.Hive$)
-* omnia.maestro.core.scalding [RichExecution](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution)
-and [RichExecutionObject](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecutionObject)
+* omnia.maestro.scalding [RichExecution](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecution)
+and [RichExecutionObject](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject)
 * com.twitter.scalding.Execution [trait](http://twitter.github.io/scalding/index.html#com.twitter.scalding.Execution)
 and [object](http://twitter.github.io/scalding/index.html#com.twitter.scalding.Execution$)
 
@@ -190,7 +190,7 @@ Although, many of the underlying libraries do support some of the forms of compl
 
 The execution monad is a key concept from scalding, see
 the `com.twitter.scalding.Execution` [trait](http://twitter.github.io/scalding/#com.twitter.scalding.Execution) and [object](http://twitter.github.io/scalding/#com.twitter.scalding.Execution$)
-as well as the maestro extensions in [`RichExecution`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution) and [`RichExecutionObject`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecutionObject).
+as well as the maestro extensions in [`RichExecution`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecution) and [`RichExecutionObject`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecutionObject).
 
 An execution is an object with type `Execution[T]` representing some
 work that can be performed that provides an item
@@ -220,9 +220,9 @@ Exceptions in custom executions (see below) also lead to failures.
 
 Some useful methods related to failures include
 [`recoverWith`](http://twitter.github.io/scalding/#com.twitter.scalding.Execution),
-[`bracket`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution)
-[`ensuring`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution) and 
-[`onException`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.core.scalding.RichExecution).
+[`bracket`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecution)
+[`ensuring`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecution) and 
+[`onException`](https://commbank.github.io/maestro/latest/api/index.html#au.com.cba.omnia.maestro.scalding.RichExecution).
 
 ### Custom executions
 

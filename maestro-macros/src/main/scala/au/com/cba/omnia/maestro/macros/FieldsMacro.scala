@@ -15,17 +15,20 @@
 package au.com.cba.omnia.maestro.macros
 
 import scala.reflect.macros.whitebox.Context
-import scala.annotation.StaticAnnotation
 
 import com.twitter.scrooge.ThriftStruct
 
-class body(tree: Any) extends StaticAnnotation
+import au.com.cba.omnia.maestro.core.data.Field
 
 /**
   * A macro that generates a `Field` for every field in the thrift struct. All the fields are
-  * members of FieldsWrapper.
+  * members of the object returned by the macro.
   */
 object FieldsMacro {
+  trait Fields[A] {
+    def AllFields: List[Field[A, _]]
+  }
+
   def impl[A <: ThriftStruct: c.WeakTypeTag](c: Context) = {
     import c.universe._
 
@@ -44,7 +47,9 @@ object FieldsMacro {
     }
 
     val refs = entries.map { case (_, name, _) => q"${TermName(name.capitalize)}" }
-    val r    = q"class FieldsWrapper { ..$fields; def AllFields = List(..$refs) }; new FieldsWrapper {}"
+    val r    = q"""new au.com.cba.omnia.maestro.macros.FieldsMacro.Fields[$typ] {
+                 ..$fields; def AllFields = List(..$refs)
+               }"""
     c.Expr(r)
   }
 }

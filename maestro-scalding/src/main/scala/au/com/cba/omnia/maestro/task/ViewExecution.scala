@@ -19,7 +19,7 @@ import com.twitter.scalding.{Execution, TupleSetter, TypedPipe, Stat}
 import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSink
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.beeswax.Hive
 
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.hive.HiveTable

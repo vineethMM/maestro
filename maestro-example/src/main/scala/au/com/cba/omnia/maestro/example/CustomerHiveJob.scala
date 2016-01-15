@@ -18,7 +18,7 @@ import org.apache.hadoop.hive.conf.HiveConf.ConfVars._
 
 import com.twitter.scalding.{Config, Execution}
 
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.beeswax.Hive
 
 import au.com.cba.omnia.maestro.api._, Maestro._
 

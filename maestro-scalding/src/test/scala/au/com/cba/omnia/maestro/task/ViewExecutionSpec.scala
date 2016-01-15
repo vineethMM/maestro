@@ -29,8 +29,9 @@ import au.com.cba.omnia.thermometer.fact.PathFactoids._
 import au.com.cba.omnia.thermometer.hive.ThermometerHiveSpec
 
 import au.com.cba.omnia.ebenezer.ParquetLogging
-import au.com.cba.omnia.ebenezer.scrooge.hive._
 import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
+
+import au.com.cba.omnia.beeswax.Hive
 
 import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 

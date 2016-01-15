@@ -95,8 +95,8 @@ package object api {
   type Hdfs[A]         = au.com.cba.omnia.permafrost.hdfs.Hdfs[A]
   val  Hdfs            = au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-  type Hive[A]         = au.com.cba.omnia.ebenezer.scrooge.hive.Hive[A]
-  val  Hive            = au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+  type Hive[A]         = au.com.cba.omnia.beeswax.Hive[A]
+  val  Hive            = au.com.cba.omnia.beeswax.Hive
 
   type ThriftStruct    = com.twitter.scrooge.ThriftStruct
 

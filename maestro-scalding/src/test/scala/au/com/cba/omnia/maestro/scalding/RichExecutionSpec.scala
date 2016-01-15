@@ -32,7 +32,7 @@ import au.com.cba.omnia.omnitool.test.Arbitraries._
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.beeswax.Hive
 
 import ExecutionOps._
 

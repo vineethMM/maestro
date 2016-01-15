@@ -35,7 +35,8 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "1.4.1-20160117233509-42defec"
-  val ebenezerVersion    = "0.21.3-20160118050516-0c6842d"
+  val ebenezerVersion    = "0.22.0-20160119050220-c374315"
+  val beeswaxVersion     = "0.1.0-20160114052949-9ab22b6"
   val omnitoolVersion    = "1.12.1-20160118033143-a5ca392"
   val permafrostVersion  = "0.12.1-20160118050802-04ab58c"
   val edgeVersion        = "3.6.0-20160118055439-77df442"
@@ -104,7 +105,8 @@ object build extends Build {
         ++ depend.hadoopClasspath
         ++ depend.hadoop()
         ++ depend.shapeless() ++ depend.testing() ++ depend.time()
-        ++ depend.omnia("ebenezer-hive", ebenezerVersion)
+        ++ depend.omnia("beeswax",       beeswaxVersion)
+        ++ depend.omnia("ebenezer",      ebenezerVersion)
         ++ depend.omnia("permafrost",    permafrostVersion)
         ++ depend.omnia("edge",          edgeVersion)
         ++ depend.omnia("humbug-core",   humbugVersion)

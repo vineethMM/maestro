@@ -23,7 +23,7 @@ import com.twitter.scalding.typed.TypedPipe
 
 import cascading.tap.hadoop.HfsProps
 
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.beeswax.Hive
 import au.com.cba.omnia.ebenezer.ParquetLogging
 
 import au.com.cba.omnia.thermometer.core.Thermometer._

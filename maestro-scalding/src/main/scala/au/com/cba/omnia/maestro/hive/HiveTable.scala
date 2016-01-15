@@ -28,7 +28,7 @@ import com.twitter.scrooge.ThriftStruct
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
 import au.com.cba.omnia.ebenezer.scrooge.{ParquetScroogeSource, PartitionParquetScroogeSource, PartitionParquetScroogeSink}
-import au.com.cba.omnia.ebenezer.scrooge.hive.Hive
+import au.com.cba.omnia.beeswax.Hive
 
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.scalding.ConfHelper

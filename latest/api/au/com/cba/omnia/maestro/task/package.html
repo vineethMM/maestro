@@ -28,11 +28,11 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../../../../lib/package_big.png" />
+        <img alt="Package" src="../../../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a></p>
         <h1>task</h1><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       </div>
@@ -79,7 +79,7 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@ExtractTimeextendsBaseOperation[(String,cascading.tuple.Tuple)]withFunction[(String,cascading.tuple.Tuple)]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Gets the path from Cascading and provides it to <code>timeSource</code> to get the time.</p>
@@ -96,7 +96,7 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@GenerateKeyextendsBaseOperation[(java.nio.ByteBuffer,java.security.MessageDigest,String,String,cascading.tuple.Tuple)]withFunction[(java.nio.ByteBuffer,java.security.MessageDigest,String,String,cascading.tuple.Tuple)]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Used by <code>Load.loadWithKey</code> to generates a unique key for each input line.</p><div class="fullcomment"><div class="comment cmt"><p>Used by <code>Load.loadWithKey</code> to generates a unique key for each input line.</p><p>It hashes each line and combines that with the hash of the path and the slice number
@@ -113,11 +113,11 @@ It also gets the path from cascading and extracts the time from that using the p
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ImportSource.html"><span class="name">ImportSource</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="ImportSource.html"><span class="name">ImportSource</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@ImportSourceextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Different sources for parlour imports.</p><div class="fullcomment"><div class="comment cmt"><p>Different sources for parlour imports.</p><p>WARNING: not considered part of the maestro api.
@@ -132,11 +132,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LoadConfig.html"><span class="name">LoadConfig</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitter">splitter: <a href="../core/split/Splitter.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">Splitter</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">Splitter.delimited(&quot;|&quot;)</a></span></span></span>, <span name="timeSource">timeSource: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">TimeSource.fromDirStructure</a></span></span></span>, <span name="generateKey">generateKey: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">false</span></span>, <span name="filter">filter: <a href="../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">RowFilter</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">RowFilter.keep</a></span></span></span>, <span name="clean">clean: <a href="../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">Clean</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">Clean.default</a></span></span></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="validator">validator: <a href="../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.LoadConfig.A">A</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">Validator.all[A]()</a></span></span></span>, <span name="errorThreshold">errorThreshold: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Double" class="extype" target="_top">Double</a> = <span class="symbol">0.05</span></span>, <span name="splitSize">splitSize: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a> = <span class="symbol">9L * 128 * 1024 * 1024</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="LoadConfig.html"><span class="name">LoadConfig</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="errors">errors: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitter">splitter: <a href="../core/split/Splitter.html" class="extype" name="au.com.cba.omnia.maestro.core.split.Splitter">Splitter</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">Splitter.delimited(&quot;|&quot;)</a></span></span></span>, <span name="timeSource">timeSource: <a href="../core/time/TimeSource.html" class="extype" name="au.com.cba.omnia.maestro.core.time.TimeSource">TimeSource</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">TimeSource.fromDirStructure</a></span></span></span>, <span name="generateKey">generateKey: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">false</span></span>, <span name="filter">filter: <a href="../core/filter/RowFilter.html" class="extype" name="au.com.cba.omnia.maestro.core.filter.RowFilter">RowFilter</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">RowFilter.keep</a></span></span></span>, <span name="clean">clean: <a href="../core/clean/Clean.html" class="extype" name="au.com.cba.omnia.maestro.core.clean.Clean">Clean</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">Clean.default</a></span></span></span>, <span name="none">none: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="validator">validator: <a href="../core/validate/Validator.html" class="extype" name="au.com.cba.omnia.maestro.core.validate.Validator">Validator</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.LoadConfig.A">A</span>] = <span class="symbol"><span class="name"><a href="../../../../../package.html">Validator.all[A]()</a></span></span></span>, <span name="errorThreshold">errorThreshold: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Double" class="extype" target="_top">Double</a> = <span class="symbol">0.05</span></span>, <span name="splitSize">splitSize: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a> = <span class="symbol">9L * 128 * 1024 * 1024</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadConfig[A]extendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Configuration options for load
@@ -150,11 +150,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="LoadExecution.html"><span class="name">LoadExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="LoadExecution.html"><span class="name">LoadExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadExecutionextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Executions for load tasks</p>
@@ -167,11 +167,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LoadFailure.html"><span class="name">LoadFailure</span></a><span class="params">(<span name="read">read: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="actual">actual: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="written">written: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="failed">failed: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="LoadFailure.html"><span class="name">LoadFailure</span></a><span class="params">(<span name="read">read: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="actual">actual: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="written">written: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="failed">failed: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadFailureextendsLoadInfowithProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The number of rows which failed to load exceeded our error threshold
@@ -185,11 +185,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="LoadInfo.html"><span class="name">LoadInfo</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="LoadInfo.html"><span class="name">LoadInfo</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadInfoextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Information about a Load</p>
@@ -202,11 +202,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="LoadSuccess.html"><span class="name">LoadSuccess</span></a><span class="params">(<span name="read">read: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="actual">actual: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="written">written: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="failed">failed: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="LoadSuccess.html"><span class="name">LoadSuccess</span></a><span class="params">(<span name="read">read: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="actual">actual: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="written">written: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="failed">failed: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadSuccessextendsLoadInfowithProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The number of rows which failed to load was within acceptable limits
@@ -220,11 +220,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="MaestroConfig.html"><span class="name">MaestroConfig</span></a><span class="params">(<span name="conf">conf: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="loadTime">loadTime: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="MaestroConfig.html"><span class="name">MaestroConfig</span></a><span class="params">(<span name="conf">conf: <span class="extype" name="com.twitter.scalding.Config">Config</span></span>, <span name="source">source: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="domain">domain: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsRoot">hdfsRoot: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="loadTime">loadTime: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@MaestroConfigextendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Core configuration settings for loads, and factory functions for
@@ -238,11 +238,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="QuerySrc.html"><span class="name">QuerySrc</span></a><span class="params">(<span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.task.ImportSource">ImportSource</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="QuerySrc.html"><span class="name">QuerySrc</span></a><span class="params">(<span name="query">query: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="splitBy">splitBy: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.task.ImportSource">ImportSource</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@QuerySrcextendsImportSourcewithProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -255,11 +255,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RawRow.html"><span class="name">RawRow</span></a><span class="params">(<span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="extraFields">extraFields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="RawRow.html"><span class="name">RawRow</span></a><span class="params">(<span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="extraFields">extraFields: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@RawRowextendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -272,11 +272,11 @@ task specific configurations.</p>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="SqoopExecution.html"><span class="name">SqoopExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="SqoopExecution.html"><span class="name">SqoopExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopExecutionextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Methods to import and export from sqoop</p>
@@ -289,11 +289,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="SqoopExportConfig.html"><span class="name">SqoopExportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <a href="https://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.ParlourExportOptions" class="extype" target="_top">ParlourExportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.SqoopExportConfig.T">T</span>]</span>]</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.task.SqoopExportConfig.T">T</span></span>, <span name="deleteFromTable">deleteFromTable: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">false</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="SqoopExportConfig.html"><span class="name">SqoopExportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <a href="https://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.ParlourExportOptions" class="extype" target="_top">ParlourExportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.SqoopExportConfig.T">T</span>]</span>]</span><span class="params">(<span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.task.SqoopExportConfig.T">T</span></span>, <span name="deleteFromTable">deleteFromTable: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">false</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopExportConfig[T&lt;:au.com.cba.omnia.parlour.ParlourExportOptions[T]]extendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Configuration options for sqoop export</p><div class="fullcomment"><div class="comment cmt"><p>Configuration options for sqoop export</p><p>Use <span class="extype" name="SqoopExecution.createSqoopExportOptions">SqoopExecution.createSqoopExportOptions</span> to populate the <code>options</code> parameter.
@@ -307,11 +307,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="SqoopImportConfig.html"><span class="name">SqoopImportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <a href="https://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.ParlourImportOptions" class="extype" target="_top">ParlourImportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.SqoopImportConfig.T">T</span>]</span>]</span><span class="params">(<span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.task.SqoopImportConfig.T">T</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="SqoopImportConfig.html"><span class="name">SqoopImportConfig</span></a><span class="tparams">[<span name="T">T &lt;: <a href="https://commbank.github.io/parlour/latest/api/index.html#au.com.cba.omnia.parlour.ParlourImportOptions" class="extype" target="_top">ParlourImportOptions</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.SqoopImportConfig.T">T</span>]</span>]</span><span class="params">(<span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timePath">timePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="au.com.cba.omnia.maestro.task.SqoopImportConfig.T">T</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopImportConfig[T&lt;:au.com.cba.omnia.parlour.ParlourImportOptions[T]]extendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Configuration options for sqoop import</p><div class="fullcomment"><div class="comment cmt"><p>Configuration options for sqoop import</p><p>Use <span class="extype" name="SqoopExecution.createSqoopImportOptions">SqoopExecution.createSqoopImportOptions</span> to populate the <code>options</code> parameter.
@@ -325,11 +325,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="TableSrc.html"><span class="name">TableSrc</span></a><span class="params">(<span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="where">where: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.task.ImportSource">ImportSource</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="TableSrc.html"><span class="name">TableSrc</span></a><span class="params">(<span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="where">where: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="ImportSource.html" class="extype" name="au.com.cba.omnia.maestro.task.ImportSource">ImportSource</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@TableSrcextendsImportSourcewithProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -342,11 +342,11 @@ task specific configurations.</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="UploadConfig.html"><span class="name">UploadConfig</span></a><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="UploadConfig.html"><span class="name">UploadConfig</span></a><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@UploadConfigextendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Configuration options for upload.</p><div class="fullcomment"><div class="comment cmt"><p>Configuration options for upload.</p><p>Files are copied from the local ingestion path to the three destination paths
@@ -356,8 +356,7 @@ to the path. For instance: the actual location of files on HDFS might be
 <code>$hdfsLandingPath/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;</code>.
 </p></div><dl class="paramcmts block"><dt class="param">localIngestPath</dt><dd class="cmt"><p>The local ingestion path where source files are found.</p></dd><dt class="param">hdfsLandingPath</dt><dd class="cmt"><p>The HDFS landing path where files are copied to.</p></dd><dt class="param">localArchivePath</dt><dd class="cmt"><p>The local archive path where files are archived.</p></dd><dt class="param">hdfsArchivePath</dt><dd class="cmt"><p>The HDFS archive path, where files are also archived.</p></dd><dt class="param">tablename</dt><dd class="cmt"><p>The table name or file name in database or project.</p></dd><dt class="param">filePattern</dt><dd class="cmt"><p>The file pattern, used to identify files to be uploaded.
                         The default value is <code>{table}?{yyyyMMdd}*</code>.</p></dd><dt class="param">controlPattern</dt><dd class="cmt"><p>The regex which identifies control files.
-                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
-</p></dd></dl></div>
+                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.</p></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.task.UploadExecution" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="UploadExecutionextendsAnyRef"></a>
       <a id="UploadExecution:UploadExecution"></a>
@@ -367,11 +366,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="UploadExecution.html"><span class="name">UploadExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="UploadExecution.html"><span class="name">UploadExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@UploadExecutionextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Push source files to HDFS using <a href="UploadExecution.html#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> and archive them.</p><div class="fullcomment"><div class="comment cmt"><p>Push source files to HDFS using <a href="UploadExecution.html#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> and archive them.</p><p>See the example at <code>au.com.cba.omnia.maestro.example.CustomerExecution</code>.</p><p>In order to run map-reduce jobs, we first need to get our data onto HDFS.
@@ -389,11 +388,11 @@ data files to retrieve and validate their metadata.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="UploadInfo.html"><span class="name">UploadInfo</span></a><span class="params">(<span name="files">files: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="UploadInfo.html"><span class="name">UploadInfo</span></a><span class="params">(<span name="files">files: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@UploadInfoextendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Information about an upload</p>
@@ -406,11 +405,11 @@ data files to retrieve and validate their metadata.
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ViewConfig.html"><span class="name">ViewConfig</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../core/partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.ViewConfig.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.task.ViewConfig.B">B</span>]</span>, <span name="output">output: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="ViewConfig.html"><span class="name">ViewConfig</span></a><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="com.twitter.scrooge.ThriftStruct">ThriftStruct</span></span>, <span name="B">B</span>]</span><span class="params">(<span name="partition">partition: <a href="../core/partition/Partition.html" class="extype" name="au.com.cba.omnia.maestro.core.partition.Partition">Partition</a>[<span class="extype" name="au.com.cba.omnia.maestro.task.ViewConfig.A">A</span>, <span class="extype" name="au.com.cba.omnia.maestro.task.ViewConfig.B">B</span>]</span>, <span name="output">output: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@ViewConfig[A&lt;:com.twitter.scrooge.ThriftStruct,B]extendsProductwithSerializable" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Configuration options for write pipes to HDFS files.</p>
@@ -423,11 +422,11 @@ data files to retrieve and validate their metadata.
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ViewExecution.html"><span class="name">ViewExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="ViewExecution.html"><span class="name">ViewExecution</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@ViewExecutionextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Executions for view tasks</p>
@@ -447,11 +446,11 @@ data files to retrieve and validate their metadata.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="EmptyLoad$.html"><span class="name">EmptyLoad</span></a><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="EmptyLoad$.html"><span class="name">EmptyLoad</span></a><span class="result"> extends <a href="LoadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.LoadInfo">LoadInfo</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@EmptyLoad" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The Load had no new data to process</p>
@@ -468,7 +467,7 @@ data files to retrieve and validate their metadata.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@HeaderTrailer" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Functions to parse the header and trailer from HDFS files.</p>
@@ -485,7 +484,7 @@ data files to retrieve and validate their metadata.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadEx" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">WARNING: not considered part of the load execution api.</p><div class="fullcomment"><div class="comment cmt"><p>WARNING: not considered part of the load execution api.
@@ -504,7 +503,7 @@ We may change this without considering backwards compatibility.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@LoadInfo" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Factory methods for <code>LoadInfo</code></p>
@@ -517,11 +516,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="MaestroConfig$.html"><span class="name">MaestroConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="MaestroConfig$.html"><span class="name">MaestroConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@MaestroConfig" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -538,7 +537,7 @@ We may change this without considering backwards compatibility.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopEx" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">WARNING: not considered part of the maestro api.</p><div class="fullcomment"><div class="comment cmt"><p>WARNING: not considered part of the maestro api.
@@ -557,7 +556,7 @@ We may change this without considering backwards compatibility.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopExecutionTest" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Methods to support testing Sqoop execution</p>
@@ -570,11 +569,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="SqoopExportConfig$.html"><span class="name">SqoopExportConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="SqoopExportConfig$.html"><span class="name">SqoopExportConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopExportConfig" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Factory functions for <a href="SqoopExportConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.SqoopExportConfig">SqoopExportConfig</a></p>
@@ -587,11 +586,11 @@ We may change this without considering backwards compatibility.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="SqoopImportConfig$.html"><span class="name">SqoopImportConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="SqoopImportConfig$.html"><span class="name">SqoopImportConfig</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@SqoopImportConfig" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Factory functions for <a href="SqoopImportConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.SqoopImportConfig">SqoopImportConfig</a></p>
@@ -608,7 +607,7 @@ We may change this without considering backwards compatibility.
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.package@UploadEx" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">WARNING: not considered part of the load execution api.</p><div class="fullcomment"><div class="comment cmt"><p>WARNING: not considered part of the load execution api.

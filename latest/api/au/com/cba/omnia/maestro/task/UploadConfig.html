@@ -28,13 +28,13 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../../../../../lib/class_big.png" />
+        <img alt="Class" src="../../../../../../lib/class_big.png" />
         <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.maestro">maestro</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.maestro.task">task</a></p>
         <h1>UploadConfig</h1><h3><span class="morelinks"><div>Related Doc:
             <a href="package.html" class="extype" name="au.com.cba.omnia.maestro.task">package task</a>
           </div></span></h3><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       </div>
@@ -45,7 +45,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">UploadConfig</span><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">UploadConfig</span><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
@@ -56,10 +56,9 @@ to the path. For instance: the actual location of files on HDFS might be
 <code>$hdfsLandingPath/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;originalFileName&gt;</code>.
 </p></div><dl class="paramcmts block"><dt class="param">localIngestPath</dt><dd class="cmt"><p>The local ingestion path where source files are found.</p></dd><dt class="param">hdfsLandingPath</dt><dd class="cmt"><p>The HDFS landing path where files are copied to.</p></dd><dt class="param">localArchivePath</dt><dd class="cmt"><p>The local archive path where files are archived.</p></dd><dt class="param">hdfsArchivePath</dt><dd class="cmt"><p>The HDFS archive path, where files are also archived.</p></dd><dt class="param">tablename</dt><dd class="cmt"><p>The table name or file name in database or project.</p></dd><dt class="param">filePattern</dt><dd class="cmt"><p>The file pattern, used to identify files to be uploaded.
                         The default value is <code>{table}?{yyyyMMdd}*</code>.</p></dd><dt class="param">controlPattern</dt><dd class="cmt"><p>The regex which identifies control files.
-                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
-</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/eab5b7b55c66dd2e531242ba12a8f87a413092a7//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
+                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/9ee10b486963276de2884ab8f371b730cb1ccd77//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -85,7 +84,6 @@ to the path. For instance: the actual location of files on HDFS might be
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -106,17 +104,16 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">UploadConfig</span><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span>
+        <span class="name">UploadConfig</span><span class="params">(<span name="localIngestPath">localIngestPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsLandingPath">hdfsLandingPath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="localArchivePath">localArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="hdfsArchivePath">hdfsArchivePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tablename">tablename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="filePattern">filePattern: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;{table}?{yyyyMMdd}*&quot;</span></span>, <span name="controlPattern">controlPattern: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a> = <span class="symbol"><span class="name"><a href="../../../../../package.html">ControlPattern.default</a></span></span></span>)</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@&lt;init&gt;(localIngestPath:String,hdfsLandingPath:String,localArchivePath:String,hdfsArchivePath:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex):au.com.cba.omnia.maestro.task.UploadConfig" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">localIngestPath</dt><dd class="cmt"><p>The local ingestion path where source files are found.</p></dd><dt class="param">hdfsLandingPath</dt><dd class="cmt"><p>The HDFS landing path where files are copied to.</p></dd><dt class="param">localArchivePath</dt><dd class="cmt"><p>The local archive path where files are archived.</p></dd><dt class="param">hdfsArchivePath</dt><dd class="cmt"><p>The HDFS archive path, where files are also archived.</p></dd><dt class="param">tablename</dt><dd class="cmt"><p>The table name or file name in database or project.</p></dd><dt class="param">filePattern</dt><dd class="cmt"><p>The file pattern, used to identify files to be uploaded.
                         The default value is <code>{table}?{yyyyMMdd}*</code>.</p></dd><dt class="param">controlPattern</dt><dd class="cmt"><p>The regex which identifies control files.
-                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
-</p></dd></dl></div>
+                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -135,11 +132,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@!=(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -152,11 +149,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@##():Int" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -169,11 +166,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@==(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -190,7 +187,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@asInstanceOf[T0]:T0" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
@@ -203,11 +200,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@clone():Object" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -226,16 +223,15 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">controlPattern</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a></span>
+        <span class="name">controlPattern</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.util.matching.Regex" class="extype" target="_top">Regex</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@controlPattern:scala.util.matching.Regex" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The regex which identifies control files.</p><div class="fullcomment"><div class="comment cmt"><p>The regex which identifies control files.
-                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.
-</p></div></div>
+                        The default value is <a href="../core/upload/ControlPattern$.html#default:scala.util.matching.Regex" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.ControlPattern#default">au.com.cba.omnia.maestro.core.upload.ControlPattern.default</a>.</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -245,11 +241,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -266,7 +262,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@filePattern:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The file pattern, used to identify files to be uploaded.</p><div class="fullcomment"><div class="comment cmt"><p>The file pattern, used to identify files to be uploaded.
@@ -280,11 +276,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@finalize():Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -307,7 +303,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@getClass():Class[_]" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -324,7 +320,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@hdfsArchivePath:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The HDFS archive path, where files are also archived.</p>
@@ -341,7 +337,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@hdfsLandingPath:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The HDFS landing path where files are copied to.</p>
@@ -354,11 +350,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
@@ -375,7 +371,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@localArchivePath:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The local archive path where files are archived.</p>
@@ -392,7 +388,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@localIngestPath:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The local ingestion path where source files are found.</p>
@@ -405,11 +401,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -422,11 +418,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@notify():Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -439,11 +435,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@notifyAll():Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -460,7 +456,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@prettyPrint:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -477,7 +473,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -494,7 +490,7 @@ to the path. For instance: the actual location of files on HDFS might be
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@tablename:String" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">The table name or file name in database or project.</p>
@@ -507,11 +503,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@wait():Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -530,11 +526,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -553,11 +549,11 @@ to the path. For instance: the actual location of files on HDFS might be
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadConfig@wait(x$1:Long):Unit" title="Permalink" target="_top">
-        <img src="../../../../../../lib/permalink.png" />
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -577,17 +573,17 @@ to the path. For instance: the actual location of files on HDFS might be
 
         <div id="inheritedMembers">
         <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
             </div><div class="parent" name="scala.Product">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a></h3>
             </div><div class="parent" name="scala.Equals">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Equals" class="extype" target="_top">Equals</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Equals" class="extype" target="_top">Equals</a></h3>
             </div><div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>

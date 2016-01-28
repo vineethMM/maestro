@@ -83,15 +83,16 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
         .toList.sequence_
 
     def withTable(ops: Path => Execution[ExecutionCounters]): Execution[ExecutionCounters] =
-      for {
-       _             <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_)))) 
+      // Work around: `withSeparateCache` avoids keeping references in the scalding EvalCache, to allow gc
+      Execution.withSeparateCache(for {
+       _             <- Execution.hive(Hive.createParquetTable[A](database, table, partitionMetadata, externalPath.map(new Path(_))))
        tablePath     <- Execution.hive(Hive.getPath(database, table))
        foldersBefore <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
        counter       <- ops(tablePath)
        foldersAfter  <- Execution.hdfs(Hdfs.glob(tablePath, hdfsPartitionGlob))
        created        = foldersAfter.diff(foldersBefore)
        _             <- addPartitions(created)
-      } yield counter
+      } yield counter)
 
     // Runs the scalding job and gets the counters
     def write(path: Path) =

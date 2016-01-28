@@ -31,6 +31,10 @@ import au.com.cba.omnia.beeswax.Hive
 
 /** Pimps an Execution instance. */
 case class RichExecution[A](execution: Execution[A]) {
+  /** Builds an `Execution` that invokes the internal [[execution]] as a separate run
+    * (by calling `run`) with Config modified by [[modifyConfig]],
+    * **warning:** the returned `Execution` doesn't share cached results with the invocation of `execution`.
+    */
   def withSubConfig(modifyConfig: Config => Config): Execution[A] =
     Execution.getConfigMode.flatMap { case (config, mode) =>
       Execution.fromFuture(cec => execution.run(modifyConfig(config), mode)(cec))
@@ -113,6 +117,16 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
       Future.successful,
       error => Future.failed(ResultException.fromError(error, stacktrace))
     )
+
+  /** Run an execution, but not as part of the current run, to avoid keeping the `EvalCache`.
+    *
+    * It appears to be critical that the parameter `execution: => Execution[A]` is call-by-name,
+    * since otherwise there is a reference to the resulting Execution in the returned `FlatMap` case object.
+    */
+  def withSeparateCache[A](execution: => Execution[A]): Execution[A] =
+    Execution.getConfigMode.flatMap { case (config, mode) =>
+      Execution.fromFuture(cec => execution.run(config, mode)(cec))
+    }
 }
 
 object ExecutionOps extends ExecutionOps

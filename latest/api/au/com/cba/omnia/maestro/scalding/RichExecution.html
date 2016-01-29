@@ -49,7 +49,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps an Execution instance.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/8dc24515e1f52e148efed7a0132eeb31ae86e0dd//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Pimps an Execution instance.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/c18183d74ce9f2d978e8fcce9b44ec9ce2593d6f//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/scalding/RichExecution.scala" target="_blank">RichExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -449,7 +449,9 @@
         <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Builds an <code>Execution</code> that invokes the internal <a href="#execution:com.twitter.scalding.Execution[A]" class="extmbr" name="au.com.cba.omnia.maestro.scalding.RichExecution#execution">execution</a> as a separate run
+(by calling <code>run</code>) with Config modified by <span class="extype" name="modifyConfig">modifyConfig</span>,
+**warning:** the returned <code>Execution</code> doesn't share cached results with the invocation of <code>execution</code>.</p>
     </li></ol>
             </div>
 

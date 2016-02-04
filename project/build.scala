@@ -35,8 +35,8 @@ object build extends Build {
   type Sett = Def.Setting[_]
 
   val thermometerVersion = "1.4.1-20160117233509-42defec"
-  val ebenezerVersion    = "0.22.0-20160119050220-c374315"
-  val beeswaxVersion     = "0.1.0-20160114052949-9ab22b6"
+  val ebenezerVersion    = "0.22.1-20160204034124-98f33a8"
+  val beeswaxVersion     = "0.1.1-20160120052815-6bf77d2"
   val omnitoolVersion    = "1.12.1-20160118033143-a5ca392"
   val permafrostVersion  = "0.12.1-20160118050802-04ab58c"
   val edgeVersion        = "3.6.0-20160118055439-77df442"

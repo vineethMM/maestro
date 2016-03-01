@@ -95,7 +95,7 @@ with <code>MaestroHdfs.createFlagFile</code>.</p><pre><span class="cmt">// new c
     _                <span class="kw">&lt;-</span> Execution.fromHdfs { MaestroHdfs.createFlagFile(inputs) }                                          <span class="cmt">// edited</span>
     _                <span class="kw">&lt;-</span> Execution.fromHdfs { Hdfs.write(Hdfs.path(conf.processingPathFile), inputs.mkString(<span class="lit">"\n"</span>)) }       <span class="cmt">// edited</span>
   } <span class="kw">yield</span> JobFinished</pre><p>That's it! We have upgraded our dependency on the deprecated functions.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/a4c1ba055ea3e8d476de13f0d2b4c1a3fcb9a4e5//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hdfs/MaestroHdfs.scala" target="_blank">MaestroHdfs.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/25d0ae572fb36b3501fab2ce2bd0fc01311029f9//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/hdfs/MaestroHdfs.scala" target="_blank">MaestroHdfs.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>

@@ -20,8 +20,8 @@ package data
   * instance of `A`.
   */
 case class Field[A : Manifest, B : Manifest](name: String, get: A => B) {
-  val structType = manifest[A].getClass
-  val columnType = manifest[B].getClass
+  val structType = manifest[A]
+  val columnType = manifest[B]
 
   /**
    * Fields are consider equal if name and type of Thrift struct are equal and column type are equal

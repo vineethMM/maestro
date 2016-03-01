@@ -12,8 +12,8 @@ install:
 - ci/sbt-setup.sh
 - ci/sbt-setup-version.sh
 script:
-- sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; project benchmark; test:compile; project example; test; assembly' && ci/sbt-deploy.sh
-  && ci/gh-pages.sh
+- sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; project benchmark;
+  test:compile; project example; test; assembly' && ci/sbt-deploy.sh && ci/sbt-gh-pages-ssh.sh
 after_script:
 - rm -rf ci
 notifications:
@@ -26,5 +26,7 @@ notifications:
     on_start: false
 env:
   global:
-  - secure: FXL+8T5bDBjGdqmZsEpzHpjBMzG3FThyEyoUFBzgmAnSws94CxYH3FmOxH5mvLXc1iXEln699LWANm4qWSROgQZyHef1VpbmMS5zWDAJjqO1GPuUbE/88raAbOz5L0YniwVMTubIVY5eHUyzaBaqsU8OESQY8OSv6WEGE6jkO5w=
-  - secure: aX3My6qoQhUr2AfNZaV9Jn2s5ILOW6cjr2Cq1sm/EeQDF77iASbDzxyweatk3AIyK7pe9abIjZJVObdYqwaFDk+iqESZdmPJSnqnS0Xptt9e5ZSORChKELysVbvZJy4AuPiIG8gt5cs7hecZOugykHWrS/ZWnKUHZWebm4tprBo=
+    secure: INxboouYQvs8qR05L6lg3ww3p63XkCuIryRoJSTsbJSybwvI4/Q+CoQRp3f5itiizjdSASjFIuE75//ZhRRzcXYTDwg+ohY1j6IjL/srrfuQE57tUtlmbJDcicktQwMZ4hCSuNBWTeUCzsECcZXWwQ7A0NY7UssZH1FSDDVitxA=
+before_install:
+- openssl aes-256-cbc -K $encrypted_680e980041ef_key -iv $encrypted_680e980041ef_iv
+  -in .travis/deploy-key.enc -out .travis/deploy-key.pem -d

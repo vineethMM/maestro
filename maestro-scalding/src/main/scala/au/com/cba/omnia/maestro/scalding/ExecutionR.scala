@@ -36,13 +36,15 @@ import au.com.cba.omnia.omnitool.%~>._
 /** Extend this and import to use operations via ExecutionR.zip, etc., and enrich M with RichExecutionR. */
 trait ExecutionROps[M[_]] {
 
-  implicit val ExecRel: Execution %~> M   // May need to be implicit in some cases. (?)
-  implicit val monad:  Result %~> M
-  implicit val mon: Monad[M]
+  // Monad and relative monad instances
+  implicit val mon:     Monad[M]            // TODO: rename this to monad (also in omnitool, answer, etc.)
+  implicit val ExecRel: Execution %~> M
+  implicit val monad:   Result    %~> M     // TODO: rename this to ResultRel
+
+  // TODO: figure out why this implicit is needed! (Note also: conflicts for client w/o private.)
+  implicit private val Resultant: Result %~> M = monad  
 
   object ExecutionR {
-
-    implicit val Resultant: ResultantMonad[M] = monad
 
     /** An algebird Monad instance for M */  // TODO: Check if we need this.
     implicit object ExecutionRMonad extends com.twitter.algebird.Monad[M] {
@@ -111,8 +113,6 @@ trait ExecutionROps[M[_]] {
   }
 
   implicit class RichExecutionR[T](val self: M[T]) {
-
-    implicit val Resultant: ResultantMonad[M] = monad
 
     def getCounters: M[(T, ExecutionCounters)]         = ExecRel.rMap(self)(_.getCounters)
     def getAndResetCounters: M[(T, ExecutionCounters)] = ExecRel.rMap(self)(_.getAndResetCounters)

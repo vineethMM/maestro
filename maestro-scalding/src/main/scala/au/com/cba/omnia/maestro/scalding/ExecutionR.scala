@@ -26,7 +26,7 @@ import cascading.flow.{ FlowDef, Flow }
 import com.twitter.scalding.{Execution, Config, Mode, Args, ExecutionCounters}
 import com.twitter.scalding.{UniqueID, JobStats, TypedPipe, TypedSink}
 
-import com.twitter.algebird.{ Monoid, Monad, Semigroup }
+import com.twitter.algebird.{ Monoid, Monad => AlgMonad, Semigroup }
 
 import au.com.cba.omnia.omnitool.{Result, RelMonad, ResultantMonad, ResultantOps, ToResultantMonadOps}
 import au.com.cba.omnia.omnitool.ResultantMonadSyntax._
@@ -37,16 +37,18 @@ import au.com.cba.omnia.omnitool.%~>._
 trait ExecutionROps[M[_]] {
 
   implicit val ExecRel: Execution %~> M   // May need to be implicit in some cases. (?)
-  implicit val ResultRel:  Result %~> M
-  implicit val monad: ResultantMonad[M]
+  implicit val monad:  Result %~> M
+  implicit val mon: Monad[M]
 
   object ExecutionR {
+
+    implicit val Resultant: ResultantMonad[M] = monad
 
     /** An algebird Monad instance for M */  // TODO: Check if we need this.
     implicit object ExecutionRMonad extends com.twitter.algebird.Monad[M] {
       override def apply[T](t: T): M[T] = from(t)
-      override def map[T, U](e: M[T])(fn: T => U): M[U] = e.map(fn)
-      override def flatMap[T, U](e: M[T])(fn: T => M[U]): M[U] = e.flatMap(fn)
+      override def map[T, U](e: M[T])(fn: T => U): M[U] = mon.map(e)(fn)
+      override def flatMap[T, U](e: M[T])(fn: T => M[U]): M[U] = mon.bind(e)(fn)
       override def join[T, U](t: M[T], u: M[U]): M[(T, U)] = t.zip(u)
     }
 
@@ -81,7 +83,7 @@ trait ExecutionROps[M[_]] {
     def withArgs[T](fn: Args => M[T]): M[T] =
       getConfig.flatMap { conf => fn(conf.getArgs) }
 
-    def withId[T](fn: UniqueID => M[T]): M[T] = ResultRel.join(ExecRel.rPoint(
+    def withId[T](fn: UniqueID => M[T]): M[T] = monad.join(ExecRel.rPoint(
       Execution.withId(id => Execution.from(fn(id)))       // via Execution[M[T]] then M[M[T]]
     ))
 
@@ -109,6 +111,8 @@ trait ExecutionROps[M[_]] {
   }
 
   implicit class RichExecutionR[T](val self: M[T]) {
+
+    implicit val Resultant: ResultantMonad[M] = monad
 
     def getCounters: M[(T, ExecutionCounters)]         = ExecRel.rMap(self)(_.getCounters)
     def getAndResetCounters: M[(T, ExecutionCounters)] = ExecRel.rMap(self)(_.getAndResetCounters)

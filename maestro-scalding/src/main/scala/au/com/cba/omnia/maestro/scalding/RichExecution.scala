@@ -23,7 +23,7 @@ import com.twitter.scalding.{Config, Execution}
 
 import org.apache.hadoop.hive.conf.HiveConf
 
-import au.com.cba.omnia.omnitool.{Result, ResultantMonad, ResultantOps, ResultantMonadOps}
+import au.com.cba.omnia.omnitool.{Result, ResultantMonad, ResultantOps, ResultantMonadOps, ToResultantMonadOps}
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
@@ -131,7 +131,7 @@ case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execut
 
 object ExecutionOps extends ExecutionOps
 
-trait ExecutionOps {
+trait ExecutionOps extends ToResultantMonadOps {
   /** Implicit conversion of an Execution instance to RichExecution. */
   implicit def executionToRichExecution[A](execution: Execution[A]): RichExecution[A] =
     RichExecution[A](execution)
@@ -154,9 +154,9 @@ trait ExecutionOps {
         .flatMap(f)       // flatMap over an Execution[Result[A]] that is overall equivalent to ma.
   }
 
-  /** Pimps a [[ResultantMonad]] to have access to the functions in [[ResultantMonadOps]]. */
-  implicit def ToResultantMonadOps[M[_], A](v: M[A])(implicit M0: ResultantMonad[M]): ResultantMonadOps[M, A] =
-    new ResultantMonadOps[M, A](v)
+  // /** Pimps a [[ResultantMonad]] to have access to the functions in [[ResultantMonadOps]]. */
+  // implicit def ToResultantMonadOps[M[_], A](v: M[A])(implicit M0: ResultantMonad[M]): ResultantMonadOps[M, A] =
+  //   new ResultantMonadOps[M, A](v)
 }
 
 /**

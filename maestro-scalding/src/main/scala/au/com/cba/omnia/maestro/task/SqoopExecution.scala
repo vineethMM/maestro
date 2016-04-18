@@ -39,6 +39,8 @@ import au.com.cba.omnia.parlour.{SqoopExecution => ParlourExecution, ParlourExpo
 
 import au.com.cba.omnia.permafrost.hdfs.Hdfs
 
+import au.com.cba.omnia.omnitool.RelMonad
+
 import au.com.cba.omnia.maestro.core.codec.Encode
 import au.com.cba.omnia.maestro.core.split.Splitter
 import au.com.cba.omnia.maestro.scalding.StatKeys
@@ -198,6 +200,16 @@ trait SqoopExecution {
     config: SqoopImportConfig[T]
   ): Execution[(String, Long)] =
     SqoopEx.importExecution(config)
+
+  /**
+    * Runs a sqoop import from a database table to HDFS, via Execution-relative M.
+    *
+    * @return Tuple of import directory and number of rows imported
+    */
+  def sqoopImportR[T <: ParlourImportOptions[T], M[_]](
+    config: SqoopImportConfig[T]
+  )(implicit ExecRel: RelMonad[Execution, M]): M[(String, Long)] =
+    ExecRel.rPoint(SqoopEx.importExecution(config))
 
   /** Exports data from HDFS to a DB via Sqoop. */
   def sqoopExport[T <: ParlourExportOptions[T]](

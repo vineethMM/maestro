@@ -19,7 +19,10 @@ import com.twitter.scalding.{Execution, TupleSetter, TypedPipe, Stat}
 import com.twitter.scrooge.ThriftStruct
 
 import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSink
+
 import au.com.cba.omnia.beeswax.Hive
+
+import au.com.cba.omnia.omnitool.RelMonad
 
 import au.com.cba.omnia.maestro.core.partition.Partition
 import au.com.cba.omnia.maestro.hive.HiveTable
@@ -77,4 +80,13 @@ trait ViewExecution {
     stat    = Stat(statKey)(id)
     n      <- table.writeExecution(pipe.map(row => { stat.inc; row }), append).map(_.get(statKey).getOrElse(0L))
   } yield n }
+
+  // Versions of view and viewHive that include conversion via implicit RelMonad instances (TODO: use ~> instead ?)
+  def viewR[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter, M[_]](
+    config: ViewConfig[A, B], pipe: TypedPipe[A]
+  )(implicit ExecRel: RelMonad[Execution, M]): M[Long] = ExecRel.rPoint(view(config, pipe))
+
+  def viewHiveR[A <: ThriftStruct : Manifest, ST, M[_]](
+    table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
+  )(implicit ExecRel: RelMonad[Execution, M]): M[Long] = ExecRel.rPoint(viewHive(table, pipe, append))
 }

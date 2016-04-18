@@ -41,7 +41,7 @@ import com.twitter.bijection.scrooge.CompactScalaCodec
 
 import com.twitter.scrooge.{ThriftStruct, ThriftStructCodec}
 
-import au.com.cba.omnia.omnitool.Result
+import au.com.cba.omnia.omnitool.{Result, RelMonad}
 
 import au.com.cba.omnia.maestro.core.codec._
 import au.com.cba.omnia.maestro.core.clean.Clean
@@ -180,6 +180,21 @@ trait LoadExecution {
     config: LoadConfig[A], sources: List[String]
   ): Execution[(TypedPipe[A], LoadInfo)] = {
     LoadEx.execution[A](config, sources)
+  }
+
+  /** A variant of load with an implicit Execution-relative monad M, via the class below.
+    * This requires an extra `()` for the implicit argument when calling.
+    */
+  def loadR[A <: ThriftStruct : Decode : Tag : ClassTag](
+    config: LoadConfig[A], sources: List[String]
+  ) = {
+    new LoadR[A](config, sources)
+  }
+  class LoadR[A <: ThriftStruct : Decode : Tag : ClassTag](
+    config: LoadConfig[A], sources: List[String]
+  ) {
+    def apply[M[_]]()(implicit ExecRel: RelMonad[Execution, M]): M[(TypedPipe[A], LoadInfo)] =
+      ExecRel.rPoint(LoadEx.execution[A](config, sources))
   }
 }
 

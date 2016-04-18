@@ -43,7 +43,7 @@ case class RichExecution[A](execution: Execution[A]) {
 
 /** Pimps the Execution object. */
 case class RichExecutionObject(exec: Execution.type) extends ResultantOps[Execution] {
-  implicit val monad: ResultantMonad[Execution] = ExecutionOps.ExecutionResultantMonad
+  implicit def ResultRel: ResultantMonad[Execution] = ExecutionOps.ExecutionResultantMonad
 
   /** Alias for [[fromHdfs]] */
   def hdfs[T](action: Hdfs[T]): Execution[T] =

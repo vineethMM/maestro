@@ -28,29 +28,26 @@ import com.twitter.scalding.{UniqueID, JobStats, TypedPipe, TypedSink}
 
 import com.twitter.algebird.{ Monoid, Monad => AlgMonad, Semigroup }
 
-import au.com.cba.omnia.omnitool.{Result, RelMonad, ResultantMonad, ResultantOps, ToResultantMonadOps}
-import au.com.cba.omnia.omnitool.ResultantMonadSyntax._
+import au.com.cba.omnia.omnitool.{Result, RelMonad, ResultantOps, ToResultantMonadOps}
 
 import au.com.cba.omnia.omnitool.%~>._
 
 /** Extend this and import to use operations via ExecutionR.zip, etc., and enrich M with RichExecutionR. */
-trait ExecutionROps[M[_]] {
+trait ExecutionROps[M[_]] extends ToResultantMonadOps {
 
-  // Monad and relative monad instances
-  implicit val mon:     Monad[M]            // TODO: rename this to monad (also in omnitool, answer, etc.)
-  implicit val ExecRel: Execution %~> M
-  implicit val monad:   Result    %~> M     // TODO: rename this to ResultRel
+  // Relative monad instances
+  implicit def ExecRel:   Execution %~> M
+  implicit def ResultRel: Result    %~> M
 
-  // TODO: figure out why this implicit is needed! (Note also: conflicts for client w/o private.)
-  implicit private val Resultant: Result %~> M = monad  
+  private def monad: Monad[M] = ResultRel
 
   object ExecutionR {
 
     /** An algebird Monad instance for M */  // TODO: Check if we need this.
     implicit object ExecutionRMonad extends com.twitter.algebird.Monad[M] {
       override def apply[T](t: T): M[T] = from(t)
-      override def map[T, U](e: M[T])(fn: T => U): M[U] = mon.map(e)(fn)
-      override def flatMap[T, U](e: M[T])(fn: T => M[U]): M[U] = mon.bind(e)(fn)
+      override def map[T, U](e: M[T])(fn: T => U): M[U] = monad.map(e)(fn)
+      override def flatMap[T, U](e: M[T])(fn: T => M[U]): M[U] = monad.bind(e)(fn)
       override def join[T, U](t: M[T], u: M[U]): M[(T, U)] = t.zip(u)
     }
 
@@ -71,10 +68,8 @@ trait ExecutionROps[M[_]] {
     def fromFuture[T](fn: ConcurrentExecutionContext => Future[T]): M[T]
       = ExecRel.rPoint(Execution.fromFuture(fn))
 
-    val unit: M[Unit]            = ExecRel.rPoint(Execution.from(()))
-
-    def fromFn[T](fn: (Config, Mode) => (FlowDef, JobStats => Future[T])): M[T]
-      = ExecRel.rPoint(Execution.fromFn(fn))
+    val unit: M[Unit]                                  = ExecRel.rPoint(Execution.from(()))
+    def fromFn(fn: (Config, Mode) => FlowDef): M[Unit] = ExecRel.rPoint(Execution.fromFn(fn))
 
     //def getArgs: M[Args]                 = ExecRel.rPoint(Execution.getArgs())  // Added after scalding 13.1
 
@@ -131,8 +126,13 @@ trait ExecutionROps[M[_]] {
     )
   }
 
+  implicit class RichExecutionCrossMaps[T](val self: Execution[T]) {
+    def flatMap[S](f: T => M[S]): M[S] = ExecRel.rPoint(self).flatMap(f)
+    def map[S](f: T => S): M[S] = ExecRel.rPoint(self).map(f)
+  }
+
   implicit class RichTypedPipeR[T](val self: TypedPipe[T]) {
-    def writeExecution(dest: TypedSink[T]): M[Unit] = ExecRel.rPoint(self.writeExecution(dest))
+    def writeExecutionR(dest: TypedSink[T]): M[Unit] = ExecRel.rPoint(self.writeExecution(dest))
   }
 
   implicit def fromEx[T](ex: Execution[T]): M[T] = ExecRel.rPoint(ex)

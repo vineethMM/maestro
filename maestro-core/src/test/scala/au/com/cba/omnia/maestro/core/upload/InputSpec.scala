@@ -20,11 +20,9 @@ import org.specs2.matcher.ThrownExpectations
 
 import java.io.File
 
-import org.joda.time.DateTime
+import org.joda.time.{DateTime, DateTimeZone, Period}, DateTimeZone.UTC
 
-import scalaz.{\/, -\/, \/-}
-
-import au.com.cba.omnia.omnitool.{Error, Ok}
+import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 
 class InputSpec extends Specification with ThrownExpectations { def is = s2"""
 
@@ -46,6 +44,7 @@ control files
   reject literal starting late   $rejectLateLiteral
   reject missing src dir         $rejectMissingSourceDir
   label control files            $labelControlFiles
+  label control file timestamped $labelControlFilesTimestamped
 """
 
  def ctlIsControl =
@@ -67,8 +66,8 @@ control files
     f1.createNewFile
     f2.createNewFile
 
-    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}{yyyyddMM}.txt", ControlPattern.default)
-    fileList mustEqual \/-(InputFiles(List(), List(data1)))
+    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}{yyyyddMM}.txt", ControlPattern.default, UTC)
+    fileList.map(_.toInputFiles) mustEqual Ok(InputFiles(List(), List(data1)))
   })
 
   def rejectLateLiteral = isolatedTest((dirs: IsolatedDirs) => {
@@ -78,14 +77,14 @@ control files
     f1.createNewFile
     f2.createNewFile
 
-    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}*{yyyyddMM}.txt", ControlPattern.default)
-    fileList mustEqual \/-(InputFiles(List(), List(data2)))
+    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}*{yyyyddMM}.txt", ControlPattern.default, UTC)
+    fileList.map(_.toInputFiles) mustEqual Ok(InputFiles(List(), List(data2)))
   })
 
   def rejectMissingSourceDir = isolatedTest((dirs: IsolatedDirs) => {
     dirs.testDir.delete
-    val fileList = Input.findFiles(dirs.testDirS, "local", "yyyyMMdd", ControlPattern.default)
-    fileList must beLike { case -\/(_) => ok }
+    val fileList = Input.findFiles(dirs.testDirS, "local", "yyyyMMdd", ControlPattern.default, UTC)
+    fileList must beLike { case Error(_) => ok }
   })
 
   def labelControlFiles = isolatedTest((dirs: IsolatedDirs) => {
@@ -96,7 +95,21 @@ control files
     f1.createNewFile
     f2.createNewFile
 
-    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}{yyyyMMdd}*", ControlPattern.default)
-    fileList must_== \/-(InputFiles(List(ctrl1), List(data2)))
+    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}{yyyyMMdd}*", ControlPattern.default, UTC)
+    fileList.map(_.toInputFiles) must_== Ok(InputFiles(List(ctrl1), List(data2)))
   })
+
+  def labelControlFilesTimestamped = isolatedTest((dirs: IsolatedDirs) => {
+    val dt = new DateTime(2014, 6, 5, 9, 0, UTC)
+    val f1 = new File(dirs.testDirS, "local2014060509.CTL")
+    val f2 = new File(dirs.testDirS, "local2014060509.DAT")
+    val ctrl1 = ControlFileTimestamped(f1, dt, Period.hours(1))
+    val data2 = DataFileTimestamped(f2.toString, List("2014", "06", "05", "09") mkString File.separator, dt, Period.hours(1))
+    f1.createNewFile
+    f2.createNewFile
+
+    val fileList = Input.findFiles(dirs.testDirS, "local", "{table}{yyyyMMddHH}*", ControlPattern.default, UTC)
+    fileList must_== Ok(InputFilesTimestamped(List(ctrl1), List(data2)))
+  })
+
 }

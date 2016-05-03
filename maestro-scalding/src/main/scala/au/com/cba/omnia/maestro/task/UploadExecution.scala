@@ -20,6 +20,8 @@ import scala.util.matching.Regex
 
 import org.slf4j.{Logger, LoggerFactory}
 
+import org.joda.time.{DateTime, DateTimeZone, Period}
+
 import org.apache.commons.io.input.ReversedLinesFileReader
 
 import com.twitter.scalding._
@@ -97,7 +99,8 @@ case class UploadConfig(
   */
 trait UploadExecution {
   /**
-    * Pushes source files onto HDFS and archives them locally.
+    * Pushes source files onto HDFS and archives them locally, when no hours
+    * are present in the timestamps in the filenames.
     *
     * `upload` expects data files intended for HDFS to be placed in the local
     * ingestion path. `upload` processes all data files that match a given file
@@ -129,8 +132,9 @@ trait UploadExecution {
     *    - The string `{<timestamp-pattern>}` represents a JodaTime timestamp pattern.
     *    - `upload` only supports certain date time fields:
     *      - year (y),
-    *      - month of year (M),
-    *      - day of month (d),
+    *      - month of year (M), and
+    *      - day of month (d)
+    *    - [[uploadTimestamped]] and [[uploadUTC]] additionally support:
     *      - hour of day (H),
     *      - minute of hour (m), and
     *      - second of minute (s).
@@ -145,7 +149,28 @@ trait UploadExecution {
     * @return List of copied hdfs files.
     */
   def upload(config: UploadConfig): Execution[UploadInfo] =
-    UploadEx.matcher(config).flatMap(UploadEx.uploader(config, _))
+    findSources(config).flatMap(uploadSources(config, _))
+
+  /** A variant of [[upload]] that additionally takes a [[timeZone]] in order to
+    * correctly support and validate hours, minutes and seconds in timestamps.
+    *
+    * @param config The upload configuration: [[UploadConfig]].
+    * @param timeZone The time zone for timestamps in file name.
+    *
+    * @return List of copied hdfs files.
+    */
+  def uploadTimestamped(config: UploadConfig, timeZone: DateTimeZone): Execution[UploadInfo] =
+    findSourcesTimestamped(config, timeZone).flatMap(uploadSourcesTimestamped(config, _))
+
+  /** A variant of [[upload]] that additionally uses UTC time zone in order to
+    * correctly support and validate hours, minutes and seconds in timestamps.
+    *
+    * @param config The upload configuration: [[UploadConfig]].
+    *
+    * @return List of copied hdfs files.
+    */
+  def uploadUTC(config: UploadConfig): Execution[UploadInfo] =
+    findSourcesUTC(config).flatMap(uploadSourcesTimestamped(config, _))
 
   /**
     * Attempt to parse the first line of the file into a header data type.
@@ -201,12 +226,51 @@ trait UploadExecution {
     *
     * @return Header and trailer data
     */
-  def parseHT[H, T](parseH: String => Result[H] = HeaderParsers.default, parseT: String => Result[T] = TrailerParsers.default)(data: DataFile): Result[(H, T)] = {
+  def parseHT[H, T](
+    parseH: String => Result[H] = HeaderParsers.default,
+    parseT: String => Result[T] = TrailerParsers.default
+  )(data: DataFile): Result[(H, T)] = {
     for {
       header   <- UploadEx.hParser(parseH, data.file)
       trailer  <- UploadEx.tParser(parseT, data.file)
     } yield(header, trailer)
   }
+
+  /**
+    * Find source files in the local ingestion path without hours in timestamps
+    *
+    * See the description of the files we upload in [[upload]]. Timestamps are
+    * validated as dates, but may not include hours, since their validity
+    * varies during daylight savings transitions.  Use [[findSourcesUTC]] or
+    * [[findSourcesTimestamped]] to include hours and/or to return timestamps.
+    *
+    * @param config The upload configuration: [[UploadConfig]].
+    *
+    * @return List of source files in the local ingestion path
+    */
+  def findSources(config: UploadConfig): Execution[List[DataFile]] = for {
+    dataFiles <- UploadEx.matcher(config, DateTimeZone.UTC)
+    _         <- Execution.guard(
+                   dataFiles.forall(_.frequency.toStandardSeconds.isGreaterThan(Period.hours(1).toStandardSeconds)),
+                   s"""|Timestamps with hours are deprecated with upload and findSources, instead use
+                      | uploadTimestamped, uploadUTC, findSourcesTimestamped or findSourcesUTC.
+                      | Timestamps are: ${dataFiles.map(_.parsedDate)}
+                   """.stripMargin
+                 )
+  } yield dataFiles.map(_.toDataFile)
+
+  /**
+    * Find source files in the local ingestion path
+    *
+    * See the description of the files we upload in [[upload]].
+    *
+    * @param config The upload configuration: [[UploadConfig]].
+    * @param timeZone The time zone for timestamps in file name.
+    *
+    * @return List of source files in the local ingestion path, with timestamps in [[timeZone]].
+    */
+  def findSourcesTimestamped(config: UploadConfig, timeZone: DateTimeZone): Execution[List[DataFileTimestamped]] =
+    UploadEx.matcher(config, timeZone)
 
   /**
     * Find source files in the local ingestion path
@@ -215,10 +279,11 @@ trait UploadExecution {
     *
     * @param config The upload configuration: [[UploadConfig]].
     *
-    * @return List of source files in the local ingestion path
+    * @return List of source files in the local ingestion path, with timestamps in UTC.
     */
-  def findSources(config: UploadConfig): Execution[List[DataFile]] =
-    UploadEx.matcher(config)
+  def findSourcesUTC(config: UploadConfig): Execution[List[DataFileTimestamped]] =
+    findSourcesTimestamped(config, DateTimeZone.UTC)
+
 
   /**
     * Pushes a list of source files onto HDFS and archives them locally.
@@ -232,6 +297,19 @@ trait UploadExecution {
     */
   def uploadSources(config: UploadConfig, files: List[DataFile]): Execution[UploadInfo] =
     UploadEx.uploader(config, files)
+
+  /**
+    * Pushes a list of source files onto HDFS and archives them locally.
+    *
+    * See the description of the HDFS push and archive at [[upload]].
+    *
+    * @param config Upload configuration: [[UploadConfig]]
+    * @param files  List of source files to upload, with timestamps, which are ignored.
+    *
+    * @return List of source file destinations on HDFS
+    */
+  def uploadSourcesTimestamped(config: UploadConfig, files: List[DataFileTimestamped]): Execution[UploadInfo] =
+    UploadEx.uploader(config, files.map(_.toDataFile))
 }
 
 /**
@@ -241,13 +319,13 @@ trait UploadExecution {
 object UploadEx {
   val logger = LoggerFactory.getLogger("Upload")
 
-  def matcher(conf: UploadConfig): Execution[List[DataFile]] = for {
+  def matcher(conf: UploadConfig, timeZone: DateTimeZone): Execution[List[DataFileTimestamped]] = for {
     _     <- Execution.from {
                logger.info(s"Start of pattern matching from ${conf.localIngestPath}")
                logger.info(conf.prettyPrint)
              }
-    files <- Execution.fromEither(Input.findFiles(
-               conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern
+    files <- Execution.fromResult(Input.findFiles(
+               conf.localIngestPath, conf.tablename, conf.filePattern, conf.controlPattern, timeZone
              ))
     _     <- Execution.from(
                files.controlFiles.foreach(ctrl => logger.info(s"skipping control file ${ctrl.file.getName}"))
@@ -259,10 +337,10 @@ object UploadEx {
     copied <- Execution.fromHdfs(
                 Push.push(files, conf.hdfsLandingPath, conf.localArchivePath, conf.hdfsArchivePath)
               )
-    _      <- Execution.from {
-                copied.foreach { case Copied(files, dest) => logger.info(s"Copied ${files.map(_.getName).mkString(", ")} to $dest ")}
-                logger.info(s"Upload ended")
-              }
+    _      <- Execution.from(copied.foreach {
+                case Copied(files, dest) => logger.info(s"Copied ${files.map(_.getName).mkString(", ")} to $dest ")
+              })
+    _      <- Execution.from(logger.info(s"Upload ended"))
   } yield UploadInfo(copied.map(_.dest.toString))
 
   def hParser[H](parseH: String => Result[H], file: String): Result[H] =

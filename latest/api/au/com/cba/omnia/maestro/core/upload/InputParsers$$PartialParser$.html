@@ -51,7 +51,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for partial file name parsers</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/47e6012c764abe8beb8dedccc9b69bab9bbbd893//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for partial file name parsers</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e06bc75d418e4e0693524f5290650e998cd6bf36//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -239,18 +239,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser#fieldOrder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="fieldOrder(t:org.joda.time.DateTimeFieldType):scalaz.\/[String,Int]"></a>
-      <a id="fieldOrder(DateTimeFieldType):\/[String,Int]"></a>
+      <a id="fieldOrder(t:org.joda.time.DateTimeFieldType):au.com.cba.omnia.omnitool.Result[Int]"></a>
+      <a id="fieldOrder(DateTimeFieldType):Result[Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fieldOrder</span><span class="params">(<span name="t">t: <span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span></span>)</span><span class="result">: <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>
+        <span class="name">fieldOrder</span><span class="params">(<span name="t">t: <span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@fieldOrder(t:org.joda.time.DateTimeFieldType):scalaz.\/[String,Int]" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@fieldOrder(t:org.joda.time.DateTimeFieldType):au.com.cba.omnia.omnitool.Result[Int]" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -295,6 +295,23 @@
       </a>
     </span>
       <p class="shortcomment cmt">Partial file name parser that succeeds when at the end of the file name</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser#frequencies" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="frequencies:scala.collection.immutable.Vector[org.joda.time.Period]"></a>
+      <a id="frequencies:Vector[Period]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">frequencies</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.collection.immutable.Vector" class="extype" target="_top">Vector</a>[<span class="extype" name="org.joda.time.Period">Period</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@frequencies:scala.collection.immutable.Vector[org.joda.time.Period]" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The (maximum) frequencies that should be inferred for corresponding date-time fields</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -432,18 +449,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser#timestamp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timestamp(pattern:String):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]"></a>
-      <a id="timestamp(String):MayFail[PartialParser]"></a>
+      <a id="timestamp(tz:org.joda.time.DateTimeZone,pattern:String):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]"></a>
+      <a id="timestamp(DateTimeZone,String):Result[PartialParser]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">timestamp</span><span class="params">(<span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="InputParsers$.html#MayFail[A]=scalaz.\/[String,A]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail">MayFail</a>[<a href="InputParsers$$PartialParser.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser">PartialParser</a>]</span>
+        <span class="name">timestamp</span><span class="params">(<span name="tz">tz: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<a href="InputParsers$$PartialParser.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser">PartialParser</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@timestamp(pattern:String):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@timestamp(tz:org.joda.time.DateTimeZone,pattern:String):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -502,24 +519,23 @@ a negative year.
     </span>
       <p class="shortcomment cmt">Ordered list of fields we permit in upload time stamps</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser#validate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="validate(parser:au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]"></a>
-      <a id="validate(PartialParser):MayFail[FileNameParser]"></a>
+      <a id="validate(parser:au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]"></a>
+      <a id="validate(PartialParser):Result[FileNameParser]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">validate</span><span class="params">(<span name="parser">parser: <a href="InputParsers$$PartialParser.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser">PartialParser</a></span>)</span><span class="result">: <a href="InputParsers$.html#MayFail[A]=scalaz.\/[String,A]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail">MayFail</a>[<a href="InputParsers$.html#FileNameParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser">FileNameParser</a>]</span>
+        <span class="name">validate</span><span class="params">(<span name="parser">parser: <a href="InputParsers$$PartialParser.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser">PartialParser</a></span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<a href="InputParsers$.html#FileNameParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[(List[String],org.joda.time.DateTime,org.joda.time.Period)]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser">FileNameParser</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@validate(parser:au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser$@validate(parser:au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Turns a PartialParser into a FileNameParser.</p><div class="fullcomment"><div class="comment cmt"><p>Turns a PartialParser into a FileNameParser.</p><p>Checks that the fields in the file pattern are valid. The restrictions
-on file pattern fields are described in
-<span class="extype" name="au.cba.com.omnia.maestro.core.task.Upload">au.cba.com.omnia.maestro.core.task.Upload</span>.
+on file pattern fields are described in <a href="../../task/UploadExecution.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadExecution">au.com.cba.omnia.maestro.task.UploadExecution</a>.
 </p></div></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>

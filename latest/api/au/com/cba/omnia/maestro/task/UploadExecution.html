@@ -54,7 +54,7 @@
 the files. The user can also use <a href="#findSources(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFile]]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#findSources">findSources</a> and <a href="#uploadSources(config:au.com.cba.omnia.maestro.task.UploadConfig,files:List[au.com.cba.omnia.maestro.core.upload.DataFile]):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#uploadSources">uploadSources</a>,
 which allows them to inspect the data files before uploading them.</p><p>The user can run <a href="#parseHeader[H](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[H]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#parseHeader">parseHeader</a>, <a href="#parseTrailer[T](parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[T]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#parseTrailer">parseTrailer</a>, and <a href="#parseHT[H,T](parseH:String=&gt;au.com.cba.omnia.omnitool.Result[H],parseT:String=&gt;au.com.cba.omnia.omnitool.Result[T])(data:au.com.cba.omnia.maestro.core.upload.DataFile):au.com.cba.omnia.omnitool.Result[(H,T)]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#parseHT">parseHT</a> on
 data files to retrieve and validate their metadata.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/47e6012c764abe8beb8dedccc9b69bab9bbbd893//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e06bc75d418e4e0693524f5290650e998cd6bf36//maestro-scalding/src/main/scala/au/com/cba/omnia/maestro/task/UploadExecution.scala" target="_blank">UploadExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div><div class="toggleContainer block">
@@ -266,8 +266,47 @@ data files to retrieve and validate their metadata.
         <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Find source files in the local ingestion path</p><div class="fullcomment"><div class="comment cmt"><p>Find source files in the local ingestion path</p><p>See the description of the files we upload in <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>.
+      <p class="shortcomment cmt">Find source files in the local ingestion path without hours in timestamps</p><div class="fullcomment"><div class="comment cmt"><p>Find source files in the local ingestion path without hours in timestamps</p><p>See the description of the files we upload in <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>. Timestamps are
+validated as dates, but may not include hours, since their validity
+varies during daylight savings transitions.  Use <a href="#findSourcesUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#findSourcesUTC">findSourcesUTC</a> or
+<a href="#findSourcesTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#findSourcesTimestamped">findSourcesTimestamped</a> to include hours and/or to return timestamps.
 </p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt>returns</dt><dd class="cmt"><p>List of source files in the local ingestion path</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#findSourcesTimestamped" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="findSourcesTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]"></a>
+      <a id="findSourcesTimestamped(UploadConfig,DateTimeZone):Execution[List[DataFileTimestamped]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">findSourcesTimestamped</span><span class="params">(<span name="config">config: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></span>, <span name="timeZone">timeZone: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.List">List</span>[<a href="../core/upload/DataFileTimestamped.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFileTimestamped">DataFileTimestamped</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadExecution@findSourcesTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Find source files in the local ingestion path</p><div class="fullcomment"><div class="comment cmt"><p>Find source files in the local ingestion path</p><p>See the description of the files we upload in <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt class="param">timeZone</dt><dd class="cmt"><p>The time zone for timestamps in file name.</p></dd><dt>returns</dt><dd class="cmt"><p>List of source files in the local ingestion path, with timestamps in <span class="extype" name="timeZone">timeZone</span>.</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#findSourcesUTC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="findSourcesUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]"></a>
+      <a id="findSourcesUTC(UploadConfig):Execution[List[DataFileTimestamped]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">findSourcesUTC</span><span class="params">(<span name="config">config: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.List">List</span>[<a href="../core/upload/DataFileTimestamped.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFileTimestamped">DataFileTimestamped</a>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadExecution@findSourcesUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Find source files in the local ingestion path</p><div class="fullcomment"><div class="comment cmt"><p>Find source files in the local ingestion path</p><p>See the description of the files we upload in <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt>returns</dt><dd class="cmt"><p>List of source files in the local ingestion path, with timestamps in UTC.</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -476,7 +515,9 @@ The user can supply their own parsing function and trailer data type if necesary
         <img src="../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally.</p><p><code>upload</code> expects data files intended for HDFS to be placed in the local
+      <p class="shortcomment cmt">Pushes source files onto HDFS and archives them locally, when no hours
+are present in the timestamps in the filenames.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes source files onto HDFS and archives them locally, when no hours
+are present in the timestamps in the filenames.</p><p><code>upload</code> expects data files intended for HDFS to be placed in the local
 ingestion path. <code>upload</code> processes all data files that match a given file
 pattern. The file pattern format is explained below.</p><p>Each data file will be copied into the HDFS landing path. Data files are
 also compressed and archived on the local machine and on HDFS.</p><p>Some files placed on the local machine are control files. These files
@@ -486,7 +527,7 @@ cause of the error has been addressed, <code>upload</code> can be run again to c
 any remaining files to HDFS. <code>upload</code> will refuse to copy a file if that
 file or it's control flags are already present in HDFS. If you
 need to overwrite a file that already exists in HDFS, you will need to
-delete the file and it's control flags before <code>upload</code> will replace it.</p><p>The file pattern is a string containing the following elements:</p><ul><li>Literals:<ul><li>Any character other than <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, or <code>\</code> represents itself.</li><li><code>\{</code>, <code>\}</code>, <code>\*</code>, <code>\?</code>, or <code>\\</code> represents <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, and <code>\</code>, respectively.</li><li>The string <code>{table}</code> represents the table name.</li></ul></li><li>Wildcards:<ul><li>The character <code>*</code> represents an arbitrary number of arbitrary characters.</li><li>The character <code>?</code> represents one arbitrary character.</li></ul></li><li>Date times:<ul><li>The string <code>{&lt;timestamp-pattern&gt;}</code> represents a JodaTime timestamp pattern.</li><li><code>upload</code> only supports certain date time fields:<ul><li>year (y),</li><li>month of year (M),</li><li>day of month (d),</li><li>hour of day (H),</li><li>minute of hour (m), and</li><li>second of minute (s).</li></ul></li></ul></li></ul><p>Some example file patterns:</p><ul><li><code>{table}{yyyyMMdd}.DAT</code></li><li><code>{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}</code></li><li><code>??_{table}-{ddMMyy}*</code>
+delete the file and it's control flags before <code>upload</code> will replace it.</p><p>The file pattern is a string containing the following elements:</p><ul><li>Literals:<ul><li>Any character other than <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, or <code>\</code> represents itself.</li><li><code>\{</code>, <code>\}</code>, <code>\*</code>, <code>\?</code>, or <code>\\</code> represents <code>{</code>, <code>}</code>, <code>*</code>, <code>?</code>, and <code>\</code>, respectively.</li><li>The string <code>{table}</code> represents the table name.</li></ul></li><li>Wildcards:<ul><li>The character <code>*</code> represents an arbitrary number of arbitrary characters.</li><li>The character <code>?</code> represents one arbitrary character.</li></ul></li><li>Date times:<ul><li>The string <code>{&lt;timestamp-pattern&gt;}</code> represents a JodaTime timestamp pattern.</li><li><code>upload</code> only supports certain date time fields:<ul><li>year (y),</li><li>month of year (M), and</li><li>day of month (d)</li></ul></li><li><a href="#uploadTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#uploadTimestamped">uploadTimestamped</a> and <a href="#uploadUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#uploadUTC">uploadUTC</a> additionally support:<ul><li>hour of day (H),</li><li>minute of hour (m), and</li><li>second of minute (s).</li></ul></li></ul></li></ul><p>Some example file patterns:</p><ul><li><code>{table}{yyyyMMdd}.DAT</code></li><li><code>{table}_{yyyyMMdd_HHss}.TXT.*.{yyyyMMddHHss}</code></li><li><code>??_{table}-{ddMMyy}*</code>
 </li></ul></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>Upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt>returns</dt><dd class="cmt"><p>List of copied hdfs files.</p></dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#uploadSources" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="uploadSources(config:au.com.cba.omnia.maestro.task.UploadConfig,files:List[au.com.cba.omnia.maestro.core.upload.DataFile]):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]"></a>
@@ -506,6 +547,64 @@ delete the file and it's control flags before <code>upload</code> will replace i
     </span>
       <p class="shortcomment cmt">Pushes a list of source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes a list of source files onto HDFS and archives them locally.</p><p>See the description of the HDFS push and archive at <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>.
 </p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>Upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></p></dd><dt class="param">files</dt><dd class="cmt"><p>List of source files to upload</p></dd><dt>returns</dt><dd class="cmt"><p>List of source file destinations on HDFS</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#uploadSourcesTimestamped" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadSourcesTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,files:List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]"></a>
+      <a id="uploadSourcesTimestamped(UploadConfig,List[DataFileTimestamped]):Execution[UploadInfo]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uploadSourcesTimestamped</span><span class="params">(<span name="config">config: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></span>, <span name="files">files: <span class="extype" name="scala.List">List</span>[<a href="../core/upload/DataFileTimestamped.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFileTimestamped">DataFileTimestamped</a>]</span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadInfo">UploadInfo</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadExecution@uploadSourcesTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,files:List[au.com.cba.omnia.maestro.core.upload.DataFileTimestamped]):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Pushes a list of source files onto HDFS and archives them locally.</p><div class="fullcomment"><div class="comment cmt"><p>Pushes a list of source files onto HDFS and archives them locally.</p><p>See the description of the HDFS push and archive at <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a>.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>Upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></p></dd><dt class="param">files</dt><dd class="cmt"><p>List of source files to upload, with timestamps, which are ignored.</p></dd><dt>returns</dt><dd class="cmt"><p>List of source file destinations on HDFS</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#uploadTimestamped" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]"></a>
+      <a id="uploadTimestamped(UploadConfig,DateTimeZone):Execution[UploadInfo]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uploadTimestamped</span><span class="params">(<span name="config">config: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></span>, <span name="timeZone">timeZone: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadInfo">UploadInfo</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadExecution@uploadTimestamped(config:au.com.cba.omnia.maestro.task.UploadConfig,timeZone:org.joda.time.DateTimeZone):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A variant of <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> that additionally takes a <span class="extype" name="timeZone">timeZone</span> in order to
+correctly support and validate hours, minutes and seconds in timestamps.</p><div class="fullcomment"><div class="comment cmt"><p>A variant of <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> that additionally takes a <span class="extype" name="timeZone">timeZone</span> in order to
+correctly support and validate hours, minutes and seconds in timestamps.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt class="param">timeZone</dt><dd class="cmt"><p>The time zone for timestamps in file name.</p></dd><dt>returns</dt><dd class="cmt"><p>List of copied hdfs files.</p></dd></dl></div>
+    </li><li name="au.com.cba.omnia.maestro.task.UploadExecution#uploadUTC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]"></a>
+      <a id="uploadUTC(UploadConfig):Execution[UploadInfo]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uploadUTC</span><span class="params">(<span name="config">config: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<a href="UploadInfo.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadInfo">UploadInfo</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../index.html#au.com.cba.omnia.maestro.task.UploadExecution@uploadUTC(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" title="Permalink" target="_top">
+        <img src="../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A variant of <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> that additionally uses UTC time zone in order to
+correctly support and validate hours, minutes and seconds in timestamps.</p><div class="fullcomment"><div class="comment cmt"><p>A variant of <a href="#upload(config:au.com.cba.omnia.maestro.task.UploadConfig):com.twitter.scalding.Execution[au.com.cba.omnia.maestro.task.UploadInfo]" class="extmbr" name="au.com.cba.omnia.maestro.task.UploadExecution#upload">upload</a> that additionally uses UTC time zone in order to
+correctly support and validate hours, minutes and seconds in timestamps.
+</p></div><dl class="paramcmts block"><dt class="param">config</dt><dd class="cmt"><p>The upload configuration: <a href="UploadConfig.html" class="extype" name="au.com.cba.omnia.maestro.task.UploadConfig">UploadConfig</a>.</p></dd><dt>returns</dt><dd class="cmt"><p>List of copied hdfs files.</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

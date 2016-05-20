@@ -49,9 +49,9 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>List of <code>PatternParser</code>s</p><p>The important one is <code>pattern</code>: this parses the whole file pattern
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Methods for producing <code>PatternParser</code>s for a specific time zone.</p><p>The important one is <code>pattern</code>: this parses the whole file pattern
 and returns the complete file name parser
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/47e6012c764abe8beb8dedccc9b69bab9bbbd893//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e06bc75d418e4e0693524f5290650e998cd6bf36//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -466,35 +466,35 @@ and returns the complete file name parser
     </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser#part" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="part(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
-      <a id="part(String):PatternParser"></a>
+      <a id="part(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
+      <a id="part(String,DateTimeZone):PatternParser"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">part</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
+        <span class="name">part</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tz">tz: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@part(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@part(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Match a single element element</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser#pattern" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="pattern(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]"></a>
-      <a id="pattern(String):InputParsers.Parser[FileNameParser]"></a>
+      <a id="pattern(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]"></a>
+      <a id="pattern(String,DateTimeZone):InputParsers.Parser[FileNameParser]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">pattern</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="InputParsers$.html#Parser[+T]extendsParsers.this.Input=&gt;Parsers.this.ParseResult[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.Parser">InputParsers.Parser</a>[<a href="InputParsers$.html#FileNameParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[List[String]]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser">FileNameParser</a>]</span>
+        <span class="name">pattern</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tz">tz: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <a href="InputParsers$.html#Parser[+T]extendsParsers.this.Input=&gt;Parsers.this.ParseResult[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.Parser">InputParsers.Parser</a>[<a href="InputParsers$.html#FileNameParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[(List[String],org.joda.time.DateTime,org.joda.time.Period)]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser">FileNameParser</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@pattern(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@pattern(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.FileNameParser]" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -568,18 +568,18 @@ and returns the complete file name parser
     </span>
       
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser#timestamp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timestamp:au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
-      <a id="timestamp:PatternParser"></a>
+      <a id="timestamp(tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
+      <a id="timestamp(DateTimeZone):PatternParser"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">timestamp</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
+        <span class="name">timestamp</span><span class="params">(<span name="tz">tz: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@timestamp:au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@timestamp(tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -621,18 +621,18 @@ timestamp format (except for &quot;{table}&quot;, of course).
     </span>
       <p class="shortcomment cmt">Parse a question mark</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser#unknownSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="unknownSeq(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
-      <a id="unknownSeq(String):PatternParser"></a>
+      <a id="unknownSeq(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser"></a>
+      <a id="unknownSeq(String,DateTimeZone):PatternParser"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">unknownSeq</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
+        <span class="name">unknownSeq</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tz">tz: <span class="extype" name="org.joda.time.DateTimeZone">DateTimeZone</span></span>)</span><span class="result">: <a href="InputParsers$.html#PatternParser=au.com.cba.omnia.maestro.core.upload.InputParsers.Parser[au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser">PatternParser</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@unknownSeq(tableName:String):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PatternParser$@unknownSeq(tableName:String,tz:org.joda.time.DateTimeZone):au.com.cba.omnia.maestro.core.upload.InputParsers.PatternParser" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

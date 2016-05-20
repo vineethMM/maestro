@@ -83,6 +83,23 @@
       </a>
     </span>
       <p class="shortcomment cmt">A control file, not to be loaded into HDFS</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.ControlFileTimestamped" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ControlFileTimestampedextendsProductwithSerializable"></a>
+      <a id="ControlFileTimestamped:ControlFileTimestamped"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ControlFileTimestamped.html"><span class="name">ControlFileTimestamped</span></a><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="timestamp">timestamp: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="frequency">frequency: <span class="extype" name="org.joda.time.Period">Period</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.package@ControlFileTimestampedextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A control file, not to be loaded into HDFS, with the timestamp and inferred frequency between timestamps</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Copied" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CopiedextendsProductwithSerializable"></a>
       <a id="Copied:Copied"></a>
@@ -117,6 +134,23 @@
       </a>
     </span>
       <p class="shortcomment cmt">A file to be uploaded, with associated business date directory</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.DataFileTimestamped" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DataFileTimestampedextendsProductwithSerializable"></a>
+      <a id="DataFileTimestamped:DataFileTimestamped"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="DataFileTimestamped.html"><span class="name">DataFileTimestamped</span></a><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="parsedDate">parsedDate: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timestamp">timestamp: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="frequency">frequency: <span class="extype" name="org.joda.time.Period">Period</span></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.package@DataFileTimestampedextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A file to be uploaded, with its business date directory, timestamp and inferred frequency between timestamps</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Header" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="HeaderextendsProductwithSerializable"></a>
       <a id="Header:Header"></a>
@@ -150,7 +184,24 @@
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Files found by <a href="Input$.html#findFiles(sourceDir:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex):scalaz.\/[String,au.com.cba.omnia.maestro.core.upload.InputFiles]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.Input#findFiles">Input.findFiles</a></p>
+      <p class="shortcomment cmt">Files found by <a href="Input$.html#findFiles(sourceDir:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex,timeZone:org.joda.time.DateTimeZone):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputFilesTimestamped]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.Input#findFiles">Input.findFiles</a> without timestamps and inferred frequencies</p>
+    </li><li name="au.com.cba.omnia.maestro.core.upload.InputFilesTimestamped" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="InputFilesTimestampedextendsProductwithSerializable"></a>
+      <a id="InputFilesTimestamped:InputFilesTimestamped"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="InputFilesTimestamped.html"><span class="name">InputFilesTimestamped</span></a><span class="params">(<span name="controlFiles">controlFiles: <span class="extype" name="scala.List">List</span>[<a href="ControlFileTimestamped.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.ControlFileTimestamped">ControlFileTimestamped</a>]</span>, <span name="dataFiles">dataFiles: <span class="extype" name="scala.List">List</span>[<a href="DataFileTimestamped.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.DataFileTimestamped">DataFileTimestamped</a>]</span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.package@InputFilesTimestampedextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Files found by <a href="Input$.html#findFiles(sourceDir:String,tablename:String,filePattern:String,controlPattern:scala.util.matching.Regex,timeZone:org.joda.time.DateTimeZone):au.com.cba.omnia.omnitool.Result[au.com.cba.omnia.maestro.core.upload.InputFilesTimestamped]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.Input#findFiles">Input.findFiles</a> with timestamps and inferred frequencies</p>
     </li><li name="au.com.cba.omnia.maestro.core.upload.Match" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MatchextendsMatchResultwithProductwithSerializable"></a>
       <a id="Match:Match"></a>
@@ -160,7 +211,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Match.html"><span class="name">Match</span></a><span class="params">(<span name="dirs">dirs: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <a href="MatchResult.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.MatchResult">MatchResult</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="Match.html"><span class="name">Match</span></a><span class="params">(<span name="dirs">dirs: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="stamp">stamp: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="frequency">frequency: <span class="extype" name="org.joda.time.Period">Period</span></span>)</span><span class="result"> extends <a href="MatchResult.html" class="extype" name="au.com.cba.omnia.maestro.core.upload.MatchResult">MatchResult</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.package@MatchextendsMatchResultwithProductwithSerializable" title="Permalink" target="_top">
@@ -168,7 +219,7 @@
       </a>
     </span>
       <p class="shortcomment cmt">The file matches the pattern.</p><div class="fullcomment"><div class="comment cmt"><p>The file matches the pattern.</p><p>Also contains the directories for the file
-corresponding to the date time fields in the pattern.
+corresponding to the date time fields in the pattern, the date time, and the inferred frequency.
 </p></div></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.MatchResult" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="MatchResultextendsAnyRef"></a>

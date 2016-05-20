@@ -55,7 +55,7 @@
 input parsers have nothing in their <code>fields</code> list. This is fine: it
 indicates the date times their parsers return are dummy values with no
 fields set.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/47e6012c764abe8beb8dedccc9b69bab9bbbd893//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/maestro/tree/e06bc75d418e4e0693524f5290650e998cd6bf36//maestro-core/src/main/scala/au/com/cba/omnia/maestro/core/upload/InputParsers.scala" target="_blank">InputParsers.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="InputParsers$.html#Parser[+T]extendsParsers.this.Input=&gt;Parsers.this.ParseResult[T]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.Parser">InputParsers.Parser</a>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>], (<a href="InputParsers$.html#Input=scala.util.parsing.input.Reader[Parsers.this.Elem]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.Input">InputParsers.Input</a>) ⇒ <a href="InputParsers$.html#ParseResult[+T]extendsAnyRef" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.ParseResult">InputParsers.ParseResult</a>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>], <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -445,24 +445,26 @@ fields set.
               
         </dd></dl></div>
     </li><li name="au.com.cba.omnia.maestro.core.upload.InputParsers.PartialParser#combineDateTimes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="combineDateTimes(dt1:org.joda.time.DateTime,fs1:List[org.joda.time.DateTimeFieldType],dt2:org.joda.time.DateTime,fs2:List[org.joda.time.DateTimeFieldType]):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[org.joda.time.DateTime]"></a>
-      <a id="combineDateTimes(DateTime,List[DateTimeFieldType],DateTime,List[DateTimeFieldType]):MayFail[DateTime]"></a>
+      <a id="combineDateTimes(dt1:org.joda.time.DateTime,fs1:List[org.joda.time.DateTimeFieldType],dt2:org.joda.time.DateTime,fs2:List[org.joda.time.DateTimeFieldType]):au.com.cba.omnia.omnitool.Result[org.joda.time.DateTime]"></a>
+      <a id="combineDateTimes(DateTime,List[DateTimeFieldType],DateTime,List[DateTimeFieldType]):Result[DateTime]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">combineDateTimes</span><span class="params">(<span name="dt1">dt1: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="fs1">fs1: <span class="extype" name="scala.List">List</span>[<span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span>]</span>, <span name="dt2">dt2: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="fs2">fs2: <span class="extype" name="scala.List">List</span>[<span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span>]</span>)</span><span class="result">: <a href="InputParsers$.html#MayFail[A]=scalaz.\/[String,A]" class="extmbr" name="au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail">MayFail</a>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>]</span>
+        <span class="name">combineDateTimes</span><span class="params">(<span name="dt1">dt1: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="fs1">fs1: <span class="extype" name="scala.List">List</span>[<span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span>]</span>, <span name="dt2">dt2: <span class="extype" name="org.joda.time.DateTime">DateTime</span></span>, <span name="fs2">fs2: <span class="extype" name="scala.List">List</span>[<span class="extype" name="org.joda.time.DateTimeFieldType">DateTimeFieldType</span>]</span>)</span><span class="result">: <a href="https://github.com/CommBank/edge/index.html#au.com.cba.omnia.omnitool.Result" class="extype" target="_top">Result</a>[<span class="extype" name="org.joda.time.DateTime">DateTime</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser@combineDateTimes(dt1:org.joda.time.DateTime,fs1:List[org.joda.time.DateTimeFieldType],dt2:org.joda.time.DateTime,fs2:List[org.joda.time.DateTimeFieldType]):au.com.cba.omnia.maestro.core.upload.InputParsers.MayFail[org.joda.time.DateTime]" title="Permalink" target="_top">
+      <a href="../../../../../../../index.html#au.com.cba.omnia.maestro.core.upload.InputParsers$$PartialParser@combineDateTimes(dt1:org.joda.time.DateTime,fs1:List[org.joda.time.DateTimeFieldType],dt2:org.joda.time.DateTime,fs2:List[org.joda.time.DateTimeFieldType]):au.com.cba.omnia.omnitool.Result[org.joda.time.DateTime]" title="Permalink" target="_top">
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Combine the information in two date times safely.</p><div class="fullcomment"><div class="comment cmt"><p>Combine the information in two date times safely.</p><p>Given two date times, and a list of fields defined in each date time,
 return a new date time containing the union of all fields. It is an
-error if the date times have different values for any field
+error if the date times have different values for any field, since
+parsers should always yield only a single date time, even if some
+or all components are repeated.
 </p></div></div>
     </li><li name="scala.Function1#compose" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="compose[A&lt;:&lt;?&gt;](g:&lt;?&gt;):A=&gt;R"></a>
@@ -591,7 +593,7 @@ error if the date times have different values for any field
         <img src="../../../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Sequential composition with another partial file name parser</p><div class="fullcomment"><div class="comment cmt"><p>Sequential composition with another partial file name parser</p><p>It is a parse error (not failure) if the date time fields are consistent.
+      <p class="shortcomment cmt">Sequential composition with another partial file name parser</p><div class="fullcomment"><div class="comment cmt"><p>Sequential composition with another partial file name parser</p><p>It is a parse error (not failure) if the date time fields are inconsistent.
 </p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>

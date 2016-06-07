@@ -37,7 +37,7 @@ import au.com.cba.omnia.omnitool.{Result, Ok, Error}
 
 import au.com.cba.omnia.maestro.core.data.Field
 import au.com.cba.omnia.maestro.core.partition.Partition
-import au.com.cba.omnia.maestro.hive.{HiveTable, UnpartitionedHiveTable}
+import au.com.cba.omnia.maestro.hive.{GenericPartitionedHiveTable, HiveTable, UnpartitionedHiveTable}
 import au.com.cba.omnia.maestro.scalding.ExecutionOps._
 import au.com.cba.omnia.maestro.core.thrift.scrooge.StringPair
 
@@ -63,6 +63,7 @@ View execution properties
     view hive executions can be composed with flatMap                    $flatMappedHive
     view hive executions can be composed with zip                        $zippedHive
     can write to tables where the underlying folder has been deleted     $withoutFolder
+    can extract and write partitioned thrift data                        $normalHiveOverwriteGeneric
 
   unpartitioned:
     can write to a hive table using execution monad                      $normalHiveUnpartitioned
@@ -130,6 +131,38 @@ View execution properties
     } yield (c1, c2)
 
     executesSuccessfully(exec) must_== ((10, 3))
+
+    val result = Hive.query("SELECT * FROM normalhive.by_first").map(_.length)
+    result must beValue(expectedA.length + expectedB.length + expectedC.length)
+
+    val path = hiveWarehouse </> "normalhive.db" </> "by_first"
+    facts(
+      path </> "partition_first=A" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedA),
+      path </> "partition_first=B" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedB),
+      path </> "partition_first=C" </> "part-*.parquet" ==> records(ParquetThermometerRecordReader[StringPair], expectedC)
+    )
+  }
+
+  // Uses withEnvironment so that we can force multiple map tasks to run and write out multiple files.
+  def normalHiveOverwriteGeneric = withEnvironment(path(getClass.getResource("/view-execution").toString)) {
+    val expectedA = List(StringPair("A", "10"))
+    val expectedB = List(StringPair("B", "10"), StringPair("B", "11"))
+    val expectedC = List(StringPair("C", "1"), StringPair("C", "2"), StringPair("C", "3"), StringPair("C", "4"))
+
+    val genericHiveTable = GenericPartitionedHiveTable[StringPair, String, (String, String)](
+      "normalHive", "by_first", List("partition_first"),
+      (row: (String, String)) => row match { case (first, second) => (first, StringPair(first, second))},
+      None
+    )
+
+    val s1 = TypedCsv[(String, String)]("partitioned-overwrite1")
+    val s2 = TypedCsv[(String, String)]("partitioned-overwrite2")
+    val exec = for {
+      _ <- genericHiveTable.writeExecution(s1, false)
+      - <- genericHiveTable.writeExecution(s2, false)
+    } yield true
+
+    executesSuccessfully(exec) must_== true
 
     val result = Hive.query("SELECT * FROM normalhive.by_first").map(_.length)
     result must beValue(expectedA.length + expectedB.length + expectedC.length)

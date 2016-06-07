@@ -66,7 +66,7 @@ trait ViewExecution {
     * @return the number of rows written.
     */
   def viewHive[A <: ThriftStruct : Manifest, ST](
-    table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
+    table: HiveTable[A, ST, A], pipe: TypedPipe[A], append: Boolean = true
   ): Execution[Long] = Execution.withId { id => for {
     /* Creates the database upfront since when Hive is run concurrently uzing `zip` all but the
      * first attempt fails.

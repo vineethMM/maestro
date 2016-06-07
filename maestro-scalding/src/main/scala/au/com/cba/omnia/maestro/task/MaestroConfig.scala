@@ -211,7 +211,7 @@ case class MaestroConfig(
     tablename: String    = self.tablename,
     database: String     = dbRaw,
     path: Option[String] = None
-  ): HiveTable[A, A] =
+  ): HiveTable[A, A, A] =
     HiveTable(database, tablename, path)
 
   /**
@@ -226,7 +226,7 @@ case class MaestroConfig(
     database: String     = dbRaw,
     path: Option[String] = None,
     partitionBatchSize: Int = 100
-  ): HiveTable[A, (B, A)] =
+  ): HiveTable[A, (B, A), A] =
     HiveTable(database, tablename, partition, path, partitionBatchSize)
 }
 

@@ -39,7 +39,7 @@ import au.com.cba.omnia.maestro.scalding.ExecutionOps._
   * ST - Type parameter of [[TypedSink]] and [[TypedPipe]]
   * returned in `sink` and `write` methods respectively.
   */
-sealed trait HiveTable[T <: ThriftStruct, ST] {
+sealed trait GenericHiveTable[T <: ThriftStruct, ST, F] {
   /** Fully qualified SQL reference to table.*/
   val name: String = s"$database.$table"
 
@@ -51,35 +51,44 @@ sealed trait HiveTable[T <: ThriftStruct, ST] {
   def database: String
   def table: String
   def externalPath: Option[String]
+  def extract: F => ST
 
   /** Creates a scalding source to read from the hive table.*/
   def source: Mappable[T]
   /** Creates [[Execution]] that writes to `this.sink` using given [[TypedPipe]].*/
-  def writeExecution(pipe: TypedPipe[T], append: Boolean = true): Execution[ExecutionCounters]
+  def writeExecution(pipe: TypedPipe[F], append: Boolean = true): Execution[ExecutionCounters] =
+    writeToSink( pipe.map(extract), append)
+
+  def writeToSink(pipe: TypedPipe[ST], append: Boolean = true): Execution[ExecutionCounters]
 }
 
-/** Information need to address/describe a specific partitioned hive table.*/
-case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
-  database: String, table: String, partition: Partition[A, B], 
-  externalPath: Option[String] = None, partitionBatchSize: Int = 100
-) extends HiveTable[A, (B, A)] {
+sealed trait HiveTable[T <: ThriftStruct, ST] extends GenericHiveTable[T, ST, T]
+
+sealed abstract class PartitionReadWriteSupport[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter] {
+  def database: String
+  def table: String
+  def externalPath: Option[String]
+  def tablePath: Path
+
+  def fieldNames: List[String]
+  def partitionBatchSize: Int
 
   /** List of partition column names and type (string by default). */
-  val partitionMetadata    = partition.fieldNames.map(n => (n, "string"))
+  val partitionMetadata    = fieldNames.map(n => (n, "string"))
   //Enforce the Hive partition pattern
-  val hivePartitionPattern = partition.fieldNames.map(_ + "=%s").mkString("/")
-  val partitionGlob        = partition.fieldNames.map(_ => "*").mkString("/")
+  val hivePartitionPattern = fieldNames.map(_ + "=%s").mkString("/")
+  val partitionGlob        = fieldNames.map(_ => "*").mkString("/")
   val hdfsPartitionGlob    = s"[^_.]$partitionGlob"
 
-  override def source: PartitionParquetScroogeSource[B, A] =
+  def source: PartitionParquetScroogeSource[B, A] =
     PartitionParquetScroogeSource[B, A](hivePartitionPattern, tablePath.toString)
 
-  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
+  def writeToSink(pipe: TypedPipe[(B, A)], append: Boolean = true): Execution[ExecutionCounters] = {
     def modifyConfig(config: Config) = ConfHelper.createUniqueFilenames(config)
 
     def addPartitions(paths: List[Path]): Execution[Unit] =
       paths.grouped(partitionBatchSize)
-        .map((ps: List[Path]) => Execution.hive(Hive.addPartitions(database, table, partition.fieldNames, ps)))
+        .map((ps: List[Path]) => Execution.hive(Hive.addPartitions(database, table, fieldNames, ps)))
         .toList.sequence_
 
     def withTable(ops: Path => Execution[ExecutionCounters]): Execution[ExecutionCounters] =
@@ -97,7 +106,6 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
     // Runs the scalding job and gets the counters
     def write(path: Path) =
       pipe
-        .map(v => partition.extract(v) -> v)
         .writeExecution(PartitionParquetScroogeSink[B, A](hivePartitionPattern, path.toString))
         .getAndResetCounters
         .map(_._2)
@@ -131,16 +139,32 @@ case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : Tup
   }
 }
 
+/** Information need to address/describe a specific partitioned hive table.*/
+case class PartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](
+  database: String, table: String, partition: Partition[A, B], 
+  externalPath: Option[String] = None, partitionBatchSize: Int = 100
+) extends PartitionReadWriteSupport[A, B] with HiveTable[A, (B, A)] {
+  override def fieldNames = partition.fieldNames
+  override def extract = (r: A) => (partition.extract(r) -> r)
+}
+
+case class GenericPartitionedHiveTable[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter, C](
+  database: String, table: String, fieldNames: List[String], extract: C => (B, A),
+  externalPath: Option[String] = None, partitionBatchSize: Int = 100
+) extends PartitionReadWriteSupport[A, B] with  GenericHiveTable[A, (B, A), C]
+
 /** Information need to address/describe a specific unpartitioned hive table.*/
 case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
   database: String, table: String, externalPath: Option[String] = None
 ) extends HiveTable[A, A] {
 
+  override def extract = identity
+
   override def source =
     ParquetScroogeSource[A](tablePath.toString)
 
   /** Writes the contents of the pipe to this HiveTable. */
-  override def writeExecution(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
+  override def writeToSink(pipe: TypedPipe[A], append: Boolean = true): Execution[ExecutionCounters] = {
     // Creates the hive table
     val setup = Execution.fromHive(
       Hive.createParquetTable[A](database, table, List.empty, externalPath.map(new Path(_))) >>
@@ -182,7 +206,7 @@ case class UnpartitionedHiveTable[A <: ThriftStruct : Manifest](
   }
 }
 
-/** Contructors for HiveTable. */
+/** Constructors for HiveTable. */
 object HiveTable {
   /** Information need to address/describe a specific partitioned hive table.*/
   def apply[A <: ThriftStruct : Manifest, B : Manifest : TupleSetter](

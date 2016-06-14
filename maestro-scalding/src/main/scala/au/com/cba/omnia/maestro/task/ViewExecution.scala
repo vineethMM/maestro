@@ -22,7 +22,7 @@ import au.com.cba.omnia.ebenezer.scrooge.PartitionParquetScroogeSink
 import au.com.cba.omnia.beeswax.Hive
 
 import au.com.cba.omnia.maestro.core.partition.Partition
-import au.com.cba.omnia.maestro.hive.HiveTable
+import au.com.cba.omnia.maestro.hive.{GenericHiveTable, HiveTable}
 import au.com.cba.omnia.maestro.scalding.StatKeys
 import au.com.cba.omnia.maestro.scalding.ExecutionOps._
 /**
@@ -67,11 +67,24 @@ trait ViewExecution {
     */
   def viewHive[A <: ThriftStruct : Manifest, ST](
     table: HiveTable[A, ST], pipe: TypedPipe[A], append: Boolean = true
+  ): Execution[Long] =
+    viewHiveGeneric(table, pipe, append)
+
+  /**
+   * Writes out the data to a hive table.
+   *
+   * This will create the table if it doesn't already exist. If the existing schema doesn't match
+   * the schema expected the job will fail.
+   *
+   * @return the number of rows written.
+   */
+  def viewHiveGeneric[A <: ThriftStruct : Manifest, ST, C](
+    table: GenericHiveTable[A, ST, C], pipe: TypedPipe[C], append: Boolean = true
   ): Execution[Long] = Execution.withId { id => for {
-    /* Creates the database upfront since when Hive is run concurrently uzing `zip` all but the
-     * first attempt fails.
-     * The Hive monad handles this so that the job doesn't fall over.
-     */
+  /* Creates the database upfront since when Hive is run concurrently uzing `zip` all but the
+   * first attempt fails.
+   * The Hive monad handles this so that the job doesn't fall over.
+   */
     _      <- Execution.fromHive(Hive.createDatabase(table.database))
     statKey = StatKeys.tuplesOutput
     stat    = Stat(statKey)(id)
